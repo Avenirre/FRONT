@@ -1,0 +1,18 @@
+@import '../../../style-variables.scss';
+
+:host .heading-back.left {
+  display: inline-block;
+  width: calc(70% - 1rem);
+  margin-right: 1rem;
+}
+.heading-back.right {
+  display: inline-block;
+  width: 30%;
+  opacity: 0.5;
+  cursor: pointer;
+}
+:host .front-block {
+}
+:host .front-block form {
+  margin: 2rem;
+}

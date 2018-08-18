@@ -1,0 +1,13 @@
+@import '../../../style-variables.scss';
+
+#templates {
+    padding-top: 25px;
+    padding-bottom: 15px;
+    background-color: white;
+    color: $color-light-blue;
+}
+
+#templates h3 {
+    font-family: $secondary-font;
+    font-weight: 900;
+}

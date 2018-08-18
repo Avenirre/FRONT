@@ -1,0 +1,68 @@
+<div class="modal-body">
+  <div class="containter">
+    <div class="back-block">
+      <div class="front-block">
+        <div class="heading-back left">
+          <h2>
+            I am<br/>the job seeker!
+          </h2>
+        </div>
+        <div
+            class="heading-back right"
+            (click)="changeModalState('regEmployer')">
+          <h2>
+            I am<br/>hiring!
+          </h2>
+        </div>
+        <form>
+          <div class="form-group row">
+            <input type="text" class="form-control col" id="firstName" aria-describedby="emailHelp"
+                   placeholder="first name">
+            <label class="col" for="firstName">e.g.John</label>
+          </div>
+          <div class="form-group row">
+            <input type="text" class="form-control col" id="lastName" aria-describedby="emailHelp"
+                   placeholder="last name">
+            <label class="col" for="lastName">e.g.Johnson</label>
+          </div>
+          <div class="form-group row">
+            <input type="email" class="form-control col" id="email" aria-describedby="emailHelp"
+                   placeholder="email">
+            <label class="col" for="email">e.g.John@mail.com</label>
+          </div>
+          <div class="form-group row">
+            <input type="phone" class="form-control col" id="phone" aria-describedby="emailHelp"
+                   placeholder="phone">
+            <label class="col" for="phone">e.g.+972 53 0000000</label>
+          </div>
+          <div class="form-group row">
+            <input type="password" class="form-control col" id="password" aria-describedby="emailHelp"
+                   placeholder="password">
+            <label class="col" for="password">8+ symbols including Abcd123</label>
+          </div>
+          <div class="form-group row">
+            <input type="password" class="form-control col" id="password-confirm"
+                   aria-describedby="emailHelp" placeholder="confirm password">
+            <label class="col" for="password-confirm">re-enter your password</label>
+          </div>
+          <a href="#">request secret code</a>
+          <div class="form-group row">
+            <input type="text" class="form-control col" id="secret-code" aria-describedby="emailHelp"
+                   placeholder="secret code">
+            <label class="col" for="secret-code">secret code, received by SMS</label>
+          </div>
+          <div class="form-group row">
+            <div class="col">
+              <button (click)="submitRegistration()" data-dismiss="modal" aria-label="Close" type="button"
+                      class="btn btn-secondary">Proceed
+              </button>
+            </div>
+            <div class="col">
+              By clicking "Proceed" you confirm that you accept the Terms of Service & Privacy Policy
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+<div
+    (click)="close($event, modal)"
+    #modal
+    id="modal-main"
+    class="modal fade bd-example-modal-lg"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="myLargeModalLabel"
+    aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <router-outlet (activate)="openModal(modal)"></router-outlet>
+      <!--<app-modal-login *ngIf="state == 'login'"></app-modal-login>-->
+      <!--<app-modal-employer-registration *ngIf="state == 'registration-employer'"></app-modal-employer-registration>-->
+      <!--<app-modal-employee-registration *ngIf="state == 'registration-employee'"></app-modal-employee-registration>-->
+    </div>
+  </div>
+</div>

@@ -1,0 +1,58 @@
+@import '../../../style-variables.scss';
+
+.title-header-logo {
+    background-color: $color-light-blue;
+    height: 60px;
+    border-radius: 0px 0px 35px 0px;
+}
+
+#footer-block-1 .container {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+#footer-block-1 .container .row {
+    width: 108%;
+}
+
+.col-logo {
+    padding-left: 0px;
+}
+
+.title-header-logo span {
+    margin-right: 15px;
+}
+
+// #footer-block-1 .btn {
+//     margin-right: 20px;
+// }
+
+#footer-block-2 .container .row{
+    min-height: 70vh;
+    margin-bottom: 30px;
+}
+
+.title-header-logo i {
+    position: relative;
+    top: 5px;
+    margin-right: 10px;
+}
+
+#bell-icon {
+    cursor: pointer;
+    position: relative;
+    top: 33%;
+}
+
+ul {
+    list-style: none;
+}
+
+.red-line {
+    width: 10px;
+    height: auto;
+    background-color: $color-orange;
+    position: relative;
+    top: 0px;
+    right: 10px;
+}
