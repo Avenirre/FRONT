@@ -1,110 +1,112 @@
 <div class="modal-body">
   <div class="containter">
-    <div class="back-block">
-      <div class="front-block">
-        <div class="heading-back left">
-          <h2>
-            I am<br/>hiring!
-          </h2>
-        </div>
-        <div
-            class="heading-back right"
-            (click)="changeModalState('regEmployee')">
-          <h2 >
-            I am<br/>the job seeker!
-          </h2>
-        </div>
-        <form>
-          <h3>company details</h3>
-          <div class="form-group row">
-            <input type="text" class="form-control col" id="companyName" aria-describedby="company name"
-                   placeholder="company name">
-            <label class="col" for="companyName">e.g.Good Intesions LTD</label>
-          </div>
-          <div class="form-group row">
-            <input type="text" class="form-control col" id="website" aria-describedby="website" placeholder="wibsite">
-            <label class="col" for="website">e.g.www.goodintensions.com</label>
-          </div>
-          <div class="form-group row">
-            <input type="text" class="form-control col" id="country" aria-describedby="country" placeholder="country">
-            <label class="col" for="country">e.g.USA</label>
-          </div>
-          <div class="form-group row">
-            <input type="text" class="form-control col" id="city" aria-describedby="city" placeholder="city/town">
-            <label class="col" for="city">e.g.Chicago</label>
-          </div>
-          <div class="form-group row">
-            <input type="text" class="form-control col" id="street" aria-describedby="street" placeholder="street">
-            <label class="col" for="street">e.g.Freud</label>
-          </div>
-          <div class="form-group row">
-            <input type="text" class="form-control col" id="building" aria-describedby="street/building"
-                   placeholder="street/building">
-            <label class="col" for="building">e.g.423/18</label>
-          </div>
-          <div class="form-group row">
-            <input type="text" class="form-control col" id="postcode" aria-describedby="postcode"
-                   placeholder="postcode">
-            <label class="col" for="postcode">e.g.32145</label>
-          </div>
-          <div class="form-group row">
-            <input type="text" class="form-control col" id="phone-company" aria-describedby="phone" placeholder="phone">
-            <label class="col" for="postcode-company">e.g.423/18</label>
-          </div>
-
-          <h3>applicant details</h3>
-          <div class="form-group row">
-            <input type="text" class="form-control col" id="firstName" aria-describedby="emailHelp"
-                   placeholder="first name">
-            <label class="col" for="firstName">e.g.John</label>
-          </div>
-          <div class="form-group row">
-            <input type="text" class="form-control col" id="lastName" aria-describedby="emailHelp"
-                   placeholder="last name">
-            <label class="col" for="lastName">e.g.Johnson</label>
-          </div>
-          <div class="form-group row">
-            <input type="text" class="form-control col" id="position" aria-describedby="emailHelp"
-                   placeholder="position">
-            <label class="col" for="position">e.g.CEO</label>
-          </div>
-          <div class="form-group row">
-            <input type="email" class="form-control col" id="email" aria-describedby="emailHelp" placeholder="email">
-            <label class="col" for="email">e.g.John@mail.com</label>
-          </div>
-          <div class="form-group row">
-            <input type="phone" class="form-control col" id="phone-applicant" aria-describedby="emailHelp"
-                   placeholder="phone">
-            <label class="col" for="phone-applicant">e.g.+972 53 0000000</label>
-          </div>
-          <div class="form-group row">
-            <input type="password" class="form-control col" id="password" aria-describedby="emailHelp"
-                   placeholder="password">
-            <label class="col" for="password">8+ symbols including Abcd123</label>
-          </div>
-          <div class="form-group row">
-            <input type="password" class="form-control col" id="password-confirm" aria-describedby="emailHelp"
-                   placeholder="confirm password">
-            <label class="col" for="password-confirm">re-enter your password</label>
-          </div>
-          <a href="#">request secret code</a>
-          <div class="form-group row">
-            <input type="text" class="form-control col" id="secret-code" aria-describedby="emailHelp"
-                   placeholder="secret code">
-            <label class="col" for="secret-code">secret code, received by SMS</label>
-          </div>
-          <div class="form-group row">
-            <div class="col">
-              <button (click)="submitRegistration()" data-dismiss="modal" aria-label="Close" type="button"
-                      class="btn btn-secondary">Proceed
-              </button>
-            </div>
-            <div class="col">
-              By clicking "Proceed" you confirm that you accept the Terms of Service & Privacy Policy
-            </div>
-          </div>
-        </form>
+    <div class="front-block">
+      <div class="heading-back left">
+        <h2>
+          I am<br/>hiring!
+        </h2>
       </div>
+      <div
+              class="heading-back right"
+              (click)="openModal('regEmployee')">
+        <h2 >
+          I am<br/>the job seeker!
+        </h2>
+      </div>
+      <form>
+        <h3>company details</h3>
+        <div class="form-group row">
+          <input type="text" class="form-control col-md-6 col-sm-12" id="companyName" aria-describedby="company name"
+                 placeholder="company name">
+          <label class="col-md-6 d-none d-md-block" for="companyName">e.g.Good Intesions LTD</label>
+        </div>
+        <div class="form-group row">
+          <input type="text" class="form-control col-md-6 col-sm-12" id="website" aria-describedby="website" placeholder="wibsite">
+          <label class="col-md-6 d-none d-md-block" for="website">e.g.www.goodintensions.com</label>
+        </div>
+        <div class="form-group row">
+          <input type="text" class="form-control col-md-6 col-sm-12" id="country" aria-describedby="country" placeholder="country">
+          <label class="col-md-6 d-none d-md-block" for="country">e.g.USA</label>
+        </div>
+        <div class="form-group row">
+          <input type="text" class="form-control col-md-6 col-sm-12" id="city" aria-describedby="city" placeholder="city/town">
+          <label class="col-md-6 d-none d-md-block" for="city">e.g.Chicago</label>
+        </div>
+        <div class="form-group row">
+          <input type="text" class="form-control col-md-6 col-sm-12" id="street" aria-describedby="street" placeholder="street">
+          <label class="col-md-6 d-none d-md-block" for="street">e.g.Freud</label>
+        </div>
+        <div class="form-group row">
+          <input type="text" class="form-control col-md-6 col-sm-12" id="building" aria-describedby="street/building"
+                 placeholder="street/building">
+          <label class="col-md-6 d-none d-md-block" for="building">e.g.423/18</label>
+        </div>
+        <div class="form-group row">
+          <input type="text" class="form-control col-md-6 col-sm-12" id="postcode" aria-describedby="postcode"
+                 placeholder="postcode">
+          <label class="col-md-6 d-none d-md-block" for="postcode">e.g.32145</label>
+        </div>
+        <div class="form-group row">
+          <input type="text" class="form-control col-md-6 col-sm-12" id="phone-company" aria-describedby="phone" placeholder="phone">
+          <label class="col-md-6 d-none d-md-block" for="postcode-company">e.g.423/18</label>
+        </div>
+
+        <h3>applicant details</h3>
+        <div class="form-group row">
+          <input type="text" class="form-control col-md-6 col-sm-12" id="firstName" aria-describedby="emailHelp"
+                 placeholder="first name">
+          <label class="col-md-6 d-none d-md-block" for="firstName">e.g.John</label>
+        </div>
+        <div class="form-group row">
+          <input type="text" class="form-control col-md-6 col-sm-12" id="lastName" aria-describedby="emailHelp"
+                 placeholder="last name">
+          <label class="col-md-6 d-none d-md-block" for="lastName">e.g.Johnson</label>
+        </div>
+        <div class="form-group row">
+          <input type="text" class="form-control col-md-6 col-sm-12" id="position" aria-describedby="emailHelp"
+                 placeholder="position">
+          <label class="col-md-6 d-none d-md-block" for="position">e.g.CEO</label>
+        </div>
+        <div class="form-group row">
+          <input type="email" class="form-control col-md-6 col-sm-12" id="email" aria-describedby="emailHelp" placeholder="email">
+          <label class="col-md-6 d-none d-md-block" for="email">e.g.John@mail.com</label>
+        </div>
+        <div class="form-group row">
+          <input type="phone" class="form-control col-md-6 col-sm-12" id="phone-applicant" aria-describedby="emailHelp"
+                 placeholder="phone">
+          <label class="col-md-6 d-none d-md-block" for="phone-applicant">e.g.+972 53 0000000</label>
+        </div>
+        <div class="form-group row">
+          <input type="password" class="form-control col-md-6 col-sm-12" id="password" aria-describedby="emailHelp"
+                 placeholder="password">
+          <label class="col-md-6 d-none d-md-block" for="password">8+ symbols including Abcd123</label>
+        </div>
+        <div class="form-group row">
+          <input type="password" class="form-control col-md-6 col-sm-12" id="password-confirm" aria-describedby="emailHelp"
+                 placeholder="confirm password">
+          <label class="col-md-6 d-none d-md-block" for="password-confirm">re-enter your password</label>
+        </div>
+        <a href="#">request secret code</a>
+        <div class="form-group row">
+          <input type="text" class="form-control col-md-6 col-sm-12" id="secret-code" aria-describedby="emailHelp"
+                 placeholder="secret code">
+          <label class="col-md-6 d-none d-md-block" for="secret-code">secret code, received by SMS</label>
+        </div>
+        <div class="form-group row">
+          <div class="col-12">
+            By clicking "Proceed" you confirm that you accept the Terms of Service & Privacy Policy
+          </div>
+          <div class="col-12">
+            <button (click)="submitRegistration()" data-dismiss="modal" aria-label="Close" type="button"
+                    class="btn btn-secondary">Proceed
+            </button>
+          </div>
+        </div>
+      </form>
     </div>
+    <div class="back-block">
+
+    </div>
+
   </div>
 </div>

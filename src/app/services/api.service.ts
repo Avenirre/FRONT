@@ -17,7 +17,7 @@ export class ApiService {
   ) { }
 
   public getQuery() {
-    return this.http.get(environment.apiUrl);
+    return this.http.get('http://localhost:4000/api');
   }
 
 

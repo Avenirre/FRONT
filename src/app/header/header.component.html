@@ -10,12 +10,12 @@
             <div class="col-md-5"></div>
             <div class="col-md-4 p-2 d-flex justify-content-around">
                 <i class="far fa-bell"></i>
-                <button (click)="changeModalState('login')" data-toggle="modal" data-target="#modal-main" type="button"
-                    class="btn btn-primary">
+                <button (click)="openModal('login')" data-toggle="modal" data-target="#modal-main" type="button"
+                        class="btn btn-primary">
                     Sign out
                 </button>
-                <button (click)="changeModalState('regEmployee')" data-toggle="modal" data-target="#modal-main" type="button"
-                    class="btn btn-danger">
+                <button (click)="openModal('regEmployee')" data-toggle="modal" data-target="#modal-main" type="button"
+                        class="btn btn-danger">
                     <i class="fas fa-user-plus"></i> Edward
                 </button>
             </div>

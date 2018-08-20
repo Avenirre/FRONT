@@ -1,5 +1,9 @@
 @import '../../../style-variables.scss';
 
+h3 {
+  font-weight: 800;
+  font-family: $secondary-font;
+}
 :host .heading-back.left {
   width: 30%;
   display: inline-block;
