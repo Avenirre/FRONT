@@ -9,7 +9,7 @@ import {ApiService} from './services/api.service';
 })
 export class AppComponent implements OnInit {
     // modalState;
-    isBlur = false;
+    // isBlur = false;
 
     constructor(
         private modalService: ModalService,
@@ -18,11 +18,11 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.modalService.modalClosed.subscribe(
-            modalState => {
-                this.isBlur = modalState;
-            }
-        );
+        // this.modalService.modalClosed.subscribe(
+        //     modalState => {
+        //         this.isBlur = modalState;
+        //     }
+        // );
         // this.modalService.modalStateChanged.subscribe((state: string) => {
         // this.modalState = state;
         // });

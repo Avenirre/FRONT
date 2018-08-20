@@ -18,8 +18,9 @@ export class ModalLoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  changeModalState(link: string) {
-    this.router.navigate(['/' + routes[link]]);
+  openModal(link: string) {
+    // this.router.navigate(['/' + routes[link]]);
+      this.modalService.openModal(routes[link]);
   }
 
   login() {

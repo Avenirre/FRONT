@@ -1,10 +1,5 @@
 @import '../../style-variables.scss';
 
-.modal {
-  //z-index: 100;
-  backgroung-color: white;
-}
-
 :host ::ng-deep a {
   cursor: pointer;
 }
@@ -21,7 +16,6 @@
 }
 .modal-content {
   position: relative;
-  //min-width: $modal-width;
   filter: blur(0px);
   -webkit-filter: blur(0px);
   background-color: transparent;
@@ -34,9 +28,9 @@
   padding: 0;
   color: $color-light;
 }
-@media (max-width: 900px) {
+@media (max-width: 1000px) {
   :host ::ng-deep h2 {
-    font-size: 1.5rem;
+    font-size: 4vw;
   }
 }
 :host ::ng-deep h2::before {
@@ -44,7 +38,7 @@
   position: absolute;
   display: block;
   width: 0.6rem;
-  height: 4.4rem;
+  height: 100%;
   top: 0.3rem;
   left: -1rem;
   background-color: $color-orange;
@@ -56,6 +50,7 @@
 :host ::ng-deep .back-block {
   position: relative;
   top: 100px;
+  padding: 10rem 0 2rem 5rem;
   min-width: 100%;
   min-height: 25rem;
   background-color: rgba(150, 170, 230, 0.7);
@@ -68,7 +63,8 @@
   padding: 1rem;
   margin: 0 1.5rem;
   position: relative;
-  top: -5rem;
+  top: 1rem;
+  z-index: 1100;
   background-color: white;
   box-shadow: 0px 0px 15px rgba(50, 50, 50, 0.2);
 }

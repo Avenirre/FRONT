@@ -10,21 +10,20 @@ import {routes} from '../../environments/environment.fake-roots';
 
 const routesApi: Routes = [
 
-  // {path: routes.profile, component: ProfileComponent},
+  {path: routes.profile, component: ProfileComponent},
   {
     path: routes.root, component: TitlePageComponent,
     children: [
       {
-        path: ':' + routes.login,
+        // path: 'login',
+        path: routes.login,
         component: ModalLoginComponent,
-        // outlet: 'modal'
       },
       {
-        path: ':' + routes.regEmployee,
+        path: routes.regEmployee,
         component: ModalEmployeeRegistrationComponent,
-        // outlet: 'modal'
       },
-      {path: ':' + routes.regEmployer, component: ModalEmployerRegistrationComponent},
+      {path: routes.regEmployer, component: ModalEmployerRegistrationComponent},
     ]
   },
   {path: '404', component: NotFoundComponent},

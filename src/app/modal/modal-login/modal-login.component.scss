@@ -5,28 +5,30 @@
 }
 :host .back-block h2 {
   position: relative;
-  width: 200px;
+  //width: 200px;
   color: $color-light;
   opacity: 1.0;
 }
 .reg-container {
   width: 20rem;
-  position: relative;
-  top: 11rem;
-  left: 3rem;
   padding: 1rem;
 }
 .reg-container h2 {
   margin-bottom: 1rem;
 }
 :host .front-block {
+  top: 1.5rem;
+  z-index: 1100;
   min-width: 25rem;
 }
-@media (max-width: 900px) {
+@media (max-width: 1050px) {
   :host .front-block {
     position: static;
     min-width: 100%;
-    margin: 0;
+    margin: 30px;
+  }
+  .back-block {
+    display: none;
   }
 }
 :host .front-block form {
