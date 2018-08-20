@@ -29,6 +29,9 @@ import { ProfileComponent } from './profile/profile.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ApiService } from './services/api.service';
 import {HttpClientModule} from '@angular/common/http';
+import { ProfileMenuComponent } from './profile/profile-menu/profile-menu.component';
+import { ProfileCvsComponent } from './profile/profile-cvs/profile-cvs.component';
+import { CvsEditPanelComponent } from './profile/profile-cvs/cvs-edit-panel/cvs-edit-panel.component';
 
 
 
@@ -48,7 +51,10 @@ import {HttpClientModule} from '@angular/common/http';
     ModalEmployeeRegistrationComponent,
     ModalComponent,
     ProfileComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    ProfileMenuComponent,
+    ProfileCvsComponent,
+    CvsEditPanelComponent
   ],
   imports: [
     BrowserModule,

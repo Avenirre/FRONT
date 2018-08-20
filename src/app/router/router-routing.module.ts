@@ -10,7 +10,7 @@ import {routes} from '../../environments/environment.fake-roots';
 
 const routesApi: Routes = [
 
-  // {path: routes.profile, component: ProfileComponent},
+  { path: routes.profile, component: ProfileComponent },
   {
     path: routes.root, component: TitlePageComponent,
     children: [
