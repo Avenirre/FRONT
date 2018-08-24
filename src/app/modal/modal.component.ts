@@ -1,36 +1,37 @@
-import {Component, OnInit, Input, ElementRef, ViewChild} from '@angular/core';
-import {ModalService} from '../services/modal.service';
-import {Router} from '@angular/router';
-// import * as $ from 'jquery';
+import {Component, OnInit, Input, ElementRef, ViewChild, OnDestroy} from '@angular/core';
+import {ModalService} from './modal.service';
+import {ActivatedRoute, Router} from '@angular/router';
 declare var $: any;
 
 @Component({
-  selector: 'app-modal',
-  templateUrl: './modal.component.html',
-  styleUrls: ['./modal.component.scss']
+    selector: 'app-modal',
+    templateUrl: './modal.component.html',
+    styleUrls: ['./modal.component.scss']
 })
-export class ModalComponent implements OnInit {
-  @Input() state: string;
-  @ViewChild('modal') modal: ElementRef;
+export class ModalComponent implements OnInit, OnDestroy {
+    isOpened = false;
+    isOpenedChangedEvent: Event;
 
-
-  constructor(
-    private router: Router,
-    private modalService: ModalService
-  ) {
-  }
-
-  ngOnInit() {
-  }
-
-  close(event, modal: ElementRef) {
-    // this.modalService.modalClosed.emit(false);
-    if (event.target == modal) {
-      this.router.navigate(['/']);
+    constructor(
+        private modalService: ModalService
+    ) {
     }
-  }
 
-  openModal() {
-    $('#modal-main').modal('show');
-  }
+    ngOnInit() {
+        this.isOpenedChangedEvent = this.modalService.getModalChangedEmmiter()
+            .subscribe(isOpened => this.isOpened = isOpened);
+    }
+
+    ngOnDestroy(): void {}
+
+    public closeModal() {
+        this.isOpened = false;
+        this.modalService.closeModal();
+    }
+
+    public openModal() {
+        this.isOpened = true;
+    }
+
+
 }

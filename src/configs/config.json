@@ -1,0 +1,7 @@
+{
+    "PORT": 4000,
+    "CORS_OPTIONS": {
+        "origin": "http://localhost:4200",
+        "optionsSuccessStatus": 200
+    }
+}

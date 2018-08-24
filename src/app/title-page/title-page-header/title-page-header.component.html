@@ -1,99 +1,145 @@
-<app-modal></app-modal>
+<!--<div id="nav-mobile" class="pos-f-t">-->
+    <!--<nav class="navbar navbar-dark bg-light-blue">-->
+        <!--<button class="navbar-toggler"-->
+                <!--type="button"-->
+                <!--data-toggle="collapse"-->
+                <!--data-target="#navbarToggleExternalContent"-->
+                <!--aria-controls="navbarToggleExternalContent"-->
+                <!--aria-expanded="false"-->
+                <!--aria-label="Toggle navigation">-->
+            <!--<div class="title-header-logo cv-logo">-->
+                <!--<i id="logo-icon" class="fas fa-user-tie fa-2x"></i>-->
+                        <!--<span>GLOBAL <strong>CV</strong> BANK</span>-->
+            <!--</div>-->
+        <!--</button>-->
+        <!--<i id="bell-icon" class="far fa-bell"></i>-->
+    <!--</nav>-->
 
-<div id="footer-block-1">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-3 col-logo">
-        <div class="title-header-logo p-2 text-right">
-          <i id="logo-icon" class="fas fa-user-tie fa-2x"></i>
-          <span>GLOBAL <strong>CV</strong> BANK</span>
-        </div>
-      </div>
-      <div class="col-md-5"></div>
-      <div class="col-md-4 p-2 d-flex justify-content-around">
-        <i id="bell-icon" class="far fa-bell"></i>
-        <button (click)="changeModalState('login')" data-toggle="modal" data-target="#modal-main" type="button"
-                class="btn btn-primary">
-          Log in
-        </button>
-        <button (click)="changeModalState('regEmployee')" data-toggle="modal" data-target="#modal-main" type="button"
-                class="btn btn-danger">
-          Register
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
+    <!--<div class="collapse" id="navbarToggleExternalContent">-->
+        <!--<div class="bg-main p-4">-->
+            <!--<button (click)="openModal('login')"-->
+                    <!--data-toggle="modal"-->
+                    <!--data-target="#modal-main"-->
+                    <!--type="button"-->
+                    <!--class="btn btn-lg btn-block btn-primary">-->
+                <!--Log in-->
+            <!--</button>-->
+            <!--<button (click)="openModal('regEmployee')"-->
+                    <!--data-toggle="modal"-->
+                    <!--data-target="#modal-main"-->
+                    <!--type="button"-->
+                    <!--class="btn btn-lg btn-block btn-danger">-->
+                <!--Register-->
+            <!--</button>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+<!--<div class="grid-container">-->
+    <!--<div class="main">-->
+        <!--<div routerLink="/" class="cv-logo title-header-logo p-2 text-right">-->
+            <!--<i id="logo-icon" class="fas fa-user-tie fa-2x"></i>-->
+            <!--<span>GLOBAL <strong>CV</strong> BANK</span>-->
+        <!--</div>-->
+            <!--<ul class="menu-btns">-->
+                <!--<i id="bell-icon" class="far fa-bell"></i>-->
+                <!--<li>-->
+                    <!--<button (click)="openModal('login')"-->
+                            <!--data-toggle="modal"-->
+                            <!--data-target="#modal-main"-->
+                            <!--type="button"-->
+                            <!--class="btn btn-primary">-->
+                        <!--Log in-->
+                    <!--</button>-->
+                <!--</li>-->
+                <!--<li>-->
+                    <!--<button (click)="openModal('regEmployee')"-->
+                            <!--data-toggle="modal"-->
+                            <!--data-target="#modal-main"-->
+                            <!--type="button"-->
+                            <!--class="btn btn-danger">-->
+                        <!--Register-->
+                    <!--</button>-->
+                <!--</li>-->
+            <!--</ul>-->
+    <!--</div>-->
+    <!--<aside class="left"></aside>-->
+    <!--<aside class="right"></aside>-->
+<!--</div>-->
 
 <div id="footer-block-2">
-  <div class="container">
-    <div class="row d-flex">
-      <div class="col-md-3 align-self-center d-flex align-items-end flex-column">
-        <div class="p-2">
-          <ul>
-            <li>
-              <strong>
-                <span class="font-weight-light">01</span> REGISTRATE
-              </strong>
-            </li>
-            <li>
-              <strong>
-                <span class="font-weight-light">02</span> CREATE CV
-              </strong>
-            </li>
-            <li>
-              <strong>
-                <span class="font-weight-light">03</span> DESIGN
-              </strong>
-            </li>
-            <li>
-              <strong>
-                <span class="font-weight-light">04</span> APROVE SCILLS
-              </strong>
-            </li>
-            <li>
-              <strong>
-                <span class="font-weight-light">05</span> GET JOB
-              </strong>
-            </li>
-            <li>
-              <strong>
-                <span class="font-weight-light">06</span> ENJOY
-              </strong>
-            </li>
-          </ul>
+    <div class="container">
+        <div class="row d-flex">
+            <div class="col-md-3 align-self-center d-flex align-items-end flex-column">
+                <div class="p-2">
+                    <ul>
+                        <li>
+                            <strong>
+                                <span class="font-weight-light">01</span> REGISTRATE
+                            </strong>
+                        </li>
+                        <li>
+                            <strong>
+                                <span class="font-weight-light">02</span> CREATE CV
+                            </strong>
+                        </li>
+                        <li>
+                            <strong>
+                                <span class="font-weight-light">03</span> DESIGN
+                            </strong>
+                        </li>
+                        <li>
+                            <strong>
+                                <span class="font-weight-light">04</span> APROVE SCILLS
+                            </strong>
+                        </li>
+                        <li>
+                            <strong>
+                                <span class="font-weight-light">05</span> GET JOB
+                            </strong>
+                        </li>
+                        <li>
+                            <strong>
+                                <span class="font-weight-light">06</span> ENJOY
+                            </strong>
+                        </li>
+                    </ul>
+                </div>
+                <div class="text-center">
+                    <p class="text-center font-weight-light small">
+                        Create your CV online, select any
+                        template you like most of all, edit
+                        online, export it and use anywhere.
+                    </p>
+                    <button
+                        routerLink="/create-cv"
+                        type="button"
+                        class="btn btn-danger btn-lg">
+                        Create
+                    </button>
+                </div>
+            </div>
+
+            <div class="col-md-6 align-self-center">
+                <h2 class="d-flex justify-content-center">
+                    <span class="red-line"></span>
+                    <span>The ultimate<br>hiring solution</span>
+                </h2>
+            </div>
+
+            <div class="col-md-3 align-self-end">
+                <p class="text-right small mt-auto p-2">
+                    GlobalCVBank provides unique
+                    <br>hiring services. We have an
+                    <br>opportunity to select applicants
+                    <br>with already approved skills.
+                    <br>That's great and so smart.
+                    <br>
+                    <br> -Jack Sparrow
+                    <br>
+                    <span class="font-weight-light">Future intentions SEO</span>
+                </p>
+
+            </div>
         </div>
-        <div class="text-center">
-          <p class="text-center font-weight-light small">
-            Create your CV online, select any
-            template you like most of all, edit
-            online, export it and use anywhere.
-          </p>
-          <button type="button" class="btn btn-danger btn-lg">Create</button>
-        </div>
-      </div>
-    
-      <div class="col-md-6 align-self-center">
-        <h2 class="d-flex justify-content-center">
-          <span class="red-line"></span>
-          <span>The ultimate<br>hiring solution</span>
-        </h2>
-      </div>
-    
-      <div class="col-md-3 align-self-end">
-        <p class="text-right small mt-auto p-2">
-          GlobalCVBank provides unique
-          <br>hiring services. We have an
-          <br>opportunity to select applicants
-          <br>with already approved skills.
-          <br>That's great and so smart.
-          <br>
-          <br> -Jack Sparrow
-          <br>
-          <span class="font-weight-light">Future intentions SEO</span>
-        </p>
-    
-      </div>
     </div>
-  </div>
 </div>

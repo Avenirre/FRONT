@@ -1,74 +1,62 @@
 @import '../../style-variables.scss';
 
-.modal {
-  //z-index: 100;
-  backgroung-color: white;
+.background-blur {
+  filter: blur(20px);
+  -webkit-filter: blur(20px);
 }
 
-:host ::ng-deep a {
-  cursor: pointer;
+.cv-modal {
+  transition: all 0.1s ease;
 }
-:host ::ng-deep button {
-  font-family: $secondary-font;
-  font-weight: 700;
+
+.disabled {
+  display: none;
 }
-:host ::ng-deep div {
-  color: $color-dark-grey;
+
+.cv-modal-background {
+  display: block;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
 }
-:host ::ng-deep input {
-  border-radius: 2rem;
-  padding: 1.4rem;
-}
-.modal-content {
-  position: relative;
-  //min-width: $modal-width;
-  filter: blur(0px);
-  -webkit-filter: blur(0px);
-  background-color: transparent;
-  border: 0;
-}
-:host ::ng-deep h2 {
-  position: relative;
-  margin: 0rem;
-  font-size: 2rem;
+
+.cv-modal-content {
+  z-index: 1010;
+  position: absolute;
   padding: 0;
-  color: $color-light;
+  width: 55%;
+  height: 50%;
+  transform: translate(40%, 50%);
+  background: rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  -webkit-box-shadow: 0 0 20px rgba(68, 68, 68, 0.5);
+  -moz-box-shadow: 0 0 20px rgba(68, 68, 68, 0.5);
+  box-shadow: 0 0 20px rgba(68, 68, 68, 0.5);
 }
-@media (max-width: 900px) {
-  :host ::ng-deep h2 {
-    font-size: 1.5rem;
+
+.modal-opened-back {
+  position: fixed;
+  width: 100%;
+  transition: all 0.4s ease;
+}
+
+@media (min-width: $display-mobile) and (max-width: $display-tablet) {
+  .cv-modal-content {
+    width: 75%;
+    min-height: 20rem;
+    transform: translate(15%, 40%);
   }
 }
-:host ::ng-deep h2::before {
-  content: "";
-  position: absolute;
-  display: block;
-  width: 0.6rem;
-  height: 4.4rem;
-  top: 0.3rem;
-  left: -1rem;
-  background-color: $color-orange;
-}
-::ng-deep .heading-back {
-  padding: 1.5rem 1rem 1.5rem 2rem;
-  background-color: $color-light-blue;
-}
-:host ::ng-deep .back-block {
-  position: relative;
-  top: 100px;
-  min-width: 100%;
-  min-height: 25rem;
-  background-color: rgba(150, 170, 230, 0.7);
-  box-shadow: 0px 0px 25px #191E5F;
+
+@media (max-width: $display-mobile) {
+  .cv-modal-content {
+    width: 90%;
+    transform: translate(5%, 45%);
+  }
 }
 
-:host ::ng-deep .front-block {
-  min-width: calc(100% - 3rem);
-  float: right;
-  padding: 1rem;
-  margin: 0 1.5rem;
-  position: relative;
-  top: -5rem;
-  background-color: white;
-  box-shadow: 0px 0px 15px rgba(50, 50, 50, 0.2);
-}
+

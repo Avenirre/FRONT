@@ -1,6 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
 @import 'style-variables.scss';
-
 body {
   margin: 0px;
   padding: 0px;
@@ -25,7 +24,7 @@ a {
   // color: $color-font-main;
   // text-decoration: none;
 } 
-::ng-deep input {
+:host ::ng-deep input {
   border-radius: 25px;
 }   
 //BUTTONS

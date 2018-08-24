@@ -1,5 +1,5 @@
 export const environment = {
   production: false,
-  apiUrl: 'http://api.cvbank.ser',
-  login: '/login',
+  apiUrl: 'http://localhost',
+  apiPort: 4000,
 };

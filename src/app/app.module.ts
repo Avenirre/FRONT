@@ -24,11 +24,20 @@ import { ModalComponent } from './modal/modal.component';
 import { SliderModule } from 'angular-image-slider';
 
 //SERVICES
-import { ModalService } from './services/modal.service';
+import { ModalService } from './modal/modal.service';
 import { ProfileComponent } from './profile/profile.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ApiService } from './services/api.service';
 import {HttpClientModule} from '@angular/common/http';
+import { ProfileMenuComponent } from './profile/profile-menu/profile-menu.component';
+import { ProfileCvsComponent } from './profile/profile-cvs/profile-cvs.component';
+import { CvsEditPanelComponent } from './profile/profile-cvs/cvs-edit-panel/cvs-edit-panel.component';
+import { TestingComponent } from './testing/testing.component';
+import { CreateCvComponent } from './create-cv/create-cv.component';
+import { CvFormComponent } from './create-cv/cv-form/cv-form.component';
+import { CvPresentationComponent } from './create-cv/cv-presentation/cv-presentation.component';
+import { CvChooseViewComponent } from './create-cv/cv-choose-view/cv-choose-view.component';
+import { CvActionsComponent } from './create-cv/cv-actions/cv-actions.component';
 
 
 
@@ -48,7 +57,16 @@ import {HttpClientModule} from '@angular/common/http';
     ModalEmployeeRegistrationComponent,
     ModalComponent,
     ProfileComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    ProfileMenuComponent,
+    ProfileCvsComponent,
+    CvsEditPanelComponent,
+    TestingComponent,
+    CreateCvComponent,
+    CvFormComponent,
+    CvPresentationComponent,
+    CvChooseViewComponent,
+    CvActionsComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,5 @@
+{
+  "getCompanies": "/company/get",
+  "getCandidates": "/candidate/get",
+  "getCandidate": "/candidate/:id"
+}

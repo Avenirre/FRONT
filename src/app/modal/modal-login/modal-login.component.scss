@@ -1,37 +1,89 @@
 @import '../../../style-variables.scss';
 
-.modal-content {
-  position: relative;
-}
-:host .back-block h2 {
-  position: relative;
-  width: 200px;
-  color: $color-light;
-  opacity: 1.0;
-}
 .reg-container {
-  width: 20rem;
-  position: relative;
-  top: 11rem;
-  left: 3rem;
-  padding: 1rem;
+  margin-top: 10rem;
+  width: 40%;
+  padding-left: 3rem;
 }
+
 .reg-container h2 {
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  text-shadow:  0 0 15px rgba(50, 50, 50, 0.4);
 }
+
 :host .front-block {
-  min-width: 25rem;
+  left: 40%;
 }
-@media (max-width: 900px) {
-  :host .front-block {
-    position: static;
-    min-width: 100%;
-    margin: 0;
-  }
-}
+
 :host .front-block form {
   margin: 6rem 1rem 3rem 1rem;
 }
+
 :host .front-block form button {
   margin: 3rem auto;
+}
+
+:host ::ng-deep .btn-close {
+  background-color: $color-light-gray;
+  display: none;
+}
+
+:host ::ng-deep .btn-close:hover {
+  background-color: $color-main-blue;
+}
+
+:host ::ng-deep .btn-reg {
+  display: none;
+}
+
+@media (min-width: $display-mobile) and (max-width: $display-tablet) {
+  :host ::ng-deep h2 {
+    font-size: 2rem;
+  }
+  .reg-container h2 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 700px) {
+  :host ::ng-deep h2 {
+    font-size: 2rem;
+  }
+
+  :host .front-block {
+    display: block;
+    margin: 30px;
+    left: 0;
+    right: 0;
+    top: -7rem;
+  }
+
+  .reg-container {
+    display: none;
+  }
+
+  :host .front-block form {
+    margin: 2rem 1rem;
+    text-align: center;
+  }
+  :host .front-block form input {
+    font-size: 1.2rem;
+    padding: 1.5rem;
+  }
+  :host .front-block form button {
+    margin: 0.5rem auto;
+    padding: 1.2rem;
+    min-width: 100%;
+    -webkit-border-radius: 2.5rem;
+    -moz-border-radius: 2.5rem;
+    border-radius: 2.5rem;
+  }
+
+  :host ::ng-deep .btn-close {
+    display: block;
+  }
+
+  :host ::ng-deep .btn-reg {
+    display: block;
+  }
 }

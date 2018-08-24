@@ -1,0 +1,6 @@
+{
+  "HOST": "localhost",
+  "PORT": 8080,
+  "getCompanies": "/company/get",
+  "getCandidates": "/candidate/get"
+}

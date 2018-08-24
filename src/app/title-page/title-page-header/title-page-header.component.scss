@@ -1,10 +1,100 @@
 @import '../../../style-variables.scss';
 
-.title-header-logo {
-    background-color: $color-light-blue;
-    height: 60px;
-    border-radius: 0px 0px 35px 0px;
+.cv-logo {
+    font-weight: 100;
+    position: relative;
+    top: -0.3rem;
 }
+//TOP MENU CLASSES
+@media (min-width: 900px) {
+    .grid-container {
+        margin: 0;
+        padding: 0;
+        display: grid;
+        grid-template-areas: "left-grid main right-grid";
+        grid-template-columns: auto 0.8fr auto;
+        grid-template-rows: 60px auto 60px;
+    }
+}
+@media (max-width: 900px) {
+    .grid-container {
+        display: none;
+    }
+}
+.main {
+    grid-area: main;
+}
+.left {
+    grid-area: left-grid;
+    background-color: $color-light-blue;
+}
+.right {
+    grid-area: right-grid;
+}
+.bg-main {
+    background-color: $color-main-blue;
+}
+.bg-light-blue {
+    background-color: $color-light-blue;
+}
+.btn-block {
+    border: 1px solid $color-light;
+    font-family: $secondary-font;
+    font-size: 0.8rem;
+    font-weight: 800;
+}
+.btn-block.btn-danger {
+    border: 0;
+}
+.title-header-logo {
+    font-size: 1.2rem;
+    display: inline-block;
+    background-color: $color-light-blue;
+    height: 65px;
+    outline: 0;
+    border-radius: 0px 0px 35px 0px;
+    cursor: pointer;
+}
+@media (max-width: 900px) {
+    .title-header-logo {
+
+        height: 45px;
+
+    }
+}
+.menu-btns {
+    display: inline-block;
+    list-style: none;
+    float: right;
+    margin: 15px;
+}
+.menu-btns li {
+    display: inline-block;
+    margin-left: 1rem;
+}
+@media (max-width: 900px) {
+    #nav-mobile {
+        display: block;
+    }
+    #nav-main {
+        display: none;
+    }
+}
+@media (min-width: 900px) {
+    #nav-mobile {
+        display: none;
+    }
+    #nav-main {
+        display: block;
+    }
+}
+//COLLAPSIBLE
+.navbar-toggler {
+    color: $color-light;
+    border: 0;
+}
+
+//MAIN MENU END
 
 #footer-block-1 .container {
     margin-left: 0;
@@ -17,19 +107,22 @@
 
 .col-logo {
     padding-left: 0px;
+    position: relative;
+    left: 0;
 }
 
 .title-header-logo span {
     margin-right: 15px;
 }
-
-// #footer-block-1 .btn {
-//     margin-right: 20px;
-// }
-
+#footer-block-2{
+    //background-image: url('../../../assets/kisspng-rain-clip-art-cartoon-cloud-5ad14695d68810.4742753715236645338787.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
 #footer-block-2 .container .row{
     min-height: 70vh;
-    margin-bottom: 30px;
+    margin-bottom: 0px;
 }
 
 .title-header-logo i {

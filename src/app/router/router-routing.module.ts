@@ -7,35 +7,26 @@ import {ModalEmployeeRegistrationComponent} from '../modal/modal-employee-regist
 import {ModalEmployerRegistrationComponent} from '../modal/modal-employer-registration/modal-employer-registration.component';
 import {ModalLoginComponent} from '../modal/modal-login/modal-login.component';
 import {routes} from '../../environments/environment.fake-roots';
+import {TestingComponent} from '../testing/testing.component';
+import {CreateCvComponent} from '../create-cv/create-cv.component';
 
 const routesApi: Routes = [
-
-  // {path: routes.profile, component: ProfileComponent},
-  {
-    path: routes.root, component: TitlePageComponent,
-    children: [
-      {
-        path: ':' + routes.login,
-        component: ModalLoginComponent,
-        // outlet: 'modal'
-      },
-      {
-        path: ':' + routes.regEmployee,
-        component: ModalEmployeeRegistrationComponent,
-        // outlet: 'modal'
-      },
-      {path: ':' + routes.regEmployer, component: ModalEmployerRegistrationComponent},
-    ]
-  },
-  {path: '404', component: NotFoundComponent},
-  {path: '**', redirectTo: '/404'}
+    {path: routes.root, component: TitlePageComponent},
+    {path: routes.login, component: ModalLoginComponent, outlet: 'modal'},
+    {path: routes.regEmployee, component: ModalEmployeeRegistrationComponent, outlet: 'modal'},
+    {path: routes.regEmployer, component: ModalEmployerRegistrationComponent, outlet: 'modal'},
+    {path: routes.profile, component: ProfileComponent},
+    {path: 'create-cv', component: CreateCvComponent},
+    {path: 'testing', component: TestingComponent},
+    {path: '404', component: NotFoundComponent},
+    {path: '**', redirectTo: '/404'}
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forRoot(routesApi),
-  ],
-  exports: [RouterModule]
+    imports: [
+        RouterModule.forRoot(routesApi),
+    ],
+    exports: [RouterModule]
 })
 export class RouterRoutingModule {
 }
