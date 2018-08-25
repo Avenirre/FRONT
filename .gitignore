@@ -2,4 +2,4 @@
 target/
 *.DS_Store
 _ign_*
-
+node_modules/
