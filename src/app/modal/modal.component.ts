@@ -1,7 +1,6 @@
 import {Component, OnInit, Input, ElementRef, ViewChild, OnDestroy} from '@angular/core';
 import {ModalService} from './modal.service';
 import {ActivatedRoute, Router} from '@angular/router';
-declare var $: any;
 
 @Component({
     selector: 'app-modal',

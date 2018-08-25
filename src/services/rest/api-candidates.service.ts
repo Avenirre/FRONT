@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {ApiService} from './api.service';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Employee} from '../employee.service';
+import {HttpClient} from '@angular/common/http';
+import {Candidate} from '../candidate.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,7 @@ export class ApiCandidatesService {
   }
 
   /**
-   * makes request for candidates list from Node.js middleware server
+   * makes request for candidates list from back-end server
    * @returns {Observable<Object>}
    */
   public getCandidates(): Observable<Object> {
@@ -28,9 +28,13 @@ export class ApiCandidatesService {
     return this.apiService.get(['candidates', id]);
   }
 
-  createEmployee(employee: Employee) {
-
-    this.apiService.post<Employee>(['candidates'], employee)
+  /**
+   * makes post request to the back-end server's create candidate method
+   * and sends JSON with candidate data;
+   * @param {Candidate} employee
+   */
+  public createCandidate(candidate: Candidate) {
+    this.apiService.post<Candidate>(['candidates'], candidate)
         .subscribe(
             (data) => {
               console.log(data);

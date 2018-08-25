@@ -1,7 +1,7 @@
 /**
  * Interface of employee registration form data
  */
-export interface EmployeeInterface {
+export interface ApplicantInterface {
   username: string;
   user_type: string;
   firstName: string;

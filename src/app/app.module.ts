@@ -1,6 +1,5 @@
 //MODULES
 import {BrowserModule} from '@angular/platform-browser';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NgModule} from '@angular/core';
 import {RouterRoutingModule} from '../router/router-routing.module';
 
@@ -18,26 +17,25 @@ import {TutorialComponent} from './title-page/tutorial/tutorial.component';
 import {TemplatesComponent} from './title-page/templates/templates.component';
 import {CompaniesComponent} from './title-page/companies/companies.component';
 import {ModalLoginComponent} from './modal/modal-login/modal-login.component';
-import {ModalEmployerRegistrationComponent} from './modal/modal-employer-registration/modal-employer-registration.component';
-import {ModalEmployeeRegistrationComponent} from './modal/modal-employee-registration/modal-employee-registration.component';
+import {CandidateRegFormComponent} from './modal/candidate-reg-form/candidate-reg-form.component';
+import {CompanyRegFormComponent} from './modal/company-reg-form/company-reg-form.component';
 import {ModalComponent} from './modal/modal.component';
-import {SliderModule} from 'angular-image-slider';
-
-//SERVICES
-import {ModalService} from './modal/modal.service';
 import {ProfileComponent} from './profile/profile.component';
 import {NotFoundComponent} from './not-found/not-found.component';
-import {ApiService} from '../services/rest/api.service';
-import {HttpClientModule} from '@angular/common/http';
 import {ProfileMenuComponent} from './profile/profile-menu/profile-menu.component';
 import {ProfileCvsComponent} from './profile/profile-cvs/profile-cvs.component';
 import {CvsEditPanelComponent} from './profile/profile-cvs/cvs-edit-panel/cvs-edit-panel.component';
-import {TestingComponent} from './testing/testing.component';
 import {CreateCvComponent} from './create-cv/create-cv.component';
+import {TestingComponent} from './testing/testing.component';
 import {CvFormComponent} from './create-cv/cv-form/cv-form.component';
 import {CvPresentationComponent} from './create-cv/cv-presentation/cv-presentation.component';
 import {CvChooseViewComponent} from './create-cv/cv-choose-view/cv-choose-view.component';
 import {CvActionsComponent} from './create-cv/cv-actions/cv-actions.component';
+
+//SERVICES
+import {ModalService} from './modal/modal.service';
+import {ApiService} from '../services/rest/api.service';
+import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import {ApiCandidatesService} from '../services/rest/api-candidates.service';
 import {ApiCompaniesService} from '../services/rest/api-companies.service';
@@ -55,8 +53,8 @@ import {ApiCompaniesService} from '../services/rest/api-companies.service';
     TemplatesComponent,
     CompaniesComponent,
     ModalLoginComponent,
-    ModalEmployerRegistrationComponent,
-    ModalEmployeeRegistrationComponent,
+    CompanyRegFormComponent,
+    CandidateRegFormComponent,
     ModalComponent,
     ProfileComponent,
     NotFoundComponent,
@@ -72,7 +70,6 @@ import {ApiCompaniesService} from '../services/rest/api-companies.service';
   ],
   imports: [
     BrowserModule,
-    SliderModule,
     AngularFontAwesomeModule,
     RouterRoutingModule,
     HttpClientModule,
@@ -82,7 +79,7 @@ import {ApiCompaniesService} from '../services/rest/api-companies.service';
     ModalService,
     ApiService,
     ApiCandidatesService,
-    ApiCompaniesService
+    ApiCompaniesService,
   ],
   bootstrap: [AppComponent]
 })

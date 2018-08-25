@@ -1,6 +1,6 @@
-import {EmployeeInterface} from '../interfaces/employee.interface';
+import {ApplicantInterface} from '../interfaces/applicant.interface';
 
-export class Employee implements EmployeeInterface {
+export class Candidate implements ApplicantInterface {
       public username = '';
       public user_type = '';
       public firstName = '';
