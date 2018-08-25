@@ -1,0 +1,41 @@
+@import '../../../style-variables.scss';
+
+:host aside {
+  color: $color-shadow-blue;
+  padding: 1rem 0;
+}
+
+:host aside::after {
+  content: "";
+  clear: both;
+  display: block;
+}
+:host a {
+  display: inline-block;
+  margin: 0 1rem;
+  color: $color-shadow-blue;
+  font-size: 0.9rem;
+  font-weight: 300;
+  vertical-align: middle;
+}
+
+:host h3 {
+  display: inline-block;
+  margin: 0 2rem 0 0;
+  font-size: 1.2rem;
+  font-weight: 200;
+  vertical-align: middle;
+}
+
+:host button {
+  margin-left: 2rem;
+}
+
+:host i {
+  padding-right: 0.3rem;
+}
+
+.buttons {
+  display: inline-block;
+  float: right;
+}
