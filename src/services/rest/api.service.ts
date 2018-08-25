@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {Observable} from 'rxjs';
 import {QueryAdressInterface} from '../../interfaces/query-adress.interface';
-import {RequestAdress} from './request-adress.service';
+import {RequestAdress} from '../request-adress.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +19,11 @@ export class ApiService {
    * @returns {Observable<Object>}
    */
   public get(path: string[]) {
+    // const adr: QueryAdressInterface = {
+    //   host: environment.apiUrl,
+    //   port: '' + environment.apiPort,
+    //   path: path
+    // };
     const adr = new RequestAdress(environment.apiUrl, environment.apiPort.toString(), path);
     const query = this.buildRequest(adr);
     console.log('Query to: ' + query);
@@ -39,6 +44,7 @@ export class ApiService {
     // };
     const adr = new RequestAdress(environment.apiUrl, environment.apiPort.toString(), path)
     const httpOptions = {
+      // TODO token
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Authorization': 'my-auth-token'
