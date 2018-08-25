@@ -21,7 +21,7 @@ export class ApiService {
    * @returns {Observable<Object>}
    */
   public getCandidates(): Observable<Object> {
-    return this.makeServerQuery(['candidate', 'get']);
+    return this.makeServerQuery(['candidates']);
   }
 
   /**
@@ -29,7 +29,7 @@ export class ApiService {
    * @returns {Observable<Object>}
    */
   public getCandidate(id: string): Observable<Object> {
-    return this.makeServerQuery(['candidate', id]);
+    return this.makeServerQuery(['candidates', id]);
   }
 
   /**
@@ -37,7 +37,7 @@ export class ApiService {
    * @returns {Observable<Object>}
    */
   getCompanies() {
-    return this.makeServerQuery(['company', 'get']);
+    return this.makeServerQuery(['companies']);
   }
 
   /**
