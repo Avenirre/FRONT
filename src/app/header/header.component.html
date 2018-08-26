@@ -1,5 +1,10 @@
 <div id="nav-mobile" class="pos-f-t">
-    <nav class="navbar navbar-dark bg-light-blue">
+    <nav class="navbar navbar-dark bg-main">
+        <i id="bell-icon" class="far fa-bell"></i>
+        <div routerLink="/" class="title-header-logo p-2 text-right cv-logo">
+            <i id="logo-icon" class="fas fa-user-tie fa-2x"></i>
+            <span>GLOBAL <strong>CV</strong> BANK</span>
+        </div>
         <button class="navbar-toggler"
                 type="button"
                 data-toggle="collapse"
@@ -7,26 +12,18 @@
                 aria-controls="navbarToggleExternalContent"
                 aria-expanded="false"
                 aria-label="Toggle navigation">
-            <div class="title-header-logo cv-logo">
-                <i id="logo-icon" class="fas fa-user-tie fa-2x"></i>
-                <span>GLOBAL <strong>CV</strong> BANK</span>
-            </div>
+                <i class="fas fa-chevron-circle-down"></i>
         </button>
-        <i id="bell-icon" class="far fa-bell"></i>
     </nav>
 
     <div class="collapse" id="navbarToggleExternalContent">
         <div class="bg-main p-4">
             <button (click)="openModal('login')"
-                    data-toggle="modal"
-                    data-target="#modal-main"
                     type="button"
                     class="btn btn-lg btn-block btn-primary">
                 Log in
             </button>
             <button (click)="openModal('regEmployee')"
-                    data-toggle="modal"
-                    data-target="#modal-main"
                     type="button"
                     class="btn btn-lg btn-block btn-danger">
                 Register
@@ -37,7 +34,7 @@
 
 <div class="grid-container">
     <div class="main">
-        <div routerLink="/" class="title-header-logo p-2 text-right">
+        <div routerLink="/" class="title-header-logo p-2 text-right cv-logo">
             <i id="logo-icon" class="fas fa-user-tie fa-2x"></i>
             <span>GLOBAL <strong>CV</strong> BANK</span>
         </div>

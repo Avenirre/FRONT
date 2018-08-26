@@ -1,0 +1,25 @@
+@import '../../../../style-variables.scss';
+
+section {
+  //height: 3rem;
+  background-color: #EAF0FF;
+  margin: 0 0 1rem 0;
+  padding: 1rem;
+  color: $color-shadow-blue;
+}
+:host h1 {
+  display: inline-block;
+  margin: 0 1.8rem 0 0;
+  font-size: 1rem;
+  font-weight: 100;
+  vertical-align: middle;
+}
+
+.buttons-container {
+  display: inline-block;
+  float: right;
+
+  i {
+    margin-left: 1rem;
+  }
+}

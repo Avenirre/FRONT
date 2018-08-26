@@ -1,5 +1,6 @@
-import {Component, ElementRef, Input, OnInit} from '@angular/core';
-import {ApiService} from '../services/api.service';
+import {Component, OnInit} from '@angular/core';
+import {ApiCandidatesService} from '../../services/rest/api-candidates.service';
+import {ApiCompaniesService} from '../../services/rest/api-companies.service';
 
 @Component({
   selector: 'app-testing',
@@ -9,14 +10,17 @@ import {ApiService} from '../services/api.service';
 export class TestingComponent implements OnInit {
   container;
 
-  constructor(private apiService: ApiService) {
+  constructor(
+      private apiCandidatesService: ApiCandidatesService,
+      private apiCompaniesService: ApiCompaniesService
+      ) {
   }
 
   ngOnInit() {
   }
 
   getCandidates() {
-    this.apiService.getCandidates().subscribe(
+    this.apiCandidatesService.getCandidates().subscribe(
        (data) => {
          // console.log(data);
          this.container = data;
@@ -29,7 +33,7 @@ export class TestingComponent implements OnInit {
   }
 
   getCompanies() {
-    this.apiService.getCompanies().subscribe(
+    this.apiCompaniesService.getCompanies().subscribe(
        (data) => {
          // console.log(data);
          this.container = data;
@@ -42,7 +46,7 @@ export class TestingComponent implements OnInit {
   }
 
   getCandidate(id: string) {
-    this.apiService.getCandidate(id).subscribe(
+    this.apiCandidatesService.getCandidate(id).subscribe(
        (data) => {
          // console.log(data);
          this.container = data;

@@ -1,0 +1,33 @@
+@import '../../../../style-variables.scss';
+
+section {
+  border-bottom: 1px solid $color-shadow-blue;
+  padding: 1.2rem 1rem 1.5rem 1rem;
+}
+
+:host input[type=checkbox] {
+  display: inline-block;
+  vertical-align: top;
+  margin: 0.3rem 0;
+}
+
+:host h1 {
+  display: block;
+  margin: 0 1.8rem 0 0;
+  font-size: 1rem;
+  font-weight: 400;
+  vertical-align: middle;
+  color: $color-shadow-blue;
+}
+span {
+  display: block;
+  margin: 0.5rem 0 0 0;
+  font-size: 0.8rem;
+  font-weight: 200;
+  color: $color-shadow-blue;
+}
+
+.cv-body {
+  display: inline-block;
+  margin-left: 0.6rem;
+}

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+declare var $: any;
 
 @Component({
   selector: 'app-cv-form',
@@ -6,10 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./cv-form.component.scss']
 })
 export class CvFormComponent implements OnInit {
-
   constructor() { }
 
   ngOnInit() {
   }
 
+  openAll() {
+    $('.collapse').collapse('toggle');
+  }
 }
