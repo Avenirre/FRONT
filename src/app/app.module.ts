@@ -39,6 +39,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import {ApiCandidatesService} from '../services/rest/api-candidates.service';
 import {ApiCompaniesService} from '../services/rest/api-companies.service';
+import { CvItemComponent } from './profile/profile-cvs/cv-item/cv-item.component';
 
 
 @NgModule({
@@ -67,6 +68,7 @@ import {ApiCompaniesService} from '../services/rest/api-companies.service';
     CvPresentationComponent,
     CvChooseViewComponent,
     CvActionsComponent,
+    CvItemComponent,
   ],
   imports: [
     BrowserModule,

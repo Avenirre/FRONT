@@ -20,7 +20,7 @@
     <form>
         <div class="form-group">
             <input type="email"
-                   class="form-control"
+                   class="form-control deletable"
                    id="email"
                    aria-describedby="email"
                    placeholder="enter email">
@@ -30,6 +30,7 @@
                    class="form-control"
                    id="password"
                    placeholder="password">
+            <i class="clear fas fa-times" onclick="var input = this.previousSibling; input.value = ''; input.focus();"></i>
         </div>
         <button (click)="login()"
                 type="button"
