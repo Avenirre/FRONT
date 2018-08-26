@@ -1,0 +1,43 @@
+@import '../../../style-variables.scss';
+
+section {
+}
+
+i {
+  font-size: 1.5rem;
+  position: relative;
+  margin-right: 1rem;
+}
+
+.unfold {
+  display: block;
+  float: right;
+  padding: 5px;
+  position: relative;
+  top: -2rem;
+  left: 1rem;
+}
+
+:host ::ng-deep h3 {
+  font-family: $secondary-font;
+  font-weight: 800;
+  font-size: 1.5rem;
+  margin: 1.5rem 0;
+}
+:host ::ng-deep input[type=text] {
+  //width: 100%;
+  border-radius: 25px;
+  border: 0;
+  outline: 0;
+  padding: 7px 20px;
+  margin: 5px 0;
+}
+
+a h3 {
+  color: $color-light;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}

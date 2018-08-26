@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+declare var $: any;
 
 @Component({
   selector: 'app-profile-menu',
@@ -12,4 +13,7 @@ export class ProfileMenuComponent implements OnInit {
   ngOnInit() {
   }
 
+  openAll() {
+    $('.collapse').collapse('toggle');
+  }
 }

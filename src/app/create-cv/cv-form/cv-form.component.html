@@ -1,164 +1,255 @@
 <section>
-  <form method="" action="">
-    <h3>1 Title</h3>
-    <input type="text" name="first_name" placeholder="first name*"/>
-    <input type="text" name="last_name" placeholder="last name*"/>
+  <form>
+    <a class="unfold" (click)="openAll()"><i class="fas fa-angle-double-down"></i></a>
+    <a
+      data-toggle="collapse"
+      href="#title"
+      role="button"
+      aria-expanded="false"
+      aria-controls="title">
+      <h3>
+        <i class="fas fa-chevron-circle-down"></i> Title
+      </h3>
+    </a>
+    <div class="collapse" id="title">
+      <input type="text" name="first_name" placeholder="first name*"/>
+      <input type="text" name="last_name" placeholder="last name*"/>
+    </div>
 
-    <h3>2 Experience</h3>
-    <input type="text" name="position_1" placeholder="position"/>
-    <input type="text" name="exp_years_1" placeholder="experience years"/>
-    <input type="text" name="position_2" placeholder="position"/>
-    <input type="text" name="exp_years_2" placeholder="experience years"/>
-    <input type="text" name="position_3" placeholder="position"/>
-    <input type="text" name="exp_years_3" placeholder="experience years"/>
-    <input type="text" name="exp_total" placeholder="total experience years"/>
+    <a
+      data-toggle="collapse"
+      href="#experience"
+      role="button"
+      aria-expanded="false"
+      aria-controls="experience">
+      <h3>
+        <i class="fas fa-chevron-circle-down"></i> Experience
+      </h3>
+    </a>
+    <div class="collapse" id="experience">
+      <input type="text" name="position_1" placeholder="position"/>
+      <input type="text" name="exp_years_1" placeholder="experience years"/>
+      <input type="text" name="position_2" placeholder="position"/>
+      <input type="text" name="exp_years_2" placeholder="experience years"/>
+      <input type="text" name="position_3" placeholder="position"/>
+      <input type="text" name="exp_years_3" placeholder="experience years"/>
+      <input type="text" name="exp_total" placeholder="total experience years"/>
+    </div>
 
-    <h3>3 Contact info</h3>
-    <input type="text" name="residence" placeholder="residence"/>
-    <input type="text" name="birthday" placeholder="birthday"/>
-    <input type="text" name="phone" placeholder="phone*"/>
-    <input type="text" name="email" placeholder="email*"/>
-    <input type="text" name="linkedin_link" placeholder="linkedin link"/>
+    <a
+      data-toggle="collapse"
+      href="#contacts"
+      role="button"
+      aria-expanded="false"
+      aria-controls="contacts">
+      <h3><i class="fas fa-chevron-circle-down"></i> Contact info</h3>
+    </a>
+    <div class="collapse" id="contacts">
+      <input type="text" name="residence" placeholder="residence"/>
+      <input type="text" name="birthday" placeholder="birthday"/>
+      <input type="text" name="phone" placeholder="phone*"/>
+      <input type="text" name="email" placeholder="email*"/>
+      <input type="text" name="linkedin_link" placeholder="linkedin link"/>
+    </div>
 
-    <h3>4 Decsription</h3>
-    <textarea name="description" placeholder="description"></textarea>
-    <input type="text" name="choose_preferable_area" placeholder="choose preferable area"/>
-    <input type="text" name="choose_position" placeholder="choose preferable position"/>
-    <p>salary from</p>
-    <select name="salary_from">
-      <option value="1500" selected>1500$</option>
-      <option value="2000">2000$</option>
-      <option value="2500">2500$</option>
-      <option value="3000">3000$</option>
-      <option value="3500">3500$</option>
-      <option value="4000">4000$</option>
-    </select>
-    <p>salary till</p>
-    <select name="salary_till">
-      <option value="1500">1500$</option>
-      <option value="2000">2000$</option>
-      <option value="2500">2500$</option>
-      <option value="3000">3000$</option>
-      <option value="3500">3500$</option>
-      <option value="4000" selected>4000$</option>
-    </select>
+    <a
+      data-toggle="collapse"
+      href="#desc"
+      role="button"
+      aria-expanded="false"
+      aria-controls="desc">
+      <h3><i class="fas fa-chevron-circle-down"></i> Decsription</h3>
+    </a>
+    <div class="collapse" id="desc">
+      <textarea name="description" placeholder="description"></textarea>
+      <input type="text" name="choose_preferable_area" placeholder="choose preferable area"/>
+      <input type="text" name="choose_position" placeholder="choose preferable position"/>
+      <p>salary from</p>
+      <select name="salary_from">
+        <option value="1500" selected>1500$</option>
+        <option value="2000">2000$</option>
+        <option value="2500">2500$</option>
+        <option value="3000">3000$</option>
+        <option value="3500">3500$</option>
+        <option value="4000">4000$</option>
+      </select>
+      <p>salary till</p>
+      <select name="salary_till">
+        <option value="1500">1500$</option>
+        <option value="2000">2000$</option>
+        <option value="2500">2500$</option>
+        <option value="3000">3000$</option>
+        <option value="3500">3500$</option>
+        <option value="4000" selected>4000$</option>
+      </select>
+    </div>
 
-    <h3>5 Education</h3>
-    <input type="text" name="school_institution_name" placeholder="school/institution name*"/>
-    <input type="text" name="degree" placeholder="degree*"/>
-    <input type="text" name="graduation_year" placeholder="graduation year*"/>
-    <input type="text" name="location" placeholder="location"/>
-    <textarea name="edu_description" placeholder="description"></textarea>
+    <a
+      data-toggle="collapse"
+      href="#education"
+      role="button"
+      aria-expanded="false"
+      aria-controls="education">
+      <h3><i class="fas fa-chevron-circle-down"></i> Education</h3>
+    </a>
+    <div class="collapse" id="education">
+      <input type="text" name="school_institution_name" placeholder="school/institution name*"/>
+      <input type="text" name="degree" placeholder="degree*"/>
+      <input type="text" name="graduation_year" placeholder="graduation year*"/>
+      <input type="text" name="location" placeholder="location"/>
+      <textarea name="edu_description" placeholder="description"></textarea>
+    </div>
 
-    <h3>6 Skills (use ctrl)</h3>
-    <select name="skills" multiple size="7">
-      <option disabled>Select skills</option>
-      <option value="s1">skill 1</option>
-      <option value="s2">skill 2</option>
-      <option value="s3">skill 3</option>
-      <option value="s4">skill 4</option>
-      <option value="s5">skill 5</option>
-      <option value="s6">skill 6</option>
-    </select>
+    <a
+      data-toggle="collapse"
+      href="#skills"
+      role="button"
+      aria-expanded="false"
+      aria-controls="skills">
+      <h3><i class="fas fa-chevron-circle-down"></i> Skills (use ctrl)</h3>
+    </a>
+    <div class="collapse" id="skills">
+      <select name="skills" multiple size="7">
+        <option disabled>Select skills</option>
+        <option value="s1">skill 1</option>
+        <option value="s2">skill 2</option>
+        <option value="s3">skill 3</option>
+        <option value="s4">skill 4</option>
+        <option value="s5">skill 5</option>
+        <option value="s6">skill 6</option>
+      </select>
+    </div>
 
-    <h3>7 Projects / Jobs</h3>
-    <input type="text" name="company_1" placeholder="company"/>
+    <a
+      data-toggle="collapse"
+      href="#projects"
+      role="button"
+      aria-expanded="false"
+      aria-controls="projects">
+      <h3><i class="fas fa-chevron-circle-down"></i> Projects / Jobs</h3>
+    </a>
+    <div class="collapse" id="projects">
+      <input type="text" name="company_1" placeholder="company"/>
 
-    <p>frontend</p>
-    <input type="radio" name="frontend_1" value="none"/> none
-    <input type="radio" name="frontend_1" value="10"/> 10%
-    <input type="radio" name="frontend_1" value="20"/> 20%
-    <input type="radio" name="frontend_1" value="30"/> 30%
-    <input type="radio" name="frontend_1" value="40"/> 40%
-    <input type="radio" name="frontend_1" value="50"/> 50%
-    <input type="radio" name="frontend_1" value="60"/> 60%
-    <input type="radio" name="frontend_1" value="70"/> 70%
-    <input type="radio" name="frontend_1" value="80"/> 80%
-    <input type="radio" name="frontend_1" value="90"/> 90%
-    <input type="radio" name="frontend_1" value="100"/> 100%
+      <label for="formControlRange">Frontend / Backend</label>
+      <input
+        type="range"
+        class="form-control-range"
+        id="formControlRange">
+      <p>from</p>
+      <input type="date" name="date_from_1"/>
+      <p>till</p>
+      <input type="date" name="date_till_1"/>
 
-    <p>backend</p>
-    <input type="radio" name="backend_1" value="none"/> none
-    <input type="radio" name="backend_1" value="10"/> 10%
-    <input type="radio" name="backend_1" value="20"/> 20%
-    <input type="radio" name="backend_1" value="30"/> 30%
-    <input type="radio" name="backend_1" value="40"/> 40%
-    <input type="radio" name="backend_1" value="50"/> 50%
-    <input type="radio" name="backend_1" value="60"/> 60%
-    <input type="radio" name="backend_1" value="70"/> 70%
-    <input type="radio" name="backend_1" value="80"/> 80%
-    <input type="radio" name="backend_1" value="90"/> 90%
-    <input type="radio" name="backend_1" value="100"/> 100%
+      <textarea name="project_description_1" placeholder="project description"></textarea>
 
-    <p>from</p>
-    <input type="date" name="date_from_1"/>
-    <p>till</p>
-    <input type="date" name="date_till_1"/>
+      <input type="text" name="company_2" placeholder="company"/>
 
-    <textarea name="project_description_1" placeholder="project description"></textarea>
+      <p>frontend</p>
+      <input type="radio" name="frontend_2" value="none"/> none
+      <label>
+        <input type="radio" name="frontend_2" value="10"/> 10%
+      </label>
+      <input type="radio" name="frontend_2" value="20"/> 20%
+      <input type="radio" name="frontend_2" value="30"/> 30%
+      <input type="radio" name="frontend_2" value="40"/> 40%
+      <input type="radio" name="frontend_2" value="50"/> 50%
+      <input type="radio" name="frontend_2" value="60"/> 60%
+      <input type="radio" name="frontend_2" value="70"/> 70%
+      <input type="radio" name="frontend_2" value="80"/> 80%
+      <input type="radio" name="frontend_2" value="90"/> 90%
+      <input type="radio" name="frontend_2" value="100"/> 100%
 
-    <input type="text" name="company_2" placeholder="company"/>
+      <p>backend</p>
+      <input type="radio" name="backend_2" value="none"/> none
+      <input type="radio" name="backend_2" value="10"/> 10%
+      <input type="radio" name="backend_2" value="20"/> 20%
+      <input type="radio" name="backend_2" value="30"/> 30%
+      <input type="radio" name="backend_2" value="40"/> 40%
+      <input type="radio" name="backend_2" value="50"/> 50%
+      <input type="radio" name="backend_2" value="60"/> 60%
+      <input type="radio" name="backend_2" value="70"/> 70%
+      <input type="radio" name="backend_2" value="80"/> 80%
+      <input type="radio" name="backend_2" value="90"/> 90%
+      <input type="radio" name="backend_2" value="100"/> 100%
 
-    <p>frontend</p>
-    <input type="radio" name="frontend_2" value="none"/> none
-    <label>
-      <input type="radio" name="frontend_2" value="10"/> 10%
-    </label>
-    <input type="radio" name="frontend_2" value="20"/> 20%
-    <input type="radio" name="frontend_2" value="30"/> 30%
-    <input type="radio" name="frontend_2" value="40"/> 40%
-    <input type="radio" name="frontend_2" value="50"/> 50%
-    <input type="radio" name="frontend_2" value="60"/> 60%
-    <input type="radio" name="frontend_2" value="70"/> 70%
-    <input type="radio" name="frontend_2" value="80"/> 80%
-    <input type="radio" name="frontend_2" value="90"/> 90%
-    <input type="radio" name="frontend_2" value="100"/> 100%
+      <p>from</p>
+      <input type="date" name="date_from_2"/>
+      <p>till</p>
+      <input type="date" name="date_till_2"/>
 
-    <p>backend</p>
-    <input type="radio" name="backend_2" value="none"/> none
-    <input type="radio" name="backend_2" value="10"/> 10%
-    <input type="radio" name="backend_2" value="20"/> 20%
-    <input type="radio" name="backend_2" value="30"/> 30%
-    <input type="radio" name="backend_2" value="40"/> 40%
-    <input type="radio" name="backend_2" value="50"/> 50%
-    <input type="radio" name="backend_2" value="60"/> 60%
-    <input type="radio" name="backend_2" value="70"/> 70%
-    <input type="radio" name="backend_2" value="80"/> 80%
-    <input type="radio" name="backend_2" value="90"/> 90%
-    <input type="radio" name="backend_2" value="100"/> 100%
+      <textarea name="project_description_2" placeholder="project description"></textarea>
+    </div>
 
-    <p>from</p>
-    <input type="date" name="date_from_2"/>
-    <p>till</p>
-    <input type="date" name="date_till_2"/>
+    <a
+      data-toggle="collapse"
+      href="#achievements"
+      role="button"
+      aria-expanded="false"
+      aria-controls="achievements">
+      <h3><i class="fas fa-chevron-circle-down"></i> Achievements</h3>
+    </a>
+    <div class="collapse" id="achievements">
+      <textarea name="achievement_1" placeholder="description"></textarea>
+      <textarea name="achievement_2" placeholder="description"></textarea>
+      <textarea name="achievement_3" placeholder="description"></textarea>
+    </div>
 
-    <textarea name="project_description_2" placeholder="project description"></textarea>
+    <a
+      data-toggle="collapse"
+      href="#certifications"
+      role="button"
+      aria-expanded="false"
+      aria-controls="certifications">
+      <h3><i class="fas fa-chevron-circle-down"></i> Certifications</h3>
+    </a>
+    <div class="collapse" id="certifications">
+      <textarea name="certification_1" placeholder="description"></textarea>
+      <textarea name="certification_2" placeholder="description"></textarea>
+      <textarea name="certification_3" placeholder="description"></textarea>
+    </div>
 
-    <h3>8 Achievements</h3>
-    <textarea name="achievement_1" placeholder="description"></textarea>
-    <textarea name="achievement_2" placeholder="description"></textarea>
-    <textarea name="achievement_3" placeholder="description"></textarea>
+    <a
+      data-toggle="collapse"
+      href="#languages"
+      role="button"
+      aria-expanded="false"
+      aria-controls="languages">
+      <h3><i class="fas fa-chevron-circle-down"></i> Languages</h3>
+    </a>
+    <div class="collapse" id="languages">
+      <input type="text" name="language_1" placeholder="language 1"/>
+      <input type="text" name="language_1" placeholder="language 2"/>
+      <input type="text" name="language_1" placeholder="language 3"/>
+    </div>
 
-    <h3>9 Certifications</h3>
-    <textarea name="certification_1" placeholder="description"></textarea>
-    <textarea name="certification_2" placeholder="description"></textarea>
-    <textarea name="certification_3" placeholder="description"></textarea>
+    <a
+      data-toggle="collapse"
+      href="#links"
+      role="button"
+      aria-expanded="false"
+      aria-controls="links">
+      <h3><i class="fas fa-chevron-circle-down"></i> Footer links</h3>
+    </a>
+    <div class="collapse" id="links">
+      <input type="text" name="footer_link_portfolio" placeholder="portfolio"/>
+      <input type="text" name="footer_link_github" placeholder="github"/>
+      <input type="text" name="footer_link_other" placeholder="other"/>
+    </div>
 
-    <h3>10 Languages</h3>
-    <input type="text" name="language_1" placeholder="language 1"/>
-    <input type="text" name="language_1" placeholder="language 2"/>
-    <input type="text" name="language_1" placeholder="language 3"/>
+    <a
+      data-toggle="collapse"
+      href="#info"
+      role="button"
+      aria-expanded="false"
+      aria-controls="info">
+      <h3><i class="fas fa-chevron-circle-down"></i> Footer info</h3>
+    </a>
+    <div class="collapse" id="info">
+      <textarea name="recommendations_req_1" placeholder="recommendations by request"></textarea>
+      <textarea name="recommendations_req_2" placeholder="recommendations by request"></textarea>
+      <textarea name="recommendations_req_3" placeholder="recommendations by request"></textarea>
+    </div>
 
-    <h3>11 Footer links</h3>
-    <input type="text" name="footer_link_portfolio" placeholder="portfolio"/>
-    <input type="text" name="footer_link_github" placeholder="github"/>
-    <input type="text" name="footer_link_other" placeholder="other"/>
-
-    <h3>12 Footer info</h3>
-    <textarea name="recommendations_req_1" placeholder="recommendations by request"></textarea>
-    <textarea name="recommendations_req_2" placeholder="recommendations by request"></textarea>
-    <textarea name="recommendations_req_3" placeholder="recommendations by request"></textarea>
-
-    <input type="submit" value="Create profile"/>
   </form>
 </section>
