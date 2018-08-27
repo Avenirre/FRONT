@@ -1,15 +1,15 @@
 import {Component, OnInit} from '@angular/core';
-import {ModalService} from '../modal.service';
+import {ModalService} from '../../../services/modal.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {routes} from '../../../environments/environment.fake-roots';
-import {Company} from '../../../services/company.service';
+import {Company} from '../../../services/support/company.service';
 import {ApiCompaniesService} from '../../../services/rest/api-companies.service';
 
 @Component({
   selector: 'app-company-reg-form',
   templateUrl: './company-reg-form.component.html',
   styleUrls: [
-    '../modal-content.component.scss',
+    '../form-main.scss',
     'company-reg-form.component.scss'
   ]
 })

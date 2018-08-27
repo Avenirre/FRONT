@@ -1,15 +1,15 @@
 import {Component, OnInit} from '@angular/core';
-import {ModalService} from '../modal.service';
+import {ModalService} from '../../../services/modal.service';
 import {Router} from '@angular/router';
 import {routes} from '../../../environments/environment.fake-roots';
 import {ApiCandidatesService} from '../../../services/rest/api-candidates.service';
-import {Candidate} from '../../../services/candidate.service';
+import {Candidate} from '../../../services/support/candidate.service';
 
 @Component({
   selector: 'app-candidate-reg-form',
   templateUrl: './candidate-reg-form.component.html',
   styleUrls: [
-    '../modal-content.component.scss',
+    '../form-main.scss',
     './candidate-reg-form.component.scss'
   ]
 })

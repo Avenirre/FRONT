@@ -1,4 +1,4 @@
-import {ApplicantInterface} from '../interfaces/applicant.interface';
+import {ApplicantInterface} from '../../interfaces/applicant.interface';
 
 export class Candidate implements ApplicantInterface {
       public username = '';

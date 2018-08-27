@@ -1,4 +1,4 @@
-import {QueryAdressInterface} from '../interfaces/query-adress.interface';
+import {QueryAdressInterface} from '../../interfaces/query-adress.interface';
 
 export class RequestAdress implements QueryAdressInterface {
   constructor(

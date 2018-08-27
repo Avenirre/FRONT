@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {routes} from '../../environments/environment.fake-roots';
-import {ModalService} from '../modal/modal.service';
+import {ModalService} from '../../services/modal.service';
 import {ActivatedRoute} from '@angular/router';
 
 @Component({

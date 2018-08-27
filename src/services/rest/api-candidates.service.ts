@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {ApiService} from './api.service';
 import {HttpClient} from '@angular/common/http';
-import {Candidate} from '../candidate.service';
+import {Candidate} from '../support/candidate.service';
 
 @Injectable({
   providedIn: 'root'
