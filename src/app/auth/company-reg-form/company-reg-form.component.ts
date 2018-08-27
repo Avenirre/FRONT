@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {ModalService} from '../../../services/modal.service';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ModalService} from '../../../services/modal/modal.service';
+import {Router} from '@angular/router';
 import {routes} from '../../../environments/environment.fake-roots';
 import {Company} from '../../../services/support/company.service';
-import {ApiCompaniesService} from '../../../services/rest/api-companies.service';
+import {AuthService} from '../../../services/auth/auth.service';
 
 @Component({
   selector: 'app-company-reg-form',
@@ -19,7 +19,7 @@ export class CompanyRegFormComponent implements OnInit {
   constructor(
     private modalService: ModalService,
     private router: Router,
-    private apiCompaniesService: ApiCompaniesService
+    private authService: AuthService
   ) {
     this.company.user_type = 'company';
   }
@@ -29,14 +29,11 @@ export class CompanyRegFormComponent implements OnInit {
 
   openModal(link: string) {
     this.modalService.openModal(routes[link]);
-    // this.router.navigate(['/' + routes[link]]);
   }
 
   submitRegistration() {
-    this.modalService.closeModal();
-    this.router.navigate(['/profile']);
     console.log(this.company);
-    this.apiCompaniesService.createCompany(this.company);
-    // this.router.navigate(['/profile']);
+    this.modalService.closeModal();
+    this.authService.createCompany(this.company);
   }
 }

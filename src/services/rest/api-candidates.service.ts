@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {ApiService} from './api.service';
 import {HttpClient} from '@angular/common/http';
-import {Candidate} from '../support/candidate.service';
 
 @Injectable({
   providedIn: 'root'
@@ -28,16 +27,16 @@ export class ApiCandidatesService {
     return this.apiService.get(['candidates', id]);
   }
 
-  /**
-   * makes post request to the back-end server's create candidate method
-   * and sends JSON with candidate data;
-   * @param {Candidate} employee
-   */
-  public createCandidate(candidate: Candidate) {
-    this.apiService.post<Candidate>(['candidates'], candidate)
-        .subscribe(
-            (data) => {
-              console.log(data);
-            });
-  }
+  // /**
+  //  * makes post request to the back-end server's create candidate method
+  //  * and sends JSON with candidate data;
+  //  * @param {Candidate} employee
+  //  */
+  // public createCandidate(candidate: Candidate) {
+  //   this.apiService.post<Candidate>(['candidates'], candidate)
+  //       .subscribe(
+  //           (data) => {
+  //             console.log(data);
+  //           });
+  // }
 }

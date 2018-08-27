@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {ModalService} from '../../../services/modal.service';
+import {ModalService} from '../../../services/modal/modal.service';
 import {Router} from '@angular/router';
 import {routes} from '../../../environments/environment.fake-roots';
-import {ApiCandidatesService} from '../../../services/rest/api-candidates.service';
 import {Candidate} from '../../../services/support/candidate.service';
+import {AuthService} from '../../../services/auth/auth.service';
 
 @Component({
   selector: 'app-candidate-reg-form',
@@ -20,7 +20,7 @@ export class CandidateRegFormComponent implements OnInit {
   constructor(
       private modalService: ModalService,
       private router: Router,
-      private apiCandidatesService: ApiCandidatesService
+      private authService: AuthService
   ) {
   }
 
@@ -34,8 +34,6 @@ export class CandidateRegFormComponent implements OnInit {
 
   submitRegistration() {
     this.modalService.closeModal();
-    console.log(this.candidate);
-    this.apiCandidatesService.createCandidate(this.candidate);
-    this.router.navigate(['/profile']);
+    this.authService.createCandidate(this.candidate);
   }
 }

@@ -1,1 +1,5 @@
 @import '../style-variables.scss';
+
+:host ::ng-deep .invisible {
+  display: none;
+}
