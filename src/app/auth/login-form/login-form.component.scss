@@ -29,11 +29,47 @@
 }
 
 :host .front-block form {
-  margin: 6rem 1rem 3rem 1rem;
-}
+  margin: 5rem 1rem 3rem 1rem;
+  //text-align: center;
 
-:host .front-block form button {
-  margin: 3rem auto;
+  button {
+    margin: 0 auto;
+  }
+  button.btn-secondary {
+    display: block;
+  }
+
+  span.badge {
+    display: none;
+    position: absolute;
+    top: 37px;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: 0.3s;
+  }
+  
+  input:hover + span.badge, input:focus + span.badge {
+    display: block;
+    transition: 0.3s;
+  }
+
+  .form-group {
+    position: relative;
+  }
+
+  .err-message-container {
+    min-height: 4rem;
+    padding: 0 2rem;
+    text-align: center;
+    //border: 1px solid;
+
+    .err-message {
+      color: $color-orange;
+      font-size: 0.8rem;
+      margin: 0;
+      vertical-align: middle;
+    }
+  }
 }
 
 :host ::ng-deep .btn-close {

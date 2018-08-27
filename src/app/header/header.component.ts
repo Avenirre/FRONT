@@ -1,22 +1,34 @@
 import {Component, OnInit} from '@angular/core';
 import {routes} from '../../environments/environment.fake-roots';
-import {ModalService} from '../../services/modal.service';
-import {ActivatedRoute} from '@angular/router';
+import {ModalService} from '../../services/modal/modal.service';
+import {AuthService} from '../../services/auth/auth.service';
 
 @Component({
-    selector: 'app-header',
-    templateUrl: './header.component.html',
-    styleUrls: ['./header.component.scss']
+  selector: 'app-header',
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
 
-    constructor(private modalService: ModalService) {}
+  constructor(
+    private modalService: ModalService,
+    private authService: AuthService
+  ) {
+  }
 
-    ngOnInit() {
-    }
+  ngOnInit() {
+  }
 
-    openModal(link: string) {
-        console.log(routes[link]);
-        this.modalService.openModal(routes[link]);
-    }
+  openModal(link: string) {
+    console.log(routes[link]);
+    this.modalService.openModal(routes[link]);
+  }
+
+  isUserLogged(): boolean {
+    return this.authService.isLoggedIn();
+  }
+
+  logout() {
+    this.authService.logout();
+  }
 }
