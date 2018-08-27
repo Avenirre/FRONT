@@ -1,3 +1,5 @@
-
-node_modules/
 .idea/
+target/
+*.DS_Store
+_ign_*
+node_modules/
