@@ -1,18 +1,31 @@
 @import '../../../style-variables';
 
-.reg-container {
-  margin-top: 10rem;
-  width: 40%;
-  padding-left: 3rem;
-}
+//.cv-form-main {
+//  margin: 0;
+//  padding: 0;
+//  width: 100%;
+//  height: 100%;
+//  background: rgba(255, 255, 255, 0.4);
+//  border: 1px solid rgba(255, 255, 255, 0.3);
+//  -webkit-box-shadow: 0 0 20px rgba(68, 68, 68, 0.5);
+//  -moz-box-shadow: 0 0 20px rgba(68, 68, 68, 0.5);
+//  box-shadow: 0 0 20px rgba(68, 68, 68, 0.5);
+//}
 
-.reg-container h2 {
-  margin-bottom: 1.5rem;
-  text-shadow:  0 0 15px rgba(50, 50, 50, 0.4);
+.reg-container {
+  padding-top: 20vh;
+  width: 40%;
+  padding-left: 4vw;
+
+  h2 {
+    font-size: 3vw;
+    margin-bottom: 5vh;
+    text-shadow:  0 0 15px rgba(50, 50, 50, 0.4);
+  }
 }
 
 :host .front-block {
-  left: 40%;
+  left: 25vw;
 }
 
 :host .front-block form {
@@ -37,15 +50,15 @@
 }
 
 @media (min-width: $display-mobile) and (max-width: $display-tablet) {
-  :host ::ng-deep h2 {
-    font-size: 2rem;
+  :host .front-block {
+    left: 30vw;
   }
   .reg-container h2 {
-    font-size: 1.5rem;
+    //font-size: 3.5vw;
   }
 }
 
-@media (max-width: 700px) {
+@media (max-width: $display-mobile) {
   :host ::ng-deep h2 {
     font-size: 2rem;
   }
@@ -63,7 +76,7 @@
   }
 
   :host .front-block form {
-    margin: 2rem 1rem;
+    margin: 1rem;
     text-align: center;
   }
   :host .front-block form input {
