@@ -3,16 +3,16 @@ import {Routes, RouterModule} from '@angular/router';
 import {ProfileComponent} from '../app/profile/profile.component';
 import {TitlePageComponent} from '../app/title-page/title-page.component';
 import {NotFoundComponent} from '../app/not-found/not-found.component';
-import {ModalLoginComponent} from '../app/modal/modal-login/modal-login.component';
+import {LoginFormComponent} from '../app/auth/login-form/login-form.component';
 import {routes} from '../environments/environment.fake-roots';
 import {TestingComponent} from '../app/testing/testing.component';
 import {CreateCvComponent} from '../app/create-cv/create-cv.component';
-import {CompanyRegFormComponent} from '../app/modal/company-reg-form/company-reg-form.component';
-import {CandidateRegFormComponent} from '../app/modal/candidate-reg-form/candidate-reg-form.component';
+import {CompanyRegFormComponent} from '../app/auth/company-reg-form/company-reg-form.component';
+import {CandidateRegFormComponent} from '../app/auth/candidate-reg-form/candidate-reg-form.component';
 
 const routesApi: Routes = [
     {path: routes.root, component: TitlePageComponent},
-    {path: routes.login, component: ModalLoginComponent, outlet: 'modal'},
+    {path: routes.login, component: LoginFormComponent, outlet: 'modal'},
     {path: routes.regEmployee, component: CandidateRegFormComponent, outlet: 'modal'},
     {path: routes.regEmployer, component: CompanyRegFormComponent, outlet: 'modal'},
     {path: routes.profile, component: ProfileComponent},
