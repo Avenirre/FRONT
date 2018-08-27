@@ -35,7 +35,6 @@ export class LoginFormComponent implements OnInit {
   login(form: NgForm) {
     console.log(form.value);
     this.modalService.closeModal();
-    // this.router.navigate(['/profile', {outlets: {modal: null}}]);
     // this.router.navigate(['/profile']);
   }
 }

@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {routes} from '../../../environments/environment.fake-roots';
 import {Company} from '../../../services/support/company.service';
 import {ApiCompaniesService} from '../../../services/rest/api-companies.service';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-company-reg-form',
@@ -32,9 +33,9 @@ export class CompanyRegFormComponent implements OnInit {
     // this.router.navigate(['/' + routes[link]]);
   }
 
-  submitRegistration() {
+  submitRegistration(form: NgForm) {
     this.modalService.closeModal();
-    this.router.navigate(['/profile']);
+    // this.router.navigate(['/profile']);
     console.log(this.company);
     this.apiCompaniesService.createCompany(this.company);
     // this.router.navigate(['/profile']);

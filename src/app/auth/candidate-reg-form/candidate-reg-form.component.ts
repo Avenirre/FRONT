@@ -36,6 +36,6 @@ export class CandidateRegFormComponent implements OnInit {
     this.modalService.closeModal();
     console.log(this.candidate);
     this.apiCandidatesService.createCandidate(this.candidate);
-    this.router.navigate(['/profile']);
+    // this.router.navigate(['/profile']);
   }
 }
