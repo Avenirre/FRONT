@@ -1,5 +1,5 @@
 import {Component, OnInit, Input, ElementRef, ViewChild, OnDestroy} from '@angular/core';
-import {ModalService} from './modal.service';
+import {ModalService} from '../../services/modal.service';
 import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({

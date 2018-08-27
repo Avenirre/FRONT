@@ -16,9 +16,9 @@ import {StatisticsComponent} from './title-page/statistics/statistics.component'
 import {TutorialComponent} from './title-page/tutorial/tutorial.component';
 import {TemplatesComponent} from './title-page/templates/templates.component';
 import {CompaniesComponent} from './title-page/companies/companies.component';
-import {ModalLoginComponent} from './modal/modal-login/modal-login.component';
-import {CandidateRegFormComponent} from './modal/candidate-reg-form/candidate-reg-form.component';
-import {CompanyRegFormComponent} from './modal/company-reg-form/company-reg-form.component';
+import {LoginFormComponent} from './auth/login-form/login-form.component';
+import {CandidateRegFormComponent} from './auth/candidate-reg-form/candidate-reg-form.component';
+import {CompanyRegFormComponent} from './auth/company-reg-form/company-reg-form.component';
 import {ModalComponent} from './modal/modal.component';
 import {ProfileComponent} from './profile/profile.component';
 import {NotFoundComponent} from './not-found/not-found.component';
@@ -33,7 +33,7 @@ import {CvChooseViewComponent} from './create-cv/cv-choose-view/cv-choose-view.c
 import {CvActionsComponent} from './create-cv/cv-actions/cv-actions.component';
 
 //SERVICES
-import {ModalService} from './modal/modal.service';
+import {ModalService} from '../services/modal.service';
 import {ApiService} from '../services/rest/api.service';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
@@ -53,7 +53,7 @@ import { CvItemComponent } from './profile/profile-cvs/cv-item/cv-item.component
     TutorialComponent,
     TemplatesComponent,
     CompaniesComponent,
-    ModalLoginComponent,
+    LoginFormComponent,
     CompanyRegFormComponent,
     CandidateRegFormComponent,
     ModalComponent,

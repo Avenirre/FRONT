@@ -3,7 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {Observable} from 'rxjs';
 import {QueryAdressInterface} from '../../interfaces/query-adress.interface';
-import {RequestAdress} from '../request-adress.service';
+import {RequestAdress} from '../support/request-adress.service';
 
 @Injectable({
   providedIn: 'root'
