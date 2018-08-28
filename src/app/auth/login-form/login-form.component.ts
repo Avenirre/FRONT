@@ -1,8 +1,11 @@
 import {Component, ElementRef, OnInit} from '@angular/core';
-import {ModalService} from '../../../services/modal.service';
+import {ModalService} from '../../../services/modal/modal.service';
 import {Router} from '@angular/router';
 import {routes} from '../../../environments/environment.fake-roots';
 import {NgForm} from '@angular/forms';
+import {AuthService} from '../../../services/auth/auth.service';
+import {LoginDataInterface} from '../../../interfaces/login-data.interface';
+
 // declare var $: any;
 
 @Component({
@@ -14,8 +17,10 @@ import {NgForm} from '@angular/forms';
   ]
 })
 export class LoginFormComponent implements OnInit {
+  loginError = false;
 
   constructor(
+    private authService: AuthService,
     private modalService: ModalService,
     private router: Router
   ) {
@@ -32,9 +37,20 @@ export class LoginFormComponent implements OnInit {
     this.modalService.closeModal();
   }
 
-  login(form: NgForm) {
-    console.log(form.value);
-    this.modalService.closeModal();
-    // this.router.navigate(['/profile']);
+  onLogin(form: NgForm) {
+    const loginData: LoginDataInterface = {
+      login: form.value['login'],
+      password: form.value['password']
+    };
+    this.authService.login(loginData)
+      .then((loginMessage: string) => {
+        console.log('login message: ' + loginMessage);
+        this.router.navigate(['..', {outlets: {modal: ['message']}}], { queryParams: { message: 'login succeed!' } });
+     // this.modalService.closeModal();
+
+      }, (loginMessage) => {
+        console.log('error message: ' + loginMessage);
+        this.loginError = true;
+      });
   }
 }

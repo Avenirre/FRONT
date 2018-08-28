@@ -33,13 +33,14 @@ import {CvChooseViewComponent} from './create-cv/cv-choose-view/cv-choose-view.c
 import {CvActionsComponent} from './create-cv/cv-actions/cv-actions.component';
 
 //SERVICES
-import {ModalService} from '../services/modal.service';
+import {ModalService} from '../services/modal/modal.service';
 import {ApiService} from '../services/rest/api.service';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import {ApiCandidatesService} from '../services/rest/api-candidates.service';
 import {ApiCompaniesService} from '../services/rest/api-companies.service';
 import { CvItemComponent } from './profile/profile-cvs/cv-item/cv-item.component';
+import { MessageComponent } from './modal/message/message.component';
 
 
 @NgModule({
@@ -69,6 +70,7 @@ import { CvItemComponent } from './profile/profile-cvs/cv-item/cv-item.component
     CvChooseViewComponent,
     CvActionsComponent,
     CvItemComponent,
+    MessageComponent,
   ],
   imports: [
     BrowserModule,

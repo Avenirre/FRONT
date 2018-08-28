@@ -13,27 +13,63 @@
 //}
 
 .reg-container {
-  padding-top: 20vh;
+  padding-top: 7rem;
   width: 40%;
   padding-left: 4vw;
 
   h2 {
-    font-size: 3vw;
-    margin-bottom: 5vh;
+    //font-size: 3vw;
+    margin-bottom: 2vh;
     text-shadow:  0 0 15px rgba(50, 50, 50, 0.4);
   }
 }
 
 :host .front-block {
-  left: 25vw;
+  left: 17rem;
 }
 
 :host .front-block form {
-  margin: 6rem 1rem 3rem 1rem;
-}
+  margin: 4rem 1rem 0 1rem;
+  //text-align: center;
 
-:host .front-block form button {
-  margin: 3rem auto;
+  button {
+    margin: 0 auto;
+  }
+  button.btn-secondary {
+    display: block;
+  }
+
+  span.badge {
+    display: none;
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: 0.3s;
+  }
+  
+  input:hover + span.badge, input:focus + span.badge {
+    display: block;
+    transition: 0.3s;
+  }
+
+  .form-group {
+    position: relative;
+  }
+
+  .err-message-container {
+    min-height: 2.5rem;
+    padding: 0 2rem;
+    text-align: center;
+    //border: 1px solid;
+
+    .err-message {
+      color: $color-orange;
+      font-size: 0.8rem;
+      margin: 0;
+      vertical-align: middle;
+    }
+  }
 }
 
 :host ::ng-deep .btn-close {
@@ -49,26 +85,35 @@
   display: none;
 }
 
-@media (min-width: $display-mobile) and (max-width: $display-tablet) {
-  :host .front-block {
-    left: 30vw;
-  }
-  .reg-container h2 {
-    //font-size: 3.5vw;
-  }
-}
+//@media (min-width: $display-mobile) and (max-width: $display-tablet) {
+//  :host .front-block {
+//    left: 30vw;
+//  }
+//  .reg-container h2 {
+//    //font-size: 3.5vw;
+//  }
+//}
 
 @media (max-width: $display-mobile) {
   :host ::ng-deep h2 {
-    font-size: 2rem;
+    font-size: 1.8rem;
+  }
+
+  :host ::ng-deep .cv-form-main {
+    //position: relative;
+    //left: auto;
+    //top: auto;
+    //transform: translate(-20rem, -15rem);
   }
 
   :host .front-block {
-    display: block;
-    margin: 30px;
-    left: 0;
-    right: 0;
-    top: -7rem;
+    position: relative;
+    width: calc(90vw - 4rem);
+    margin: 0;
+    //transform: translate(-40vw, 0rem);
+    left: 2rem;
+    right: 2rem;
+    //top: -7rem;
   }
 
   .reg-container {
