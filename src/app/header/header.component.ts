@@ -2,6 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {routes} from '../../environments/environment.fake-roots';
 import {ModalService} from '../../services/modal/modal.service';
 import {AuthService} from '../../services/auth/auth.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {TitlePageComponent} from '../title-page/title-page.component';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-header',
@@ -9,15 +12,17 @@ import {AuthService} from '../../services/auth/auth.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+  isTitlePage: boolean;
 
   constructor(
     private modalService: ModalService,
-    private authService: AuthService
+    private authService: AuthService,
   ) {
   }
 
   ngOnInit() {
   }
+
 
   openModal(link: string) {
     console.log(routes[link]);
