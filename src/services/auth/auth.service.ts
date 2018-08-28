@@ -4,7 +4,6 @@ import {ApiService} from '../rest/api.service';
 import {Company} from '../support/company.service';
 import {LoginDataInterface} from '../../interfaces/login-data.interface';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable} from "rxjs/internal/Observable";
 
 @Injectable({
   providedIn: 'root'

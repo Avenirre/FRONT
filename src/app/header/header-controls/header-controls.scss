@@ -1,0 +1,11 @@
+:host ::ng-deep .menu-btns {
+  display: inline-block;
+  list-style: none;
+  float: right;
+  margin: 15px;
+}
+
+:host ::ng-deep .menu-btns li {
+  display: inline-block;
+  margin-left: 1rem;
+}
