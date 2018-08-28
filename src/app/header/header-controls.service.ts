@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {environment} from '../../environments/environment';
-import {ModalService} from '../../services/modal/modal.service';
+import {ModalService} from '../modal/modal.service';
 import {AuthService} from '../../services/auth/auth.service';
 
 @Injectable({

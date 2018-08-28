@@ -10,6 +10,7 @@ import {AuthService} from '../../../../services/auth/auth.service';
   ]
 })
 export class BtnsLoggedComponent implements OnInit {
+  currentUsername = localStorage.getItem('currentLogin');
 
   constructor(
     private authService: AuthService
