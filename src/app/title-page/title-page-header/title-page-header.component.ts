@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {ModalService} from '../../../services/modal/modal.service';
-import {routes} from '../../../environments/environment.fake-roots';
+import {ModalService} from '../../modal/modal.service';
+import {environment} from '../../../environments/environment';
 import {Router} from '@angular/router';
 
 @Component({
@@ -9,6 +9,8 @@ import {Router} from '@angular/router';
     styleUrls: ['./title-page-header.component.scss']
 })
 export class TitlePageHeaderComponent implements OnInit {
+  private routes = environment.routes;
+
     constructor(
         private modalService: ModalService,
     ) {
@@ -19,6 +21,6 @@ export class TitlePageHeaderComponent implements OnInit {
     }
 
     openModal(link: string) {
-        this.modalService.openModal(routes[link]);
+        this.modalService.openModal(this.routes[link]);
     }
 }

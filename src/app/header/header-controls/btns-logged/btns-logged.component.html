@@ -1,0 +1,17 @@
+<li>
+  <button
+    (click)="logout()"
+    data-toggle="modal" data-target="#modal-main" type="button"
+    class="btn btn-primary">
+    Sign Out
+  </button>
+</li>
+<li>
+  <button
+    routerLink="/profile"
+    data-toggle="modal" data-target="#modal-main"
+    type="button"
+    class="btn btn-danger">
+    {{currentUsername}}
+  </button>
+</li>

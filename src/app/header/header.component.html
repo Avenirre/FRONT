@@ -1,5 +1,5 @@
 <div id="nav-mobile" class="pos-f-t">
-  <nav class="navbar navbar-dark bg-main">
+  <nav class="navbar navbar-dark bg-light-blue">
     <i id="bell-icon" class="far fa-bell"></i>
     <div routerLink="/" class="title-header-logo p-2 text-right cv-logo">
       <i id="logo-icon" class="fas fa-user-tie fa-2x"></i>
@@ -18,91 +18,41 @@
 
   <div class="collapse" id="navbarToggleExternalContent">
     <div class="bg-main p-4">
-      <button (click)="openModal('login')"
-              type="button"
-              class="btn btn-lg btn-block btn-primary">
-        Log in
-      </button>
-      <button (click)="openModal('regEmployee')"
-              type="button"
-              class="btn btn-lg btn-block btn-danger">
-        Register
-      </button>
+      <ul class="btns-mobile">
+        <!--BUTTONS-->
+        <app-btns-logged *ngIf="isLoggedIn(); else notLoggedButtons"></app-btns-logged>
+        <ng-template #notLoggedButtons>
+          <app-btns-unlogged></app-btns-unlogged>
+        </ng-template>
+        <!--/BUTTNOS-->
+      </ul>
     </div>
   </div>
 </div>
 
-<div class="grid-container">
+<div class="grid-container"
+      [class.grid-container-title]="isTitlePage">
   <div class="main">
     <div routerLink="/"
-         class="header-logo p-2 text-right cv-logo"
-          [class.title-header-logo]="isTitlePage"
+         class="header-logo p-2 text-left cv-logo"
+         [class.title-header-logo]="isTitlePage"
     >
       <i id="logo-icon" class="fas fa-user-tie fa-2x"></i>
       <span>GLOBAL <strong>CV</strong> BANK</span>
     </div>
-    <ul *ngIf="isUserLogged(); else notLoggedButtons"
-        class="menu-btns">
+    <ul class="menu-btns">
       <i id="bell-icon" class="far fa-bell"></i>
-      <li>
-        <button
-          (click)="logout()"
-          data-toggle="modal" data-target="#modal-main" type="button"
-          class="btn btn-primary">
-          Sign Out
-        </button>
-      </li>
-      <li>
-        <button
-          routerLink="/profile"
-          data-toggle="modal" data-target="#modal-main"
-          type="button"
-          class="btn btn-danger">
-          Profile
-        </button>
-      </li>
+      <!--BUTTONS-->
+      <app-btns-logged *ngIf="isLoggedIn(); else notLoggedButtons"></app-btns-logged>
+      <ng-template #notLoggedButtons>
+        <app-btns-unlogged></app-btns-unlogged>
+      </ng-template>
+      <!--/BUTTONS-->
     </ul>
-    <ng-template #notLoggedButtons>
-      <ul class="menu-btns">
-        <i id="bell-icon" class="far fa-bell"></i>
-        <li>
-          <button
-            (click)="openModal('login')"
-            data-toggle="modal" data-target="#modal-main" type="button"
-            class="btn btn-primary">
-            Log in
-          </button>
-        </li>
-        <li>
-          <button
-            (click)="openModal('regEmployee')"
-            data-toggle="modal" data-target="#modal-main"
-            type="button"
-            class="btn btn-danger">
-            Register
-          </button>
-        </li>
-      </ul>
-    </ng-template>
   </div>
-  <aside class="left"></aside>
+  <aside class="left" [class.bg-light-blue]="isTitlePage"></aside>
   <aside class="right"></aside>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 <!--<div id="main-footer">-->

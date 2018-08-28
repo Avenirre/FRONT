@@ -4,7 +4,6 @@ import {ApiService} from '../rest/api.service';
 import {Company} from '../support/company.service';
 import {LoginDataInterface} from '../../interfaces/login-data.interface';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable} from "rxjs/internal/Observable";
 
 @Injectable({
   providedIn: 'root'
@@ -40,10 +39,8 @@ export class AuthService {
       this.apiService.post<LoginDataInterface>(['login', 'validate'], user, this.httpOptions)
         .subscribe(
           (data) => {
-            // console.log('is logged in: ' + this.isLoggedIn());
             localStorage.setItem('token', data['token']);
-            console.log('token: ', localStorage.getItem('token'));
-            console.log('is logged in: ' + this.isLoggedIn());
+            localStorage.setItem('currentLogin', data['login']);
             resolve('succsess');
           },
           (error: Error) => {

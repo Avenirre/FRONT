@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {ModalService} from '../../../services/modal/modal.service';
+import {ModalService} from '../../modal/modal.service';
 import {Router} from '@angular/router';
-import {routes} from '../../../environments/environment.fake-roots';
+import {environment} from '../../../environments/environment';
 import {Company} from '../../../services/support/company.service';
 import {AuthService} from '../../../services/auth/auth.service';
 
@@ -16,6 +16,8 @@ import {AuthService} from '../../../services/auth/auth.service';
 export class CompanyRegFormComponent implements OnInit {
   company: Company = new Company();
   confirmPass: string;
+  private routes = environment.routes;
+
   constructor(
     private modalService: ModalService,
     private router: Router,
@@ -27,8 +29,8 @@ export class CompanyRegFormComponent implements OnInit {
   ngOnInit() {
   }
 
-  openModal(link: string) {
-    this.modalService.openModal(routes[link]);
+  openCandidateModal(link: string) {
+    this.modalService.openModal(this.routes['regCandidate']);
   }
 
   submitRegistration() {
