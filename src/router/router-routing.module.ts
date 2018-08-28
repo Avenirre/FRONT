@@ -9,6 +9,7 @@ import {TestingComponent} from '../app/testing/testing.component';
 import {CreateCvComponent} from '../app/create-cv/create-cv.component';
 import {CompanyRegFormComponent} from '../app/auth/company-reg-form/company-reg-form.component';
 import {CandidateRegFormComponent} from '../app/auth/candidate-reg-form/candidate-reg-form.component';
+import {MessageComponent} from '../app/modal/message/message.component';
 
 const routesApi: Routes = [
     {path: routes.root, component: TitlePageComponent},
@@ -17,6 +18,7 @@ const routesApi: Routes = [
     {path: routes.regEmployer, component: CompanyRegFormComponent, outlet: 'modal'},
     {path: routes.profile, component: ProfileComponent},
     {path: 'create-cv', component: CreateCvComponent},
+    {path: 'message', component: MessageComponent, outlet: 'modal'},
     {path: 'testing', component: TestingComponent},
     {path: '404', component: NotFoundComponent},
     {path: '**', redirectTo: '/404'}
