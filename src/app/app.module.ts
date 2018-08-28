@@ -41,6 +41,8 @@ import {ApiCandidatesService} from '../services/rest/api-candidates.service';
 import {ApiCompaniesService} from '../services/rest/api-companies.service';
 import { CvItemComponent } from './profile/profile-cvs/cv-item/cv-item.component';
 import { MessageComponent } from './modal/message/message.component';
+import { BtnsLoggedComponent } from './header/header-controls/btns-logged/btns-logged.component';
+import { BtnsUnloggedComponent } from './header/header-controls/btns-unlogged/btns-unlogged.component';
 
 
 @NgModule({
@@ -71,6 +73,8 @@ import { MessageComponent } from './modal/message/message.component';
     CvActionsComponent,
     CvItemComponent,
     MessageComponent,
+    BtnsLoggedComponent,
+    BtnsUnloggedComponent,
   ],
   imports: [
     BrowserModule,
