@@ -1,32 +1,12 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import {CV} from '../../models/cv.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CvService {
-  cv = {
-      first_name: '',
-      second_name: '',
-      position: [],
-      experience_year: [],
-      residence: '',
-      birthday: '',
-      phone: '',
-      email: '',
-      linkedin: '',
-      description: '',
-      prefer_area: '',
-      prefer_position: '',
-      salary_from: 0,
-      salary_till: 0,
-      school_name: '',
-      degree: '',
-      graduation_year: 0,
-      school_location: '',
-      school_description: '',
-      skills: []
-  }
+  cv: CV = new CV();
   cvChanged = new EventEmitter<any>();
   constructor(private http: HttpClient) { }
 
@@ -42,8 +22,6 @@ export class CvService {
       return this.cv;
   }
 
-  saveCv() {
-      http.
-  }
+  saveCv() {}
 
 }
