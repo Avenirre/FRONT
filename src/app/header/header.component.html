@@ -34,7 +34,10 @@
 
 <div class="grid-container">
   <div class="main">
-    <div routerLink="/" class="title-header-logo p-2 text-right cv-logo">
+    <div routerLink="/"
+         class="header-logo p-2 text-right cv-logo"
+          [class.title-header-logo]="isTitlePage"
+    >
       <i id="logo-icon" class="fas fa-user-tie fa-2x"></i>
       <span>GLOBAL <strong>CV</strong> BANK</span>
     </div>
@@ -85,6 +88,22 @@
   <aside class="left"></aside>
   <aside class="right"></aside>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <!--<div id="main-footer">-->
 <!--<div class="container">-->

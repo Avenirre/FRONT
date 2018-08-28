@@ -2,9 +2,9 @@
         #cvModalMain
         class="cv-modal"
         [class.disabled]="!isOpened">
-    <div class="cv-modal-content">
+    <!--<div class="cv-modal-content">-->
             <router-outlet name="modal" (activate)="openModal()"></router-outlet>
-    </div>
+    <!--</div>-->
     <div (click)="closeModal()" class="cv-modal-background">
     </div>
 </div>

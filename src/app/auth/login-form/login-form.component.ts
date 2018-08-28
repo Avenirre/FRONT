@@ -45,6 +45,7 @@ export class LoginFormComponent implements OnInit {
     this.authService.login(loginData)
       .then((loginMessage: string) => {
         console.log('login message: ' + loginMessage);
+        this.router.navigate(['..', {outlets: {modal: ['message']}}], { queryParams: { message: 'login succeed!' } });
      // this.modalService.closeModal();
 
       }, (loginMessage) => {

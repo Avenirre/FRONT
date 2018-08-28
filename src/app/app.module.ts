@@ -40,6 +40,7 @@ import {FormsModule} from '@angular/forms';
 import {ApiCandidatesService} from '../services/rest/api-candidates.service';
 import {ApiCompaniesService} from '../services/rest/api-companies.service';
 import { CvItemComponent } from './profile/profile-cvs/cv-item/cv-item.component';
+import { MessageComponent } from './modal/message/message.component';
 
 
 @NgModule({
@@ -69,6 +70,7 @@ import { CvItemComponent } from './profile/profile-cvs/cv-item/cv-item.component
     CvChooseViewComponent,
     CvActionsComponent,
     CvItemComponent,
+    MessageComponent,
   ],
   imports: [
     BrowserModule,
