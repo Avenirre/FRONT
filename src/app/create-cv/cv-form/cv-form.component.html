@@ -1,5 +1,5 @@
 <section>
-  <form>
+  <form (keyup)="setData()">
     <a class="unfold" (click)="openAll()"><i class="fas fa-angle-double-down"></i></a>
     <a
       data-toggle="collapse"
@@ -12,8 +12,8 @@
       </h3>
     </a>
     <div class="collapse" id="title">
-      <input type="text" name="first_name" placeholder="first name*"/>
-      <input type="text" name="last_name" placeholder="last name*"/>
+      <input type="text" name="first_name" placeholder="first name*" [(ngModel)]="cv['first_name']"/>
+      <input type="text" name="last_name" placeholder="last name*" [(ngModel)]="cv['second_name']"/>
     </div>
 
     <a
