@@ -4,7 +4,10 @@ import {ActivatedRoute} from '@angular/router';
 @Component({
   selector: 'app-message',
   templateUrl: './message.component.html',
-  styleUrls: ['./message.component.scss']
+  styleUrls: [
+    '../../auth/form-main.scss',
+    './message.component.scss'
+  ]
 })
 export class MessageComponent implements OnInit {
   message: string;
