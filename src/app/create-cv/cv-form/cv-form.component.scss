@@ -24,8 +24,8 @@ i {
   font-size: 1.5rem;
   margin: 1rem 0;
 }
-:host ::ng-deep input[type=text], textarea {
-  //width: 100%;
+:host ::ng-deep input, textarea, select {
+  width: 100%;
   border-radius: 25px;
   border: 0;
   outline: 0;

@@ -7,16 +7,16 @@ export class CV {
         first_name: '',
         second_name: '',
         residence: '',
-        languages: [],
-        education: [],
-        birthday: ''
+        languages: [''],
+        education: [new Education('', '', '', '', '')],
+        birthday: '',
+        other_link: ''
     };
     public contact_info = {
         address: '',
         phone: '',
         email: '',
-        linkedin: '',
-        github: ''
+        linkedin: ''
     };
     public preferences = {
         description: '',
@@ -26,12 +26,14 @@ export class CV {
         salary_till: ''
     };
     public prof_info =  {
-        experience: [],
+        experience: [new Experience('', null)],
         skills: [],
-        jobs: [],
-        achievements: '',
-        certification: [],
+        jobs: [new Job('', '', '', '', '')],
+        achievements: [''],
+        certification: [''],
+        portfolio: '',
+        github: '',
+        recommendations: ['']
     };
-    public footer_info = '';
     public activated = false;
 }
