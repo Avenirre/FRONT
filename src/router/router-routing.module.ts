@@ -27,7 +27,7 @@ const routesApi: Routes = [
   {path: 'message', component: MessageComponent, outlet: 'modal'},
   {path: 'testing', component: TestingComponent},
   {path: '404', component: NotFoundComponent},
-  {path: '**', redirectTo: '/404'}
+  // {path: '**', redirectTo: '/404'}
 ];
 
 @NgModule({

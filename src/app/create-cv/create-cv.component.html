@@ -7,7 +7,7 @@
       <div class="content-main">
         <!--MAIN CONTENT-->
         <app-cv-actions></app-cv-actions>
-        <router-outlet></router-outlet>
+        <router-outlet (activate)="ngOnInit()" ></router-outlet>
         <app-cv-actions></app-cv-actions>
         <hr>
 

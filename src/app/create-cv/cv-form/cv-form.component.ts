@@ -37,7 +37,7 @@ export class CvFormComponent implements OnInit {
     this.cv['personal_info']['education'].push(new Education('', '', ''));
   }
   addJob() {
-    this.cv['prof_info']['jobs'].push(new Job('', '', ''));
+    this.cv['prof_info']['jobs'].push(new Job('', '', -1));
   }
   addAchivement() {
     this.cv['prof_info']['achievements'].push('');

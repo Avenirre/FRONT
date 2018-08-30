@@ -1,8 +1,8 @@
 <aside>
   <ul>
-    <li *ngFor="let template of templates">
+    <li *ngFor="let template of templates; let i=index" (click)="onChangeTemplate(template)">
       <div class="template">
-        {{template}}
+        <img class="preview" src="../../../assets/cv-templates-prev/template-{{i}}.png" alt="template preview">
       </div>
     </li>
   </ul>

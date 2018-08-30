@@ -25,11 +25,18 @@ export class CvService {
   }
 
   emitCvChanges() {
-      this.cvChanged.emit(this.cv);
+    this.saveCVLocal();
+    this.cvChanged.emit(this.cv);
   }
 
   getCv() {
-      return this.cv;
+    this.getSavedCV();
+    return this.cv;
+  }
+
+  private saveCVLocal() {
+    const cvStr = JSON.stringify(this.cv);
+    localStorage.setItem('current-cv-creating', cvStr);
   }
 
   public saveCV(cv: CV) {
@@ -40,4 +47,35 @@ export class CvService {
            });
   }
 
+  private getSavedCV(): boolean {
+    const cvStr = localStorage.getItem('current-cv-creating');
+    if (cvStr) {
+      this.cv = JSON.parse(cvStr);
+      return true;
+    }
+    return false;
+  }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
