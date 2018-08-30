@@ -12,6 +12,7 @@
       </h3>
     </a>
     <div class="collapse" id="title">
+      <input type="text" name="title" placeholder="cv title*" [(ngModel)]="cv.settings.title"/>
       <input type="text" name="first_name" placeholder="first name*" [(ngModel)]="cv['personal_info']['first_name']"/>
       <input type="text" name="last_name" placeholder="last name*" [(ngModel)]="cv['personal_info']['second_name']"/>
       <textarea name="summary" id="summary" [(ngModel)]="cv.personal_info.summary"></textarea>
@@ -30,8 +31,10 @@
     </a>
     <div class="collapse" id="experience">
       <div *ngFor="let experience of cv['prof_info']['experience']; let i = index">
-        <input type="text" name="position_{{i}}" placeholder="position" [(ngModel)]="cv['prof_info']['experience'][i]['position']"/>
-        <input type="text" name="exp_years_{{i}}" placeholder="experience years" [(ngModel)]="cv['prof_info']['experience'][i]['years']"/>
+        <input type="text" name="position_{{i}}" placeholder="position"
+               [(ngModel)]="cv['prof_info']['experience'][i]['position']"/>
+        <input type="text" name="exp_years_{{i}}" placeholder="experience years"
+               [(ngModel)]="cv['prof_info']['experience'][i]['years']"/>
       </div>
       <div>
         <button class="add-btn" (click)="addExperience()">
@@ -66,8 +69,10 @@
     </a>
     <div class="collapse" id="desc">
       <textarea name="description" placeholder="description" [(ngModel)]="cv.preferences.description"></textarea>
-      <input type="text" name="choose_preferable_area" placeholder="choose preferable area" [(ngModel)]="cv.preferences.area"/>
-      <input type="text" name="choose_position" placeholder="choose preferable position" [(ngModel)]="cv.preferences.position"/>
+      <input type="text" name="choose_preferable_area" placeholder="choose preferable area"
+             [(ngModel)]="cv.preferences.area"/>
+      <input type="text" name="choose_position" placeholder="choose preferable position"
+             [(ngModel)]="cv.preferences.position"/>
       <p>salary from</p>
       <select name="salary_from" [(ngModel)]="cv.preferences.salary_from">
         <option value="1500" selected>1500$</option>
@@ -98,11 +103,16 @@
     </a>
     <div class="collapse" id="education">
       <div *ngFor="let edu of cv['personal_info']['education']; let i = index">
-        <input type="text" name="school_institution_name_{{i}}" placeholder="school/institution name*" [(ngModel)]="cv['personal_info']['education'][i]['school']"/>
-        <input type="text" name="degree_{{i}}" placeholder="degree*"[(ngModel)]="cv.personal_info.education[i].degree"/>
-        <input type="text" name="graduation_year_{{i}}" placeholder="graduation year*" [(ngModel)]="cv['personal_info']['education'][i]['graduation_year']"/>
-        <input type="text" name="location_{{i}}" placeholder="location" [(ngModel)]="cv['personal_info']['education'][i]['location']"/>
-        <textarea name="edu_description_{{i}}" placeholder="description" [(ngModel)]="cv['personal_info']['education'][i]['description']"></textarea>
+        <input type="text" name="school_institution_name_{{i}}" placeholder="school/institution name*"
+               [(ngModel)]="cv['personal_info']['education'][i]['school']"/>
+        <input type="text" name="degree_{{i}}" placeholder="degree*"
+               [(ngModel)]="cv.personal_info.education[i].degree"/>
+        <input type="text" name="graduation_year_{{i}}" placeholder="graduation year*"
+               [(ngModel)]="cv['personal_info']['education'][i]['graduation_year']"/>
+        <input type="text" name="location_{{i}}" placeholder="location"
+               [(ngModel)]="cv['personal_info']['education'][i]['location']"/>
+        <textarea name="edu_description_{{i}}" placeholder="description"
+                  [(ngModel)]="cv['personal_info']['education'][i]['description']"></textarea>
       </div>
       <div>
         <button class="add-btn" (click)="addEducation()">
@@ -146,7 +156,8 @@
         <input type="date" name="date_from_{{i}}" [(ngModel)]="cv.prof_info.jobs[i].date_from"/>
         <p>till</p>
         <input type="date" name="date_till_{{i}}" [(ngModel)]="cv.prof_info.jobs[i].date_till"/>
-        <textarea name="project_description_{{i}}" placeholder="project description" [(ngModel)]="cv.prof_info.jobs[i].description"></textarea>
+        <textarea name="project_description_{{i}}" placeholder="project description"
+                  [(ngModel)]="cv.prof_info.jobs[i].description"></textarea>
       </div>
       <div>
         <button class="add-btn" (click)="addJob()">
@@ -164,8 +175,9 @@
       <h3><i class="fas fa-chevron-circle-down"></i> Achievements</h3>
     </a>
     <div class="collapse" id="achievements">
-      <div *ngFor="let achivement of cv.prof_info.achievements; let i = index">
-        <textarea name="achievement_{{i}}" placeholder="description" [(ngModel)]="cv.prof_info.achievements[i]"></textarea>
+      <div *ngFor="let a of cv.prof_info.achievements; let i = index; trackBy:trackByFn">
+        <textarea name="achievement_{{i}}" placeholder="description"
+                  [(ngModel)]="cv.prof_info.achievements[i]"></textarea>
       </div>
       <div>
         <button class="add-btn" (click)="addAchivement()">
@@ -183,8 +195,9 @@
       <h3><i class="fas fa-chevron-circle-down"></i> Certifications</h3>
     </a>
     <div class="collapse" id="certifications">
-      <div *ngFor="let certificate of cv.prof_info.certification; let i = index">
-        <textarea name="certification_{{i}}" placeholder="description" [(ngModel)]="cv.prof_info.certification[i]"></textarea>
+      <div *ngFor="let certificate of cv.prof_info.certification; let i = index; trackBy:trackByFn">
+        <textarea name="certification_{{i}}" placeholder="description"
+                  [(ngModel)]="cv.prof_info.certification[i]"></textarea>
       </div>
       <div>
         <button class="add-btn" (click)="addCertification()">
@@ -202,8 +215,9 @@
       <h3><i class="fas fa-chevron-circle-down"></i> Languages</h3>
     </a>
     <div class="collapse" id="languages">
-      <div *ngFor="let language of cv.personal_info.languages; let i = index">
-        <input type="text" name="language_{{i}}" placeholder="language {{i+1}}" [(ngModel)]="cv.personal_info.languages[i]"/>
+      <div *ngFor="let language of cv.personal_info.languages; let i = index; trackBy:trackByFn">
+        <input type="text" name="language_{{i}}" placeholder="language {{i+1}}"
+               [(ngModel)]="cv.personal_info.languages[i]"/>
       </div>
       <div>
         <button class="add-btn" (click)="addLanguage()">
@@ -235,14 +249,8 @@
       <h3><i class="fas fa-chevron-circle-down"></i> Footer info</h3>
     </a>
     <div class="collapse" id="info">
-      <div *ngFor="let recommendation of cv.prof_info.recommendations; let i = index">
-        <textarea name="recommendations_req_{{i}}" placeholder="recommendations by request" [(ngModel)]="cv.prof_info.recommendations[i]"></textarea>
-      </div>
-      <div>
-        <button class="add-btn" (click)="addRecommendation()">
-          <i class="fas fa-plus fa-2x"></i>
-        </button>
-      </div>
+      <textarea name="recommendation" placeholder="recommendation"
+                [(ngModel)]="cv.prof_info.recommendations"></textarea>
     </div>
 
   </form>

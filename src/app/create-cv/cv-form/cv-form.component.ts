@@ -48,12 +48,12 @@ export class CvFormComponent implements OnInit {
   addLanguage() {
       this.cv['personal_info']['languages'].push('');
   }
-  addRecommendation() {
-      this.cv['prof_info']['recommendations'].push('');
-  }
   setData() {
     this.cvService.setCv(this.cv);
     this.cvService.emitCvChanges();
+  }
+  trackByFn(index: any, item: any) {
+    return index;
   }
   openAll() {
     $('.collapse').collapse('toggle');
