@@ -10,7 +10,9 @@ export class CV {
         languages: [''],
         education: [new Education('', '', '', '', '')],
         birthday: '',
-        other_link: ''
+        other_link: '',
+        summary: '',
+        about: ''
     };
     public contact_info = {
         address: '',
@@ -28,7 +30,7 @@ export class CV {
     public prof_info =  {
         experience: [new Experience('', null)],
         skills: [''],
-        jobs: [new Job('', '', '', '', '')],
+        jobs: [new Job('', '', -1, '', '', '')],
         achievements: [''],
         certification: [''],
         portfolio: '',
@@ -36,4 +38,5 @@ export class CV {
         recommendations: ['']
     };
     public activated = false;
+    public cv_template = 0;
 }
