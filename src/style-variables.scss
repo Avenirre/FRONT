@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Rubik:300,400,500,700');
+
 //$modal-width: 700px;
 
 //DISPLAY GRADATION
@@ -8,15 +10,17 @@ $display-tablet: 1200px;
 $size-section-desktop: 80%;
 
 $main-font: 'Roboto';
-$secondary-font:'Open Sans';
+$secondary-font: 'Rubik', 'Open Sans';
 
 $font-size-main: 16px;
 
-$color-main-blue: #2c4cb8;
-$color-light-blue: #5284F3;
-$color-light-blue-hover: #5C83FF;
+$color-main-blue: #2C4CB8;
+$color-light-blue: #5B7AEE;
+$color-light-blue-hover: #5E8DF8;
 $color-shadow-blue: #003F5F;
-$color-orange: #FF4C43;
+$color-orange: #FD5435;
+$color-h3-cv: #AEE2F0;
+$color-font-cv: #0F4966;
 $color-font-main: #fff;
 $color-font-secondary: #B9C0EB;
 $color-dark: #000;

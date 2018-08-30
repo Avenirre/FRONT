@@ -1,89 +1,81 @@
 <div id="nav-mobile" class="pos-f-t">
-    <nav class="navbar navbar-dark bg-main">
-        <i id="bell-icon" class="far fa-bell"></i>
-        <div routerLink="/" class="title-header-logo p-2 text-right cv-logo">
-            <i id="logo-icon" class="fas fa-user-tie fa-2x"></i>
-            <span>GLOBAL <strong>CV</strong> BANK</span>
-        </div>
-        <button class="navbar-toggler"
-                type="button"
-                data-toggle="collapse"
-                data-target="#navbarToggleExternalContent"
-                aria-controls="navbarToggleExternalContent"
-                aria-expanded="false"
-                aria-label="Toggle navigation">
-                <i class="fas fa-chevron-circle-down"></i>
-        </button>
-    </nav>
-
-    <div class="collapse" id="navbarToggleExternalContent">
-        <div class="bg-main p-4">
-            <button (click)="openModal('login')"
-                    type="button"
-                    class="btn btn-lg btn-block btn-primary">
-                Log in
-            </button>
-            <button (click)="openModal('regEmployee')"
-                    type="button"
-                    class="btn btn-lg btn-block btn-danger">
-                Register
-            </button>
-        </div>
+  <nav class="navbar navbar-dark bg-light-blue">
+    <i id="bell-icon" class="far fa-bell"></i>
+    <div routerLink="/" class="title-header-logo p-2 text-right cv-logo">
+      <i id="logo-icon" class="fas fa-user-tie fa-2x"></i>
+      <span>GLOBAL <strong>CV</strong> BANK</span>
     </div>
+    <button class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarToggleExternalContent"
+            aria-controls="navbarToggleExternalContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+      <i class="fas fa-chevron-circle-down"></i>
+    </button>
+  </nav>
+
+  <div class="collapse" id="navbarToggleExternalContent">
+    <div class="bg-main p-4">
+      <ul class="btns-mobile">
+        <!--BUTTONS-->
+        <app-btns-logged *ngIf="isLoggedIn(); else notLoggedButtons"></app-btns-logged>
+        <ng-template #notLoggedButtons>
+          <app-btns-unlogged></app-btns-unlogged>
+        </ng-template>
+        <!--/BUTTNOS-->
+      </ul>
+    </div>
+  </div>
 </div>
 
-<div class="grid-container">
-    <div class="main">
-        <div routerLink="/" class="title-header-logo p-2 text-right cv-logo">
-            <i id="logo-icon" class="fas fa-user-tie fa-2x"></i>
-            <span>GLOBAL <strong>CV</strong> BANK</span>
-        </div>
-        <ul class="menu-btns">
-            <i id="bell-icon" class="far fa-bell"></i>
-            <li>
-                <button
-                        (click)="openModal('login')"
-                        data-toggle="modal" data-target="#modal-main" type="button"
-                        class="btn btn-primary">
-                    Log in
-                </button>
-            </li>
-            <li>
-                <button
-                        (click)="openModal('regEmployee')"
-                        data-toggle="modal" data-target="#modal-main"
-                        type="button"
-                        class="btn btn-danger">
-                    Register
-                </button>
-            </li>
-        </ul>
+<div class="grid-container"
+      [class.grid-container-title]="isTitlePage">
+  <div class="main">
+    <div routerLink="/"
+         class="header-logo p-2 text-left cv-logo"
+         [class.title-header-logo]="isTitlePage"
+    >
+      <i id="logo-icon" class="fas fa-user-tie fa-2x"></i>
+      <span>GLOBAL <strong>CV</strong> BANK</span>
     </div>
-    <aside class="left"></aside>
-    <aside class="right"></aside>
+    <ul class="menu-btns">
+      <i id="bell-icon" class="far fa-bell"></i>
+      <!--BUTTONS-->
+      <app-btns-logged *ngIf="isLoggedIn(); else notLoggedButtons"></app-btns-logged>
+      <ng-template #notLoggedButtons>
+        <app-btns-unlogged></app-btns-unlogged>
+      </ng-template>
+      <!--/BUTTONS-->
+    </ul>
+  </div>
+  <aside class="left" [class.bg-light-blue]="isTitlePage"></aside>
+  <aside class="right"></aside>
 </div>
+
 
 <!--<div id="main-footer">-->
-    <!--<div class="container">-->
-        <!--<div class="row">-->
-            <!--<div class="col-md-3">-->
-                <!--<div class="p-2 text-left">-->
-                    <!--<i id="logo-icon" class="fas fa-user-tie fa-2x"></i>&#160;-->
-                    <!--<span>GLOBAL <strong>CV</strong> BANK</span>-->
-                <!--</div>-->
-            <!--</div>-->
-            <!--<div class="col-md-5"></div>-->
-            <!--<div class="col-md-4 p-2 d-flex justify-content-around">-->
-                <!--<i class="far fa-bell"></i>-->
-                <!--<button (click)="openModal('login')" data-toggle="modal" data-target="#modal-main" type="button"-->
-                        <!--class="btn btn-primary">-->
-                    <!--Sign out-->
-                <!--</button>-->
-                <!--<button (click)="openModal('regEmployee')" data-toggle="modal" data-target="#modal-main" type="button"-->
-                        <!--class="btn btn-danger">-->
-                    <!--<i class="fas fa-user-plus"></i> Edward-->
-                <!--</button>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
+<!--<div class="container">-->
+<!--<div class="row">-->
+<!--<div class="col-md-3">-->
+<!--<div class="p-2 text-left">-->
+<!--<i id="logo-icon" class="fas fa-user-tie fa-2x"></i>&#160;-->
+<!--<span>GLOBAL <strong>CV</strong> BANK</span>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="col-md-5"></div>-->
+<!--<div class="col-md-4 p-2 d-flex justify-content-around">-->
+<!--<i class="far fa-bell"></i>-->
+<!--<button (click)="openModal('login')" data-toggle="modal" data-target="#modal-main" type="button"-->
+<!--class="btn btn-primary">-->
+<!--Sign out-->
+<!--</button>-->
+<!--<button (click)="openModal('regEmployee')" data-toggle="modal" data-target="#modal-main" type="button"-->
+<!--class="btn btn-danger">-->
+<!--<i class="fas fa-user-plus"></i> Edward-->
+<!--</button>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
 <!--</div>-->

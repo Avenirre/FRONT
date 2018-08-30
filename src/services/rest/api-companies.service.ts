@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {ApiService} from './api.service';
-import {Company} from '../company.service';
 
 @Injectable({
   providedIn: 'root'
@@ -21,11 +20,11 @@ export class ApiCompaniesService {
     return this.apiService.get(['companies']);
   }
 
-  public createCompany(company: Company) {
-    this.apiService.post<Company>(['companies'], company)
-      .subscribe(
-        (data) => {
-          console.log(data);
-        });
-  }
+  // public createCompany(company: Company) {
+  //   this.apiService.post<Company>(['companies'], company)
+  //     .subscribe(
+  //       (data) => {
+  //         console.log(data);
+  //       });
+  // }
 }

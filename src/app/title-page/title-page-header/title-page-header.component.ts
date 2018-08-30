@@ -1,24 +1,33 @@
 import {Component, OnInit} from '@angular/core';
 import {ModalService} from '../../modal/modal.service';
-import {routes} from '../../../environments/environment.fake-roots';
+import {environment} from '../../../environments/environment';
 import {Router} from '@angular/router';
 
 @Component({
-    selector: 'app-title-page-header',
-    templateUrl: './title-page-header.component.html',
-    styleUrls: ['./title-page-header.component.scss']
+  selector: 'app-title-page-header',
+  templateUrl: './title-page-header.component.html',
+  styleUrls: ['./title-page-header.component.scss']
 })
 export class TitlePageHeaderComponent implements OnInit {
-    constructor(
-        private modalService: ModalService,
-    ) {
-    }
+  private routes = environment.routes;
 
-    ngOnInit() {
+  constructor(
+    private modalService: ModalService,
+    private router: Router
+  ) {
+  }
 
-    }
+  ngOnInit() {
 
-    openModal(link: string) {
-        this.modalService.openModal(routes[link]);
-    }
+  }
+
+  openModal(link: string) {
+    this.modalService.openModal(this.routes[link]);
+  }
+
+  onCreateCv() {
+    const cvTypeChosen = localStorage.getItem('cvTypeChosen');
+    const cvTypeToNavigate = cvTypeChosen === null ? '1' : cvTypeChosen;
+    this.router.navigate([this.routes.cvCreate, cvTypeToNavigate]);
+  }
 }

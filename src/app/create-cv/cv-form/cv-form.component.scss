@@ -24,8 +24,8 @@ i {
   font-size: 1.5rem;
   margin: 1rem 0;
 }
-:host ::ng-deep input[type=text] {
-  //width: 100%;
+:host ::ng-deep input, textarea, select {
+  width: 100%;
   border-radius: 25px;
   border: 0;
   outline: 0;
@@ -40,4 +40,16 @@ a h3 {
 
 a:hover {
   text-decoration: none;
+}
+
+.add-btn {
+  height: 35px;
+  width: 35px;
+  border: none;
+  background-color: #ffffff;
+  border-radius: 50%;
+  cursor: pointer;
+  padding: auto;
+  align-content: center;
+  margin-left: calc(100% - 28px);
 }

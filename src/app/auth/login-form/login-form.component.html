@@ -1,0 +1,80 @@
+<div class="cv-form-main">
+  <div class="back-block">
+    <div class="reg-container">
+      <h2>
+        Don't have<br/>an account?
+      </h2>
+      <button (click)="openCandidateModal()"
+              data-toggle="modal"
+              data-target="#modal-employee-reg"
+              class="btn btn-danger">
+        Create
+      </button>
+    </div>
+  </div>
+  <div class="front-block">
+    <div class="content-form">
+      <div class="heading-back">
+        <h2>
+          I have<br/>an account
+        </h2>
+      </div>
+      <form (ngSubmit)="onLogin(loginForm)" #loginForm="ngForm">
+
+        <div class="form-group">
+          <input ngModel
+                 #inputLogin="ngModel"
+                 name="login"
+                 type="text"
+                 class="form-control deletable"
+                 [class.is-invalid]="inputLogin.invalid && inputLogin.touched || loginError"
+                 [class.is-valid]="inputLogin.valid && inputLogin.touched"
+                 id="email"
+                 aria-describedby="email"
+                 placeholder="enter email"
+                 required>
+          <span [class.d-none]="!(inputLogin.invalid && inputLogin.touched)"
+                class="badge badge-pill badge-danger">
+            Login can not be empty!
+          </span>
+        </div>
+        <div class="form-group">
+          <input ngModel
+                 #inputPass="ngModel"
+                 name="password"
+                 type="password"
+                 class="form-control"
+                 [class.is-invalid]="inputPass.invalid && inputPass.touched  || loginError"
+                 [class.is-valid]="inputPass.valid && inputPass.touched"
+                 id="password"
+                 placeholder="password"
+                 required>
+          <span [class.d-none]="!(inputPass.invalid && inputPass.touched)"
+                class="badge badge-pill badge-danger">
+            Password can not be empty!
+          </span>
+          <!--<i class="clear fas fa-times" onclick="var input = this.previousSibling; input.value = ''; input.focus();"></i>-->
+        </div>
+        <div class="err-message-container">
+          <span class="err-message"
+             [class.d-none]="!loginError">
+            Invalid login or password!
+          </span>
+        </div>
+        <button [disabled]="loginForm.invalid"
+                type="submit"
+                class="btn btn-secondary">
+          Log in
+        </button>
+        <button (click)="openCandidateModal()"
+                class="btn btn-danger btn-reg">
+          Create
+        </button>
+        <button (click)="closeModal()"
+                class="btn btn-close">
+          Close
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
