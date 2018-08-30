@@ -7,6 +7,7 @@ export const environment = {
     login: 'login',
     regCandidate: 'registration-candidate',
     regCompany: 'registration-company',
-    profile: 'profile'
+    profile: 'profile',
+    cvCreate: 'create-cv'
   }
 };

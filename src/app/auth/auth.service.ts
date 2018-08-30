@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {Candidate} from '../support/candidate.service';
-import {ApiService} from '../rest/api.service';
-import {Company} from '../support/company.service';
+import {Candidate} from '../../services/support/candidate.service';
+import {ApiService} from '../../services/rest/api.service';
+import {Company} from '../../services/support/company.service';
 import {LoginDataInterface} from '../../interfaces/login-data.interface';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 
@@ -39,6 +39,7 @@ export class AuthService {
       this.apiService.post<LoginDataInterface>(['login', 'validate'], user, this.httpOptions)
         .subscribe(
           (data) => {
+            console.log(data);
             localStorage.setItem('token', data['token']);
             localStorage.setItem('currentLogin', data['login']);
             resolve('succsess');

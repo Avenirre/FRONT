@@ -3,7 +3,7 @@ import {ModalService} from '../../modal/modal.service';
 import {Router} from '@angular/router';
 import {environment} from '../../../environments/environment';
 import {Candidate} from '../../../services/support/candidate.service';
-import {AuthService} from '../../../services/auth/auth.service';
+import {AuthService} from '../auth.service';
 
 @Component({
   selector: 'app-candidate-reg-form',

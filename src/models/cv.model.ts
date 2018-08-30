@@ -27,7 +27,7 @@ export class CV {
     };
     public prof_info =  {
         experience: [new Experience('', null)],
-        skills: [],
+        skills: [''],
         jobs: [new Job('', '', '', '', '')],
         achievements: [''],
         certification: [''],

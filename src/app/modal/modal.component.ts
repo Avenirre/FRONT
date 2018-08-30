@@ -23,11 +23,10 @@ export class ModalComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.isOpenedChangedEvent = this.modalService.getModalChangedEmitter()
       .subscribe(isOpened => this.isOpened = isOpened);
-    // this.messageCreatedEvent = this.modalService.getMessageCreatedEmitter()
-    //   .subscribe(message => this.message = message);
   }
 
-  ngOnDestroy(): void {}
+  ngOnDestroy(): void {
+  }
 
   public closeModal() {
     this.isOpened = false;

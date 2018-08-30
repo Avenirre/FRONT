@@ -3,7 +3,7 @@ import {ModalService} from '../../modal/modal.service';
 import {Router} from '@angular/router';
 import {environment} from '../../../environments/environment';
 import {NgForm} from '@angular/forms';
-import {AuthService} from '../../../services/auth/auth.service';
+import {AuthService} from '../auth.service';
 import {LoginDataInterface} from '../../../interfaces/login-data.interface';
 import {TextService} from '../../../services/text.service';
 
