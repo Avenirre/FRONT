@@ -1,11 +1,11 @@
-import {Component, ElementRef, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ModalService} from '../../modal/modal.service';
 import {Router} from '@angular/router';
 import {environment} from '../../../environments/environment';
 import {NgForm} from '@angular/forms';
 import {AuthService} from '../auth.service';
-import {LoginDataInterface} from '../../../interfaces/login-data.interface';
 import {TextService} from '../../../services/text.service';
+import {LoginData} from '../../../models/auth/login-data.model';
 
 // declare var $: any;
 
@@ -55,16 +55,11 @@ export class LoginFormComponent implements OnInit {
    * @param {NgForm} form
    */
   onLogin(form: NgForm) {
-    const loginData: LoginDataInterface = {
-      login: form.value['login'],
-      password: form.value['password']
-    };
+    const loginData = new LoginData(form.value['username'], form.value['password']);
+    // console.log(loginData);
     this.authService.login(loginData)
-      .then((loginMessage: string) => {
-        const message = this.textService
-          .getSuccessLoginMessage(localStorage.getItem('currentLogin'));
-        console.log(message);
-        this.modalService.showMessage(message);
+      .then(() => {
+        this.modalService.showSuccessLogin();
       }, (loginMessage) => {
         this.loginError = true;
       });

@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ModalService} from '../../modal/modal.service';
 import {Router} from '@angular/router';
 import {environment} from '../../../environments/environment';
-import {Candidate} from '../../../services/support/candidate.service';
+import {Candidate} from '../../../models/auth/candidate.model';
 import {AuthService} from '../auth.service';
 
 @Component({

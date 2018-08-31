@@ -1,14 +1,17 @@
 import {Injectable} from '@angular/core';
-import {Candidate} from '../../services/support/candidate.service';
+import {Candidate} from '../../models/auth/candidate.model';
 import {ApiService} from '../../services/rest/api.service';
-import {Company} from '../../services/support/company.service';
-import {LoginDataInterface} from '../../interfaces/login-data.interface';
+import {Company} from '../../models/auth/company.model';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {LoginData} from '../../models/auth/login-data.model';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  private api = environment.api;
+
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -33,20 +36,20 @@ export class AuthService {
   /**
    * login user with given login data
    */
-  public login(user: LoginDataInterface): Promise<string> {
+  public login(user: LoginData): Promise<string> {
     console.log('user: ', user);
     return new Promise((resolve, reject) => {
-      this.apiService.post<LoginDataInterface>(['login', 'validate'], user, this.httpOptions)
+      this.apiService.post<LoginData>(this.api.login, user, this.httpOptions)
         .subscribe(
           (data) => {
-            console.log(data);
-            localStorage.setItem('token', data['token']);
-            localStorage.setItem('currentLogin', data['login']);
+            // console.log(data);
+            const dataStr = JSON.stringify(data);
+            localStorage.setItem('userLogin', dataStr);
             resolve('succsess');
           },
           (error: Error) => {
             console.log(error);
-            reject('error');
+            reject(error);
           });
     });
 

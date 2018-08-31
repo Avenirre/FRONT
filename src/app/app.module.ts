@@ -1,12 +1,12 @@
-//MODULES
+// MODULES
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {RouterRoutingModule} from '../router/router-routing.module';
 
-//LIBRARIES
+// LIBRARIES
 import {AngularFontAwesomeModule} from 'angular-font-awesome';
 
-//COMPONENTS
+// COMPONENTS
 import {AppComponent} from './app.component';
 import {TitlePageComponent} from './title-page/title-page.component';
 import {TitlePageHeaderComponent} from './title-page/title-page-header/title-page-header.component';
@@ -32,17 +32,17 @@ import {CvPresentationComponent} from './create-cv/cv-presentation/cv-presentati
 import {CvChooseViewComponent} from './create-cv/cv-choose-view/cv-choose-view.component';
 import {CvActionsComponent} from './create-cv/cv-actions/cv-actions.component';
 
-//SERVICES
+// SERVICES
 import {ModalService} from './modal/modal.service';
 import {ApiService} from '../services/rest/api.service';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import {ApiCandidatesService} from '../services/rest/api-candidates.service';
 import {ApiCompaniesService} from '../services/rest/api-companies.service';
-import { CvItemComponent } from './profile/profile-cvs/cv-item/cv-item.component';
-import { MessageComponent } from './modal/message/message.component';
-import { BtnsLoggedComponent } from './header/header-controls/btns-logged/btns-logged.component';
-import { BtnsUnloggedComponent } from './header/header-controls/btns-unlogged/btns-unlogged.component';
+import {CvItemComponent} from './profile/profile-cvs/cv-item/cv-item.component';
+import {MessageComponent} from './modal/message/message.component';
+import {BtnsLoggedComponent} from './header/header-controls/btns-logged/btns-logged.component';
+import {BtnsUnloggedComponent} from './header/header-controls/btns-unlogged/btns-unlogged.component';
 
 
 @NgModule({

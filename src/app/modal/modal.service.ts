@@ -40,7 +40,7 @@ export class ModalService implements OnInit {
    * shows modal with custom message of type ModalMessageInterface
    * @param message
    */
-  public showMessage(message: ModalMessageInterface) {
+  private showMessage(message: ModalMessageInterface) {
     this.defModalMessage.next(message);
     this.router.navigate(['..', {outlets: {modal: ['message']}}]);
   }
@@ -61,5 +61,14 @@ export class ModalService implements OnInit {
   public closeModal() {
     this.modalStateChanged.emit(false);
     this.router.navigate(['..', {outlets: {modal: null}}]);
+  }
+
+  /**
+   * fire modal with success authorization message
+   */
+  public showSuccessLogin() {
+    const currentLogin = localStorage.getItem('currentLogin');
+    const message = this.textService.getSuccessLoginMessage(currentLogin);
+    this.showMessage(message);
   }
 }
