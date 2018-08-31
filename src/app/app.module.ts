@@ -43,6 +43,7 @@ import {CvItemComponent} from './profile/profile-cvs/cv-item/cv-item.component';
 import {MessageComponent} from './modal/message/message.component';
 import {BtnsLoggedComponent} from './header/header-controls/btns-logged/btns-logged.component';
 import {BtnsUnloggedComponent} from './header/header-controls/btns-unlogged/btns-unlogged.component';
+import {AuthService} from './auth/auth.service';
 
 
 @NgModule({
@@ -88,6 +89,7 @@ import {BtnsUnloggedComponent} from './header/header-controls/btns-unlogged/btns
     ApiService,
     ApiCandidatesService,
     ApiCompaniesService,
+    AuthService,
   ],
   bootstrap: [AppComponent]
 })

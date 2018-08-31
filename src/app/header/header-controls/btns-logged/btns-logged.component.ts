@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../../../auth/auth.service';
+import {DataService} from '../../../../services/data.service';
 
 @Component({
   selector: 'app-btns-logged',
@@ -10,7 +11,7 @@ import {AuthService} from '../../../auth/auth.service';
   ]
 })
 export class BtnsLoggedComponent implements OnInit {
-  currentUsername = localStorage.getItem('currentLogin');
+  currentUsername = DataService.getUserName();
 
   constructor(
     private authService: AuthService

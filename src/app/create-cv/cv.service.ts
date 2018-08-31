@@ -2,7 +2,6 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {CV} from '../../models/cv.model';
 import {Observable} from 'rxjs';
-import {Candidate} from '../../models/auth/candidate.model';
 import {ApiService} from '../../services/rest/api.service';
 import {HttpHeaders} from '../../../node_modules/@angular/common/http';
 

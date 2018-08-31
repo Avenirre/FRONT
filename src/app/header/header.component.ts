@@ -17,7 +17,7 @@ export class HeaderComponent implements OnInit {
     router: Router
   ) {
     router.events.subscribe(event => {
-      if (event instanceof NavigationEnd ) {
+      if (event instanceof NavigationEnd) {
         if (event.url === '/') {
           this.isTitlePage = true;
         } else {
@@ -31,17 +31,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
   }
 
-
-  // openModal(link: string) {
-  //   console.log(routes[link]);
-  //   this.modalService.openModal(routes[link]);
-  // }
-  //
   isLoggedIn(): boolean {
     return this.authService.isLoggedIn();
   }
-  //
-  // logout() {
-  //   this.authService.logout();
-  // }
 }

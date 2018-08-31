@@ -12,12 +12,14 @@
   align-items: center;
   //border: 1px solid red;
 }
+
 .left-heading {
   grid-area: left;
   height: 100%;
   background-color: $color-light-blue;
   padding: 1rem 1rem 1rem 2rem;
 }
+
 .right-heading {
   margin-right: 1rem;
   grid-area: right;
@@ -27,11 +29,13 @@
   opacity: 0.8;
   cursor: pointer;
 }
-@media (max-width: $display-mobile){
+
+@media (max-width: $display-mobile) {
   .headings-container {
     grid-template-columns: 60% 40%;
   }
 }
+
 .right-heading:hover {
   opacity: 1;
   background-color: $color-light-blue;
@@ -42,14 +46,49 @@
   width: calc(70% - 1rem);
   margin-right: 1rem;
 }
+
 .heading-back.right {
   display: inline-block;
   width: 30%;
   opacity: 0.5;
   cursor: pointer;
 }
+
 :host .front-block {
 }
+
 :host .front-block form {
   margin: 2rem;
+}
+
+.form-group {
+  position: relative;
+}
+
+span.badge {
+  display: none;
+  position: absolute;
+  top: 30px;
+  left: 7rem;
+  transform: translateX(-50%);
+  transition: 0.3s;
+}
+
+input:hover + span.badge, input:focus + span.badge {
+  display: block;
+  transition: 0.3s;
+}
+
+.err-message-container {
+  min-height: 2.5rem;
+  padding: 0 2rem;
+  text-align: center;
+  //border: 1px solid;
+
+  .err-message {
+    color: $color-orange;
+    font-size: 0.8rem;
+    margin: 0;
+    vertical-align: middle;
+  }
 }

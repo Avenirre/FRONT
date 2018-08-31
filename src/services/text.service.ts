@@ -36,4 +36,11 @@ export class TextService {
                 don't save after reload;`
     };
   }
+
+  getUnauthorizedMessage() {
+    return {
+      title: 'Unauthorized',
+      message: `Sorry, but you don't have rights to proceed.`
+    };
+  }
 }

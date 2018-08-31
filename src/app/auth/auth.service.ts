@@ -1,10 +1,11 @@
 import {Injectable} from '@angular/core';
-import {Candidate} from '../../models/auth/candidate.model';
+import {Applicant} from '../../models/auth/applicant.model';
 import {ApiService} from '../../services/rest/api.service';
-import {Company} from '../../models/auth/company.model';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {LoginData} from '../../models/auth/login-data.model';
 import {environment} from '../../environments/environment';
+import {ModalService} from '../modal/modal.service';
+import {DataService} from '../../services/data.service';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,9 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
-    private apiService: ApiService
+    private modalService: ModalService,
+    private apiService: ApiService,
+    private dataService: DataService
   ) {
   }
 
@@ -30,7 +33,9 @@ export class AuthService {
    * @returns {boolean}
    */
   public isLoggedIn(): boolean {
-    return localStorage.getItem('token') !== null;
+    const user = DataService.getCurrentUser();
+
+    return user !== null && user.token !== null;
   }
 
   /**
@@ -42,18 +47,31 @@ export class AuthService {
       this.apiService.post<LoginData>(this.api.login, user, this.httpOptions)
         .subscribe(
           (data) => {
-            // console.log(data);
-            const dataStr = JSON.stringify(data);
-            localStorage.setItem('userLogin', dataStr);
+            this.afterSuccessLogin(data);
             resolve('succsess');
           },
           (error: Error) => {
-            console.log(error);
+            this.afterFailedLogin(error);
             reject(error);
           });
     });
+  }
 
+  /**
+   * fulfills after success user login;
+   * @param data
+   */
+  private afterSuccessLogin(data) {
+    console.log('log s: ', data);
+    DataService.saveUser(data);
+    this.modalService.showSuccessLogin();
+  }
 
+  /**
+   *fulfills after failed user login;
+  */
+  private afterFailedLogin(error) {
+    console.log('log e: ', error);
   }
 
   /**
@@ -61,7 +79,7 @@ export class AuthService {
    */
   public logout(): boolean {
     if (this.isLoggedIn()) {
-      localStorage.removeItem('token');
+      localStorage.removeItem('currentUser');
       return true;
     }
     return false;
@@ -72,24 +90,18 @@ export class AuthService {
    * and sends JSON with candidate data;
    * @param {Candidate} employee
    */
-  public createCandidate(candidate: Candidate) {
-    this.apiService.post<Candidate>(['candidates'], candidate, this.httpOptions)
-      .subscribe(
-        (data) => {
-          console.log(data);
-        });
-  }
-
-  /**
-   * makes post request to the back-end server's create company method
-   * and sends JSON with candidate data;
-   * @param {Candidate} employee
-   */
-  public createCompany(company: Company) {
-    this.apiService.post<Company>(['companies'], company, this.httpOptions)
-      .subscribe(
-        (data) => {
-          console.log(data);
-        });
+  public createApplicant(applicant: Applicant) {
+    console.log('crAppl: ', applicant);
+    return new Promise((resolve, reject) => {
+      this.apiService.post<Applicant>(this.api.registration, applicant, this.httpOptions)
+        .subscribe(
+          (data) => {
+            console.log(data);
+          },
+          (error) => {
+            console.log(error);
+          });
+    });
   }
 }
+

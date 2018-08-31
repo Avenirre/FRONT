@@ -71,4 +71,9 @@ export class ModalService implements OnInit {
     const message = this.textService.getSuccessLoginMessage(currentLogin);
     this.showMessage(message);
   }
+
+  showUnauthorizedMessage() {
+    const message = this.textService.getUnauthorizedMessage();
+    this.showMessage(message);
+  }
 }

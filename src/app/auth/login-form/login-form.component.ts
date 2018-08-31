@@ -58,9 +58,9 @@ export class LoginFormComponent implements OnInit {
     const loginData = new LoginData(form.value['username'], form.value['password']);
     // console.log(loginData);
     this.authService.login(loginData)
-      .then(() => {
-        this.modalService.showSuccessLogin();
-      }, (loginMessage) => {
+      .then(
+        () => {},
+        (error) => {
         this.loginError = true;
       });
   }

@@ -4,6 +4,7 @@ export const environment = {
   apiPort: 8080,
   api: {
     login: ['api', 'login'],
+    registration: ['api', 'profiles'],
   },
   routes: {
     root: '',
@@ -11,6 +12,7 @@ export const environment = {
     regCandidate: 'registration-candidate',
     regCompany: 'registration-company',
     profile: 'profile',
-    cvCreate: 'create-cv'
+    cvCreate: 'create-cv',
+    unauthorizedUser: 'unauthorized',
   }
 };

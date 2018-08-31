@@ -14,10 +14,10 @@ export class HeaderControlsService {
     private authService: AuthService
     ) { }
 
-  isUserLogged(): boolean {
-    // return this.authService.isLoggedIn();
-    return false;
-  }
+  // static isUserLogged(): boolean {
+  //   // return AuthService.isLoggedIn();
+  //   // return false;
+  // }
 
   public openModal(link: string) {
     console.log(this.routes);

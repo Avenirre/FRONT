@@ -1,6 +1,6 @@
 import {ApplicantInterface} from '../../interfaces/applicant.interface';
 
-export class Company implements ApplicantInterface {
+export class Applicant implements ApplicantInterface {
   public username = '';
   public user_type = '';
   public firstName = '';
@@ -19,5 +19,7 @@ export class Company implements ApplicantInterface {
   public house_building = '';
   public postcode = '';
   public position = '';
-  constructor() {}
+
+  constructor() {
+  }
 }

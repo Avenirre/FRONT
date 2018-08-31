@@ -2,8 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {ModalService} from '../../modal/modal.service';
 import {Router} from '@angular/router';
 import {environment} from '../../../environments/environment';
-import {Company} from '../../../models/auth/company.model';
 import {AuthService} from '../auth.service';
+import {Applicant} from '../../../models/auth/applicant.model';
 
 @Component({
   selector: 'app-company-reg-form',
@@ -14,7 +14,7 @@ import {AuthService} from '../auth.service';
   ]
 })
 export class CompanyRegFormComponent implements OnInit {
-  company: Company = new Company();
+  company: Applicant = new Applicant();
   confirmPass: string;
   private routes = environment.routes;
 
@@ -34,8 +34,25 @@ export class CompanyRegFormComponent implements OnInit {
   }
 
   submitRegistration() {
-    console.log(this.company);
+    // console.log(this.company);
     this.modalService.closeModal();
-    this.authService.createCompany(this.company);
+    this.authService.createApplicant(this.company);
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

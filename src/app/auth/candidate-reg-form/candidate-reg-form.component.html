@@ -15,14 +15,18 @@
         </div>
 
       </div>
-      <form>
+      <form (submit)="submitRegistration(form)" #form="ngForm">
         <div class="form-group row">
-          <input [(ngModel)]="candidate.username"
-                 name="firstName"
+          <input ngModel
+                 name="username"
                  type="text"
                  class="form-control col-md-6 col-sm-12"
+                 #username="ngModel"
+                 [class.is-invalid]="username.invalid && username.touched || regErr"
+                 [class.is-valid]="username.valid && username.touched"
                  id="username"
-                 placeholder="login">
+                 placeholder="login"
+                 required>
           <label
             class="col-md-6 d-none d-md-block"
             for="firstName">
@@ -30,12 +34,16 @@
           </label>
         </div>
         <div class="form-group row">
-          <input [(ngModel)]="candidate.firstName"
+          <input ngModel
                  name="firstName"
                  type="text"
                  class="form-control col-md-6 col-sm-12"
+                 #firstName="ngModel"
+                 [class.is-invalid]="firstName.invalid && firstName.touched || regErr"
+                 [class.is-valid]="firstName.valid && firstName.touched"
                  id="firstName"
-                 placeholder="first name">
+                 placeholder="first name"
+                 required>
           <label
             class="col-md-6 d-none d-md-block"
             for="firstName">
@@ -43,63 +51,80 @@
           </label>
         </div>
         <div class="form-group row">
-          <input [(ngModel)]="candidate.lastName"
+          <input ngModel
                  name="lastName"
                  type="text"
                  class="form-control col-md-6 col-sm-12"
+                 #lastName="ngModel"
+                 [class.is-invalid]="lastName.invalid && lastName.touched || regErr"
+                 [class.is-valid]="lastName.valid && lastName.touched"
                  id="lastName"
-                 aria-describedby="emailHelp"
-                 placeholder="last name">
+                 placeholder="last name"
+                 required>
           <label class="col-md-6 d-none d-md-block"
                  for="lastName">
             e.g.Johnson
           </label>
         </div>
         <div class="form-group row">
-          <input [(ngModel)]="candidate.email"
+          <input ngModel
                  name="email"
                  type="email"
                  class="form-control col-md-6 col-sm-12"
+                 #email="ngModel"
+                 [class.is-invalid]="email.invalid && email.touched || regErr"
+                 [class.is-valid]="email.valid && email.touched"
                  id="email"
-                 aria-describedby="emailHelp"
-                 placeholder="email">
+                 placeholder="email"
+                 required>
           <label class="col-md-6 d-none d-md-block"
                  for="email">
             e.g.John@mail.com
           </label>
         </div>
         <div class="form-group row">
-          <input [(ngModel)]="candidate.phone"
+          <input ngModel
                  name="phone"
                  type="text"
                  class="form-control col-md-6 col-sm-12"
+                 #phone="ngModel"
+                 [class.is-invalid]="phone.invalid && phone.touched || regErr"
+                 [class.is-valid]="phone.valid && phone.touched"
                  id="phone"
-                 aria-describedby="emailHelp"
-                 placeholder="phone">
+                 placeholder="phone"
+                 required>
           <label class="col-md-6 d-none d-md-block"
                  for="phone">
             e.g.+972 53 0000000
           </label>
         </div>
         <div class="form-group row">
-          <input [(ngModel)]="candidate.password"
+          <input ngModel
                  name="password"
                  type="password"
                  class="form-control col-md-6 col-sm-12"
+                 #password="ngModel"
+                 [class.is-invalid]="password.invalid && password.touched || regErr"
+                 [class.is-valid]="password.valid && password.touched"
                  id="password"
-                 placeholder="password">
+                 placeholder="password"
+                 required>
           <label class="col-md-6 d-none d-md-block"
                  for="password">
             8+ symbols including
           </label>
         </div>
         <div class="form-group row">
-          <input [(ngModel)]="confirmPass"
+          <input ngModel
                  name="confirmPass"
                  type="password"
                  class="form-control col-md-6 col-sm-12"
+                 #confirmPass="ngModel"
+                 [class.is-invalid]="confirmPass.invalid && confirmPass.touched || regErr"
+                 [class.is-valid]="confirmPass.valid && confirmPass.touched"
                  id="password-confirm"
-                 placeholder="confirm password">
+                 placeholder="confirm password"
+                 required>
           <label class="col-md-6 d-none d-md-block"
                  for="password-confirm">
             re-enter your password
@@ -122,7 +147,8 @@
         </div>
 
         <div class="col-12">
-          <button (click)="submitRegistration()" data-dismiss="modal" aria-label="Close" type="button"
+          <button type="submit"
+                  [disabled]="form.invalid"
                   class="btn btn-secondary">Proceed
           </button>
         </div>

@@ -2,8 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {ModalService} from '../../modal/modal.service';
 import {Router} from '@angular/router';
 import {environment} from '../../../environments/environment';
-import {Candidate} from '../../../models/auth/candidate.model';
 import {AuthService} from '../auth.service';
+import {Applicant} from '../../../models/auth/applicant.model';
+import {NgForm} from '@angular/forms';
+import {ValidateService} from '../../../services/validate.service';
 
 @Component({
   selector: 'app-candidate-reg-form',
@@ -14,27 +16,42 @@ import {AuthService} from '../auth.service';
   ]
 })
 export class CandidateRegFormComponent implements OnInit {
-  candidate: Candidate = new Candidate();
-  confirmPass: string;
+  regErr = false;
   private routes = environment.routes;
 
   constructor(
-      private modalService: ModalService,
-      private router: Router,
-      private authService: AuthService
+    private modalService: ModalService,
+    private router: Router,
+    private authService: AuthService,
+    private validateService: ValidateService
   ) {
   }
 
+  private createApplicant(form: NgForm): Applicant {
+    const applicant = new Applicant();
+    applicant.user_type = 'candidate';
+    applicant.username = form.value['username'];
+    applicant.firstName = form.value['firstName'];
+    applicant.lastName = form.value['lastName'];
+    applicant.email = form.value['email'];
+    applicant.phone = form.value['phone'];
+    applicant.password = form.value['password'];
+    return applicant;
+  }
+
   ngOnInit() {
-    this.candidate.user_type = 'candidate';
   }
 
   openCompanyModal() {
     this.modalService.openModal(this.routes['regCompany']);
   }
 
-  submitRegistration() {
-    this.modalService.closeModal();
-    this.authService.createCandidate(this.candidate);
+  submitRegistration(form: NgForm) {
+    // this.modalService.closeModal();
+    const applicant = this.createApplicant(form);
+    // console.log(applicant);
+    this.authService.createApplicant(applicant);
   }
+
+
 }
