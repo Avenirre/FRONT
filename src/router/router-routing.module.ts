@@ -22,7 +22,7 @@ const routesApi: Routes = [
   {path: routes.profile, component: ProfileComponent, canActivate: [AuthGuard]},
   {
     path: routes.cvCreate, component: CreateCvComponent, children: [
-      {path: ':type', component: CvPresentationComponent}
+      // {path: ':type', component: CvPresentationComponent}
     ]
   },
   {path: 'message', component: MessageComponent, outlet: 'modal'},

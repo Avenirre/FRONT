@@ -40,6 +40,9 @@ export class CV {
   public settings = {
     title: 'Title',
     activated: false,
-    template: 0
+    template: {
+      type: 0,
+      colorScheme: 0
+    }
   };
 }

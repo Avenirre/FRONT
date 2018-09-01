@@ -12,7 +12,7 @@ export class CvActionsComponent implements OnInit {
   constructor(private cvService: CvService) { }
 
   ngOnInit() {
-    this.title = this.cvService.getCv().settings.title;
+    this.title = this.cvService.getCV().settings.title;
     this.cvService.cvChanged.subscribe((cv: CV) => {
       this.title = cv.settings.title;
     });

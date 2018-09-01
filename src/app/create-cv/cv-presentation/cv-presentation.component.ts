@@ -3,6 +3,7 @@ import {CvService} from '../cv.service';
 import {CV} from '../../../models/cv.model';
 import {ActivatedRoute, Params} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
+import {DataService} from '../../../services/data.service';
 
 @Component({
   selector: 'app-cv-presentation',
@@ -11,30 +12,29 @@ import {HttpClient} from '@angular/common/http';
 })
 export class CvPresentationComponent implements OnInit, OnDestroy {
   cv: CV;
-  template = 0;
-  templateHtml = '';
+  templateType = 0;
+  templateColor = 0;
 
   constructor(
-    private cvService: CvService,
-    private http: HttpClient,
-    private route: ActivatedRoute
+    private cvService: CvService
   ) {
   }
 
   ngOnInit() {
-    this.cv = this.cvService.getCv();
+    this.cv = this.cvService.getCV();
+    this.loadTemplate();
+
     this.cvService.cvChanged.subscribe(
-      (cv) => {
-        this.cv = this.cvService.getCv();
+      (cv: CV) => {
+        this.cv = cv;
+        this.loadTemplate();
       }
     );
-    this.route.params.subscribe((params: Params) => {
-      this.template = params.type;
-    });
-    this.http.get('/templates/template-0').subscribe((html: string) => {
-      this.templateHtml = html;
-      console.log(html);
-    });
+  }
+
+  loadTemplate() {
+    this.templateType = this.cv.settings.template.type;
+    this.templateColor = this.cv.settings.template.colorScheme;
   }
 
   ngOnDestroy(): void {

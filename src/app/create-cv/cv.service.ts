@@ -1,58 +1,57 @@
-import { EventEmitter, Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {EventEmitter, Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 import {CV} from '../../models/cv.model';
-import {Observable} from 'rxjs';
 import {ApiService} from '../../services/rest/api.service';
-import {HttpHeaders} from '../../../node_modules/@angular/common/http';
+import {HttpHeaders} from '@angular/common/http';
+import {DataService} from '../../services/data.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CvService {
   httpOptions = {
-      headers: new HttpHeaders({
-          'Content-Type': 'application/json',
-          'Authorization': 'my-auth-token',
-      })
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'my-auth-token',
+    })
   };
-  cv: CV = new CV();
+  cv: CV = null;
   cvChanged = new EventEmitter<any>();
-  constructor(private http: HttpClient, private  apiService: ApiService) { }
 
-  setCv(cv) {
-      this.cv = cv;
+  constructor(private http: HttpClient, private  apiService: ApiService) {
   }
 
-  emitCvChanges() {
-    this.saveCVLocal();
-    this.cvChanged.emit(this.cv);
-  }
-
-  getCv() {
-    this.getSavedCV();
+  public getCV() {
+    if (this.cv === null) {
+      this.cv = DataService.getCV();
+      if (this.cv === null) {
+        this.cv = new CV();
+      }
+    }
     return this.cv;
   }
 
-  private saveCVLocal() {
-    const cvStr = JSON.stringify(this.cv);
-    localStorage.setItem('current-cv-creating', cvStr);
+  public setCV(cv) {
+    this.cv = cv;
+  }
+
+  public setTemplate(template: { templateType: number, templateColor: number }): void {
+    this.cv.settings.template.type = template.templateType;
+    this.cv.settings.template.colorScheme = template.templateColor;
+    this.emitCvChanges();
+  }
+
+  public emitCvChanges() {
+    DataService.saveCV(this.cv);
+    this.cvChanged.emit(this.cv);
   }
 
   public saveCV(cv: CV) {
-     this.apiService.post<CV>(['cs/set'], cv, this.httpOptions)
-        .subscribe(
-           (data) => {
-              console.log(data);
-           });
-  }
-
-  private getSavedCV(): boolean {
-    const cvStr = localStorage.getItem('current-cv-creating');
-    if (cvStr) {
-      this.cv = JSON.parse(cvStr);
-      return true;
-    }
-    return false;
+    this.apiService.post<CV>(['cs/set'], cv, this.httpOptions)
+      .subscribe(
+        (data) => {
+          console.log(data);
+        });
   }
 }
 

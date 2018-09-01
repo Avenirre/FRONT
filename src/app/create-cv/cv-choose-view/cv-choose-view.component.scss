@@ -2,21 +2,26 @@
 
 ul {
   list-style: none;
-  margin: 4rem 0 0 0rem;
+  margin: 5rem 0 0 0rem;
 }
 
 li {
-  margin: 1.5rem 0;
 }
 
 img.preview {
   display: block;
   width: inherit;
   transform: translate(-0.3rem, -0.3rem);
+  opacity: 0.8;
+}
+
+img.active, img.preview:hover {
+  opacity: 1;
 }
 
 .template {
   width: 100%;
   background-color: $color-shadow-blue;
+  margin: 1.5rem 0;
 
 }

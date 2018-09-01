@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Params, Router} from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {environment} from '../../../environments/environment';
+import {CvService} from '../cv.service';
+
 
 @Component({
   selector: 'app-cv-choose-view',
@@ -7,21 +9,22 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
   styleUrls: ['./cv-choose-view.component.scss']
 })
 export class CvChooseViewComponent implements OnInit {
-  templates = ['0', '1'];
+  templates = environment.settings.templates;
   templateId: number;
-  constructor(
-    private router: Router,
-    private route: ActivatedRoute
-    ) { }
 
-  ngOnInit() {
+  constructor(
+    private cvService: CvService
+  ) {
   }
 
-  onChangeTemplate(chosenTemplate) {
-    this.router.navigate(['create-cv', chosenTemplate]);
-    this.route.params.subscribe((params: Params) => {
-      this.templateId = params.type;
-      console.log(this.route);
+  ngOnInit() {
+    this.cvService.getCV();
+  }
+
+  onChangeTemplate(type, color) {
+    this.cvService.setTemplate({
+      templateType: type,
+      templateColor: color
     });
   }
 }

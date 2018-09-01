@@ -14,5 +14,11 @@ export const environment = {
     profile: 'profile',
     cvCreate: 'create-cv',
     unauthorizedUser: 'unauthorized',
+  },
+  settings: {
+    templates: {
+      types: [0],
+      colorSchemes: [0, 1]
+    }
   }
 };

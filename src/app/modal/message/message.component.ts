@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {ModalService} from '../modal.service';
-import {ModalMessageInterface} from '../../../interfaces/modal-message.interface';
 
 @Component({
   selector: 'app-message',

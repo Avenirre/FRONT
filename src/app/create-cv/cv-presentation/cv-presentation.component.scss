@@ -80,6 +80,7 @@
 .cv-section-right {
   grid-area: sec-cv-right;
   padding: 0 2rem;
+  overflow: auto;
 
   h1 {
     margin: 0;
