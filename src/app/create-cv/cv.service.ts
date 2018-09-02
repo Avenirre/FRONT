@@ -12,7 +12,7 @@ export class CvService {
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': 'my-auth-token',
+      'Authorization': `Bearer ${DataService.get}`,
     })
   };
   cv: CV = null;
