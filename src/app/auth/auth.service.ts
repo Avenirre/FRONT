@@ -16,7 +16,7 @@ export class AuthService {
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': 'my-auth-token',
+      'Authorization': `Bearer ${DataService.getUserToken()}`,
     })
   };
 
@@ -61,9 +61,9 @@ export class AuthService {
    * fulfills after success user login;
    * @param data
    */
-  private afterSuccessLogin(data) {
-    console.log('log s: ', data);
-    DataService.saveUser(data);
+  private afterSuccessLogin(response) {
+    // console.log('log s: ', response.data);
+    DataService.saveUser(response.data);
     this.modalService.showSuccessLogin();
   }
 

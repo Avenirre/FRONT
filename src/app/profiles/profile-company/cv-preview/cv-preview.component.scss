@@ -1,8 +1,75 @@
 @import '../../../../style-variables';
 
 section {
-  border-bottom: 1px solid $color-shadow-blue;
   padding: 1.2rem 1rem 1.5rem 1rem;
+}
+
+.prev-container {
+  display: grid;
+  grid-template-areas: "prev-check prev-content prev-contacts prev-status";
+  grid-template-columns: 2rem auto 10rem 10rem;
+  margin-left: 0.6rem;
+  border-bottom: 1px solid $color-shadow-blue;
+  color: $color-shadow-blue;
+  padding: 1rem 0 2rem 0;
+}
+
+.prev-check {
+  grid-area: prev-check;
+}
+
+.prev-content {
+  grid-area: prev-content;
+  text-align: left;
+  padding: 0 2rem 0 0;
+
+  .cv-description {
+    font-size: 0.8em;
+    font-weight: 400;
+    text-align: justify;
+    margin: 15px 0;
+  }
+
+  .cv-skills {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .cv-skills li {
+    display: inline-block;
+    margin: 0 0.5rem 0 0;
+  }
+  .cv-skills a {
+    display: block;
+    text-align: center;
+    font-size: 0.9em;
+    padding: 0px 15px 0px 15px;
+    min-width: 40px;
+    color: #00415D;
+    border: 1px solid #00415D;
+    border-radius: 15px;
+  }
+  .cv-skills a.inactive {
+    color: #97989A;
+    border-color: #97989A;
+  }
+}
+
+.prev-contacts {
+  grid-area: prev-contacts;
+
+  p {
+    font-size: 0.8em;
+    margin: 10px 0;
+  }
+  i {
+    font-size: 1.2em;
+    margin: 0 5px 0 0;
+  }
+}
+
+.prev-status {
+  grid-area: prev-status;
 }
 
 :host input[type=checkbox] {
@@ -11,14 +78,15 @@ section {
   margin: 0.3rem 0;
 }
 
-:host h1 {
+:host h2 {
   display: block;
   margin: 0 1.8rem 0 0;
-  font-size: 1rem;
-  font-weight: 400;
+  font-size: 1.2rem;
+  font-weight: 500;
   vertical-align: middle;
   color: $color-shadow-blue;
 }
+
 span {
   display: block;
   margin: 0.5rem 0 0 0;
@@ -27,7 +95,4 @@ span {
   color: $color-shadow-blue;
 }
 
-.cv-body {
-  display: inline-block;
-  margin-left: 0.6rem;
-}
+
