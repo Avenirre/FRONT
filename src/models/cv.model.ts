@@ -47,4 +47,6 @@ export class CV {
     },
     candidate_id: null
   };
+
+  constructor() {}
 }
