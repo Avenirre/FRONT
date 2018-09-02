@@ -21,7 +21,7 @@ export class CompanyMenuComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.foldersSubscription.unsubscribe();
+    // this.foldersSubscription.unsubscribe();
   }
 
   onSelectFolder(index: number): void {
