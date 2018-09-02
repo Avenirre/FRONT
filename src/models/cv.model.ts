@@ -3,6 +3,7 @@ import {Job} from './job.model';
 import {Education} from './education.model';
 
 export class CV {
+  public id: null;
   public personal_info = {
     first_name: '',
     second_name: '',
@@ -43,6 +44,7 @@ export class CV {
     template: {
       type: 0,
       colorScheme: 0
-    }
+    },
+    candidate_id: null
   };
 }
