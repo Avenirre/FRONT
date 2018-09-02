@@ -4,6 +4,7 @@ import {PlatformLocation} from '@angular/common';
 import {BehaviorSubject} from 'rxjs/internal/BehaviorSubject';
 import {TextService} from '../../services/text.service';
 import {ModalMessageInterface} from '../../interfaces/modal-message.interface';
+import {DataService} from '../../services/data.service';
 
 @Injectable({
   providedIn: 'root'
@@ -67,7 +68,7 @@ export class ModalService implements OnInit {
    * fire modal with success authorization message
    */
   public showSuccessLogin() {
-    const currentLogin = localStorage.getItem('currentLogin');
+    const currentLogin = DataService.getUserName();
     const message = this.textService.getSuccessLoginMessage(currentLogin);
     this.showMessage(message);
   }

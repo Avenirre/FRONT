@@ -21,9 +21,24 @@ export class DataService {
 
   public static getUserName() {
     const user = JSON.parse(localStorage.getItem('currentUser'));
+    // console.log(user.username);
     return user.username || null;
   }
 
+  public static getUserType() {
+    const user = JSON.parse(localStorage.getItem('currentUser'));
+    let usertype = user.usertype;
+    usertype = usertype.slice(1, usertype.length - 1);
+    return usertype;
+  }
+
+  public static getUserToken() {
+    const user = JSON.parse(localStorage.getItem('currentUser'));
+    if (user && user.token) {
+      return user.token;
+    }
+    return null;
+  }
 // END USER METHODS
 // CV METHODS
   public static saveCV(cv: CV) {
