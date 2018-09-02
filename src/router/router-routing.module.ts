@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
-import {ProfileComponent} from '../app/profile/profile.component';
+import {ProfileCandidateComponent} from '../app/profiles/profile-candidate/profile-candidate.component';
 import {TitlePageComponent} from '../app/title-page/title-page.component';
 import {NotFoundComponent} from '../app/not-found/not-found.component';
 import {LoginFormComponent} from '../app/auth/login-form/login-form.component';
@@ -12,6 +12,7 @@ import {CandidateRegFormComponent} from '../app/auth/candidate-reg-form/candidat
 import {MessageComponent} from '../app/modal/message/message.component';
 import {CvPresentationComponent} from '../app/create-cv/cv-presentation/cv-presentation.component';
 import {AuthGuard} from '../app/auth/auth-guard.service';
+import {ProfileCompanyComponent} from '../app/profiles/profile-company/profile-company.component';
 
 const routes = environment.routes;
 const routesApi: Routes = [
@@ -19,7 +20,14 @@ const routesApi: Routes = [
   {path: routes.login, component: LoginFormComponent, outlet: 'modal'},
   {path: routes.regCandidate, component: CandidateRegFormComponent, outlet: 'modal'},
   {path: routes.regCompany, component: CompanyRegFormComponent, outlet: 'modal'},
-  {path: routes.profile, component: ProfileComponent, canActivate: [AuthGuard]},
+  {path: routes.profile,
+    // component: ProfileCandidateComponent,
+    // canActivate: [AuthGuard],
+    children: [
+      {path: routes.profileCandidate, component: ProfileCandidateComponent},
+      {path: routes.profileCompany, component: ProfileCompanyComponent},
+    ]
+  },
   {
     path: routes.cvCreate, component: CreateCvComponent, children: [
       // {path: ':type', component: CvPresentationComponent}

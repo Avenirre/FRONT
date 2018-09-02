@@ -20,11 +20,11 @@ import {LoginFormComponent} from './auth/login-form/login-form.component';
 import {CandidateRegFormComponent} from './auth/candidate-reg-form/candidate-reg-form.component';
 import {CompanyRegFormComponent} from './auth/company-reg-form/company-reg-form.component';
 import {ModalComponent} from './modal/modal.component';
-import {ProfileComponent} from './profile/profile.component';
+import {ProfileCandidateComponent} from './profiles/profile-candidate/profile-candidate.component';
 import {NotFoundComponent} from './not-found/not-found.component';
-import {ProfileMenuComponent} from './profile/profile-menu/profile-menu.component';
-import {ProfileCvsComponent} from './profile/profile-cvs/profile-cvs.component';
-import {CvsEditPanelComponent} from './profile/profile-cvs/cvs-edit-panel/cvs-edit-panel.component';
+import {ProfileMenuComponent} from './profiles/profile-candidate/profile-menu/profile-menu.component';
+import {ProfileCvsComponent} from './profiles/profile-candidate/profile-cvs/profile-cvs.component';
+import {CvsEditPanelComponent} from './profiles/profile-candidate/profile-cvs/cvs-edit-panel/cvs-edit-panel.component';
 import {CreateCvComponent} from './create-cv/create-cv.component';
 import {TestingComponent} from './testing/testing.component';
 import {CvFormComponent} from './create-cv/cv-form/cv-form.component';
@@ -39,11 +39,14 @@ import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import {ApiCandidatesService} from '../services/rest/api-candidates.service';
 import {ApiCompaniesService} from '../services/rest/api-companies.service';
-import {CvItemComponent} from './profile/profile-cvs/cv-item/cv-item.component';
+import {CvItemComponent} from './profiles/profile-candidate/profile-cvs/cv-item/cv-item.component';
 import {MessageComponent} from './modal/message/message.component';
 import {BtnsLoggedComponent} from './header/header-controls/btns-logged/btns-logged.component';
 import {BtnsUnloggedComponent} from './header/header-controls/btns-unlogged/btns-unlogged.component';
 import {AuthService} from './auth/auth.service';
+import { ProfileCompanyComponent } from './profiles/profile-company/profile-company.component';
+import { CompanyMenuComponent } from './profiles/profile-company/company-menu/company-menu.component';
+import { CvPreviewComponent } from './profiles/profile-company/cv-preview/cv-preview.component';
 
 
 @NgModule({
@@ -61,7 +64,7 @@ import {AuthService} from './auth/auth.service';
     CompanyRegFormComponent,
     CandidateRegFormComponent,
     ModalComponent,
-    ProfileComponent,
+    ProfileCandidateComponent,
     NotFoundComponent,
     ProfileMenuComponent,
     ProfileCvsComponent,
@@ -76,6 +79,9 @@ import {AuthService} from './auth/auth.service';
     MessageComponent,
     BtnsLoggedComponent,
     BtnsUnloggedComponent,
+    ProfileCompanyComponent,
+    CompanyMenuComponent,
+    CvPreviewComponent,
   ],
   imports: [
     BrowserModule,

@@ -12,6 +12,8 @@ export const environment = {
     regCandidate: 'registration-candidate',
     regCompany: 'registration-company',
     profile: 'profile',
+    profileCandidate: 'candidate',
+    profileCompany: 'company',
     cvCreate: 'create-cv',
     unauthorizedUser: 'unauthorized',
   },

@@ -1,0 +1,5 @@
+<h1>My foders</h1>
+<h3 *ngFor="let folder of foldersNames; let i=index"
+    (click)="onSelectFolder(i)">
+  {{i + 1}}. {{folder}}
+</h3>

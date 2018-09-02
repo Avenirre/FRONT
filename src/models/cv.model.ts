@@ -45,4 +45,6 @@ export class CV {
       colorScheme: 0
     }
   };
+
+  constructor() {}
 }
