@@ -12,7 +12,7 @@ export class CvService {
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${DataService.get}`,
+      'Authorization': `Bearer ${DataService.getUserToken()}`,
     })
   };
   cv: CV = null;
@@ -29,6 +29,16 @@ export class CvService {
       }
     }
     return this.cv;
+  }
+
+  public convertCv(cv: CV) {
+    let backCv = cv;
+    return backCv;
+  }
+
+  public unConvertCv(backCv) {
+    let cv = backCv;
+    return cv;
   }
 
   public setCV(cv) {
