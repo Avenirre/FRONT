@@ -7,6 +7,8 @@ import {CV} from '../../../models/cv/cv.model';
   providedIn: 'root'
 })
 export class CompanyService {
+  checkedCount = 0;
+  checkedChanged = new Subject();
   folderChanged = new Subject<string>();
   folders = [
     new ProfileFolder('Frontend Developer', [
@@ -46,6 +48,19 @@ export class CompanyService {
 
   setCurrentFolder(folder: string) {
     this.folderChanged.next(folder);
+  }
+
+  cvCheckboxPressed(state: boolean) {
+    if (state) {
+      this.checkedCount++;
+    } else {
+      this.checkedCount--;
+    }
+    this.checkedChanged.next(this.checkedCount);
+  }
+
+  resetCheckedCount() {
+    this.checkedCount = 0;
   }
 }
 

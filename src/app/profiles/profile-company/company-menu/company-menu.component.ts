@@ -38,6 +38,7 @@ export class CompanyMenuComponent implements OnInit, OnDestroy {
 
   onSelectFolder(folder?: string): void {
     this.isFolders = true;
+    this.companyService.resetCheckedCount();
     if (folder) {
       this.navigateToFolder(folder);
       DataService.setCurrentFolder(folder);
