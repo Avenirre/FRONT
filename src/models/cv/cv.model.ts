@@ -6,52 +6,49 @@ import { Education } from './cv.education.model';
 import { Skill } from './cv.skill.model';
 import { Language } from './cv.lang.model';
 import { Template } from './cv.template.model';
+import { Position } from './cv.position.model';
 
 export class CV {
-    public id: number;
-    public first_name: string;
-    public second_name: string;
-    public profile_id: number;
-    public summary: string;
-    public about: string;
-    public email: string;
-    public phone: string;
-    public residence: string;
-    public birthday: string;
-    public linkedin: string;
-    public github: string;
-    public recommendations: string;
-    public title: string;
-    public activated: boolean;
-    public portfolio: string;
-    public preferencedArea: string;
-    public salaryFromPreference: number;
-    public salaryTillPreference: number;
+    public id: number = null;
+    public first_name: string = null;
+    public second_name: string = null;
+    public profile_id: number = null;
+    public summary: string = null;
+    public about: string = null;
+    public email: string = null;
+    public phone: string = null;
+    public residence: string = null;
+    public birthday: string = null;
+    public linkedin: string = null;
+    public github: string = null;
+    public recommendations: string = null;
+    public title: string = null;
+    public activated: boolean = null;
+    public portfolio: string = null;
+    public preferencedArea: string = null;
+    public salaryFromPreference: number = null;
+    public salaryTillPreference: number = null;
 
-    public position_preference: Position;
-    public template: Template;
-    public cvLang: [ Language ];
-    public cvSkill: [ Skill ];
-    public education: [ Education ];
-    public cvJobs: [ Job ];
-    public cvAchievements: [ Achievement ];
-    public cvCertification: [ Certification ];
-    public cvActivity: [ Activity ];
+    public position_preference = new Position(null, null);
+    public template = new Template(null, null);
+    public cvLang = [];
+    public cvSkill = [];
+    public education = [];
+    public cvJobs = [];
+    public cvAchievements = [];
+    public cvCertification = [];
+    public cvActivity = [];
 
-    public constructor(cv?) {
+    constructor(cv?) {
         if (!cv) {
-            this.id = null;
-            this.profile_id = 0;
+            this.position_preference = new Position('', '');
+            this.template = new Template(0, 0);
+            this.cvLang.push(new Language(null, ''));
+            this.cvSkill.push(new Skill(null, ''));
+            this.education.push(new Education(null, '', null, '', '', ''));
+            this.cvJobs.push(new Job(null, '', null, '', '', null, null, 50));
+            this.cvAchievements.push(new Achievement('', null));
+            this.cvCertification.push(new Certification('', null));
         }
-    }
-
-    public compileActivity() {
-        for (let i = 0; i < this.cvJobs.length; i++) {
-
-        }
-    }
-
-    public unCompileActivity() {
-
     }
 }

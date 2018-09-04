@@ -1,4 +1,9 @@
 export class Certification {
     description: string;
-    yearEnd: number
+    yearEnd: number;
+
+    constructor (description, yearEnd) {
+        this.description = description;
+        this.yearEnd = yearEnd;
+    }
 }

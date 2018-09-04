@@ -8,6 +8,7 @@ export const environment = {
   api: {
     login: ['api', 'login'],
     registration: ['api', 'profiles'],
+    save_cv: ['api', 'cv']
   },
   /**
    * local frontend routes
