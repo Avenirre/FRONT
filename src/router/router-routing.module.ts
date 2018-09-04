@@ -12,6 +12,9 @@ import {CandidateRegFormComponent} from '../app/auth/candidate-reg-form/candidat
 import {MessageComponent} from '../app/modal/message/message.component';
 import {AuthGuard} from '../app/auth/auth-guard.service';
 import {ProfileCompanyComponent} from '../app/profiles/profile-company/profile-company.component';
+import {ProfileCvsComponent} from '../app/profiles/profile-candidate/profile-cvs/profile-cvs.component';
+import {ProfileSettingComponent} from '../app/profiles/profile-candidate/profile-setting/profile-setting.component';
+import {ProfileStatisticComponent} from '../app/profiles/profile-candidate/profile-statistic/profile-statistic.component';
 import {CompanyFolderComponent} from '../app/profiles/profile-company/company-folder/company-folder.component';
 import {CompanySettingsComponent} from '../app/profiles/profile-company/company-settings/company-settings.component';
 import {CvPresentationComponent} from '../app/create-cv/cv-presentation/cv-presentation.component';
@@ -24,10 +27,20 @@ const routesApi: Routes = [
   {path: routes.regCompany, component: CompanyRegFormComponent, outlet: 'modal'},
   {
     path: routes.profile,
-    component: ProfileCandidateComponent,
+    // component: ProfileCandidateComponent,
     canActivate: [AuthGuard],
-    children: []
+    children: [
+
+    ]
   },
+  {path: routes.profileCandidate, component: ProfileCandidateComponent,
+      children: [
+          {path: 'cvs-manager', component: ProfileCvsComponent},
+          {path: 'settings', component: ProfileSettingComponent},
+          {path: 'statistics', component: ProfileStatisticComponent}
+      ]
+  },
+  {path: routes.profileCompany, component: ProfileCompanyComponent},
   {path: routes.profileCandidate, component: ProfileCandidateComponent},
   {
     path: routes.profileCompany, component: ProfileCompanyComponent, children: [

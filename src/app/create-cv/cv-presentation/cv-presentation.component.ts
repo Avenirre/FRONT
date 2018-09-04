@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CvService} from '../cv.service';
-import {CV} from '../../../models/cv.model';
+import {CV} from '../../../models/cv/cv.model';
 import {ActivatedRoute, Params} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
 import {DataService} from '../../../services/data.service';
@@ -33,8 +33,10 @@ export class CvPresentationComponent implements OnInit, OnDestroy {
   }
 
   loadTemplate() {
-    this.templateType = this.cv.settings.template.type;
-    this.templateColor = this.cv.settings.template.colorScheme;
+    if (this.cv.template) {
+      this.templateType = this.cv.template.type;
+      this.templateColor = this.cv.template.color_scheme;
+    }
   }
 
   ngOnDestroy(): void {

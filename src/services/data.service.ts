@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {CV} from '../models/cv.model';
+import {CV} from '../models/cv/cv.model';
 import {environment} from '../environments/environment';
 import {LocalSettings} from '../models/local-settings.model';
 

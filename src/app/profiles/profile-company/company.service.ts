@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {ProfileFolder} from '../../../models/profileFolder';
 import {Subject} from 'rxjs';
-import {CV} from '../../../models/cv.model';
+import {CV} from '../../../models/cv/cv.model';
 
 @Injectable({
   providedIn: 'root'

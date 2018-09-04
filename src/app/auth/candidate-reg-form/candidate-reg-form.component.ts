@@ -6,6 +6,8 @@ import {AuthService} from '../auth.service';
 import {Applicant} from '../../../models/auth/applicant.model';
 import {NgForm} from '@angular/forms';
 import {ValidateService} from '../../../services/validate.service';
+import {CV} from '../../../models/cv/cv.model';
+import {CvService} from '../../create-cv/cv.service';
 
 @Component({
   selector: 'app-candidate-reg-form',
@@ -23,7 +25,8 @@ export class CandidateRegFormComponent implements OnInit {
     private modalService: ModalService,
     private router: Router,
     private authService: AuthService,
-    private validateService: ValidateService
+    private validateService: ValidateService,
+    private cvService: CvService
   ) {
   }
 
@@ -51,6 +54,12 @@ export class CandidateRegFormComponent implements OnInit {
     const applicant = this.createApplicant(form);
     // console.log(applicant);
     this.authService.createApplicant(applicant);
+    if (this.cvService.expectingCv) {
+        const cv: CV = this.cvService.getCV();
+        console.log(`Expecting CV:`);
+        console.log(cv);
+        this.cvService.saveCV(cv);
+    }
   }
 
 
