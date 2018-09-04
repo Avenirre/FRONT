@@ -2,7 +2,8 @@
   <div class="prev-container">
     <div class="prev-check">
       <input type="checkbox"
-             (click)="onCheckboxPressed()">
+             #checkbox
+             (click)="onCheckboxPressed($event)">
     </div>
     <div class="prev-content">
       <h2>MyFirstCVName</h2>
