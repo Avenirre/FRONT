@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {CompanyService} from '../../company.service';
 
 @Component({
   selector: 'app-cmp-edit-panel',
@@ -6,10 +7,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./cmp-edit-panel.component.scss']
 })
 export class CmpEditPanelComponent implements OnInit {
+  selectedCount = 0;
 
-  constructor() { }
+  constructor(
+    private companyService: CompanyService
+  ) { }
 
   ngOnInit() {
+    this.companyService.checkedChanged.subscribe((count: number) => {
+      this.selectedCount = count;
+    });
   }
 
 }

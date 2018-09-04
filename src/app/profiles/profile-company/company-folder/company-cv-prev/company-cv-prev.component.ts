@@ -1,4 +1,4 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, ElementRef, Input, OnDestroy, OnInit} from '@angular/core';
 import {CompanyService} from '../../company.service';
 import {CV} from '../../../../../models/cv.model';
 
@@ -30,9 +30,8 @@ export class CompanyCvPrevComponent implements OnInit, OnDestroy {
     // this.folderSubscription.unsubscribe();
   }
 
-  onCheckboxPressed(i: number) {
-    // this.checked[i] = !this.checked[i];
-    // this.checkedCount = this.checked[i] ? this.checkedCount++ : this.checkedCount--;
-    // this.companyService.changeCheckedCount(this.checkedCount);
+  onCheckboxPressed(event) {
+    const state = event.target.checked;
+    this.companyService.cvCheckboxPressed(state);
   }
 }
