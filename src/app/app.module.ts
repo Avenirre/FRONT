@@ -87,7 +87,7 @@ import { CompanySettingsComponent } from './profiles/profile-company/company-set
     BtnsUnloggedComponent,
     ProfileCompanyComponent,
     CompanyMenuComponent,
-    CvPreviewComponent,
+    // CvPreviewComponent,
     ProfileStatisticComponent,
     ProfileSettingComponent,
     CompanyCvPrevComponent,

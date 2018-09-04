@@ -7,7 +7,7 @@ import {AuthService} from '../auth.service';
 import {TextService} from '../../../services/text.service';
 import {LoginData} from '../../../models/auth/login-data.model';
 import {CvService} from '../../create-cv/cv.service';
-import {CV} from '../../../models/cv.model';
+import {CV} from '../../../models/cv/cv.model';
 
 // declare var $: any;
 

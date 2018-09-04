@@ -1,6 +1,6 @@
 import {EventEmitter, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {CV} from '../../models/cv.model';
+import {CV} from '../../models/cv/cv.model';
 import {ApiService} from '../../services/rest/api.service';
 import {HttpHeaders} from '@angular/common/http';
 import {DataService} from '../../services/data.service';

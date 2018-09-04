@@ -6,7 +6,7 @@ import {AuthService} from '../auth.service';
 import {Applicant} from '../../../models/auth/applicant.model';
 import {NgForm} from '@angular/forms';
 import {ValidateService} from '../../../services/validate.service';
-import {CV} from '../../../models/cv.model';
+import {CV} from '../../../models/cv/cv.model';
 import {CvService} from '../../create-cv/cv.service';
 
 @Component({

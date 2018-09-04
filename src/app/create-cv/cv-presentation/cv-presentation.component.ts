@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CvService} from '../cv.service';
-import {CV} from '../../../models/cv.model';
+import {CV} from '../../../models/cv/cv.model';
 import {ActivatedRoute, Params} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
 import {DataService} from '../../../services/data.service';

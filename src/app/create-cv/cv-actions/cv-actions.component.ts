@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {CvService} from '../cv.service';
-import {CV} from '../../../models/cv.model';
+import {CV} from '../../../models/cv/cv.model';
 
 @Component({
   selector: 'app-cv-actions',

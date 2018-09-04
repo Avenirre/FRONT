@@ -1,9 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CvService} from '../cv.service';
-import {Experience} from '../../../models/experience.model';
-import {CV} from '../../../models/cv.model';
-import {Education} from '../../../models/education.model';
-import {Job} from '../../../models/job.model';
+import {CV} from '../../../models/cv/cv.model';
 import {DataService} from '../../../services/data.service';
 
 declare var $: any;
@@ -35,15 +32,15 @@ export class CvFormComponent implements OnInit {
   }
 
   addExperience() {
-    this.cv['prof_info']['experience'].push(new Experience(''));
+    // this.cv['prof_info']['experience'].push(new Experience(''));
   }
 
   addEducation() {
-    this.cv['personal_info']['education'].push(new Education('', '', ''));
+    // this.cv['personal_info']['education'].push(new Education('', '', ''));
   }
 
   addJob() {
-    this.cv['prof_info']['jobs'].push(new Job('', '', -1));
+    // this.cv['prof_info']['jobs'].push(new Job('', '', -1));
   }
 
   addAchivement() {

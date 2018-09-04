@@ -1,4 +1,4 @@
-import {CV} from './cv.model';
+import {CV} from './cv/cv.model';
 
 export class ProfileFolder {
   public name: string;
