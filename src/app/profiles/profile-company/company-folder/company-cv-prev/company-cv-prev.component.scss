@@ -1,7 +1,11 @@
-@import '../../../../style-variables';
+@import '../../../../../style-variables';
 
 section {
-  padding: 1.2rem 1rem 1.5rem 1rem;
+  padding: 0rem 1rem;
+}
+
+section:hover {
+  background-color: $color-super-light-blue;
 }
 
 .prev-container {
@@ -13,6 +17,7 @@ section {
   color: $color-shadow-blue;
   padding: 1rem 0 2rem 0;
 }
+
 
 .prev-check {
   grid-area: prev-check;

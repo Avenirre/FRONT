@@ -12,6 +12,9 @@ import {CandidateRegFormComponent} from '../app/auth/candidate-reg-form/candidat
 import {MessageComponent} from '../app/modal/message/message.component';
 import {AuthGuard} from '../app/auth/auth-guard.service';
 import {ProfileCompanyComponent} from '../app/profiles/profile-company/profile-company.component';
+import {CompanyFolderComponent} from '../app/profiles/profile-company/company-folder/company-folder.component';
+import {CompanySettingsComponent} from '../app/profiles/profile-company/company-settings/company-settings.component';
+import {CvPresentationComponent} from '../app/create-cv/cv-presentation/cv-presentation.component';
 
 const routes = environment.routes;
 const routesApi: Routes = [
@@ -26,10 +29,19 @@ const routesApi: Routes = [
     children: []
   },
   {path: routes.profileCandidate, component: ProfileCandidateComponent},
-  {path: routes.profileCompany, component: ProfileCompanyComponent},
+  {
+    path: routes.profileCompany, component: ProfileCompanyComponent, children: [
+      {
+        path: routes.profileCompanyFolders, children: [
+          {path: ':folder', component: CompanyFolderComponent},
+        ]
+      },
+      {path: routes.profileCompanySettings, component: CompanySettingsComponent},
+    ]
+  },
   {
     path: routes.cvCreate, component: CreateCvComponent, children: [
-      // {path: ':type', component: CvPresentationComponent}
+      {path: ':type', component: CvPresentationComponent}
     ]
   },
   {path: 'message', component: MessageComponent, outlet: 'modal'},

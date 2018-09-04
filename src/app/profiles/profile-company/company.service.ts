@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import {CompanyFolder} from '../../../models/company.folder';
+import {Injectable} from '@angular/core';
+import {ProfileFolder} from '../../../models/profileFolder';
 import {Subject} from 'rxjs';
 import {CV} from '../../../models/cv.model';
 
@@ -7,44 +7,63 @@ import {CV} from '../../../models/cv.model';
   providedIn: 'root'
 })
 export class CompanyService {
-  foldersChanged = new Subject<CompanyFolder[]>();
-  folderSelected = new Subject<CompanyFolder>();
-  currentFolderIndex: number;
+  folderChanged = new Subject<string>();
   folders = [
-    new CompanyFolder('Frontend Developer', [
+    new ProfileFolder('Frontend Developer', [
       new CV()
     ]),
-    new CompanyFolder('Backend Developer', [
+    new ProfileFolder('Backend Developer', [
       new CV(),
       new CV()
     ]),
-    new CompanyFolder('Designer', [
-      new CV()
+    new ProfileFolder('Designer', [
+      new CV(),
+      new CV(),
+      new CV(),
     ]),
   ];
 
   constructor() { }
 
-  public getFolders(): CompanyFolder[] {
+  public getFolders(): ProfileFolder[] {
     return this.folders;
   }
 
-  public getCurentFolder(): CompanyFolder {
-    return this.folders[this.currentFolderIndex] || this.folders[0];
+  getFolder(folderName: string): ProfileFolder {
+    return this.folders.find((current) => {
+      return current.name === folderName;
+    });
   }
 
+  /**
+   * returns array of names of all user foders;
+   */
   public getFoldersNames(): string[] {
-    return this.folders.map((folder: CompanyFolder) => {
+    return this.folders.map((folder: ProfileFolder) => {
       return folder.name;
     });
   }
 
-  public emitFoldersChange(): void {
-    this.foldersChanged.next(this.folders);
-  }
-
-  public selectFolder(index: number): void {
-    this.currentFolderIndex = index;
-    this.folderSelected.next(this.folders[index]);
+  setCurrentFolder(folder: string) {
+    this.folderChanged.next(folder);
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

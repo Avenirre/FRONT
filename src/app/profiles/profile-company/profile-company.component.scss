@@ -39,10 +39,10 @@
   display: grid;
   margin: 0;
   padding: 0;
-  min-height: calc(100vh - 10rem);
   grid-template-areas: "content-left content-main";
   grid-template-columns: 30% 70%;
   grid-template-rows: auto;
+  min-height: 100vh;
 
 }
 
