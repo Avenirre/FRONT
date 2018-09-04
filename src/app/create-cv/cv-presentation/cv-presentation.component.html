@@ -7,7 +7,7 @@
       <h1 class="cv-logo template-{{templateColor}}">CV</h1>
     </div>
     <div class="cv-section-right">
-      <h1>{{cv.first_name}} {{cv.second_name}}</h1>
+      <h1>{{cv.firstName}} {{cv.lastName}}</h1>
       <div class="cv-summary">
         {{cv.about}}
       </div>
@@ -46,9 +46,7 @@
     <div class="cv-section-right">
       <div class="cv-data-container">
         <span *ngFor="let skill of cv.cvSkill">
-          <!--TODO get skills title from back-->
-          {{skill.name_skill}};
-        </span>
+          </span>
       </div>
     </div>
   </div>
@@ -71,7 +69,7 @@
     <div class="cv-section-right">
       <div class="cv-data-container">
         <p *ngFor="let education of cv.education">
-          {{education.year_end}} year
+          {{education.yearEnd}} year
           <br>
           <strong>{{education.institution}} | {{education.degree}}</strong>
           <br>
@@ -101,7 +99,7 @@
       <div class="cv-data-container">
         <p *ngFor="let lanaguage of cv.cvLang">
           <strong>
-            {{lanaguage.name_lang}}
+            {{lanaguage.nameLang}}
           </strong>
         </p>
       </div>
