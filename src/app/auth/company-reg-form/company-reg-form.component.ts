@@ -47,7 +47,7 @@ export class CompanyRegFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.applicant.userType = 'COMPANY';
+    this.applicant.user_type = 'COMPANY';
   }
 
   openCandidateModal() {

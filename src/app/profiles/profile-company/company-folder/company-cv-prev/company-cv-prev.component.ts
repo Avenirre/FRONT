@@ -1,6 +1,6 @@
 import {Component, ElementRef, Input, OnDestroy, OnInit} from '@angular/core';
 import {CompanyService} from '../../company.service';
-import {CV} from '../../../../../models/cv.model';
+import {CV} from '../../../../../models/cv/cv.model';
 
 @Component({
   selector: 'app-company-cv-prev',

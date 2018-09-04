@@ -108,3 +108,16 @@ export class AuthService {
   }
 }
 
+// console.log('user: ', user);
+// return new Promise((resolve, reject) => {
+//   this.apiService.post<LoginData>(this.api.login, user, this.httpOptions)
+//     .subscribe(
+//       (data) => {
+//         this.afterSuccessLogin(data);
+//         resolve('succsess');
+//       },
+//       (error: Error) => {
+//         this.afterFailedLogin(error);
+//         reject(error);
+//       });
+// });
