@@ -1,15 +1,33 @@
 @import '../../../../style-variables.scss';
 
-:host ::ng-deep h1 {
+:host ::ng-deep h1, .menu-link {
   font-family: $secondary-font;
   font-weight: 800;
-  font-size: 2rem;
-  margin: 1.5rem 0;
+  font-size: 1.5rem;
+  margin: 1rem 0;
 }
 
 :host ::ng-deep h3 {
   font-family: $secondary-font;
   font-weight: 600;
-  font-size: 1.5rem;
-  margin: 1rem 0;
+  font-size: 1.2rem;
+  margin: 0.8rem 0.5rem;
+  cursor: pointer;
+}
+
+.active {
+  text-decoration: underline;
+}
+
+.folder-controls {
+  padding: 0 0 0 2rem;
+  i{
+    font-size: 0.8rem;
+    margin: 0 1rem 0 0;
+  }
+}
+
+a {
+  color: #fff;
+  cursor: pointer;
 }

@@ -46,13 +46,9 @@ import {BtnsUnloggedComponent} from './header/header-controls/btns-unlogged/btns
 import {AuthService} from './auth/auth.service';
 import { ProfileCompanyComponent } from './profiles/profile-company/profile-company.component';
 import { CompanyMenuComponent } from './profiles/profile-company/company-menu/company-menu.component';
-// import { CvPreviewComponent } from './profiles/profile-company/cv-preview/cv-preview.component';
+import { CvPreviewComponent } from './profiles/profile-company/cv-preview/cv-preview.component';
 import { ProfileStatisticComponent } from './profiles/profile-candidate/profile-statistic/profile-statistic.component';
 import { ProfileSettingComponent } from './profiles/profile-candidate/profile-setting/profile-setting.component';
-import { CompanyCvPrevComponent } from './profiles/profile-company/company-folder/company-cv-prev/company-cv-prev.component';
-import { CmpEditPanelComponent } from './profiles/profile-company/company-folder/cmp-edit-panel/cmp-edit-panel.component';
-import { CompanyFolderComponent } from './profiles/profile-company/company-folder/company-folder.component';
-import { CompanySettingsComponent } from './profiles/profile-company/company-settings/company-settings.component';
 
 
 @NgModule({
@@ -89,11 +85,7 @@ import { CompanySettingsComponent } from './profiles/profile-company/company-set
     CompanyMenuComponent,
     CvPreviewComponent,
     ProfileStatisticComponent,
-    ProfileSettingComponent,
-    CompanyCvPrevComponent,
-    CmpEditPanelComponent,
-    CompanyFolderComponent,
-    CompanySettingsComponent,
+    ProfileSettingComponent
   ],
   imports: [
     BrowserModule,

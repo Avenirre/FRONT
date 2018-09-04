@@ -15,6 +15,9 @@ import {ProfileCompanyComponent} from '../app/profiles/profile-company/profile-c
 import {ProfileCvsComponent} from '../app/profiles/profile-candidate/profile-cvs/profile-cvs.component';
 import {ProfileSettingComponent} from '../app/profiles/profile-candidate/profile-setting/profile-setting.component';
 import {ProfileStatisticComponent} from '../app/profiles/profile-candidate/profile-statistic/profile-statistic.component';
+import {CompanyFolderComponent} from '../app/profiles/profile-company/company-folder/company-folder.component';
+import {CompanySettingsComponent} from '../app/profiles/profile-company/company-settings/company-settings.component';
+import {CvPresentationComponent} from '../app/create-cv/cv-presentation/cv-presentation.component';
 
 const routes = environment.routes;
 const routesApi: Routes = [
@@ -38,9 +41,20 @@ const routesApi: Routes = [
       ]
   },
   {path: routes.profileCompany, component: ProfileCompanyComponent},
+  {path: routes.profileCandidate, component: ProfileCandidateComponent},
+  {
+    path: routes.profileCompany, component: ProfileCompanyComponent, children: [
+      {
+        path: routes.profileCompanyFolders, children: [
+          {path: ':folder', component: CompanyFolderComponent},
+        ]
+      },
+      {path: routes.profileCompanySettings, component: CompanySettingsComponent},
+    ]
+  },
   {
     path: routes.cvCreate, component: CreateCvComponent, children: [
-      // {path: ':type', component: CvPresentationComponent}
+      {path: ':type', component: CvPresentationComponent}
     ]
   },
   {path: 'message', component: MessageComponent, outlet: 'modal'},

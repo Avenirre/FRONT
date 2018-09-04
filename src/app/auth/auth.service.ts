@@ -6,6 +6,7 @@ import {LoginData} from '../../models/auth/login-data.model';
 import {environment} from '../../environments/environment';
 import {ModalService} from '../modal/modal.service';
 import {DataService} from '../../services/data.service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +25,7 @@ export class AuthService {
     private http: HttpClient,
     private modalService: ModalService,
     private apiService: ApiService,
+    private router: Router,
     private dataService: DataService
   ) {
   }
@@ -79,7 +81,8 @@ export class AuthService {
    */
   public logout(): boolean {
     if (this.isLoggedIn()) {
-      localStorage.removeItem('currentUser');
+      DataService.removeUser();
+      this.router.navigate(['/']);
       return true;
     }
     return false;

@@ -1,6 +1,6 @@
 import {CV} from './cv.model';
 
-export class CompanyFolder {
+export class ProfileFolder {
   public name: string;
   public cvs: CV[];
 
