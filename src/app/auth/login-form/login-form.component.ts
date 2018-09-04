@@ -6,6 +6,8 @@ import {NgForm} from '@angular/forms';
 import {AuthService} from '../auth.service';
 import {TextService} from '../../../services/text.service';
 import {LoginData} from '../../../models/auth/login-data.model';
+import {CvService} from '../../create-cv/cv.service';
+import {CV} from '../../../models/cv.model';
 
 // declare var $: any;
 
@@ -25,7 +27,8 @@ export class LoginFormComponent implements OnInit {
     private textService: TextService,
     private authService: AuthService,
     private modalService: ModalService,
-    private router: Router
+    private router: Router,
+    private cvService: CvService
   ) {
   }
 
@@ -59,7 +62,14 @@ export class LoginFormComponent implements OnInit {
     // console.log(loginData);
     this.authService.login(loginData)
       .then(
-        () => {},
+        () => {
+          if (this.cvService.expectingCv) {
+            const cv: CV = this.cvService.getCV();
+            console.log(`Expecting CV:`);
+            console.log(cv);
+            this.cvService.saveCV(cv);
+          }
+        },
         (error) => {
         this.loginError = true;
       });

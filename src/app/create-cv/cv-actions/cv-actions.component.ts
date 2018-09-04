@@ -9,13 +9,23 @@ import {CV} from '../../../models/cv.model';
 })
 export class CvActionsComponent implements OnInit {
   title: string;
+  cv: CV;
   constructor(private cvService: CvService) { }
 
   ngOnInit() {
-    this.title = this.cvService.getCV().settings.title;
+    this.title = this.cvService.getCV().title;
     this.cvService.cvChanged.subscribe((cv: CV) => {
-      this.title = cv.settings.title;
+      this.title = cv.title;
     });
   }
 
+    activateCv() {
+        this.cvService.getCV().activated = true;
+        this.saveCv();
+    }
+
+    saveCv() {
+        this.cv = this.cvService.getCV();
+        this.cvService.saveCV(this.cv);
+    }
 }

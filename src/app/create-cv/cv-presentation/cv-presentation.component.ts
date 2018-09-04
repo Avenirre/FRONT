@@ -33,8 +33,10 @@ export class CvPresentationComponent implements OnInit, OnDestroy {
   }
 
   loadTemplate() {
-    this.templateType = this.cv.settings.template.type;
-    this.templateColor = this.cv.settings.template.colorScheme;
+    if (this.cv.template) {
+      this.templateType = this.cv.template.type;
+      this.templateColor = this.cv.template.color_scheme;
+    }
   }
 
   ngOnDestroy(): void {

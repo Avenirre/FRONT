@@ -47,6 +47,8 @@ import {AuthService} from './auth/auth.service';
 import { ProfileCompanyComponent } from './profiles/profile-company/profile-company.component';
 import { CompanyMenuComponent } from './profiles/profile-company/company-menu/company-menu.component';
 import { CvPreviewComponent } from './profiles/profile-company/cv-preview/cv-preview.component';
+import { ProfileStatisticComponent } from './profiles/profile-candidate/profile-statistic/profile-statistic.component';
+import { ProfileSettingComponent } from './profiles/profile-candidate/profile-setting/profile-setting.component';
 
 
 @NgModule({
@@ -82,6 +84,8 @@ import { CvPreviewComponent } from './profiles/profile-company/cv-preview/cv-pre
     ProfileCompanyComponent,
     CompanyMenuComponent,
     CvPreviewComponent,
+    ProfileStatisticComponent,
+    ProfileSettingComponent
   ],
   imports: [
     BrowserModule,

@@ -13,7 +13,4 @@ export class ProfileMenuComponent implements OnInit {
   ngOnInit() {
   }
 
-  openAll() {
-    $('.collapse').collapse('toggle');
-  }
 }
