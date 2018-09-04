@@ -3,6 +3,7 @@ import {ModalService} from '../../modal/modal.service';
 import {environment} from '../../../environments/environment';
 import {Applicant} from '../../../models/auth/applicant.model';
 import {FormBuilder, NgForm, Validators} from '@angular/forms';
+import {ValidatorService} from '../../../services/validator.service';
 
 @Component({
   selector: 'app-company-reg-form',
@@ -32,9 +33,11 @@ export class CompanyRegFormComponent implements OnInit {
       username: ['', Validators.required],
     }),
     passwordGroup: this.fb.group({
-      password: ['', Validators.required],
-      confirmPass: ['', Validators.required],
-    })
+        password: ['', Validators.required],
+        confirmPass: ['', Validators.required],
+      }, { validator: ValidatorService.MatchPassword }
+    )
+
   });
 
   applicant: Applicant = new Applicant();
@@ -55,7 +58,8 @@ export class CompanyRegFormComponent implements OnInit {
   }
 
   submitRegistration() {
-    console.log(this.regForm.value);
+    // console.log(this.regForm.value);
+    console.log(this.regForm.controls);
     // this.assembleApplicant(form);
     // console.log(this.company);
     // this.modalService.closeModal();

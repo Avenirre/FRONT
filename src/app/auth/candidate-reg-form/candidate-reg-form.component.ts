@@ -5,7 +5,6 @@ import {environment} from '../../../environments/environment';
 import {AuthService} from '../auth.service';
 import {Applicant} from '../../../models/auth/applicant.model';
 import {NgForm} from '@angular/forms';
-import {ValidateService} from '../../../services/validate.service';
 import {CV} from '../../../models/cv/cv.model';
 import {CvService} from '../../create-cv/cv.service';
 
@@ -25,7 +24,6 @@ export class CandidateRegFormComponent implements OnInit {
     private modalService: ModalService,
     private router: Router,
     private authService: AuthService,
-    private validateService: ValidateService,
     private cvService: CvService
   ) {
   }
