@@ -46,7 +46,7 @@ export class CvService {
 
   public setTemplate(template: { templateType: number, templateColor: number }): void {
     this.cv.template.type = template.templateType;
-    this.cv.template.color_scheme = template.templateColor;
+    this.cv.template.colorScheme = template.templateColor;
     this.emitCvChanges();
   }
 

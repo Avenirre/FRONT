@@ -1,9 +1,9 @@
 export class Language {
     id: number;
-    name_lang: string;
+    nameLang: string;
 
     constructor(id, name_lang) {
         this.id = id;
-        this.name_lang = name_lang;
+        this.nameLang = name_lang;
     }
 }

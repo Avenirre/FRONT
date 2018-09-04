@@ -10,9 +10,9 @@ import { Position } from './cv.position.model';
 
 export class CV {
     public id: number = null;
-    public first_name: string = null;
-    public second_name: string = null;
-    public profile_id: number = null;
+    public firstName: string = null;
+    public lastName: string = null;
+    public profileId: number = null;
     public summary: string = null;
     public about: string = null;
     public email: string = null;
@@ -29,7 +29,7 @@ export class CV {
     public salaryFromPreference: number = null;
     public salaryTillPreference: number = null;
 
-    public position_preference = new Position(null, null);
+    public positionPreference = new Position(null, null);
     public template = new Template(null, null);
     public cvLang = [];
     public cvSkill = [];
@@ -41,7 +41,7 @@ export class CV {
 
     constructor(cv?) {
         if (!cv) {
-            this.position_preference = new Position('', '');
+            this.positionPreference = new Position('', '');
             this.template = new Template(0, 0);
             this.cvLang.push(new Language(null, ''));
             this.cvSkill.push(new Skill(null, ''));

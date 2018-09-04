@@ -35,7 +35,7 @@ export class CvPresentationComponent implements OnInit, OnDestroy {
   loadTemplate() {
     if (this.cv.template) {
       this.templateType = this.cv.template.type;
-      this.templateColor = this.cv.template.color_scheme;
+      this.templateColor = this.cv.template.colorScheme;
     }
   }
 

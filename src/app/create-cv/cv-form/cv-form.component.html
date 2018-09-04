@@ -13,8 +13,8 @@
     </a>
     <div class="collapse" id="title">
       <input type="text" name="title" placeholder="cv title*" [(ngModel)]="cv.title"/>
-      <input type="text" name="first_name" placeholder="first name*" [(ngModel)]="cv.first_name"/>
-      <input type="text" name="last_name" placeholder="last name*" [(ngModel)]="cv.second_name"/>
+      <input type="text" name="first_name" placeholder="first name*" [(ngModel)]="cv.firstName"/>
+      <input type="text" name="last_name" placeholder="last name*" [(ngModel)]="cv.lastName"/>
       <textarea name="summary" id="summary" placeholder="summary*" [(ngModel)]="cv.summary"></textarea>
       <textarea name="about" id="about" placeholder="about*" [(ngModel)]="cv.about"></textarea>
     </div>
@@ -69,12 +69,12 @@
     </a>
     <div class="collapse" id="desc">
       <input type="text" name="choose_preferable_area" [(ngModel)]="cv.preferencedArea" placeholder="choose preferable area"/>
-      <select name="preference_position" [(ngModel)]="cv.position_preference.id">
+      <select name="preference_position" [(ngModel)]="cv.positionPreference.id">
         <option disabled selected>Select preference position</option>
-        <option *ngFor="let pos of positions" [selected]="cv.position_preference.id == pos.id" [value]="pos.id">{{ pos.postName }}</option>
+        <option *ngFor="let pos of positions" [selected]="cv.positionPreference.id == pos.id" [value]="pos.id">{{ pos.postName }}</option>
       </select>
       <input type="text" name="choose_position" placeholder="choose preferable position"
-             [(ngModel)]="cv.position_preference.postName"/>
+             [(ngModel)]="cv.positionPreference.postName"/>
       <input type="number" name="salary_from" [(ngModel)]="cv.salaryFromPreference" placeholder="Salary from ($)"/>
       <input type="number" name="salary_till" [(ngModel)]="cv.salaryTillPreference" placeholder="Salary till ($)"/>
     </div>
@@ -94,7 +94,7 @@
         <input type="text" name="degree_{{i}}" placeholder="degree*"
                [(ngModel)]="cv.education[i].degree"/>
         <input type="text" name="graduation_year_{{i}}" placeholder="graduation year*"
-               [(ngModel)]="cv.education[i].year_end"/>
+               [(ngModel)]="cv.education[i].yearEnd"/>
         <input type="text" name="location_{{i}}" placeholder="location"
                [(ngModel)]="cv.education[i].location"/>
         <textarea name="edu_description_{{i}}" placeholder="description"
@@ -212,10 +212,10 @@
       <div *ngFor="let language of cv.cvLang; let i = index; trackBy:trackByFn">
         <select name="language_{{i}}" [(ngModel)]="cv.cvLang[i].id">
           <option disabled>Select language</option>
-          <option *ngFor="let lg of languages" [value]="lg.id" [selected]="cv.cvLang[i].id == lg.id">{{ lg.name_lang }}</option>
+          <option *ngFor="let lg of languages" [value]="lg.id" [selected]="cv.cvLang[i].id == lg.id">{{ lg.nameLang }}</option>
         </select>
         <!--<input type="text" name="language_{{i}}" placeholder="language {{i+1}}"-->
-               <!--[(ngModel)]="cv.cvLang[i].name_lang"/>-->
+               <!--[(ngModel)]="cv.cvLang[i].nameLang"/>-->
       </div>
       <div>
         <button class="add-btn" (click)="addLanguage()">
