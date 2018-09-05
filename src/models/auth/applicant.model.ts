@@ -3,7 +3,7 @@ import {ApplicantInterface} from '../../interfaces/applicant.interface';
 export class Applicant {
   public username = '';
   public password = '';
-  public user_type = '';
+  public usertype = '';
   public firstName = '';
   public lastName = '';
   public position = '';

@@ -4,9 +4,11 @@ import {Router} from '@angular/router';
 import {environment} from '../../../environments/environment';
 import {AuthService} from '../auth.service';
 import {Applicant} from '../../../models/auth/applicant.model';
-import {NgForm} from '@angular/forms';
-import {CV} from '../../../models/cv/cv.model';
+import {FormBuilder, NgForm, Validators} from '@angular/forms';
 import {CvService} from '../../create-cv/cv.service';
+import {ValidatorService} from '../../../services/validator.service';
+import {CV} from '../../../models/cv/cv.model';
+import {LoginData} from '../../../models/auth/login-data.model';
 
 @Component({
   selector: 'app-candidate-reg-form',
@@ -17,10 +19,55 @@ import {CvService} from '../../create-cv/cv.service';
   ]
 })
 export class CandidateRegFormComponent implements OnInit {
-  regErr = false;
   private routes = environment.routes;
+  regForm = this.fb.group({
+    applicantDetails: this.fb.group({
+      firstName: [''],
+      lastName: [''],
+      phone: ['',
+        // ValidatorService.validCountryPhone('IS')
+      ],
+      email: ['', Validators.pattern(
+        '^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$'
+      )],
+      username: ['', [
+        Validators.required,
+        Validators.pattern('[A-Za-z0-9-_]+'),
+        Validators.minLength(3),
+        Validators.maxLength(15)
+      ]
+      ],
+    }),
+    passwordGroup: this.fb.group({
+        password: ['',
+          [
+            Validators.required,
+            Validators.minLength(8),
+            Validators.maxLength(15)
+          ]
+        ],
+        confirmPass: ['', Validators.required],
+      }, {validator: ValidatorService.matchPassword}
+    )
+  });
+
+  validation_messages = {
+    'email': [
+      {type: 'pattern', message: 'Email is not valid'}
+    ],
+    'username': [
+      {type: 'validUsername', message: 'Your username has already been taken'},
+      {type: 'pattern', message: 'Your username must contain only numbers, letters and "-" or "_" symbols'}
+    ],
+    'password': [
+      {type: 'required', message: 'Password is required'},
+      {type: 'minlength', message: 'Password must be at least 8 characters long'},
+      {type: 'maxlength', message: 'Password cannot be more than 15 characters long'},
+    ]
+  };
 
   constructor(
+    private fb: FormBuilder,
     private modalService: ModalService,
     private router: Router,
     private authService: AuthService,
@@ -28,15 +75,15 @@ export class CandidateRegFormComponent implements OnInit {
   ) {
   }
 
-  private createApplicant(form: NgForm): Applicant {
+  private createApplicant(): Applicant {
     const applicant = new Applicant();
-    applicant.user_type = 'candidate';
-    applicant.username = form.value['username'];
-    applicant.firstName = form.value['firstName'];
-    applicant.lastName = form.value['lastName'];
-    applicant.email = form.value['email'];
-    applicant.phone = form.value['phone'];
-    applicant.password = form.value['password'];
+    applicant.usertype = 'CANDIDATE';
+    applicant.username = this.regForm.value['applicantDetails']['username'];
+    applicant.firstName = this.regForm.value['applicantDetails']['firstName'];
+    applicant.lastName = this.regForm.value['applicantDetails']['lastName'];
+    applicant.email = this.regForm.value['applicantDetails']['email'];
+    applicant.phone = this.regForm.value['applicantDetails']['phone'];
+    applicant.password = this.regForm.value['passwordGroup']['password'];
     return applicant;
   }
 
@@ -47,18 +94,28 @@ export class CandidateRegFormComponent implements OnInit {
     this.modalService.openModal(this.routes['regCompany']);
   }
 
-  submitRegistration(form: NgForm) {
+  submitRegistration() {
     // this.modalService.closeModal();
-    const applicant = this.createApplicant(form);
-    // console.log(applicant);
-    this.authService.createApplicant(applicant);
+    const applicant = this.createApplicant();
+    this.authService.createApplicant(applicant)
+      .then(
+      () => {
+        const loginData = new LoginData(
+          applicant.username,
+          applicant.password
+        );
+        // console.log(loginData);
+        this.authService.login(loginData);
+      },
+      () => {
+        this.modalService.showErrorMessage('registration');
+      });
+
     if (this.cvService.expectingCv) {
-        const cv: CV = this.cvService.getCV();
-        console.log(`Expecting CV:`);
-        console.log(cv);
-        this.cvService.saveCV(cv);
+      const cv: CV = this.cvService.getCV();
+      // console.log(`Expecting CV:`);
+      // console.log(cv);
+      this.cvService.saveCV(cv);
     }
   }
-
-
 }

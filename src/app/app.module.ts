@@ -4,7 +4,6 @@ import {NgModule} from '@angular/core';
 import {RouterRoutingModule} from '../router/router-routing.module';
 
 // LIBRARIES
-import {AngularFontAwesomeModule} from 'angular-font-awesome';
 
 // COMPONENTS
 import {AppComponent} from './app.component';
@@ -97,7 +96,6 @@ import { CompanySettingsComponent } from './profiles/profile-company/company-set
   ],
   imports: [
     BrowserModule,
-    AngularFontAwesomeModule,
     RouterRoutingModule,
     HttpClientModule,
     FormsModule,

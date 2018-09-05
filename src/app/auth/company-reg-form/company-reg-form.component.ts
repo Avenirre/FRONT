@@ -2,8 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {ModalService} from '../../modal/modal.service';
 import {environment} from '../../../environments/environment';
 import {Applicant} from '../../../models/auth/applicant.model';
-import {FormBuilder, NgForm, Validators} from '@angular/forms';
+import {FormBuilder, Validators} from '@angular/forms';
 import {ValidatorService} from '../../../services/validator.service';
+import {AuthService} from '../auth.service';
+import {LoginData} from '../../../models/auth/login-data.model';
 
 @Component({
   selector: 'app-company-reg-form',
@@ -29,45 +31,96 @@ export class CompanyRegFormComponent implements OnInit {
       firstName: [''],
       lastName: [''],
       position: [''],
-      email: [''],
-      username: ['', Validators.required],
+      email: ['', Validators.pattern(
+        '^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$'
+      )],
+      username: ['', [
+        Validators.required,
+        Validators.pattern('[A-Za-z0-9-_]+'),
+        Validators.minLength(3),
+        Validators.maxLength(15)
+      ]
+      ],
     }),
     passwordGroup: this.fb.group({
-        password: ['', Validators.required],
+        password: ['',
+          [
+            Validators.required,
+            Validators.minLength(8),
+            Validators.maxLength(15)
+          ]
+        ],
         confirmPass: ['', Validators.required],
-      }, { validator: ValidatorService.MatchPassword }
+      }, {validator: ValidatorService.matchPassword}
     )
-
   });
 
-  applicant: Applicant = new Applicant();
+  validation_messages = {
+    'email': [
+      {type: 'pattern', message: 'Email is not valid'}
+    ],
+    'username': [
+      {type: 'validUsername', message: 'Your username has already been taken'},
+      {type: 'pattern', message: 'Your username must contain only numbers, letters and "-" or "_" symbols'}
+    ],
+    'password': [
+      {type: 'required', message: 'Password is required'},
+      {type: 'minlength', message: 'Password must be at least 8 characters long'},
+      {type: 'maxlength', message: 'Password cannot be more than 15 characters long'},
+    ]
+  };
+
   private routes = environment.routes;
 
   constructor(
     private fb: FormBuilder,
     private modalService: ModalService,
+    private authService: AuthService
   ) {
   }
 
-  ngOnInit() {
-    this.applicant.user_type = 'COMPANY';
-  }
+  ngOnInit() {}
 
   openCandidateModal() {
     this.modalService.openModal(this.routes['regCandidate']);
   }
 
   submitRegistration() {
-    // console.log(this.regForm.value);
-    console.log(this.regForm.controls);
-    // this.assembleApplicant(form);
-    // console.log(this.company);
-    // this.modalService.closeModal();
-    // this.authService.createApplicant(this.applicant);
+    const applicant = this.createApplicant();
+    this.authService.createApplicant(applicant)
+      .then(
+      () => {
+        const loginData = new LoginData(
+          applicant.username,
+          applicant.password
+        );
+        // console.log()
+        this.authService.login(loginData);
+        // this.modalService.showSuccessLogin();
+      },
+      () => {
+        this.modalService.showErrorMessage('registration');
+      }
+    );
   }
 
-  private assembleApplicant(form: NgForm) {
-    // this.applicant.firstName =
+  private createApplicant(): Applicant {
+    const applicant = new Applicant();
+    applicant.usertype = 'COMPANY';
+    applicant.username = this.regForm.value['applicantDetails']['username'];
+    applicant.firstName = this.regForm.value['applicantDetails']['firstName'];
+    applicant.lastName = this.regForm.value['applicantDetails']['lastName'];
+    applicant.email = this.regForm.value['applicantDetails']['email'];
+    applicant.password = this.regForm.value['passwordGroup']['password'];
+    applicant.country = this.regForm.value['companyDetails']['country'];
+    applicant.website = this.regForm.value['companyDetails']['website'];
+    applicant.cityTown = this.regForm.value['companyDetails']['cityTown'];
+    applicant.street = this.regForm.value['companyDetails']['street'];
+    applicant.houseBuilding = this.regForm.value['companyDetails']['houseBuilding'];
+    applicant.postcode = this.regForm.value['companyDetails']['postcode'];
+    applicant.phone = this.regForm.value['companyDetails']['phone'];
+    applicant.companyName = this.regForm.value['companyDetails']['companyName'];
+    return applicant;
   }
 }
 
