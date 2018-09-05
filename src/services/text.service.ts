@@ -37,10 +37,17 @@ export class TextService {
     };
   }
 
-  getUnauthorizedMessage() {
+  getUnauthorizedMessage(): ModalMessageInterface {
     return {
       title: 'Unauthorized',
       message: `Sorry, but you don't have rights to proceed.`
+    };
+  }
+
+  getRegistrationErrorMessage(): ModalMessageInterface {
+    return {
+      title: 'Error',
+      message: `Sorry, unsuccessful registration.`
     };
   }
 }

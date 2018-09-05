@@ -30,8 +30,7 @@
               "node_modules/bootstrap/scss/bootstrap.scss",
               "src/styles.scss",
               "node_modules/roboto-fontface/css/roboto/roboto-fontface.css",
-              "node_modules/npm-font-open-sans/open-sans.scss",
-              "node_modules/font-awesome/css/font-awesome.css"
+              "node_modules/npm-font-open-sans/open-sans.scss"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",

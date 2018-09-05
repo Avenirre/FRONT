@@ -1,24 +1,21 @@
 import {ApplicantInterface} from '../../interfaces/applicant.interface';
 
-export class Applicant implements ApplicantInterface {
+export class Applicant {
   public username = '';
-  public user_type = '';
+  public password = '';
+  public usertype = '';
   public firstName = '';
   public lastName = '';
-  public email = '';
-  public phone = '';
-  public password = '';
-  public language = [''];
-  public residence = '';
-  public linkedIn = '';
-  public birthday = '';
-  public website = '';
-  public country = '';
-  public city_town = '';
-  public street = '';
-  public house_building = '';
-  public postcode = '';
   public position = '';
+  public companyName = '';
+  public phone = '';
+  public email = '';
+  public website = '';
+  public postcode = '';
+  public country = '';
+  public cityTown = '';
+  public street = '';
+  public houseBuilding = '';
 
   constructor() {
   }
