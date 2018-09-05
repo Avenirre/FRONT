@@ -1,5 +1,10 @@
 @import '../../style-variables';
 
+:host ::ng-deep label {
+  font-size: 0.9rem;
+  font-family: $secondary-font;
+}
+
 :host ::ng-deep .cv-form-main {
   z-index: 1010;
   position: absolute;
@@ -83,6 +88,24 @@
   padding: 1.8rem;
   background-color: $color-light-blue;
   min-height: 6rem;
+}
+
+.message {
+  font-family: $secondary-font;
+  font-size: 0.8rem;
+  padding: 2rem;
+}
+
+.buttons-container {
+  text-align: center;
+}
+
+input.ng-invalid.ng-touched {
+  border: 1px solid $color-orange;
+}
+
+input.ng-valid.ng-touched {
+  border: 1px solid $color-light-blue;
 }
 
 @media (max-width: $display-mobile){

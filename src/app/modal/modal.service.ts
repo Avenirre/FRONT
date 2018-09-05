@@ -4,6 +4,7 @@ import {PlatformLocation} from '@angular/common';
 import {BehaviorSubject} from 'rxjs/internal/BehaviorSubject';
 import {TextService} from '../../services/text.service';
 import {ModalMessageInterface} from '../../interfaces/modal-message.interface';
+import {DataService} from '../../services/data.service';
 
 @Injectable({
   providedIn: 'root'
@@ -40,7 +41,7 @@ export class ModalService implements OnInit {
    * shows modal with custom message of type ModalMessageInterface
    * @param message
    */
-  public showMessage(message: ModalMessageInterface) {
+  private showMessage(message: ModalMessageInterface) {
     this.defModalMessage.next(message);
     this.router.navigate(['..', {outlets: {modal: ['message']}}]);
   }
@@ -61,5 +62,26 @@ export class ModalService implements OnInit {
   public closeModal() {
     this.modalStateChanged.emit(false);
     this.router.navigate(['..', {outlets: {modal: null}}]);
+  }
+
+  /**
+   * fire modal with success authorization message
+   */
+  public showSuccessLogin() {
+    const currentLogin = DataService.getUserName();
+    const message = this.textService.getSuccessLoginMessage(currentLogin);
+    this.showMessage(message);
+  }
+
+  public showUnauthorizedMessage() {
+    const message = this.textService.getUnauthorizedMessage();
+    this.showMessage(message);
+  }
+
+  public showErrorMessage(type: string) {
+    if (type === 'registration') {
+      const message = this.textService.getRegistrationErrorMessage();
+      this.showMessage(message);
+    }
   }
 }

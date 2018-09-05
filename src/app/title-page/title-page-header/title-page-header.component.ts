@@ -26,8 +26,23 @@ export class TitlePageHeaderComponent implements OnInit {
   }
 
   onCreateCv() {
-    const cvTypeChosen = localStorage.getItem('cvTypeChosen');
-    const cvTypeToNavigate = cvTypeChosen === null ? '1' : cvTypeChosen;
-    this.router.navigate([this.routes.cvCreate, cvTypeToNavigate]);
+    // const cvTypeChosen = localStorage.getItem('cvTypeChosen');
+    // const cvTypeToNavigate = cvTypeChosen === null ? '0' : cvTypeChosen;
+    this.router.navigate([this.routes.cvCreate]);
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

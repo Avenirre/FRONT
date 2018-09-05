@@ -1,14 +1,15 @@
-<div class="cv-presentation">
-  <div class="h-back">
+<!--TEMPLATE-0-->
+<div *ngIf="templateType == 0" class="cv-presentation">
+  <div class="h-back template-{{templateColor}}">
   </div>
   <div class="cv-section-grid-container">
     <div class="cv-section-left">
-      <h1 class="cv-logo">CV</h1>
+      <h1 class="cv-logo template-{{templateColor}}">CV</h1>
     </div>
     <div class="cv-section-right">
-      <h1>Edward Fish</h1>
+      <h1>{{cv.firstName}} {{cv.lastName}}</h1>
       <div class="cv-summary">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. A alias deserunt expedita inventore iure nisi quo quod rerum? Accusamus ducimus eius fugiat magni nam nisi odit quaerat similique veniam vero?
+        {{cv.about}}
       </div>
     </div>
   </div>
@@ -16,10 +17,19 @@
     <div class="cv-section-left"><h3>contact info</h3></div>
     <div class="cv-section-right">
       <div class="cv-data-container">
-        <span class="cv-contact"><i class="fas fa-phone-square"></i>058-6688-888</span>
-        <span class="cv-contact"><i class="fas fa-envelope"></i>fisheddie@gmail.com</span>
-        <span class="cv-contact"><i class="fas fa-home"></i>Ashdod</span>
-        <span class="cv-contact">29.y.o</span>
+        <span class="cv-contact">
+          <i class="fas fa-phone-square"></i>
+          {{cv.phone}}
+        </span>
+        <span class="cv-contact"><i class="fas fa-envelope"></i>
+          {{cv.email}}
+        </span>
+        <span class="cv-contact"><i class="fas fa-home"></i>
+          {{cv.residence}}
+        </span>
+        <span class="cv-contact">
+          {{cv.birthday}} y.o.
+        </span>
       </div>
     </div>
   </div>
@@ -27,7 +37,7 @@
     <div class="cv-section-left"><h3>summary</h3></div>
     <div class="cv-section-right">
       <div class="cv-data-container">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias asperiores aspernatur dolor, ducimus, eius eos excepturi fugiat ipsa nam nesciunt nostrum quasi vero voluptates. A consequatur expedita incidunt laudantium repellendus.
+        {{cv.summary}}
       </div>
     </div>
   </div>
@@ -35,7 +45,8 @@
     <div class="cv-section-left"><h3>skills</h3></div>
     <div class="cv-section-right">
       <div class="cv-data-container">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet, fugit, veritatis. Dolorem, magni, numquam. Aperiam id iusto porro quam sint? Animi architecto at et eveniet iure laboriosam mollitia, nostrum qui?
+        <span *ngFor="let skill of cv.cvSkill">
+          </span>
       </div>
     </div>
   </div>
@@ -43,23 +54,12 @@
     <div class="cv-section-left"><h3>projects</h3></div>
     <div class="cv-section-right">
       <div class="cv-data-container">
-        <p>
-          Lorem ipsum dolor sit amet <br>
-          <strong>Lorem ipsum dolor sit amet</strong> consectetur adipisicing elit. Eveniet, fugit, veritatis.
-          Dolorem, magni, numquam. Aperiam id iusto porro quam sint? Animi architecto at et eveniet iure
-          laboriosam mollitia, nostrum qui?
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet <br>
-          <strong>Lorem ipsum dolor sit amet</strong> consectetur adipisicing elit. Eveniet, fugit, veritatis.
-          Dolorem, magni, numquam. Aperiam id iusto porro quam sint? Animi architecto at et eveniet iure
-          laboriosam mollitia, nostrum qui?
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet <br>
-          <strong>Lorem ipsum dolor sit amet</strong> consectetur adipisicing elit. Eveniet, fugit, veritatis.
-          Dolorem, magni, numquam. Aperiam id iusto porro quam sint? Animi architecto at et eveniet iure
-          laboriosam mollitia, nostrum qui?
+        <p *ngFor="let job of cv.cvJobs">
+          {{job.date_from}}year - {{job.date_till}}year<br>
+          <strong>{{job.company}}</strong>
+          {{job.position.postName}} <br>
+          {{job.backFront}}% frontend <br>
+          {{job.description}}
         </p>
       </div>
     </div>
@@ -68,14 +68,15 @@
     <div class="cv-section-left"><h3>education</h3></div>
     <div class="cv-section-right">
       <div class="cv-data-container">
-        Eveniet, fugit, veritatis.
-        <br>
-        <strong>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</strong>
-        <br>
-        Eveniet, fugit, veritatis.
-        <br>
-        <strong>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</strong>
-        <br>
+        <p *ngFor="let education of cv.education">
+          {{education.yearEnd}} year
+          <br>
+          <strong>{{education.institution}} | {{education.degree}}</strong>
+          <br>
+          {{education.location}}
+          <br>
+          {{education.note}}
+        </p>
       </div>
     </div>
   </div>
@@ -83,7 +84,12 @@
     <div class="cv-section-left"><h3>achievements</h3></div>
     <div class="cv-section-right">
       <div class="cv-data-container">
-        <strong>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet, fugit, veritatis.</strong>
+        <p *ngFor="let acheivement of cv.cvAchievements">
+          {{acheivement.yearEnd}}<br>
+          <strong>
+            {{acheivement.description}}
+          </strong>
+        </p>
       </div>
     </div>
   </div>
@@ -91,7 +97,11 @@
     <div class="cv-section-left"><h3>languages</h3></div>
     <div class="cv-section-right">
       <div class="cv-data-container">
-        <strong>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet, fugit, veritatis.</strong>
+        <p *ngFor="let lanaguage of cv.cvLang">
+          <strong>
+            {{lanaguage.nameLang}}
+          </strong>
+        </p>
       </div>
     </div>
   </div>
@@ -99,10 +109,11 @@
     <div class="cv-section-left"><h3>other</h3></div>
     <div class="cv-section-right">
       <div class="cv-data-container">
-        <strong>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet, fugit, veritatis.</strong>
+        <strong>
+          <!-- TODO footer info-->
+        </strong>
         <br><br>
       </div>
     </div>
   </div>
-
 </div>

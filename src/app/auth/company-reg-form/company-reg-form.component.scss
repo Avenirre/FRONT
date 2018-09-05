@@ -12,12 +12,14 @@
   align-items: center;
   //border: 1px solid red;
 }
+
 .left-heading {
   grid-area: left;
   height: 100%;
   background-color: $color-light-blue;
   padding: 1rem 1rem 1rem 2rem;
 }
+
 .right-heading {
   margin-right: 1rem;
   grid-area: right;
@@ -27,32 +29,42 @@
   opacity: 0.8;
   cursor: pointer;
 }
-@media (max-width: $display-mobile){
+
+@media (max-width: $display-mobile) {
   .headings-container {
     grid-template-columns: 40% 60%;
   }
 }
+
 .right-heading:hover {
   opacity: 1;
   background-color: $color-light-blue;
 }
+
 h3 {
   font-weight: 800;
   font-family: $secondary-font;
 }
+
 :host .heading-back.left {
   width: 30%;
   display: inline-block;
   margin-right: 1rem;
 }
+
 .heading-back.right {
   width: calc(70% - 1rem);
   display: inline-block;
   opacity: 0.5;
   cursor: pointer;
 }
+
 :host .front-block {
 }
+
 :host .front-block form {
   margin: 2rem;
 }
+
+
+

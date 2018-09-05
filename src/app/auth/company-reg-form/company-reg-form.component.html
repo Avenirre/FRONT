@@ -14,218 +14,206 @@
         </div>
 
       </div>
-
-      <form (submit)="submitRegistration(regForm)" #regForm="ngForm">
+      <form (ngSubmit)="submitRegistration()" [formGroup]="regForm">
         <h3>company details</h3>
-        <div class="form-group row">
-          <input [(ngModel)]="company.username"
-                 name="company"
-                 type="text"
-                 class="form-control col-md-6 col-sm-12"
-                 id="companyName"
-                 placeholder="company name">
-          <label class="col-md-6 d-none d-md-block"
-                 for="companyName">e.g.Good Intesions LTD</label>
+        <div formGroupName="companyDetails">
+          <div class="form-group row">
+            <input formControlName="companyName"
+                   type="text"
+                   class="form-control col-md-6 col-sm-12"
+                   id="companyName"
+                   placeholder="company name">
+            <label class="col-md-6 d-none d-md-block"
+                   for="companyName">e.g.Good Intesions LTD</label>
+          </div>
+          <div class="form-group row">
+            <input formControlName="website"
+                   type="text"
+                   class="form-control col-md-6 col-sm-12"
+                   id="website" aria-describedby="website"
+                   placeholder="website">
+            <label class="col-md-6 d-none d-md-block"
+                   for="website">
+              e.g.www.goodintensions.com
+            </label>
+          </div>
+          <div class="form-group row">
+            <input formControlName="country"
+                   type="text"
+                   class="form-control col-md-6 col-sm-12"
+                   id="country"
+                   placeholder="country">
+            <label class="col-md-6 d-none d-md-block"
+                   for="country">
+              e.g.USA
+            </label>
+          </div>
+          <div class="form-group row">
+            <input formControlName="cityTown"
+                   type="text"
+                   class="form-control col-md-6 col-sm-12"
+                   id="city" aria-describedby="city"
+                   placeholder="city/town">
+            <label class="col-md-6 d-none d-md-block"
+                   for="city">
+              e.g.Chicago
+            </label>
+          </div>
+          <div class="form-group row">
+            <input formControlName="street"
+                   type="text"
+                   class="form-control col-md-6 col-sm-12"
+                   id="street" aria-describedby="street"
+                   placeholder="street">
+            <label class="col-md-6 d-none d-md-block"
+                   for="street">
+              e.g.Freud
+            </label>
+          </div>
+          <div class="form-group row">
+            <input formControlName="houseBuilding"
+                   type="text"
+                   class="form-control col-md-6 col-sm-12"
+                   id="building"
+                   placeholder="house/building">
+            <label class="col-md-6 d-none d-md-block"
+                   for="building">
+              e.g.423/18
+            </label>
+          </div>
+          <div class="form-group row">
+            <input formControlName="postcode"
+                   type="text"
+                   class="form-control col-md-6 col-sm-12"
+                   id="phone"
+                   placeholder="postcode">
+            <label class="col-md-6 d-none d-md-block"
+                   for="phone">
+              e.g.32145
+            </label>
+          </div>
+          <div class="form-group row">
+            <input formControlName="phone"
+                   type="text"
+                   class="form-control col-md-6 col-sm-12"
+                   id="phone-company"
+                   placeholder="phone">
+            <label class="col-md-6 d-none d-md-block"
+                   for="phone">
+              e.g.+972 53 0000000
+            </label>
+          </div>
         </div>
-        <div class="form-group row">
-          <input [(ngModel)]="company.website"
-                 name="website"
-                 type="text"
-                 class="form-control col-md-6 col-sm-12"
-                 id="website" aria-describedby="website"
-                 placeholder="wibsite">
-          <label class="col-md-6 d-none d-md-block"
-                 for="website">
-            e.g.www.goodintensions.com
-          </label>
-        </div>
-        <div class="form-group row">
-          <input [(ngModel)]="company.country"
-                 name="country"
-                 type="text"
-                 class="form-control col-md-6 col-sm-12"
-                 id="country"
-                 placeholder="country">
-          <label class="col-md-6 d-none d-md-block"
-                 for="country">
-            e.g.USA
-          </label>
-        </div>
-        <div class="form-group row">
-          <input [(ngModel)]="company.city_town"
-                 name="city"
-                 type="text"
-                 class="form-control col-md-6 col-sm-12"
-                 id="city" aria-describedby="city"
-                 placeholder="city/town">
-          <label class="col-md-6 d-none d-md-block"
-                 for="city">
-            e.g.Chicago
-          </label>
-        </div>
-        <div class="form-group row">
-          <input [(ngModel)]="company.street"
-                 name="street"
-                 type="text"
-                 class="form-control col-md-6 col-sm-12"
-                 id="street" aria-describedby="street"
-                 placeholder="street">
-          <label class="col-md-6 d-none d-md-block"
-                 for="street">
-            e.g.Freud
-          </label>
-        </div>
-        <div class="form-group row">
-          <input [(ngModel)]="company.house_building"
-                 name="building"
-                 type="text"
-                 class="form-control col-md-6 col-sm-12"
-                 id="building"
-                 placeholder="house/building">
-          <label class="col-md-6 d-none d-md-block"
-                 for="building">
-            e.g.423/18
-          </label>
-        </div>
-        <div class="form-group row">
-          <input [(ngModel)]="company.phone"
-                 name="postcode"
-                 type="text"
-                 class="form-control col-md-6 col-sm-12"
-                 id="phone"
-                 aria-describedby="postcode"
-                 placeholder="postcode">
-          <label class="col-md-6 d-none d-md-block"
-                 for="phone">
-            e.g.32145
-          </label>
-        </div>
-        <div class="form-group row">
-          <input [(ngModel)]="company.phone"
-                 name="phone"
-                 type="text"
-                 class="form-control col-md-6 col-sm-12"
-                 id="postcode-company"
-                 aria-describedby="phone"
-                 placeholder="phone">
-          <label class="col-md-6 d-none d-md-block"
-                 for="postcode-company">
-            e.g.423/18
-          </label>
-        </div>
-
         <h3>applicant details</h3>
-        <div class="form-group row">
-          <input [(ngModel)]="company.firstName"
-                 name="firstName"
-                 type="text"
-                 class="form-control col-md-6 col-sm-12"
-                 id="firstName"
-                 placeholder="first name">
-          <label class="col-md-6 d-none d-md-block"
-                 for="firstName">
-            e.g.John
-          </label>
+        <div formGroupName="applicantDetails">
+          <div class="form-group row">
+            <input formControlName="firstName"
+                   type="text"
+                   class="form-control col-md-6 col-sm-12"
+                   id="firstName"
+                   placeholder="first name">
+            <label class="col-md-6 d-none d-md-block"
+                   for="firstName">
+              e.g.John
+            </label>
+          </div>
+          <div class="form-group row">
+            <input formControlName="lastName"
+                   type="text"
+                   class="form-control col-md-6 col-sm-12"
+                   id="lastName"
+                   placeholder="last name">
+            <label class="col-md-6 d-none d-md-block"
+                   for="lastName">
+              e.g.Johnson
+            </label>
+          </div>
+          <div class="form-group row">
+            <input formControlName="position"
+                   type="text"
+                   class="form-control col-md-6 col-sm-12"
+                   id="position"
+                   placeholder="position">
+            <label class="col-md-6 d-none d-md-block"
+                   for="position">
+              e.g.CEO
+            </label>
+          </div>
+          <div class="form-group row">
+            <input formControlName="email"
+                   type="email"
+                   class="form-control col-md-6 col-sm-12"
+                   id="email"
+                   placeholder="email">
+            <label class="col-md-6 d-none d-md-block"
+                   for="email">
+              e.g.John@mail.com
+            </label>
+          </div>
+          <div class="form-group row">
+            <input formControlName="username"
+                   type="text"
+                   class="form-control col-md-6 col-sm-12"
+                   id="username"
+                   placeholder="username*">
+            <label class="col-md-6 d-none d-md-block"
+                   for="username">e.g.Username</label>
+            <!--<div class="error-message" *ngIf="regForm.get('username')">-->
+              <!--{{validation_messages.username}}-->
+              <!--sdfsdf-->
+            <!--</div>-->
+          </div>
+
         </div>
-        <div class="form-group row">
-          <input [(ngModel)]="company.lastName"
-                 name="lastName"
-                 type="text"
-                 class="form-control col-md-6 col-sm-12"
-                 id="lastName"
-                 placeholder="last name">
-          <label class="col-md-6 d-none d-md-block"
-                 for="lastName">
-            e.g.Johnson
-          </label>
+        <div formGroupName="passwordGroup">
+          <div class="form-group row">
+            <input formControlName="password"
+                   type="password"
+                   class="form-control col-md-6 col-sm-12"
+                   id="password"
+                   placeholder="password*">
+            <label class="col-md-6 d-none d-md-block"
+                   for="password">
+              8+ symbols including
+            </label>
+          </div>
+          <div class="form-group row">
+            <input formControlName="confirmPass"
+                   type="password"
+                   class="form-control col-md-6 col-sm-12"
+                   id="confirmPass"
+                   placeholder="confirm password*">
+            <label class="col-md-6 d-none d-md-block"
+                   for="confirmPass">
+              re-enter your password
+            </label>
+          </div>
+
+          <div class="alert alert-danger"
+          *ngIf="errors.RegError">
+            Registration Error
+          </div>
         </div>
+        <!--<a href="#">request secret code</a>-->
+        <!--<div class="form-group row">-->
+        <!--<input type="text"-->
+        <!--class="form-control col-md-6 col-sm-12"-->
+        <!--id="secret-code"-->
+        <!--aria-describedby="emailHelp"-->
+        <!--placeholder="secret code">-->
+        <!--<label class="col-md-6 d-none d-md-block"-->
+        <!--for="secret-code">-->
+        <!--secret code, received by SMS-->
+        <!--</label>-->
+        <!--</div>-->
         <div class="form-group row">
-          <input [(ngModel)]="company.position"
-                 name="position"
-                 type="text"
-                 class="form-control col-md-6 col-sm-12"
-                 id="position"
-                 aria-describedby="emailHelp"
-                 placeholder="position">
-          <label class="col-md-6 d-none d-md-block"
-                 for="position">
-            e.g.CEO
-          </label>
-        </div>
-        <div class="form-group row">
-          <input [(ngModel)]="company.email"
-                 name="email"
-                 type="email"
-                 class="form-control col-md-6 col-sm-12"
-                 id="email"
-                 aria-describedby="emailHelp"
-                 placeholder="email">
-          <label class="col-md-6 d-none d-md-block"
-                 for="email">
-            e.g.John@mail.com
-          </label>
-        </div>
-        <div class="form-group row">
-          <!--TODO two phone numbers-->
-          <input
-            type="text"
-            class="form-control col-md-6 col-sm-12"
-            id="phone-applicant"
-            aria-describedby="emailHelp"
-            placeholder="phone">
-          <label class="col-md-6 d-none d-md-block"
-                 for="phone-applicant">
-            e.g.+972 53 0000000
-          </label>
-        </div>
-        <div class="form-group row">
-          <input [(ngModel)]="company.password"
-                 name="password"
-                 type="password"
-                 class="form-control col-md-6 col-sm-12"
-                 id="password"
-                 aria-describedby="emailHelp"
-                 placeholder="password">
-          <label class="col-md-6 d-none d-md-block"
-                 for="password">
-            8+ symbols including Abcd123
-          </label>
-        </div>
-        <div class="form-group row">
-          <input [(ngModel)]="confirmPass"
-                 name="confirmPass"
-                 type="password"
-                 class="form-control col-md-6 col-sm-12"
-                 id="password-confirm"
-                 aria-describedby="emailHelp"
-                 placeholder="confirm password">
-          <label class="col-md-6 d-none d-md-block"
-                 for="password-confirm">
-            re-enter your password
-          </label>
-        </div>
-        <a href="#">request secret code</a>
-        <div class="form-group row">
-          <input type="text"
-                 class="form-control col-md-6 col-sm-12"
-                 id="secret-code"
-                 aria-describedby="emailHelp"
-                 placeholder="secret code">
-          <label class="col-md-6 d-none d-md-block"
-                 for="secret-code">
-            secret code, received by SMS
-          </label>
-        </div>
-        <div class="form-group row">
-          <div class="col-12">
+          <div class="col-12 message">
             By clicking "Proceed" you confirm that you accept the
             Terms of Service & Privacy Policy
           </div>
-          <div class="col-12">
-            <button (click)="submitRegistration()"
-                    data-dismiss="modal"
-                    aria-label="Close"
-                    type="button"
+          <div class="col-12 buttons-container">
+            <button [disabled]="regForm.invalid"
+                    type="submit"
                     class="btn btn-secondary">Proceed
             </button>
           </div>

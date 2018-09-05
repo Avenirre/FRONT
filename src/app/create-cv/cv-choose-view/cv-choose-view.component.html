@@ -1,8 +1,13 @@
 <aside>
   <ul>
-    <li *ngFor="let template of templates">
-      <div class="template">
-        {{template}}
+    <li *ngFor="let type of templates.types; let i=index">
+      <div *ngFor="let color of templates.colorSchemes; let j=index"
+           (click)="onChangeTemplate(i, j)"
+           class="template">
+        <!--<div>-->
+          <img class="preview" src="../../../assets/cv-templates-prev/template-{{type}}{{color}}.png"
+               alt="template preview">
+        <!--</div>-->
       </div>
     </li>
   </ul>

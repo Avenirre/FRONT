@@ -7,7 +7,6 @@ import {HttpClient} from '@angular/common/http';
   providedIn: 'root'
 })
 export class ApiCandidatesService {
-  // TODO make inheritance of ApiService
   constructor(http: HttpClient, private apiService: ApiService) {
   }
 
