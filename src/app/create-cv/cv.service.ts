@@ -61,7 +61,8 @@ export class CvService {
       this.headerService.openModal('login');
     } else {
         this.compileActivity(cv);
-        console.log(cv);
+        console.log(JSON.stringify(this.httpOptions));
+        console.log(JSON.stringify(cv));
         this.apiService.post<CV>(this.routes.api.save_cv, cv, this.httpOptions)
          .subscribe(
            (data) => {
