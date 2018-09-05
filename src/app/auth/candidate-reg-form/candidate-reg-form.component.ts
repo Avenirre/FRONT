@@ -4,7 +4,7 @@ import {Router} from '@angular/router';
 import {environment} from '../../../environments/environment';
 import {AuthService} from '../auth.service';
 import {Applicant} from '../../../models/auth/applicant.model';
-import {FormBuilder, NgForm, Validators} from '@angular/forms';
+import {FormBuilder, Validators} from '@angular/forms';
 import {CvService} from '../../create-cv/cv.service';
 import {ValidatorService} from '../../../services/validator.service';
 import {CV} from '../../../models/cv/cv.model';
@@ -20,6 +20,9 @@ import {LoginData} from '../../../models/auth/login-data.model';
 })
 export class CandidateRegFormComponent implements OnInit {
   private routes = environment.routes;
+  errors = {
+    RegError: false
+  };
   regForm = this.fb.group({
     applicantDetails: this.fb.group({
       firstName: [''],
@@ -95,27 +98,24 @@ export class CandidateRegFormComponent implements OnInit {
   }
 
   submitRegistration() {
-    // this.modalService.closeModal();
     const applicant = this.createApplicant();
     this.authService.createApplicant(applicant)
       .then(
-      () => {
-        const loginData = new LoginData(
-          applicant.username,
-          applicant.password
-        );
-        // console.log(loginData);
-        this.authService.login(loginData);
-      },
-      () => {
-        this.modalService.showErrorMessage('registration');
-      });
+        (response) => {
+          const loginData = new LoginData(
+            applicant.username,
+            applicant.password
+          );
+          this.authService.login(loginData);
+          if (this.cvService.expectingCv) {
+            const cv: CV = this.cvService.getCV();
+            this.cvService.saveCV(cv);
+          }
+        },
+        (error) => {
+          this.errors.RegError = true;
+          console.log(error);
+        });
 
-    if (this.cvService.expectingCv) {
-      const cv: CV = this.cvService.getCV();
-      // console.log(`Expecting CV:`);
-      // console.log(cv);
-      this.cvService.saveCV(cv);
-    }
   }
 }

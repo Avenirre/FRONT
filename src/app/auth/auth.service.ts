@@ -44,7 +44,7 @@ export class AuthService {
    * login user with given login data
    */
   public login(user: LoginData): Promise<string> {
-    console.log('user: ', user);
+    // console.log('user: ', user);
     return new Promise((resolve, reject) => {
       this.apiService.post<LoginData>(this.api.login, user, this.httpOptions)
         .subscribe(
@@ -73,7 +73,7 @@ export class AuthService {
    *fulfills after failed user login;
    */
   private afterFailedLogin(error) {
-    console.log('log e: ', error);
+    console.log('login error: ', error);
   }
 
   /**
@@ -103,13 +103,17 @@ export class AuthService {
     return new Promise((resolve, reject) => {
       this.apiService.post<Applicant>(this.api.registration, applicant, httpOptions)
         .subscribe(
-          (data) => {
-            console.log('success reg', data);
-            // resolve(data);
+          (response) => {
+            // console.log('success reg', data);
+            if (response['status'] === 'success') {
+              resolve(response['data']);
+            } else {
+              reject(response['status']);
+            }
           },
           (error) => {
-            console.log('error reg', error);
-            // reject(error);
+            // console.log('error reg', error);
+            reject(error);
           });
     });
   }

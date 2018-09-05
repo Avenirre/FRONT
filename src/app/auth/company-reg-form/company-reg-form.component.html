@@ -189,8 +189,10 @@
             </label>
           </div>
 
-          <!--<div class="alert alert-danger"-->
-          <!--*ngIf="regForm.controls.confirmPassword.errors?.MatchPassword">Password not match</div>-->
+          <div class="alert alert-danger"
+          *ngIf="errors.RegError">
+            Registration Error
+          </div>
         </div>
         <!--<a href="#">request secret code</a>-->
         <!--<div class="form-group row">-->

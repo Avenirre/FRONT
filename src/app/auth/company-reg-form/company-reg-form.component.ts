@@ -6,6 +6,7 @@ import {FormBuilder, Validators} from '@angular/forms';
 import {ValidatorService} from '../../../services/validator.service';
 import {AuthService} from '../auth.service';
 import {LoginData} from '../../../models/auth/login-data.model';
+import {CV} from '../../../models/cv/cv.model';
 
 @Component({
   selector: 'app-company-reg-form',
@@ -16,6 +17,9 @@ import {LoginData} from '../../../models/auth/login-data.model';
   ]
 })
 export class CompanyRegFormComponent implements OnInit {
+  errors = {
+    RegError: false
+  };
   regForm = this.fb.group({
     companyDetails: this.fb.group({
       companyName: [''],
@@ -89,19 +93,18 @@ export class CompanyRegFormComponent implements OnInit {
     const applicant = this.createApplicant();
     this.authService.createApplicant(applicant)
       .then(
-      () => {
-        const loginData = new LoginData(
-          applicant.username,
-          applicant.password
-        );
-        // console.log()
-        this.authService.login(loginData);
-        // this.modalService.showSuccessLogin();
-      },
-      () => {
-        this.modalService.showErrorMessage('registration');
-      }
-    );
+        (response) => {
+          const loginData = new LoginData(
+            applicant.username,
+            applicant.password
+          );
+          console.log('login data: ', loginData);
+          this.authService.login(loginData);
+        },
+        (error) => {
+          this.errors.RegError = true;
+          console.log(error);
+        });
   }
 
   private createApplicant(): Applicant {
