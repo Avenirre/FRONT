@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {environment} from '../../environments/environment';
 import {ModalService} from '../modal/modal.service';
 import {AuthService} from '../auth/auth.service';
@@ -12,12 +12,13 @@ export class HeaderControlsService {
   constructor(
     private modalService: ModalService,
     private authService: AuthService
-    ) { }
-
-  isUserLogged(): boolean {
-    // return this.authService.isLoggedIn();
-    return false;
+  ) {
   }
+
+  // static isUserLogged(): boolean {
+  //   // return AuthService.isLoggedIn();
+  //   // return false;
+  // }
 
   public openModal(link: string) {
     console.log(this.routes);

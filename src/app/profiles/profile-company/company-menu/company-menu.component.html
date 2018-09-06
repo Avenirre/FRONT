@@ -1,0 +1,22 @@
+<a routerLinkActive="active"
+   routerLink="settings"
+   (click)="onSelectSettings()">
+  <h1>Settings</h1>
+</a>
+<a (click)="onSelectFolder()"><h1>My foders</h1></a>
+<div *ngIf="isFolders">
+  <div *ngFor="let folder of foldersNames; let i=index">
+    <h3
+      (click)="onSelectFolder(folder)"
+      [class.active]="folder === currentFolderName">
+      {{i + 1}}. {{folder}}
+    </h3>
+    <div *ngIf="folder === currentFolderName"
+         class="folder-controls">
+      <i class="fas fa-edit"></i>
+      <i class="fas fa-share-alt"></i>
+      <i class="fas fa-trash"></i>
+      <i class="fas fa-arrows-alt"></i>
+    </div>
+  </div>
+</div>

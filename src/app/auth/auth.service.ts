@@ -1,24 +1,32 @@
 import {Injectable} from '@angular/core';
-import {Candidate} from '../../services/support/candidate.service';
+import {Applicant} from '../../models/auth/applicant.model';
 import {ApiService} from '../../services/rest/api.service';
-import {Company} from '../../services/support/company.service';
-import {LoginDataInterface} from '../../interfaces/login-data.interface';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {LoginData} from '../../models/auth/login-data.model';
+import {environment} from '../../environments/environment';
+import {ModalService} from '../modal/modal.service';
+import {DataService} from '../../services/data.service';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  private api = environment.api;
+
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': 'my-auth-token',
+      'Authorization': `Bearer ${DataService.getUserToken()}`,
     })
   };
 
   constructor(
     private http: HttpClient,
-    private apiService: ApiService
+    private modalService: ModalService,
+    private apiService: ApiService,
+    private router: Router,
+    private dataService: DataService,
   ) {
   }
 
@@ -27,30 +35,45 @@ export class AuthService {
    * @returns {boolean}
    */
   public isLoggedIn(): boolean {
-    return localStorage.getItem('token') !== null;
+    const user = DataService.getCurrentUser();
+
+    return user !== null && user.token !== null;
   }
 
   /**
    * login user with given login data
    */
-  public login(user: LoginDataInterface): Promise<string> {
-    console.log('user: ', user);
+  public login(user: LoginData): Promise<string> {
+    // console.log('user: ', user);
     return new Promise((resolve, reject) => {
-      this.apiService.post<LoginDataInterface>(['login', 'validate'], user, this.httpOptions)
+      this.apiService.post<LoginData>(this.api.login, user, this.httpOptions)
         .subscribe(
           (data) => {
-            console.log(data);
-            localStorage.setItem('token', data['token']);
-            localStorage.setItem('currentLogin', data['login']);
-            resolve('succsess');
+            this.afterSuccessLogin(data);
+            resolve('success');
           },
           (error: Error) => {
-            console.log(error);
-            reject('error');
+            this.afterFailedLogin(error);
+            reject(error);
           });
     });
+  }
 
+  /**
+   * fulfills after success user login;
+   * @param data
+   */
+  private afterSuccessLogin(response) {
+    // console.log('log s: ', response.data);
+    DataService.saveUser(response.data);
+    this.modalService.showSuccessLogin();
+  }
 
+  /**
+   *fulfills after failed user login;
+   */
+  private afterFailedLogin(error) {
+    console.log('login error: ', error);
   }
 
   /**
@@ -58,7 +81,8 @@ export class AuthService {
    */
   public logout(): boolean {
     if (this.isLoggedIn()) {
-      localStorage.removeItem('token');
+      DataService.removeUser();
+      this.router.navigate(['/']);
       return true;
     }
     return false;
@@ -69,24 +93,29 @@ export class AuthService {
    * and sends JSON with candidate data;
    * @param {Candidate} employee
    */
-  public createCandidate(candidate: Candidate) {
-    this.apiService.post<Candidate>(['candidates'], candidate, this.httpOptions)
-      .subscribe(
-        (data) => {
-          console.log(data);
-        });
-  }
-
-  /**
-   * makes post request to the back-end server's create company method
-   * and sends JSON with candidate data;
-   * @param {Candidate} employee
-   */
-  public createCompany(company: Company) {
-    this.apiService.post<Company>(['companies'], company, this.httpOptions)
-      .subscribe(
-        (data) => {
-          console.log(data);
-        });
+  public createApplicant(applicant: Applicant) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    };
+    console.log(httpOptions);
+    return new Promise((resolve, reject) => {
+      this.apiService.post<Applicant>(this.api.registration, applicant, httpOptions)
+        .subscribe(
+          (response) => {
+            // console.log('success reg', data);
+            if (response['status'] === 'success') {
+              resolve(response['data']);
+            } else {
+              reject(response['status']);
+            }
+          },
+          (error) => {
+            // console.log('error reg', error);
+            reject(error);
+          });
+    });
   }
 }
+

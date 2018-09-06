@@ -3,11 +3,13 @@
     <div class="content-form">
       <div class="heading-back">
         <h2>
-      {{ message.title}}
+          {{ message.title}}
         </h2>
       </div>
-      {{message.message}}
-        <hr>
+      <div class="message-box">
+        {{message.message}}
+      </div>
+      <hr>
       <button (click)="closeModal()"
               class="btn btn-close">
         Close
