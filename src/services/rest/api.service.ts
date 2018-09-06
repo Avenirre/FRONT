@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {Observable} from 'rxjs';
 import {QueryAdressInterface} from '../../interfaces/query-adress.interface';
-import {RequestAdress} from '../support/request-adress.service';
+import {RequestAdress} from '../../models/request-adress.model';
 
 @Injectable({
   providedIn: 'root'
@@ -40,7 +40,7 @@ export class ApiService {
   public post<T>(path: string[], obj: T, httpOptions) {
     const adr = new RequestAdress(environment.apiUrl, environment.apiPort.toString(), path);
     const query = this.buildRequest(adr);
-    // console.log('Query to: ' + query);
+    console.log('Query to: ' + query);
     return this.http.post(query, obj, httpOptions);
   }
   /**
