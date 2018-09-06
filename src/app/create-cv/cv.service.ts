@@ -14,10 +14,10 @@ import {environment} from '../../environments/environment';
 })
 export class CvService {
   httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${DataService.getUserToken()}`,
-    })
+      headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${DataService.getUserToken()}`
+        })
   };
   cv: CV = null;
   cvChanged = new EventEmitter<any>();
@@ -29,6 +29,7 @@ export class CvService {
               private headerService: HeaderControlsService,
               private authService: AuthService) {
   }
+
 
   public getCV() {
     if (this.cv === null) {
@@ -61,9 +62,11 @@ export class CvService {
       this.headerService.openModal('login');
     } else {
         this.compileActivity(cv);
-        console.log(JSON.stringify(this.httpOptions));
-        console.log(JSON.stringify(cv));
-        this.apiService.post<CV>(this.routes.api.save_cv, cv, this.httpOptions)
+        this.httpOptions.headers.set('Authorization', 'my-new-auth-token');
+        let headers: HttpHeaders = new HttpHeaders();
+        headers = headers.append('Content-Type', 'application/json');
+        headers = headers.append('Authorization', `Bearer ${DataService.getUserToken()}`);
+        this.apiService.post<CV>(this.routes.api.save_cv, cv, {headers: headers})
          .subscribe(
            (data) => {
              console.log(data);
@@ -116,8 +119,11 @@ export class CvService {
     }
 
     public unCompileActivity() {
+        for (let i = 0; i < this.cv.cvActivity.length; i++) {
 
+        }
     }
+
 }
 
 
