@@ -6,7 +6,7 @@ import {LoginData} from '../../models/auth/login-data.model';
 import {environment} from '../../environments/environment';
 import {ModalService} from '../modal/modal.service';
 import {DataService} from '../../services/data.service';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +26,7 @@ export class AuthService {
     private modalService: ModalService,
     private apiService: ApiService,
     private router: Router,
-    private dataService: DataService
+    private dataService: DataService,
   ) {
   }
 
@@ -44,13 +44,13 @@ export class AuthService {
    * login user with given login data
    */
   public login(user: LoginData): Promise<string> {
-    console.log('user: ', user);
+    // console.log('user: ', user);
     return new Promise((resolve, reject) => {
       this.apiService.post<LoginData>(this.api.login, user, this.httpOptions)
         .subscribe(
           (data) => {
             this.afterSuccessLogin(data);
-            resolve('succsess');
+            resolve('success');
           },
           (error: Error) => {
             this.afterFailedLogin(error);
@@ -71,9 +71,9 @@ export class AuthService {
 
   /**
    *fulfills after failed user login;
-  */
+   */
   private afterFailedLogin(error) {
-    console.log('log e: ', error);
+    console.log('login error: ', error);
   }
 
   /**
@@ -94,15 +94,26 @@ export class AuthService {
    * @param {Candidate} employee
    */
   public createApplicant(applicant: Applicant) {
-    console.log('crAppl: ', applicant);
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    };
+    console.log(httpOptions);
     return new Promise((resolve, reject) => {
-      this.apiService.post<Applicant>(this.api.registration, applicant, this.httpOptions)
+      this.apiService.post<Applicant>(this.api.registration, applicant, httpOptions)
         .subscribe(
-          (data) => {
-            console.log(data);
+          (response) => {
+            // console.log('success reg', data);
+            if (response['status'] === 'success') {
+              resolve(response['data']);
+            } else {
+              reject(response['status']);
+            }
           },
           (error) => {
-            console.log(error);
+            // console.log('error reg', error);
+            reject(error);
           });
     });
   }

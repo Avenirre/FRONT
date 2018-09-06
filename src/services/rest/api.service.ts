@@ -44,7 +44,7 @@ export class ApiService {
   public post<T>(path: string[], obj: T, httpOptions) {
     const adr = new RequestAdress(environment.apiUrl, environment.apiPort.toString(), path);
     const query = this.buildRequest(adr);
-    // console.log('Query to: ' + query);
+    console.log('Query to: ' + query);
     return this.http.post(query, obj, httpOptions);
   }
   /**

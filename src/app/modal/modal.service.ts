@@ -73,8 +73,15 @@ export class ModalService implements OnInit {
     this.showMessage(message);
   }
 
-  showUnauthorizedMessage() {
+  public showUnauthorizedMessage() {
     const message = this.textService.getUnauthorizedMessage();
     this.showMessage(message);
+  }
+
+  public showErrorMessage(type: string) {
+    if (type === 'registration') {
+      const message = this.textService.getRegistrationErrorMessage();
+      this.showMessage(message);
+    }
   }
 }

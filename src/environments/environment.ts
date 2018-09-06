@@ -7,11 +7,11 @@ export const environment = {
    */
   api: {
     login: ['api', 'login'],
-    registration: ['api', 'profiles'],
     save_cv: ['api', 'cv'],
     lang_ref: ['api', 'languages'],
     skills_ref: ['api', 'skills'],
-    user_cvs: ['api', 'cv']
+    user_cvs: ['api', 'cv'],
+    registration: ['api', 'signup'],
   },
   /**
    * local frontend routes

@@ -4,7 +4,6 @@ import {NgModule} from '@angular/core';
 import {RouterRoutingModule} from '../router/router-routing.module';
 
 // LIBRARIES
-import {AngularFontAwesomeModule} from 'angular-font-awesome';
 
 // COMPONENTS
 import {AppComponent} from './app.component';
@@ -36,7 +35,7 @@ import {CvActionsComponent} from './create-cv/cv-actions/cv-actions.component';
 import {ModalService} from './modal/modal.service';
 import {ApiService} from '../services/rest/api.service';
 import {HttpClientModule} from '@angular/common/http';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ApiCandidatesService} from '../services/rest/api-candidates.service';
 import {ApiCompaniesService} from '../services/rest/api-companies.service';
 import {CvItemComponent} from './profiles/profile-candidate/profile-cvs/cv-item/cv-item.component';
@@ -97,10 +96,10 @@ import { CompanySettingsComponent } from './profiles/profile-company/company-set
   ],
   imports: [
     BrowserModule,
-    AngularFontAwesomeModule,
     RouterRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     ModalService,
@@ -111,5 +110,6 @@ import { CompanySettingsComponent } from './profiles/profile-company/company-set
   ],
   bootstrap: [AppComponent]
 })
+
 export class AppModule {
 }

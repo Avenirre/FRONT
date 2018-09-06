@@ -15,140 +15,112 @@
         </div>
 
       </div>
-      <form (submit)="submitRegistration(form)" #form="ngForm">
-        <div class="form-group row">
-          <input ngModel
-                 name="username"
-                 type="text"
-                 class="form-control col-md-6 col-sm-12"
-                 #username="ngModel"
-                 [class.is-invalid]="username.invalid && username.touched || regErr"
-                 [class.is-valid]="username.valid && username.touched"
-                 id="username"
-                 placeholder="login"
-                 required>
-          <label
-            class="col-md-6 d-none d-md-block"
-            for="firstName">
-            e.g.superlogin
-          </label>
+      <form (ngSubmit)="submitRegistration()" [formGroup]="regForm">
+        <div formGroupName="applicantDetails">
+          <div class="form-group row">
+            <input formControlName="firstName"
+                   type="text"
+                   class="form-control col-md-6 col-sm-12"
+                   id="firstName"
+                   placeholder="first name">
+            <label
+              class="col-md-6 d-none d-md-block"
+              for="firstName">
+              e.g.John
+            </label>
+          </div>
+          <div class="form-group row">
+            <input formControlName="lastName"
+                   type="text"
+                   class="form-control col-md-6 col-sm-12"
+                   id="lastName"
+                   placeholder="last name">
+            <label class="col-md-6 d-none d-md-block"
+                   for="lastName">
+              e.g.Johnson
+            </label>
+          </div>
+          <div class="form-group row">
+            <input formControlName="email"
+                   type="email"
+                   class="form-control col-md-6 col-sm-12"
+                   id="email"
+                   placeholder="email">
+            <label class="col-md-6 d-none d-md-block"
+                   for="email">
+              e.g.John@mail.com
+            </label>
+          </div>
+          <div class="form-group row">
+            <input formControlName="phone"
+                   type="text"
+                   class="form-control col-md-6 col-sm-12"
+                   id="phone"
+                   placeholder="phone">
+            <label class="col-md-6 d-none d-md-block"
+                   for="phone">
+              e.g.+972 53 0000000
+            </label>
+          </div>
+          <div class="form-group row">
+            <input formControlName="username"
+                   type="text"
+                   class="form-control col-md-6 col-sm-12"
+                   id="username"
+                   placeholder="username*">
+            <label class="col-md-6 d-none d-md-block"
+                   for="username">
+              e.g.Username
+            </label>
+          </div>
         </div>
-        <div class="form-group row">
-          <input ngModel
-                 name="firstName"
-                 type="text"
-                 class="form-control col-md-6 col-sm-12"
-                 #firstName="ngModel"
-                 [class.is-invalid]="firstName.invalid && firstName.touched || regErr"
-                 [class.is-valid]="firstName.valid && firstName.touched"
-                 id="firstName"
-                 placeholder="first name"
-                 required>
-          <label
-            class="col-md-6 d-none d-md-block"
-            for="firstName">
-            e.g.John
-          </label>
+        <div formGroupName="passwordGroup">
+          <div class="form-group row">
+            <input formControlName="password"
+                   type="password"
+                   class="form-control col-md-6 col-sm-12"
+                   id="password"
+                   placeholder="password">
+            <label class="col-md-6 d-none d-md-block"
+                   for="password">
+              8+ symbols including
+            </label>
+          </div>
+          <div class="form-group row">
+            <input formControlName="confirmPass"
+                   type="password"
+                   class="form-control col-md-6 col-sm-12"
+                   id="password-confirm"
+                   placeholder="confirm password">
+            <label class="col-md-6 d-none d-md-block"
+                   for="password-confirm">
+              re-enter your password
+            </label>
+          </div>
         </div>
-        <div class="form-group row">
-          <input ngModel
-                 name="lastName"
-                 type="text"
-                 class="form-control col-md-6 col-sm-12"
-                 #lastName="ngModel"
-                 [class.is-invalid]="lastName.invalid && lastName.touched || regErr"
-                 [class.is-valid]="lastName.valid && lastName.touched"
-                 id="lastName"
-                 placeholder="last name"
-                 required>
-          <label class="col-md-6 d-none d-md-block"
-                 for="lastName">
-            e.g.Johnson
-          </label>
+        <div class="alert alert-danger"
+             *ngIf="errors.RegError">
+          Registration Error
         </div>
-        <div class="form-group row">
-          <input ngModel
-                 name="email"
-                 type="email"
-                 class="form-control col-md-6 col-sm-12"
-                 #email="ngModel"
-                 [class.is-invalid]="email.invalid && email.touched || regErr"
-                 [class.is-valid]="email.valid && email.touched"
-                 id="email"
-                 placeholder="email"
-                 required>
-          <label class="col-md-6 d-none d-md-block"
-                 for="email">
-            e.g.John@mail.com
-          </label>
-        </div>
-        <div class="form-group row">
-          <input ngModel
-                 name="phone"
-                 type="text"
-                 class="form-control col-md-6 col-sm-12"
-                 #phone="ngModel"
-                 [class.is-invalid]="phone.invalid && phone.touched || regErr"
-                 [class.is-valid]="phone.valid && phone.touched"
-                 id="phone"
-                 placeholder="phone"
-                 required>
-          <label class="col-md-6 d-none d-md-block"
-                 for="phone">
-            e.g.+972 53 0000000
-          </label>
-        </div>
-        <div class="form-group row">
-          <input ngModel
-                 name="password"
-                 type="password"
-                 class="form-control col-md-6 col-sm-12"
-                 #password="ngModel"
-                 [class.is-invalid]="password.invalid && password.touched || regErr"
-                 [class.is-valid]="password.valid && password.touched"
-                 id="password"
-                 placeholder="password"
-                 required>
-          <label class="col-md-6 d-none d-md-block"
-                 for="password">
-            8+ symbols including
-          </label>
-        </div>
-        <div class="form-group row">
-          <input ngModel
-                 name="confirmPass"
-                 type="password"
-                 class="form-control col-md-6 col-sm-12"
-                 #confirmPass="ngModel"
-                 [class.is-invalid]="confirmPass.invalid && confirmPass.touched || regErr"
-                 [class.is-valid]="confirmPass.valid && confirmPass.touched"
-                 id="password-confirm"
-                 placeholder="confirm password"
-                 required>
-          <label class="col-md-6 d-none d-md-block"
-                 for="password-confirm">
-            re-enter your password
-          </label>
-        </div>
-        <a>request secret code</a>
-        <div class="form-group row">
-          <input
-            type="text"
-            class="form-control col-md-6 col-sm-12"
-            id="secret-code"
-            placeholder="secret code">
-          <label class="col-md-6 d-none d-md-block"
-                 for="secret-code">
-            secret code, received by SMS
-          </label>
-        </div>
-        <div class="col-12 mt-5 mb-3">
+        <!--<a>request secret code</a>-->
+        <!--<div class="form-group row">-->
+          <!--<input-->
+            <!--type="text"-->
+            <!--class="form-control col-md-6 col-sm-12"-->
+            <!--id="secret-code"-->
+            <!--placeholder="secret code">-->
+          <!--<label class="col-md-6 d-none d-md-block"-->
+                 <!--for="secret-code">-->
+            <!--secret code, received by SMS-->
+          <!--</label>-->
+        <!--</div>-->
+        <div class="col-12 message">
           By clicking "Proceed" you confirm that you accept the Terms of Service & Privacy Policy
         </div>
 
-        <div class="col-12">
+        <div class="col-12 buttons-container">
           <button type="submit"
-                  [disabled]="form.invalid"
+                  [disabled]="regForm.invalid"
                   class="btn btn-secondary">Proceed
           </button>
         </div>
