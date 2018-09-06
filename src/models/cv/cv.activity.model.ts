@@ -13,11 +13,11 @@ export class Activity {
     yearEnd: number;
     backFront: number;
 
-    constructor(id, activityType_id, activityType_name, position_id, position_postName, description, yearStart, yearEnd, backFront) {
+    constructor(id, activityTypeId, activityTypeName, positionId, position_postName, description, yearStart, yearEnd, backFront) {
         this.id = id;
-        this.activityType.id = activityType_id;
-        this.activityType.name = activityType_name;
-        this.position.id = position_id;
+        this.activityType.id = activityTypeId;
+        this.activityType.name = activityTypeName;
+        this.position.id = positionId;
         this.position.postName = position_postName;
         this.description = description;
         this.yearStart = yearStart;

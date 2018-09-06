@@ -12,7 +12,7 @@ export class CV {
     public id: number = null;
     public firstName: string = null;
     public lastName: string = null;
-    public profileId: number = 1;
+    public profileId: number = null;
     public summary: string = null;
     public about: string = null;
     public email: string = null;
