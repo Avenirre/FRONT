@@ -1,21 +1,71 @@
 <a routerLinkActive="active"
+   routerLink="search"
+   (click)="onSelectSearch()">
+  <h1>Search</h1>
+</a>
+
+<a routerLinkActive="active"
    routerLink="settings"
    (click)="onSelectSettings()">
   <h1>Settings</h1>
 </a>
-<a (click)="onSelectFolder()"><h1>My foders</h1></a>
-<div *ngIf="isFolders">
+
+<div class="folders-h">
+  <a (click)="onSelectDefaultFolder()">
+    <h1 class="f-link">My foders</h1>
+  </a>
+  <div class="f-create">
+    <i (click)="openCreateFolderDialog()"
+       class="far fa-plus-square"></i>
+  </div>
+</div>
+
+<form *ngIf="states.isCreateFolder"
+      class="create-folder-form"
+      (ngSubmit)="onCreateFolder(createFolderForm.value)"
+      #createFolderForm="ngForm">
+  <input class="form-control"
+         type="text"
+         name="folderName"
+         ngModel>
+  <input class="btn btn-danger" type="submit" value="Add">
+</form>
+
+<!--CONTENT-->
+<app-search-form *ngIf="menuSection === SectionUnit.SEARCH"></app-search-form>
+
+<div *ngIf="menuSection === SectionUnit.FOLDERS">
   <div *ngFor="let folder of foldersNames; let i=index">
-    <h3
-      (click)="onSelectFolder(folder)"
-      [class.active]="folder === currentFolderName">
-      {{i + 1}}. {{folder}}
-    </h3>
-    <div *ngIf="folder === currentFolderName"
+    <div class="folder"
+         (click)="onSelectFolder(folder.name)"
+         [class.active]="folder.name === currentFolderName">
+      <span *ngIf="!states.isEditFolder || folder.name !== currentFolderName">
+      {{i + 1}}. {{folder.name}}
+      </span>
+    </div>
+    <!--EDIT FOLDER DIALOG-->
+    <div *ngIf="states.isEditFolder && folder.name === currentFolderName">
+      <form
+        class="create-folder-form"
+        (ngSubmit)="onEditFolder(folder.id, editFolderForm.value.folderName)"
+        #editFolderForm="ngForm">
+        <input class="form-control"
+               type="text"
+               name="folderName"
+               ngModel>
+        <div *ngIf="errors.folderExists" class="alert">Folder with such name already exists!</div>
+        <input class="btn btn-danger" type="submit" value="Save">
+        <button (click)="onCancelEdit()" class="btn btn-secondary">Cancel</button>
+      </form>
+    </div>
+    <!--END EDIT FOLDER DIALOG-->
+    <div *ngIf="folder.name === currentFolderName"
          class="folder-controls">
-      <i class="fas fa-edit"></i>
+      <i (click)="onEditFolderDialog()"
+         class="fas fa-edit"></i>
       <i class="fas fa-share-alt"></i>
-      <i class="fas fa-trash"></i>
+      <i (click)="onDeleteFolder(folder.id)"
+         class="fas fa-trash"></i>
       <i class="fas fa-arrows-alt"></i>
     </div>
   </div>

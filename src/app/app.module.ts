@@ -52,6 +52,8 @@ import { CompanyCvPrevComponent } from './profiles/profile-company/company-folde
 import { CmpEditPanelComponent } from './profiles/profile-company/company-folder/cmp-edit-panel/cmp-edit-panel.component';
 import { CompanyFolderComponent } from './profiles/profile-company/company-folder/company-folder.component';
 import { CompanySettingsComponent } from './profiles/profile-company/company-settings/company-settings.component';
+import { CvSearchComponent } from './profiles/profile-company/cv-search/cv-search.component';
+import { SearchFormComponent } from './profiles/profile-company/search-form/search-form.component';
 
 
 @NgModule({
@@ -93,6 +95,8 @@ import { CompanySettingsComponent } from './profiles/profile-company/company-set
     CmpEditPanelComponent,
     CompanyFolderComponent,
     CompanySettingsComponent,
+    CvSearchComponent,
+    SearchFormComponent,
   ],
   imports: [
     BrowserModule,

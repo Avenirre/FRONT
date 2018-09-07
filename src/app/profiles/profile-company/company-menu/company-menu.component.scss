@@ -7,7 +7,21 @@
   margin: 1rem 0;
 }
 
-:host ::ng-deep h3 {
+.folders-h {
+  width: 100%;
+
+  .f-link {
+    display: inline-block;
+  }
+
+  .f-create {
+    display: inline-block;
+    right: 0;
+    font-size: 1.2rem;
+  }
+}
+
+:host ::ng-deep .folder {
   font-family: $secondary-font;
   font-weight: 600;
   font-size: 1.2rem;
@@ -31,3 +45,31 @@ a {
   color: #fff;
   cursor: pointer;
 }
+
+.create-folder-form {
+  padding: 0 1rem;
+
+  input[type=text] {
+    border-radius: 3rem;
+  }
+
+  input[type=submit] {
+  }
+}
+
+.alert {
+  font-size: 0.8rem;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+

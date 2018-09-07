@@ -1,5 +1,10 @@
 <app-cmp-edit-panel></app-cmp-edit-panel>
-<app-company-cv-prev
-  *ngFor="let cv of folder.cvs"
-  [cv]="cv"
-></app-company-cv-prev>
+<div *ngIf="!errors.FolderNotFound">
+  <app-company-cv-prev
+    *ngFor="let cv of folder.cvs"
+    [cv]="cv"
+  ></app-company-cv-prev>
+</div>
+<div *ngIf="errors.FolderNotFound" class="alert">
+  Folder not found!
+</div>
