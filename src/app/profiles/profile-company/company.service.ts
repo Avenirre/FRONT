@@ -7,18 +7,22 @@ import {CV} from '../../../models/cv/cv.model';
   providedIn: 'root'
 })
 export class CompanyService {
+  currentFolder: number;
   checkedCount = 0;
   checkedChanged = new Subject();
   folderChanged = new Subject<string>();
-  folders = [
-    new ProfileFolder('Frontend Developer', [
+  foldersChanged = new Subject<ProfileFolder[]>();
+  foldersNamesChanged = new Subject<{id: number, name: string}[]>();
+
+  folders: ProfileFolder[] = [
+    new ProfileFolder(0, 'Frontend Developer', [
       new CV()
     ]),
-    new ProfileFolder('Backend Developer', [
+    new ProfileFolder(1, 'Backend Developer', [
       new CV(),
       new CV()
     ]),
-    new ProfileFolder('Designer', [
+    new ProfileFolder(2, 'Designer', [
       new CV(),
       new CV(),
       new CV(),
@@ -40,9 +44,11 @@ export class CompanyService {
   /**
    * returns array of names of all user foders;
    */
-  public getFoldersNames(): string[] {
+  public getFoldersNames(): {id: number, name: string}[] {
     return this.folders.map((folder: ProfileFolder) => {
-      return folder.name;
+      const id: number = folder.id;
+      const name: string = folder.name;
+      return {id, name};
     });
   }
 
@@ -61,6 +67,72 @@ export class CompanyService {
 
   resetCheckedCount() {
     this.checkedCount = 0;
+    this.checkedChanged.next(this.checkedCount);
+  }
+
+  createFolder(folderName: string) {
+    const id = this.findFolderId();
+    const newFolder = new ProfileFolder(id, folderName, []);
+    this.folders.push(newFolder);
+    this.foldersChanged.next(this.folders);
+
+    const foldersNames = this.getFoldersNames();
+    this.foldersNamesChanged.next(foldersNames);
+    console.log(this.folders);
+  }
+
+  /**
+   * finds unique empty local id of new folder;
+   */
+  private findFolderId(): number {
+    let id = 0;
+    this.folders.forEach((current) => {
+      if (current.id > id) {
+        id = current.id++;
+      }
+    });
+    return id;
+  }
+
+  public isFolderExists(folder: string): boolean {
+    if (!folder) {
+      return false;
+    }
+    let res = false;
+    this.folders.forEach((current) => {
+      if (current.name === folder) {
+        res = true;
+      }
+    });
+    return res;
+  }
+
+  editFolder(id: number, name: string) {
+    const folderIndex = this.folders.findIndex((c) => {
+      return c.id === id;
+    });
+    this.folders[folderIndex].name = name;
+    this.sendFolders();
+    console.log(this.folders);
+  }
+
+  private sendFolders() {
+    this.foldersNamesChanged.next(this.getFoldersNames());
+  }
+
+  deleteFolder(id: number) {
+    const index = this.folders.findIndex((c) => {
+      return c.id === id;
+    });
+    this.folders = this.folders.splice(index, 1);
+    this.emitFoldersChanges();
+  }
+
+  emitFoldersChanges() {
+    this.foldersNamesChanged.next(this.getFoldersNames());
+    const foldersNames = this.getFoldersNames();
+    this.foldersNamesChanged.next(foldersNames);
+
   }
 }
 

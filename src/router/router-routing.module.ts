@@ -18,6 +18,7 @@ import {ProfileStatisticComponent} from '../app/profiles/profile-candidate/profi
 import {CompanyFolderComponent} from '../app/profiles/profile-company/company-folder/company-folder.component';
 import {CompanySettingsComponent} from '../app/profiles/profile-company/company-settings/company-settings.component';
 import {CvPresentationComponent} from '../app/create-cv/cv-presentation/cv-presentation.component';
+import {CvSearchComponent} from '../app/profiles/profile-company/cv-search/cv-search.component';
 
 const routes = environment.routes;
 const routesApi: Routes = [
@@ -29,16 +30,15 @@ const routesApi: Routes = [
     path: routes.profile,
     // component: ProfileCandidateComponent,
     canActivate: [AuthGuard],
-    children: [
-
-    ]
+    children: []
   },
-  {path: routes.profileCandidate, component: ProfileCandidateComponent,
-      children: [
-          {path: 'cvs-manager', component: ProfileCvsComponent},
-          {path: 'settings', component: ProfileSettingComponent},
-          {path: 'statistics', component: ProfileStatisticComponent}
-      ]
+  {
+    path: routes.profileCandidate, component: ProfileCandidateComponent,
+    children: [
+      {path: 'cvs-manager', component: ProfileCvsComponent},
+      {path: 'settings', component: ProfileSettingComponent},
+      {path: 'statistics', component: ProfileStatisticComponent}
+    ]
   },
   {path: routes.profileCompany, component: ProfileCompanyComponent},
   {path: routes.profileCandidate, component: ProfileCandidateComponent},
@@ -49,6 +49,7 @@ const routesApi: Routes = [
           {path: ':folder', component: CompanyFolderComponent},
         ]
       },
+      {path: routes.profileCompanySearch, component: CvSearchComponent},
       {path: routes.profileCompanySettings, component: CompanySettingsComponent},
     ]
   },
