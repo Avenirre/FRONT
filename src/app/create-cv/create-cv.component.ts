@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {CvService} from './cv.service';
+import {ActivatedRoute, Params} from '@angular/router';
 
 @Component({
   selector: 'app-create-cv',
@@ -8,9 +10,17 @@ import { Component, OnInit } from '@angular/core';
 export class CreateCvComponent implements OnInit {
 
 
-  constructor() { }
+  constructor(private cvService: CvService,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.route.params.subscribe(
+        (params: Params) => {
+          if (params['id']) {
+            this.cvService.setEditCv(params['id']);
+          }
+        }
+    );
   }
 
 }

@@ -58,6 +58,11 @@ const routesApi: Routes = [
       {path: ':type', component: CvPresentationComponent}
     ]
   },
+  {
+    path: routes.cvEdit, component: CreateCvComponent, children: [
+        {path: ':type', component: CvPresentationComponent}
+    ]
+  },
   {path: 'message', component: MessageComponent, outlet: 'modal'},
   {path: 'testing', component: TestingComponent},
   {path: '404', component: NotFoundComponent},

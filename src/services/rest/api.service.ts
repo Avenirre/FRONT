@@ -24,11 +24,15 @@ export class ApiService {
    * @param {string[]} path
    * @returns {Observable<Object>}
    */
-  public get(path: string[]) {
+  public get(path: string[], headers?) {
     const adr = new RequestAdress(environment.apiUrl, environment.apiPort.toString(), path);
     const query = this.buildRequest(adr);
     console.log('Query to: ' + query);
-    return this.http.get(query);
+    if (headers) {
+        return this.http.get(query, headers);
+    } else {
+        return this.http.get(query);
+    }
   }
 
   /**

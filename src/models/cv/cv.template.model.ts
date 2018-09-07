@@ -1,8 +1,10 @@
 export class Template {
     type: number;
     colorScheme: number;
+    id: number;
 
-    constructor (type, color_scheme) {
+    constructor (id, type, color_scheme) {
+        this.id = id;
         this.type = type;
         this.colorScheme = color_scheme;
     }

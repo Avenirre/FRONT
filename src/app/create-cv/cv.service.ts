@@ -1,4 +1,4 @@
-import {EventEmitter, Injectable} from '@angular/core';
+import {EventEmitter, Injectable, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {CV} from '../../models/cv/cv.model';
 import {ApiService} from '../../services/rest/api.service';
@@ -8,18 +8,21 @@ import {HeaderControlsService} from '../header/header-controls.service';
 import {AuthService} from '../auth/auth.service';
 import {Activity} from '../../models/cv/cv.activity.model';
 import {environment} from '../../environments/environment';
+import {Position} from '../../models/cv/cv.position.model';
+import {Template} from '../../models/cv/cv.template.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CvService {
+export class CvService implements OnInit {
   httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${DataService.getUserToken()}`,
-    })
+      headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${DataService.getUserToken()}`
+        })
   };
   cv: CV = null;
+  user_cvs: CV[];
   cvChanged = new EventEmitter<any>();
   expectingCv = false;
   routes = environment;
@@ -29,6 +32,7 @@ export class CvService {
               private headerService: HeaderControlsService,
               private authService: AuthService) {
   }
+
 
   public getCV() {
     if (this.cv === null) {
@@ -42,6 +46,22 @@ export class CvService {
 
   public setCV(cv) {
     this.cv = cv;
+  }
+
+  public setEditCv(id: number): void {
+      for (let i = 0; i < this.user_cvs.length; i++) {
+          if (this.user_cvs[i].id == id) {
+              this.cv = this.user_cvs[i];
+              if (!this.cv.positionPreference) {
+                  this.cv.positionPreference = new Position(null, null);
+              }
+              if (!this.cv.template) {
+                  this.cv.template = new Template(null, null, null);
+              }
+              console.log(this.cv);
+              return;
+          }
+      }
   }
 
   public setTemplate(template: { templateType: number, templateColor: number }): void {
@@ -61,8 +81,11 @@ export class CvService {
       this.headerService.openModal('login');
     } else {
         this.compileActivity(cv);
-        console.log(cv);
-        this.apiService.post<CV>(this.routes.api.save_cv, cv, this.httpOptions)
+        this.httpOptions.headers.set('Authorization', 'my-new-auth-token');
+        let headers: HttpHeaders = new HttpHeaders();
+        headers = headers.append('Content-Type', 'application/json');
+        headers = headers.append('Authorization', `Bearer ${DataService.getUserToken()}`);
+        this.apiService.post<CV>(this.routes.api.save_cv, cv, {headers: headers})
          .subscribe(
            (data) => {
              console.log(data);
@@ -115,8 +138,35 @@ export class CvService {
     }
 
     public unCompileActivity() {
+        for (let i = 0; i < this.cv.cvActivity.length; i++) {
 
+        }
     }
+
+    setUsersCvs() {
+        const result = new Promise(
+            (resolve, reject) => {
+                let headers: HttpHeaders = new HttpHeaders();
+                headers = headers.append('Content-Type', 'application/json');
+                headers = headers.append('Authorization', `Bearer ${DataService.getUserToken()}`);
+                this.apiService.get(environment.api.user_cvs, {headers: headers}).subscribe(
+                    (res) => {
+                        this.user_cvs = res['data'];
+                        resolve('finish');
+                    }
+                );
+            }
+        );
+        return result;
+    }
+
+    getUsersCvs(): CV[] {
+      return this.user_cvs;
+    }
+
+    ngOnInit(): void {
+    }
+
 }
 
 
