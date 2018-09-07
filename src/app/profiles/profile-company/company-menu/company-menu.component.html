@@ -14,9 +14,11 @@
   <a (click)="onSelectDefaultFolder()">
     <h1 class="f-link">My foders</h1>
   </a>
-  <div class="f-create">
+  <div class="f-create"
+       *ngIf="menuSection === SectionUnit.FOLDERS">
     <i (click)="openCreateFolderDialog()"
-       class="far fa-plus-square"></i>
+       class="far fa-plus-square">
+    </i>
   </div>
 </div>
 
@@ -28,7 +30,9 @@
          type="text"
          name="folderName"
          ngModel>
-  <input class="btn btn-danger" type="submit" value="Add">
+  <button class="btn btn-danger" type="submit">
+    <i class="fas fa-plus"></i>
+  </button>
 </form>
 
 <!--CONTENT-->
@@ -46,14 +50,16 @@
     <!--EDIT FOLDER DIALOG-->
     <div *ngIf="states.isEditFolder && folder.name === currentFolderName">
       <form
-        class="create-folder-form"
+        class="edit-folder-form"
         (ngSubmit)="onEditFolder(folder.id, editFolderForm.value.folderName)"
         #editFolderForm="ngForm">
         <input class="form-control"
                type="text"
                name="folderName"
                ngModel>
-        <div *ngIf="errors.folderExists" class="alert">Folder with such name already exists!</div>
+        <div *ngIf="errors.folderExists" class="alert">
+          Folder with such name already exists!
+        </div>
         <input class="btn btn-danger" type="submit" value="Save">
         <button (click)="onCancelEdit()" class="btn btn-secondary">Cancel</button>
       </form>

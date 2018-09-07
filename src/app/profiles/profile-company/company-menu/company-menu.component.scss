@@ -11,14 +11,23 @@
   width: 100%;
 
   .f-link {
-    display: inline-block;
+    display: block;
+    float: left;
+    margin-top: 0;
   }
 
   .f-create {
-    display: inline-block;
-    right: 0;
-    font-size: 1.2rem;
+    display: block;
+    float: right;
+    font-size: 1.5rem;
   }
+}
+
+.folders-h::after {
+  content: '';
+  display: block;
+  clear: both;
+
 }
 
 :host ::ng-deep .folder {
@@ -50,10 +59,27 @@ a {
   padding: 0 1rem;
 
   input[type=text] {
-    border-radius: 3rem;
+    box-sizing: border-box;
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    width: calc(100% - 2.5rem);
+    color: $color-light;
+    border-radius: 3rem 0 0 3rem;
+    border: 1px solid #fff;
+    background-color: $color-light-blue;
+    box-shadow: none;
   }
 
-  input[type=submit] {
+  button {
+    box-sizing: border-box;
+    display: inline-block;
+    text-align: center;
+    width: 2.5rem;
+    color: $color-light-blue;
+    padding: 0.5rem 0;
+    border-radius: 0 3rem 3rem 0;
+    background-color: #fff;
+    border: 2px solid #fff;
   }
 }
 

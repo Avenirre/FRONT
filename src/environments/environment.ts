@@ -8,7 +8,8 @@ export const environment = {
   api: {
     login: ['api', 'login'],
     registration: ['api', 'signup'],
-    save_cv: ['api', 'cv']
+    save_cv: ['api', 'cv'],
+    getFolders: ['api', 'folders']
 
   },
   /**
