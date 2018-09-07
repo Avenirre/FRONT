@@ -10,6 +10,7 @@ import {Activity} from '../../models/cv/cv.activity.model';
 import {environment} from '../../environments/environment';
 import {Position} from '../../models/cv/cv.position.model';
 import {Template} from '../../models/cv/cv.template.model';
+import {Education} from '../../models/cv/cv.education.model';
 
 @Injectable({
   providedIn: 'root'
@@ -50,15 +51,17 @@ export class CvService implements OnInit {
 
   public setEditCv(id: number): void {
       for (let i = 0; i < this.user_cvs.length; i++) {
-          if (this.user_cvs[i].id == id) {
+          if (+this.user_cvs[i].id === id) {
               this.cv = this.user_cvs[i];
               if (!this.cv.positionPreference) {
                   this.cv.positionPreference = new Position(null, null);
               }
               if (!this.cv.template) {
-                  this.cv.template = new Template(null, null, null);
+                  this.cv.template = new Template(null, 0, 0);
               }
-              console.log(this.cv);
+              if (!this.cv.education) {
+                  this.cv.education = [new Education(null, null, null, null, null, null)];
+              }
               return;
           }
       }
