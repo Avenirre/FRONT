@@ -26,6 +26,7 @@ export const environment = {
     profileCompany: 'profile/company',
     profileCompanyFolders: 'folders',
     profileCompanySettings: 'settings',
+    profileCompanySearch: 'search',
     cvCreate: 'create-cv',
     cvEdit: 'profile/candidate/edit-cv/:id',
     unauthorizedUser: 'unauthorized',
