@@ -12,7 +12,7 @@ export class CompanyService {
   checkedChanged = new Subject();
   folderChanged = new Subject<string>();
   foldersChanged = new Subject<ProfileFolder[]>();
-  foldersNamesChanged = new Subject<{id: number, name: string}[]>();
+  foldersNamesChanged = new Subject<{ id: number, name: string }[]>();
 
   folders: ProfileFolder[] = [
     new ProfileFolder(0, 'Frontend Developer', [
@@ -29,22 +29,37 @@ export class CompanyService {
     ]),
   ];
 
-  constructor() { }
+  constructor() {
+  }
 
   public getFolders(): ProfileFolder[] {
     return this.folders;
   }
 
-  getFolder(folderName: string): ProfileFolder {
+  /**
+   * returns folder by given folder id;
+   * @param id
+   */
+  getFolderById(id: number): ProfileFolder {
     return this.folders.find((current) => {
-      return current.name === folderName;
+      return current.id === id;
     });
   }
 
   /**
-   * returns array of names of all user foders;
+   * returns folder by given folder name;
+   * @param name
    */
-  public getFoldersNames(): {id: number, name: string}[] {
+  getFolderByName(name: string): ProfileFolder {
+    return this.folders.find((current) => {
+      return current.name === name;
+    });
+  }
+
+  /**
+   * returns array of names and id-s of all user-folders;
+   */
+  public getFoldersNames(): { id: number, name: string }[] {
     return this.folders.map((folder: ProfileFolder) => {
       const id: number = folder.id;
       const name: string = folder.name;
@@ -52,6 +67,10 @@ export class CompanyService {
     });
   }
 
+  /**
+   * set current folder, chosen by user;
+   * @param folder
+   */
   setCurrentFolder(folder: string) {
     this.folderChanged.next(folder);
   }
@@ -70,6 +89,10 @@ export class CompanyService {
     this.checkedChanged.next(this.checkedCount);
   }
 
+  /**
+   * create new empty folder in folders array;
+   * @param folderName
+   */
   createFolder(folderName: string) {
     const id = this.findFolderId();
     const newFolder = new ProfileFolder(id, folderName, []);
@@ -94,6 +117,10 @@ export class CompanyService {
     return id;
   }
 
+  /**
+   * checks if folder with given name exists;
+   * @param folder
+   */
   public isFolderExists(folder: string): boolean {
     if (!folder) {
       return false;
@@ -107,6 +134,11 @@ export class CompanyService {
     return res;
   }
 
+  /**
+   * edit name of folder by given folder id;
+   * @param id
+   * @param name
+   */
   editFolder(id: number, name: string) {
     const folderIndex = this.folders.findIndex((c) => {
       return c.id === id;
@@ -120,14 +152,28 @@ export class CompanyService {
     this.foldersNamesChanged.next(this.getFoldersNames());
   }
 
+  /**
+   * delete folder with given id from folders array;
+   * @param id
+   */
   deleteFolder(id: number) {
     const index = this.folders.findIndex((c) => {
       return c.id === id;
     });
-    this.folders = this.folders.splice(index, 1);
-    this.emitFoldersChanges();
+    if (this.folders.length <= 1) {
+      this.folders[index].cvs = [];
+    } else {
+      if (index !== -1) {
+        this.folders.splice(index, 1);
+      }
+      this.emitFoldersChanges();
+
+    }
   }
 
+  /**
+   * emit folders and folder names arrays to the subscribers;
+   */
   emitFoldersChanges() {
     this.foldersNamesChanged.next(this.getFoldersNames());
     const foldersNames = this.getFoldersNames();

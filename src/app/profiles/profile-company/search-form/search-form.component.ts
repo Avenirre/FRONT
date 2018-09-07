@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {ApiService} from '../../../../services/rest/api.service';
+import {DataService} from '../../../../services/data.service';
 
 @Component({
   selector: 'app-search-form',
@@ -6,13 +8,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./search-form.component.scss']
 })
 export class SearchFormComponent implements OnInit {
+  profile;
 
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   onSubmitForm(searchForm: HTMLFormElement) {
     
   }
+
+
 }

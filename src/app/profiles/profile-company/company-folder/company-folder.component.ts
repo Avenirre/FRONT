@@ -25,9 +25,8 @@ export class CompanyFolderComponent implements OnInit {
       const folderName = params['folder'];
       if (this.companyService.isFolderExists(folderName)) {
         this.companyService.setCurrentFolder(folderName);
-        this.folder = this.companyService.getFolder(folderName);
+        this.folder = this.companyService.getFolderByName(folderName);
         this.errors.FolderNotFound = false;
-        console.log(this.folder);
       } else {
         this.errors.FolderNotFound = true;
       }

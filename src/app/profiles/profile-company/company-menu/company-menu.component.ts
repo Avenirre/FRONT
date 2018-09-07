@@ -17,11 +17,14 @@ export class CompanyMenuComponent implements OnInit, OnDestroy {
   routes = environment.routes;
   SectionUnit = SectionUnit;
   menuSection: SectionUnit;
+  errors = {
+    folderExists: false
+  };
   states = {
     isCreateFolder: false,
     isEditFolder: false,
   };
-  foldersNames: {id: number, name: string}[];
+  foldersNames: { id: number, name: string }[];
   currentFolderName: string;
   folderSubscription: Subscription;
   namesSubscription: Subscription;
@@ -40,7 +43,7 @@ export class CompanyMenuComponent implements OnInit, OnDestroy {
         this.currentFolderName = folder;
       });
     this.namesSubscription = this.companyService.foldersNamesChanged.subscribe(
-      (names: {id: number, name: string}[]) => {
+      (names: { id: number, name: string }[]) => {
         this.foldersNames = names;
       });
     this.onSelectDefaultFolder();
@@ -91,12 +94,15 @@ export class CompanyMenuComponent implements OnInit, OnDestroy {
   }
 
   onEditFolder(id: number, name: string) {
-    this.states.isEditFolder = false;
-    this.companyService.editFolder(id, name);
-
+    if (this.companyService.isFolderExists(name)) {
+      this.errors.folderExists = true;
+    } else {
+      this.states.isEditFolder = false;
+      this.companyService.editFolder(id, name);
+    }
   }
 
-  onEditFolderDialog(folder: string) {
+  onEditFolderDialog() {
     this.states.isEditFolder = true;
   }
 
@@ -116,6 +122,9 @@ export class CompanyMenuComponent implements OnInit, OnDestroy {
     this.states.isCreateFolder = !this.states.isCreateFolder;
   }
 
+  onCancelEdit() {
+    this.states.isEditFolder = false;
+  }
 }
 
 enum SectionUnit {

@@ -42,22 +42,26 @@
       <span *ngIf="!states.isEditFolder || folder.name !== currentFolderName">
       {{i + 1}}. {{folder.name}}
       </span>
-      <span *ngIf="states.isEditFolder && folder.name === currentFolderName">
-        <form
-              class="create-folder-form"
-              (ngSubmit)="onEditFolder(folder.id, editFolderForm.value.folderName)"
-              #editFolderForm="ngForm">
-          <input class="form-control"
-                 type="text"
-                 name="folderName"
-                 ngModel>
-          <input class="btn btn-danger" type="submit" value="Add">
-        </form>
-      </span>
     </div>
+    <!--EDIT FOLDER DIALOG-->
+    <div *ngIf="states.isEditFolder && folder.name === currentFolderName">
+      <form
+        class="create-folder-form"
+        (ngSubmit)="onEditFolder(folder.id, editFolderForm.value.folderName)"
+        #editFolderForm="ngForm">
+        <input class="form-control"
+               type="text"
+               name="folderName"
+               ngModel>
+        <div *ngIf="errors.folderExists" class="alert">Folder with such name already exists!</div>
+        <input class="btn btn-danger" type="submit" value="Save">
+        <button (click)="onCancelEdit()" class="btn btn-secondary">Cancel</button>
+      </form>
+    </div>
+    <!--END EDIT FOLDER DIALOG-->
     <div *ngIf="folder.name === currentFolderName"
          class="folder-controls">
-      <i (click)="onEditFolderDialog(folder)"
+      <i (click)="onEditFolderDialog()"
          class="fas fa-edit"></i>
       <i class="fas fa-share-alt"></i>
       <i (click)="onDeleteFolder(folder.id)"
