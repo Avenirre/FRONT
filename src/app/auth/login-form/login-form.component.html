@@ -57,8 +57,12 @@
         </div>
         <div class="err-message-container">
           <span class="err-message"
-             [class.d-none]="!loginError">
+             *ngIf="errors.unauthorised">
             Invalid login or password!
+          </span>
+          <span class="err-message"
+                *ngIf="errors.dif">
+            Connection error!
           </span>
         </div>
         <button [disabled]="loginForm.invalid"

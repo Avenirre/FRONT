@@ -21,14 +21,15 @@ import {LoginData} from '../../../models/auth/login-data.model';
 export class CandidateRegFormComponent implements OnInit {
   private routes = environment.routes;
   errors = {
-    RegError: false
+    RegError: false,
+    UserNameExists: false,
+    ServerError: false
   };
   regForm = this.fb.group({
     applicantDetails: this.fb.group({
       firstName: [''],
       lastName: [''],
       phone: ['',
-        // ValidatorService.validCountryPhone('IS')
       ],
       email: ['', Validators.pattern(
         '^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$'
@@ -98,6 +99,7 @@ export class CandidateRegFormComponent implements OnInit {
   }
 
   submitRegistration() {
+    this.resetErrors();
     const applicant = this.createApplicant();
     this.authService.createApplicant(applicant)
       .then(
@@ -113,9 +115,20 @@ export class CandidateRegFormComponent implements OnInit {
           }
         },
         (error) => {
-          this.errors.RegError = true;
           console.log(error);
+          if (error.status === 400) {
+            this.errors.UserNameExists = true;
+          } else if (error.status === 500) {
+            this.errors.ServerError = true;
+          } else {
+            this.errors.RegError = true;
+          }
         });
+  }
 
+  private resetErrors() {
+    this.errors.UserNameExists = false;
+    this.errors.RegError = false;
+    this.errors.ServerError = false;
   }
 }

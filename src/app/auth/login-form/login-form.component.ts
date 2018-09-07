@@ -21,6 +21,10 @@ import {CV} from '../../../models/cv/cv.model';
 })
 export class LoginFormComponent implements OnInit {
   loginError = false;
+  errors = {
+    unauthorised: false,
+    dif: false
+  };
   private routes = environment.routes;
 
   constructor(
@@ -71,6 +75,12 @@ export class LoginFormComponent implements OnInit {
           }
         },
         (error) => {
+          console.log(error);
+          if (error.status === 401) {
+            this.errors.unauthorised = true;
+          } else {
+            this.errors.dif = true;
+          }
         this.loginError = true;
       });
   }
