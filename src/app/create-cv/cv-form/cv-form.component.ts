@@ -83,7 +83,7 @@ export class CvFormComponent implements OnInit {
   }
 
   addLanguage() {
-    this.cv.cvLang.push(new Language(null, ''));
+    this.cv.languages.push(new Language(null, ''));
   }
 
   setData() {

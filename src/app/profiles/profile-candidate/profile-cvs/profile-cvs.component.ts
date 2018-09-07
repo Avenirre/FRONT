@@ -4,6 +4,7 @@ import {ApiService} from '../../../../services/rest/api.service';
 import {HttpHeaders} from '../../../../../node_modules/@angular/common/http';
 import {DataService} from '../../../../services/data.service';
 import {CV} from '../../../../models/cv/cv.model';
+import {CvService} from '../../../create-cv/cv.service';
 
 @Component({
   selector: 'app-profile-cvs',
@@ -12,18 +13,17 @@ import {CV} from '../../../../models/cv/cv.model';
 })
 export class ProfileCvsComponent implements OnInit {
   cvs: CV[];
-  constructor(private apiService: ApiService) { }
+  constructor(private cvService: CvService) { }
 
   ngOnInit() {
-      let headers: HttpHeaders = new HttpHeaders();
-      headers = headers.append('Content-Type', 'application/json');
-      headers = headers.append('Authorization', `Bearer ${DataService.getUserToken()}`);
-      this.apiService.get(environment.api.user_cvs, {headers: headers}).subscribe(
-          (res) => {
-              this.cvs = res['data'];
-              console.log(JSON.stringify(this.cvs));
-          }
-      );
+      this.cvs = this.cvService.getUsersCvs();
+      if (!this.cvs) {
+          this.cvService.setUsersCvs().then(
+              (res) => {
+                this.cvs = this.cvService.getUsersCvs();
+              }
+          );
+      }
   }
 
 }
