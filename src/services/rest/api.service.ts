@@ -27,7 +27,8 @@ export class ApiService {
   public get(path: string[], headers?) {
     const adr = new RequestAdress(environment.apiUrl, environment.apiPort.toString(), path);
     const query = this.buildRequest(adr);
-    console.log('Query to: ' + query);
+    console.log('Query(get) to: ' + query);
+    console.log('Query(get) header: ', headers);
     if (headers) {
         return this.http.get(query, headers);
     } else {
@@ -44,7 +45,8 @@ export class ApiService {
   public post<T>(path: string[], obj: T, httpOptions) {
     const adr = new RequestAdress(environment.apiUrl, environment.apiPort.toString(), path);
     const query = this.buildRequest(adr);
-    console.log('Query to: ' + query);
+    console.log('Query(post) to: ' + query);
+    console.log('Query(post) header: ', httpOptions);
     return this.http.post(query, obj, httpOptions);
   }
   /**

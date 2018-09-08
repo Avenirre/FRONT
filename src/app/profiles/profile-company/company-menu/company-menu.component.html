@@ -35,6 +35,7 @@
   <input class="form-control"
          type="text"
          name="folderName"
+         #createFolderInput
          ngModel>
   <button type="submit">
     <i class="fas fa-plus"></i>
@@ -70,13 +71,11 @@
         <div *ngIf="errors.EmptyFolderName" class="alert">
           Folder name can not be empty!
         </div>
-        <button class="cancel" (click)="onCancelEdit()">
-          <i class="fas fa-ban"></i>
-        </button>
-        <button class="submit"
-                type="submit">
-          <i class="far fa-edit"></i>
-        </button>
+
+        <!--<button class="submit"-->
+        <!--type="submit">-->
+        <!--<i class="far fa-edit"></i>-->
+        <!--</button>-->
       </form>
     </div>
     <!--END EDIT FOLDER DIALOG-->
@@ -88,6 +87,8 @@
       <i (click)="onDeleteFolder(folder.id)"
          class="fas fa-trash"></i>
       <i class="fas fa-arrows-alt"></i>
+      <i (click)="onCancelEdit()"
+         class="fas fa-ban"></i>
     </div>
   </div>
 </div>
