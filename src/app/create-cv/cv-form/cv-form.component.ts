@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {CvService} from '../cv.service';
 import {CV} from '../../../models/cv/cv.model';
 import {DataService} from '../../../services/data.service';
@@ -23,6 +23,7 @@ declare var $: any;
 export class CvFormComponent implements OnInit {
   cv: CV;
   skills = [];
+  selectedSkills = [];
   languages = [];
   positions = [
       new Position(1, 'Programmer'),
@@ -37,20 +38,20 @@ export class CvFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.cv = this.cvService.getCV();
-      this.apiService.get(environment.api.skills_ref)
+      this.cv = this.cvService.getCV();
+      this.apiService.get(environment.api.lang_ref)
         .subscribe(
             (res) => {
                 for (let i = 0; i < res['data'].length; i++) {
-                    this.languages.push(new Language(+res['data'][i].id, res['data'][i].nameSkill));
+                    this.languages.push(new Language(+res['data'][i].id, res['data'][i].nameLang));
                 }
             }
         );
-      this.apiService.get(environment.api.lang_ref)
+      this.apiService.get(environment.api.skills_ref)
           .subscribe(
               (res) => {
                   for (let i = 0; i < res['data'].length; i++) {
-                      this.skills.push(new Skill(+res['data'][i].id, res['data'][i].nameLang));
+                      this.skills.push(new Skill(+res['data'][i].id, res['data'][i].nameSkill));
                   }
               }
           );
@@ -93,6 +94,10 @@ export class CvFormComponent implements OnInit {
 
   trackByFn(index: any, item: any) {
     return index;
+  }
+
+  compareFn(c1, c2): boolean {
+     return c1 && c2 ? c1.id == c2.id : c1 == c2;
   }
 
   openAll() {

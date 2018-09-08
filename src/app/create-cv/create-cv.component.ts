@@ -18,6 +18,7 @@ export class CreateCvComponent implements OnInit {
         (params: Params) => {
           if (params['id']) {
             this.cvService.setEditCv(params['id']);
+            console.log('id of editint cv is: ' + params['id']);
           }
         }
     );

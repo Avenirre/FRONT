@@ -11,6 +11,9 @@ import {environment} from '../../environments/environment';
 import {Position} from '../../models/cv/cv.position.model';
 import {Template} from '../../models/cv/cv.template.model';
 import {Education} from '../../models/cv/cv.education.model';
+import {Job} from '../../models/cv/cv.job.model';
+import {Achievement} from '../../models/cv/cv.achievement.model';
+import {Certification} from '../../models/cv/cv.certification.model';
 
 @Injectable({
   providedIn: 'root'
@@ -50,20 +53,27 @@ export class CvService implements OnInit {
   }
 
   public setEditCv(id: number): void {
-      for (let i = 0; i < this.user_cvs.length; i++) {
-          if (+this.user_cvs[i].id === id) {
-              this.cv = this.user_cvs[i];
-              if (!this.cv.positionPreference) {
-                  this.cv.positionPreference = new Position(null, null);
+      if (this.user_cvs) {
+          for (let i = 0; i < this.user_cvs.length; i++) {
+              if (this.user_cvs[i].id == id) {
+                  this.cv = this.user_cvs[i];
+                  if (!this.cv.positionPreference) {
+                      this.cv.positionPreference = new Position(null, null);
+                  }
+                  if (!this.cv.template) {
+                      this.cv.template = new Template(null, 0, 0);
+                  }
+                  if (this.cv.education.length === 0) {
+                      this.cv.education.push(new Education(null, null, null, null, null, null));
+                  }
+                  this.unCompileActivity();
+                  console.log(this.cv);
+                  return;
               }
-              if (!this.cv.template) {
-                  this.cv.template = new Template(null, 0, 0);
-              }
-              if (!this.cv.education) {
-                  this.cv.education = [new Education(null, null, null, null, null, null)];
-              }
-              return;
+              this.cv =  new CV();
           }
+      } else {
+          this.cv =  new CV();
       }
   }
 
@@ -88,6 +98,7 @@ export class CvService implements OnInit {
         let headers: HttpHeaders = new HttpHeaders();
         headers = headers.append('Content-Type', 'application/json');
         headers = headers.append('Authorization', `Bearer ${DataService.getUserToken()}`);
+        console.log(JSON.stringify(cv));
         this.apiService.post<CV>(this.routes.api.save_cv, cv, {headers: headers})
          .subscribe(
            (data) => {
@@ -97,7 +108,7 @@ export class CvService implements OnInit {
     }
   }
 
-    public compileActivity(cv) {
+  public compileActivity(cv) {
         this.cv.cvActivity.splice(0, this.cv.cvActivity.length - 1);
         for (let i = 0; i < this.cv.cvJobs.length; i++) {
             this.cv.cvActivity.push(
@@ -138,15 +149,40 @@ export class CvService implements OnInit {
                     null)
             );
         }
-    }
+  }
 
-    public unCompileActivity() {
+  public unCompileActivity() {
+        this.cv.cvJobs = [];
+        this.cv.cvAchievements = [];
+        this.cv.cvCertification = [];
         for (let i = 0; i < this.cv.cvActivity.length; i++) {
-
+            switch (this.cv.cvActivity[i].activityTypeId) {
+                case 1:
+                    this.cv.cvJobs.push(new Job(
+                        this.cv.cvActivity[i].id,
+                        '',
+                        this.cv.cvActivity[i].positionId,
+                        '',
+                        this.cv.cvActivity[i].description,
+                        this.cv.cvActivity[i].yearStart,
+                        this.cv.cvActivity[i].yearEnd,
+                        this.cv.cvActivity[i].backFront));
+                    break;
+                case 2:
+                    this.cv.cvAchievements.push(new Achievement(
+                        this.cv.cvActivity[i].description,
+                        this.cv.cvActivity[i].yearEnd));
+                    break;
+                case 3:
+                    this.cv.cvCertification.push(new Certification(
+                        this.cv.cvActivity[i].description,
+                        this.cv.cvActivity[i].yearEnd));
+                    break;
+            }
         }
     }
 
-    setUsersCvs() {
+  setUsersCvs() {
         const result = new Promise(
             (resolve, reject) => {
                 let headers: HttpHeaders = new HttpHeaders();
@@ -163,11 +199,11 @@ export class CvService implements OnInit {
         return result;
     }
 
-    getUsersCvs(): CV[] {
+  getUsersCvs(): CV[] {
       return this.user_cvs;
     }
 
-    ngOnInit(): void {
+  ngOnInit(): void {
     }
 
 }
