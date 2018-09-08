@@ -2,11 +2,16 @@ import {Injectable} from '@angular/core';
 import {ProfileFolder} from '../../../models/profileFolder';
 import {Subject} from 'rxjs';
 import {CV} from '../../../models/cv/cv.model';
+import {ApiService} from '../../../services/rest/api.service';
+import {environment} from '../../../environments/environment';
+import {HttpHeaders} from '@angular/common/http';
+import {DataService} from '../../../services/data.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CompanyService {
+  api = environment.api;
   currentFolder: number;
   checkedCount = 0;
   checkedChanged = new Subject();
@@ -29,7 +34,28 @@ export class CompanyService {
     ]),
   ];
 
-  constructor() {
+  constructor(
+    private apiService: ApiService
+  ) {
+    // this.downloadFolders();
+  }
+
+  private downloadFolders() {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${DataService.getUserToken()}`
+      })
+    };
+    this.apiService.get(this.api.getFolders, httpOptions).subscribe(
+      (folders) => {
+        this.folders = <ProfileFolder[]>folders['data'];
+        console.log(this.folders);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   public getFolders(): ProfileFolder[] {

@@ -3,6 +3,7 @@ import {Applicant} from '../../../../models/auth/applicant.model';
 import {NgForm} from '@angular/forms';
 import {DataService} from '../../../../services/data.service';
 import {ApiService} from '../../../../services/rest/api.service';
+import {HttpHeaders} from '@angular/common/http';
 
 @Component({
   selector: 'app-company-settings',
@@ -28,6 +29,9 @@ export class CompanySettingsComponent implements OnInit {
   getProfile() {
     const profile = DataService.getCurrentUser();
     console.log(profile);
-
+    // httpOptions = new HttpHeaders({
+    //   'Content-Type': 'application/json',
+    //
+    // });
   }
 }

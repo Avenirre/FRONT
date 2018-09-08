@@ -12,6 +12,7 @@ export const environment = {
     skills_ref: ['api', 'skills'],
     user_cvs: ['api', 'cv'],
     registration: ['api', 'signup'],
+    getFolders: ['api', 'folders']
   },
   /**
    * local frontend routes
