@@ -12,25 +12,31 @@
 
 <div class="folders-h">
   <a (click)="onSelectDefaultFolder()">
-    <h1 class="f-link">My foders</h1>
+    <h1 [class.active]="menuSection === SectionUnit.FOLDERS"
+        class="f-link">My foders</h1>
   </a>
   <div class="f-create"
        *ngIf="menuSection === SectionUnit.FOLDERS">
-    <i (click)="openCreateFolderDialog()"
+    <i *ngIf="menuAction !== ActionUnit.CREATE_FOLDER"
+       (click)="openCreateFolderDialog()"
        class="far fa-plus-square">
+    </i>
+    <i *ngIf="menuAction === ActionUnit.CREATE_FOLDER"
+       (click)="openCreateFolderDialog()"
+       class="far fa-minus-square">
     </i>
   </div>
 </div>
 
-<form *ngIf="states.isCreateFolder"
+<form *ngIf="menuAction === ActionUnit.CREATE_FOLDER"
       class="create-folder-form"
-      (ngSubmit)="onCreateFolder(createFolderForm.value)"
+      (ngSubmit)="onCreateFolder(createFolderForm.value.folderName)"
       #createFolderForm="ngForm">
   <input class="form-control"
          type="text"
          name="folderName"
          ngModel>
-  <button class="btn btn-danger" type="submit">
+  <button type="submit">
     <i class="fas fa-plus"></i>
   </button>
 </form>
@@ -39,16 +45,16 @@
 <app-search-form *ngIf="menuSection === SectionUnit.SEARCH"></app-search-form>
 
 <div *ngIf="menuSection === SectionUnit.FOLDERS">
-  <div *ngFor="let folder of foldersNames; let i=index">
+  <div class="folders-list" *ngFor="let folder of foldersNames; let i=index">
     <div class="folder"
          (click)="onSelectFolder(folder.name)"
          [class.active]="folder.name === currentFolderName">
-      <span *ngIf="!states.isEditFolder || folder.name !== currentFolderName">
+      <span *ngIf="menuAction !== ActionUnit.EDIT_FOLDER || folder.name !== currentFolderName">
       {{i + 1}}. {{folder.name}}
       </span>
     </div>
     <!--EDIT FOLDER DIALOG-->
-    <div *ngIf="states.isEditFolder && folder.name === currentFolderName">
+    <div *ngIf="menuAction === ActionUnit.EDIT_FOLDER && folder.name === currentFolderName">
       <form
         class="edit-folder-form"
         (ngSubmit)="onEditFolder(folder.id, editFolderForm.value.folderName)"
@@ -56,12 +62,21 @@
         <input class="form-control"
                type="text"
                name="folderName"
-               ngModel>
-        <div *ngIf="errors.folderExists" class="alert">
+               [ngModel]="folder.name">
+
+        <div *ngIf="errors.ExistFolder" class="alert">
           Folder with such name already exists!
         </div>
-        <input class="btn btn-danger" type="submit" value="Save">
-        <button (click)="onCancelEdit()" class="btn btn-secondary">Cancel</button>
+        <div *ngIf="errors.EmptyFolderName" class="alert">
+          Folder name can not be empty!
+        </div>
+        <button class="cancel" (click)="onCancelEdit()">
+          <i class="fas fa-ban"></i>
+        </button>
+        <button class="submit"
+                type="submit">
+          <i class="far fa-edit"></i>
+        </button>
       </form>
     </div>
     <!--END EDIT FOLDER DIALOG-->

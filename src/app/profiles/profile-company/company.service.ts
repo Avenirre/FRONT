@@ -37,16 +37,25 @@ export class CompanyService {
   constructor(
     private apiService: ApiService
   ) {
+    // this.downloadFolders();
   }
 
-  private downloadFolder() {
+  private downloadFolders() {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${DataService.getUserToken()}`
       })
     };
-    this.apiService.get(this.api.getFolders, httpOptions);
+    this.apiService.get(this.api.getFolders, httpOptions).subscribe(
+      (folders) => {
+        this.folders = <ProfileFolder[]>folders['data'];
+        console.log(this.folders);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   public getFolders(): ProfileFolder[] {

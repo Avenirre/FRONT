@@ -6,6 +6,7 @@ import {environment} from '../../../../environments/environment';
 import {DataService} from '../../../../services/data.service';
 import {NgForm} from '@angular/forms';
 import {ProfileFolder} from '../../../../models/profileFolder';
+import {AnimateTimings} from '@angular/animations';
 
 @Component({
   selector: 'app-company-menu',
@@ -16,13 +17,13 @@ import {ProfileFolder} from '../../../../models/profileFolder';
 export class CompanyMenuComponent implements OnInit, OnDestroy {
   routes = environment.routes;
   SectionUnit = SectionUnit;
+  ActionUnit = ActionUnit;
   menuSection: SectionUnit;
+  menuAction: ActionUnit = ActionUnit.NONE;
   errors = {
-    folderExists: false
-  };
-  states = {
-    isCreateFolder: false,
-    isEditFolder: false,
+    ExistFolder: false,
+    EmptyFolderName: false,
+    EmptyNewFolderName: false
   };
   foldersNames: { id: number, name: string }[];
   currentFolderName: string;
@@ -88,22 +89,38 @@ export class CompanyMenuComponent implements OnInit, OnDestroy {
       {relativeTo: this.activatedRoute});
   }
 
-  onCreateFolder(form: NgForm) {
-    this.states.isCreateFolder = false;
-    this.companyService.createFolder(form['folderName']);
+  onCreateFolder(name: string) {
+    if (name.length === 0) {
+      this.errors.EmptyNewFolderName = true;
+    }
+    this.companyService.createFolder(name);
+    this.menuAction = ActionUnit.NONE;
   }
 
-  onEditFolder(id: number, name: string) {
-    if (this.companyService.isFolderExists(name)) {
-      this.errors.folderExists = true;
+  openCreateFolderDialog() {
+    this.resetErrors();
+    if (this.menuAction === ActionUnit.CREATE_FOLDER) {
+      this.menuAction = ActionUnit.NONE;
     } else {
-      this.states.isEditFolder = false;
-      this.companyService.editFolder(id, name);
+      this.menuAction = ActionUnit.CREATE_FOLDER;
     }
   }
 
+  onEditFolder(id: number, name: string) {
+    this.resetErrors();
+    if (this.companyService.isFolderExists(name)) {
+      this.errors.ExistFolder = true;
+    } else if (name.length === 0) {
+      this.errors.EmptyFolderName = true;
+    } else {
+      this.companyService.editFolder(id, name);
+    }
+    this.menuAction = ActionUnit.NONE;
+  }
+
   onEditFolderDialog() {
-    this.states.isEditFolder = true;
+    this.resetErrors();
+    this.menuAction = ActionUnit.EDIT_FOLDER;
   }
 
   onDeleteFolder(id: number) {
@@ -118,17 +135,24 @@ export class CompanyMenuComponent implements OnInit, OnDestroy {
     this.menuSection = SectionUnit.SEARCH;
   }
 
-  openCreateFolderDialog() {
-    this.states.isCreateFolder = !this.states.isCreateFolder;
-  }
 
   onCancelEdit() {
-    this.states.isEditFolder = false;
+    this.menuAction = ActionUnit.NONE;
+  }
+
+  resetErrors() {
+    this.errors.ExistFolder = false;
+    this.errors.EmptyFolderName = false;
+    this.errors.EmptyNewFolderName = false;
   }
 }
 
 enum SectionUnit {
   FOLDERS, SEARCH, SETTINGS
+}
+
+enum ActionUnit {
+  CREATE_FOLDER, EDIT_FOLDER, NONE
 }
 
 
