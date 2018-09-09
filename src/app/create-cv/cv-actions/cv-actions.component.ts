@@ -26,6 +26,6 @@ export class CvActionsComponent implements OnInit {
 
     saveCv() {
         this.cv = this.cvService.setCV();
-        this.cvService.saveCV(this.cv);
+        this.cvService.saveCV();
     }
 }

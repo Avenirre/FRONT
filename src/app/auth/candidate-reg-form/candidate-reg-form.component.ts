@@ -110,8 +110,8 @@ export class CandidateRegFormComponent implements OnInit {
           );
           this.authService.login(loginData);
           if (this.cvService.expectingCv) {
-            const cv: CV = this.cvService.setCV();
-            this.cvService.saveCV(cv);
+            this.cvService.setCV();
+            this.cvService.saveCV();
           }
         },
         (error) => {

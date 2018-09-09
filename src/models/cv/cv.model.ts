@@ -41,7 +41,7 @@ export class CV {
 
     constructor(cv?) {
         if (!cv) {
-            this.positionPreference = new Position('', '');
+            this.positionPreference = new Position(null, '');
             this.template = new Template(null, 0, 0);
             this.languages.push(new Language(null, ''));
             this.skills.push(new Skill(null, ''));

@@ -1,6 +1,4 @@
-import {LoginDataInterface} from '../../interfaces/login-data.interface';
-
-export class LoginData implements LoginDataInterface {
+export class LoginData {
   username: string;
   password: string;
 

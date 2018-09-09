@@ -47,7 +47,7 @@ export class ApiService {
       const query = this.buildRequest(adr);
       console.log('Query(put) to: ' + query);
       console.log('Query(put) header: ', httpOptions);
-      console.log('Query(out) object:');
+      console.log('Query(put) object:');
       console.log(obj);
       return this.http.put(query, obj, httpOptions);
   }

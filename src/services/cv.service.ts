@@ -17,6 +17,7 @@ import {Certification} from '../models/cv/cv.certification.model';
 import {Language} from '../models/cv/cv.lang.model';
 import {Skill} from '../models/cv/cv.skill.model';
 import {Router} from '@angular/router';
+import {Subject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +35,8 @@ export class CvService implements OnInit {
   cvChanged = new EventEmitter<any>();
   expectingCv = false;
   routes = environment;
+  changedChecked = new Subject<number>();
+  changedUserCVs = new Subject<CV[]>();
 
   constructor(private http: HttpClient,
               private apiService: ApiService,
@@ -41,7 +44,6 @@ export class CvService implements OnInit {
               private authService: AuthService,
               private router: Router) {
   }
-
 
   public setCV(cv?) {
     if (cv) {
@@ -61,26 +63,56 @@ export class CvService implements OnInit {
   //   this.cv = cv;
   // }
 
-  public  deleteCv(id: number) {
+  public deleteCv(id) {
       for (let i = 0; i < this.user_cvs.length; i++) {
           if (this.user_cvs[i].id === id ) {
               this.user_cvs.splice(i, 1);
-              const delete_path = environment.api.delete_cv;
+              this.changedChecked.next(this.userCvsIdChecked.length);
+              const delete_path = [];
+              for (let ii = 0; ii < environment.api.delete_cv.length; ii++) {
+                  delete_path.push(environment.api.delete_cv[ii]);
+              }
+              delete_path.push(id);
               let headers: HttpHeaders = new HttpHeaders();
               headers = headers.append('Content-Type', 'application/json');
               headers = headers.append('Authorization', `Bearer ${DataService.getUserToken()}`);
-              delete_path.push(id.toString());
+              document.body.style.cursor = 'progress';
               this.apiService.delete(delete_path, {headers: headers}).subscribe(
                   (result) => {
+                      document.body.style.cursor = 'auto';
                       console.log(result);
                   },
                   (error) => {
+                      document.body.style.cursor = 'auto';
                       console.log(error);
                   }
               );
               return;
           }
       }
+  }
+
+  public toggleActiveCV(id: number, status: boolean) {
+    for (let i = 0; i < this.user_cvs.length; i++) {
+        if (this.user_cvs[i].id === id) {
+            this.cv = this.user_cvs[i];
+            this.cv.activated = status;
+            let headers: HttpHeaders = new HttpHeaders();
+            headers = headers.append('Content-Type', 'application/json');
+            headers = headers.append('Authorization', `Bearer ${DataService.getUserToken()}`);
+            const update_path = [];
+            for (let ii = 0; ii < environment.api.delete_cv.length; ii++) {
+                update_path.push(environment.api.delete_cv[ii]);
+            }
+            update_path.push(id);
+            this.apiService.put<CV>(update_path, this.cv, {headers: headers})
+                .subscribe(
+                    (data) => {
+                        console.log(data);
+                        this.setUsersCvs();
+                    });
+        }
+    }
   }
 
   public setCVOfUserCvs(id: number): void {
@@ -112,10 +144,10 @@ export class CvService implements OnInit {
     this.cvChanged.emit(this.cv);
   }
 
-  public saveCV(cv: CV) {
-      if (this.cv.title === '' || this.cv.title === null) {
-          return;
-      }
+  public saveCV() {
+    if (this.cv.title === '' || this.cv.title === null) {
+        return;
+    }
     if (!this.authService.isLoggedIn()) {
       this.expectingCv = true;
       this.headerService.openModal('login');
@@ -125,21 +157,24 @@ export class CvService implements OnInit {
         let headers: HttpHeaders = new HttpHeaders();
         headers = headers.append('Content-Type', 'application/json');
         headers = headers.append('Authorization', `Bearer ${DataService.getUserToken()}`);
-        if (cv.id) {
-            const update_path: string[] = this.routes.api.save_cv;
-            update_path.push(this.cv.id.toString());
-            this.apiService.put<CV>(update_path, cv, {headers: headers})
+        if (this.cv.id) {
+            const update_path = [];
+            for (let ii = 0; ii < environment.api.delete_cv.length; ii++) {
+                update_path.push(environment.api.delete_cv[ii]);
+            }
+            update_path.push(this.cv.id);
+            this.apiService.put<CV>(update_path, this.cv, {headers: headers})
                 .subscribe(
                     (data) => {
                         console.log(data);
-                        this.getUsersCvs();
+                        this.setUsersCvs();
                     });
         } else {
-            this.apiService.post<CV>(this.routes.api.save_cv, cv, {headers: headers})
+            this.apiService.post<CV>(this.routes.api.save_cv, this.cv, {headers: headers})
              .subscribe(
                (data) => {
                  console.log(data);
-                 this.getUsersCvs();
+                 this.setUsersCvs();
                });
         }
         this.expectingCv = false;
@@ -151,7 +186,7 @@ export class CvService implements OnInit {
       this.prepareLangs();
       this.prepareSkills();
       // this.prepareEducation();
-      this.preparePositionPreference();
+      // this.preparePositionPreference();
   }
 
   private prepareActivity() {
@@ -221,11 +256,11 @@ export class CvService implements OnInit {
   //     }
   // }
 
-  private preparePositionPreference() {
-      if (this.cv.positionPreference.id == null || this.cv.positionPreference.id === '') {
-          this.cv.positionPreference = null;
-      }
-  }
+  // private preparePositionPreference() {
+  //     if (this.cv.positionPreference.id == null || this.cv.positionPreference.id === '') {
+  //         this.cv.positionPreference = null;
+  //     }
+  // }
 
   public prepareToUsing() {
         this.cv.cvJobs = [];
@@ -262,6 +297,15 @@ export class CvService implements OnInit {
       if (!this.cv.template) {
           this.cv.template = new Template(null, 0, 0);
       }
+      if (this.cv.cvJobs.length === 0) {
+          this.cv.cvJobs.push(new Job(null, '', null, '', '', null, null, 50));
+      }
+      if (this.cv.cvCertification.length === 0) {
+          this.cv.cvCertification.push(new Certification('', null));
+      }
+      if (this.cv.cvAchievements.length === 0) {
+          this.cv.cvAchievements.push(new Achievement('', null));
+      }
       if (this.cv.education.length === 0) {
           this.cv.education.push(new Education(null, null, null, null, null, null));
       }
@@ -282,7 +326,15 @@ export class CvService implements OnInit {
                 this.apiService.get(environment.api.user_cvs, {headers: headers}).subscribe(
                     (res) => {
                         this.user_cvs = res['data'];
-                        resolve('finish');
+                        this.changedUserCVs.next(this.user_cvs);
+                        document.body.style.cursor = 'auto';
+                        console.log(res);
+                        resolve(res);
+                    },
+                    (error) => {
+                        document.body.style.cursor = 'auto';
+                        console.log(error);
+                        reject(error);
                     }
                 );
             }

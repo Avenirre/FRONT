@@ -1,11 +1,12 @@
 <section>
   <h1>
-    Selected:
+    Selected: {{ amount }}
   </h1>
   <div class="buttons-container">
-    <i class="fas fa-eye-slash"></i>
-    <i class="far fa-file" [routerLink]="'../../../'+routes.cvCreate"></i>
-    <i class="far fa-trash-alt" (click)="deleteCheckedCvs()"></i>
+    <i class="fas fa-eye"title="activate CVs" (click)="toggleActiveCVs(true)"></i>
+    <i class="fas fa-eye-slash" title="deactivate CVs" (click)="toggleActiveCVs(false)"></i>
+    <i class="far fa-file" [routerLink]="'../../../'+routes.cvCreate" title="create CV"></i>
+    <i class="far fa-trash-alt" (click)="deleteCheckedCvs()" title="delete CVs"></i>
     <!--<i class="fas fa-times"></i>-->
   </div>
 </section>

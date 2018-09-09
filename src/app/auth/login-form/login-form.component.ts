@@ -68,10 +68,10 @@ export class LoginFormComponent implements OnInit {
       .then(
         () => {
           if (this.cvService.expectingCv) {
-            const cv: CV = this.cvService.setCV();
+            this.cvService.setCV();
             console.log(`Expecting CV:`);
-            console.log(cv);
-            this.cvService.saveCV(cv);
+            console.log(this.cvService.cv);
+            this.cvService.saveCV();
           }
         },
         (error) => {

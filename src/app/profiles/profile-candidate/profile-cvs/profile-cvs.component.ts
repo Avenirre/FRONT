@@ -17,7 +17,15 @@ export class ProfileCvsComponent implements OnInit {
 
   ngOnInit() {
       this.cvs = this.cvService.getUsersCvs();
+      this.cvService.changedUserCVs.subscribe(
+          (CVs) => {
+              this.cvs = CVs;
+              this.cvService.userCvsIdChecked = [];
+              this.cvService.changedChecked.next(this.cvService.userCvsIdChecked.length);
+          }
+      );
       if (!this.cvs) {
+          document.body.style.cursor = 'progress';
           this.cvService.setUsersCvs().then(
               (res) => {
                 this.cvs = this.cvService.getUsersCvs();

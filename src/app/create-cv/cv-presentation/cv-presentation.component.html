@@ -7,7 +7,8 @@
       <h1 class="cv-logo template-{{templateColor}}">CV</h1>
     </div>
     <div class="cv-section-right">
-      <h1>{{cv.firstName}} {{cv.lastName}}</h1>
+      <h2 class="candidate_name">{{cv.firstName}} {{cv.lastName}}</h2>
+      <h4 class="prefer_position">{{cv.positionPreference.postName}}</h4>
       <div class="cv-summary">
         {{cv.about}}
       </div>
@@ -58,7 +59,7 @@
           {{job.date_from}}year - {{job.date_till}}year<br>
           <strong>{{job.company}}</strong>
           {{job.position.postName}} <br>
-          {{job.backFront}}% frontend <br>
+          {{job.backFront}}% frontend <strong>/</strong> {{100 - job.backFront}}% backend <br>
           {{job.description}}
         </p>
       </div>

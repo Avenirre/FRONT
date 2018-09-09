@@ -21,6 +21,9 @@ export class CvItemComponent implements OnInit {
     if (this.cv.activated) {
         this.badgeClasses = ['badge', 'badge-primary'];
         this.badgeText = 'Activated';
+    } else {
+        this.badgeClasses = ['badge', 'badge-secondary'];
+        this.badgeText = 'Not activated';
     }
   }
 
@@ -31,6 +34,7 @@ export class CvItemComponent implements OnInit {
         const index = this.cvService.userCvsIdChecked.indexOf(id);
         this.cvService.userCvsIdChecked.splice(index, 1);
     }
+    this.cvService.changedChecked.next(this.cvService.userCvsIdChecked.length);
   }
 
 }
