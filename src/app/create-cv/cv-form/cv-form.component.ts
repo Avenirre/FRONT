@@ -9,6 +9,7 @@ import {Certification} from '../../../models/cv/cv.certification.model';
 import {Language} from '../../../models/cv/cv.lang.model';
 import {Skill} from '../../../models/cv/cv.skill.model';
 import {Position} from '../../../models/cv/cv.position.model';
+import {AgmCvComponent} from './agm-cv/agm-cv.component';
 
 declare var $: any;
 
@@ -46,6 +47,8 @@ export class CvFormComponent implements OnInit {
   ngOnInit() {
     this.cv = this.cvService.getCV();
   }
+
+
 
   // addExperience() {
   //   this.cv['prof_info']['experience'].push(new Experience(''));

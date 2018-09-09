@@ -2,7 +2,8 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {RouterRoutingModule} from '../router/router-routing.module';
-
+import { AgmCoreModule } from '@agm/core';
+import {AgmCvComponent} from './create-cv/cv-form/agm-cv/agm-cv.component';
 // LIBRARIES
 
 // COMPONENTS
@@ -93,8 +94,13 @@ import { CompanySettingsComponent } from './profiles/profile-company/company-set
     CmpEditPanelComponent,
     CompanyFolderComponent,
     CompanySettingsComponent,
+      AgmCvComponent
   ],
   imports: [
+      AgmCoreModule.forRoot({
+          apiKey: 'AIzaSyA-FppnYJfomJjEu7p3kkhcw2P3RqLZ-9c',
+          libraries: ["places"]
+      }),
     BrowserModule,
     RouterRoutingModule,
     HttpClientModule,
