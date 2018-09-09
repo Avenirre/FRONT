@@ -12,7 +12,7 @@
       </h3>
     </a>
     <div class="collapse" id="title">
-      <input type="text" name="title" placeholder="cv title*" [(ngModel)]="cv.title"/>
+      <input type="text" name="title" required placeholder="cv title*" [(ngModel)]="cv.title"/>
       <input type="text" name="first_name" placeholder="first name*" [(ngModel)]="cv.firstName"/>
       <input type="text" name="last_name" placeholder="last name*" [(ngModel)]="cv.lastName"/>
       <textarea name="summary" id="summary" placeholder="summary*" [(ngModel)]="cv.summary"></textarea>
@@ -70,7 +70,7 @@
     <div class="collapse" id="desc">
       <input type="text" name="choose_preferable_area" [(ngModel)]="cv.preferencedArea" placeholder="choose preferable area"/>
       <select name="preference_position" [(ngModel)]="cv.positionPreference.id">
-        <option disabled selected>Select preference position</option>
+        <option disabled>Select preference position</option>
         <option *ngFor="let pos of positions" [selected]="cv.positionPreference.id == pos.id" [value]="pos.id">{{ pos.postName }}</option>
       </select>
       <input type="text" name="choose_position" placeholder="choose preferable position"

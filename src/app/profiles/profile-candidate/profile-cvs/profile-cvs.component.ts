@@ -4,7 +4,7 @@ import {ApiService} from '../../../../services/rest/api.service';
 import {HttpHeaders} from '../../../../../node_modules/@angular/common/http';
 import {DataService} from '../../../../services/data.service';
 import {CV} from '../../../../models/cv/cv.model';
-import {CvService} from '../../../create-cv/cv.service';
+import {CvService} from '../../../../services/cv.service';
 
 @Component({
   selector: 'app-profile-cvs',

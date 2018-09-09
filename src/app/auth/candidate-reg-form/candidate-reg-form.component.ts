@@ -5,7 +5,7 @@ import {environment} from '../../../environments/environment';
 import {AuthService} from '../auth.service';
 import {Applicant} from '../../../models/auth/applicant.model';
 import {FormBuilder, Validators} from '@angular/forms';
-import {CvService} from '../../create-cv/cv.service';
+import {CvService} from '../../../services/cv.service';
 import {ValidatorService} from '../../../services/validator.service';
 import {CV} from '../../../models/cv/cv.model';
 import {LoginData} from '../../../models/auth/login-data.model';
@@ -110,7 +110,7 @@ export class CandidateRegFormComponent implements OnInit {
           );
           this.authService.login(loginData);
           if (this.cvService.expectingCv) {
-            const cv: CV = this.cvService.getCV();
+            const cv: CV = this.cvService.setCV();
             this.cvService.saveCV(cv);
           }
         },

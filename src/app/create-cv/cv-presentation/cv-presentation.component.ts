@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {CvService} from '../cv.service';
+import {CvService} from '../../../services/cv.service';
 import {CV} from '../../../models/cv/cv.model';
 import {ActivatedRoute, Params} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
@@ -21,7 +21,7 @@ export class CvPresentationComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.cv = this.cvService.getCV();
+    this.cv = this.cvService.setCV();
     this.loadTemplate();
 
     this.cvService.cvChanged.subscribe(

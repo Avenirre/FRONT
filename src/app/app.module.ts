@@ -45,6 +45,7 @@ import {BtnsUnloggedComponent} from './header/header-controls/btns-unlogged/btns
 import {AuthService} from './auth/auth.service';
 import { ProfileCompanyComponent } from './profiles/profile-company/profile-company.component';
 import { CompanyMenuComponent } from './profiles/profile-company/company-menu/company-menu.component';
+import { CvService } from '../services/cv.service';
 // import { CvPreviewComponent } from './profiles/profile-company/cv-preview/cv-preview.component';
 import { ProfileStatisticComponent } from './profiles/profile-candidate/profile-statistic/profile-statistic.component';
 import { ProfileSettingComponent } from './profiles/profile-candidate/profile-setting/profile-setting.component';
@@ -54,6 +55,7 @@ import { CompanyFolderComponent } from './profiles/profile-company/company-folde
 import { CompanySettingsComponent } from './profiles/profile-company/company-settings/company-settings.component';
 import { CvSearchComponent } from './profiles/profile-company/cv-search/cv-search.component';
 import { SearchFormComponent } from './profiles/profile-company/search-form/search-form.component';
+
 
 
 @NgModule({
@@ -111,6 +113,7 @@ import { SearchFormComponent } from './profiles/profile-company/search-form/sear
     ApiCandidatesService,
     ApiCompaniesService,
     AuthService,
+    CvService
   ],
   bootstrap: [AppComponent]
 })

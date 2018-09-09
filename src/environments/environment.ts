@@ -8,6 +8,7 @@ export const environment = {
   api: {
     login: ['api', 'login'],
     save_cv: ['api', 'cv'],
+    delete_cv: ['api', 'cv'],
     lang_ref: ['api', 'languages'],
     skills_ref: ['api', 'skills'],
     user_cvs: ['api', 'cv'],

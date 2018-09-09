@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {CvService} from '../cv.service';
+import {CvService} from '../../../services/cv.service';
 import {CV} from '../../../models/cv/cv.model';
 import {DataService} from '../../../services/data.service';
 import {Education} from '../../../models/cv/cv.education.model';
@@ -38,7 +38,7 @@ export class CvFormComponent implements OnInit {
   }
 
   ngOnInit() {
-      this.cv = this.cvService.getCV();
+      this.cv = this.cvService.setCV();
       this.apiService.get(environment.api.lang_ref)
         .subscribe(
             (res) => {

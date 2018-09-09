@@ -1,7 +1,16 @@
 <section class="cv-item">
-  <input type="checkbox">
+  <input type="checkbox" (click)="checkCv($event, cv.id)">
   <div class="cv-body">
-    <h1><a routerLink="../edit-cv/{{cv.id}}">{{ cv.title }}</a></h1>
+    <h1 class="d-flex bd-highlight">
+      <div class="d-flex bd-highlight">
+        <div class="p-2 flex-grow-1 bd-highlight">
+          <a routerLink="../edit-cv/{{cv.id}}">{{ cv.title }}</a>
+        </div>
+        <div class="p-2 bd-highlight">
+          <span [ngClass]="badgeClasses">{{badgeText}}</span>
+        </div>
+      </div>
+    </h1>
     <span>views: 123</span>
   </div>
 </section>

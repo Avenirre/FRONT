@@ -60,7 +60,11 @@ const routesApi: Routes = [
   },
   {
     path: routes.cvEdit, component: CreateCvComponent, children: [
-        {path: ':type', component: CvPresentationComponent}
+        {
+          path: ':type',
+          canActivate: [AuthGuard],
+          component: CvPresentationComponent
+        }
     ]
   },
   {path: 'message', component: MessageComponent, outlet: 'modal'},
