@@ -22,6 +22,7 @@ export class FoldersListComponent implements OnInit, OnDestroy {
   errors = {
     ExistFolder: false,
     EmptyNewFolderName: false,
+    EmptyFolderName: false
   };
 
   constructor(
@@ -79,6 +80,20 @@ export class FoldersListComponent implements OnInit, OnDestroy {
     }
   }
 
+  editFolder(folder: ProfileFolder, name) {
+    this.resetErrors();
+    if (this._companyService.isFolderExists(name)) {
+      this.errors.ExistFolder = true;
+    } else if (name.length === 0) {
+      this.errors.EmptyFolderName = true;
+    } else {
+      console.log('edit folder', folder);
+      const editedFolder = folder.nameFolder = name;
+      this._companyService.editFolder(folder.id, name);
+      this.menuAction = ActionUnit.NONE;
+    }
+  }
+
   openEditFolderDialog() {
     this.resetErrors();
     this.menuAction = ActionUnit.EDIT_FOLDER;
@@ -90,7 +105,7 @@ export class FoldersListComponent implements OnInit, OnDestroy {
   }
 
   private isError() {
-    if (this.errors.ExistFolder || this.errors.EmptyNewFolderName) {
+    if (this.errors.ExistFolder || this.errors.EmptyNewFolderName || this.errors.EmptyFolderName) {
       return true;
     }
     return false;
@@ -99,7 +114,9 @@ export class FoldersListComponent implements OnInit, OnDestroy {
   private resetErrors() {
     this.errors.ExistFolder = false;
     this.errors.EmptyNewFolderName = false;
+    this.errors.EmptyFolderName = false;
   }
+
 
 }
 

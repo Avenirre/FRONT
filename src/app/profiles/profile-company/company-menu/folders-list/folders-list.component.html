@@ -44,7 +44,7 @@
       <div *ngIf="menuAction === ActionUnit.EDIT_FOLDER && folder.nameFolder === currentFolder.nameFolder">
         <form
           class="edit-folder-form"
-          (ngSubmit)="editFolder(folder.id, editFolderForm.value.folderName)"
+          (ngSubmit)="editFolder(folder, editFolderForm.value['folderName'])"
           #editFolderForm="ngForm">
           <input class="form-control"
                  type="text"

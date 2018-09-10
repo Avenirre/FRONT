@@ -7,6 +7,7 @@ import {DataService} from '../../../services/data.service';
 import {BehaviorSubject} from 'rxjs';
 import {SectionUnit} from '../../../enums/section.enum';
 import {ActivatedRoute, Params, Router} from '@angular/router';
+import {Applicant} from '../../../models/auth/applicant.model';
 
 @Injectable({
   providedIn: 'root'
@@ -135,6 +136,33 @@ export class CompanyFoldersService {
     console.log(folder);
     this.folders.push(folder);
     this._$folders.next(this.folders);
+  }
+
+  async editFolder(id: number, name: string) {
+    const index = this.folders.findIndex((cur) => {
+      return cur.id === id;
+    });
+    const editedFolder = this.folders[index];
+    editedFolder.nameFolder = name;
+    const resp = await this.apiEditFolder(editedFolder);
+    console.log('resp:', resp);
+    this.folders[index] = editedFolder;
+  }
+
+  async apiEditFolder(folder) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${DataService.getUserToken()}`
+      })
+    };
+    const resp = await this._api
+      .put<ProfileFolder>(
+        environment.api.editFolder(folder.id),
+        folder,
+        httpOptions)
+      .toPromise();
+    console.log(resp);
   }
 }
 

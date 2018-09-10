@@ -14,7 +14,10 @@ export const environment = {
     user_cvs: ['api', 'cv'],
     registration: ['api', 'signup'],
     getFolders: ['api', 'folders'],
-    getProfile: ['api', 'profiles']
+    editFolder: (id: number): string[] => {
+      return ['api', 'folders', id.toString()];
+    },
+    getProfile: ['api', 'profiles'],
   },
   /**
    * local frontend routes
