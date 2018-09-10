@@ -50,3 +50,11 @@ a:hover {
   align-content: center;
   margin-left: calc(100% - 28px);
 }
+
+input {
+  border: white 2px solid;
+}
+
+input.ng-touched.ng-invalid {
+  border: red 2px solid;
+}

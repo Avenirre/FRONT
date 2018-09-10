@@ -9,6 +9,7 @@
     <div class="cv-section-right">
       <h2 class="candidate_name">{{cv.firstName}} {{cv.lastName}}</h2>
       <h4 class="prefer_position">{{cv.position_preference}}</h4>
+      <p *ngIf="cv.residence!='' && cv.residence!=null">{{cv.residence}}</p>
       <div class="cv-summary">
         {{cv.about}}
       </div>

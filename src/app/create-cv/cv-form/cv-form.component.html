@@ -53,10 +53,20 @@
       <h3><i class="fas fa-chevron-circle-down"></i> Contact info</h3>
     </a>
     <div class="collapse" id="contacts">
-      <input type="text" name="residence" placeholder="residence" [(ngModel)]="cv.residence"/>
+      <!--<input type="text" name="residence" placeholder="residence"/>-->
       <input type="text" name="phone" required placeholder="phone*" [(ngModel)]="cv.phone"/>
-      <input type="text" name="email" required [email]="true" placeholder="email*" [(ngModel)]="cv.email"/>
-      <agm-cv></agm-cv>
+      <input type="email" name="email" required [email]="true" placeholder="email*" [(ngModel)]="cv.email"/>
+      <input type="text"
+             placeholder="residence"
+             autocorrect="off"
+             autocapitalize="off"
+             spellcheck="off"
+             class="form-control"
+             #searchResidence
+             [(ngModel)]="cv.residence"
+             [ngModelOptions]="{standalone: true}"
+             (blur)="setData()">
+      <!--<agm-cv></agm-cv>-->
     </div>
 
     <a
