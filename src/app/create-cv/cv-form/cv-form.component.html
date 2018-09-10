@@ -56,7 +56,6 @@
       <input type="text" name="residence" placeholder="residence" [(ngModel)]="cv.residence"/>
       <input type="text" name="phone" required placeholder="phone*" [(ngModel)]="cv.phone"/>
       <input type="text" name="email" required [email]="true" placeholder="email*" [(ngModel)]="cv.email"/>
-      <input type="text" name="linkedin_link" placeholder="linkedin link" [(ngModel)]="cv.linkedin"/>
     </div>
 
     <a
@@ -69,12 +68,12 @@
     </a>
     <div class="collapse" id="desc">
       <input type="text" name="choose_preferable_area" [(ngModel)]="cv.preferencedArea" placeholder="choose preferable area"/>
-      <select name="preference_position" placeholder="Choose an option" [(ngModel)]="cv.positionPreference.id">
-        <option disabled>Select preference position</option>
-        <option *ngFor="let pos of positions" [selected]="cv.positionPreference.id == pos.id" [value]="pos.id">{{ pos.postName }}</option>
-      </select>
+      <!--<select name="preference_position" placeholder="Choose an option" [(ngModel)]="cv.positionPreference.id">-->
+        <!--<option disabled>Select preference position</option>-->
+        <!--<option *ngFor="let pos of positions" [selected]="cv.positionPreference.id == pos.id" [value]="pos.id">{{ pos.postName }}</option>-->
+      <!--</select>-->
       <input type="text" name="choose_position" placeholder="choose preferable position"
-             [(ngModel)]="cv.positionPreference.postName"/>
+             [(ngModel)]="cv.position_preference"/>
       <input type="number" name="salary_from" [(ngModel)]="cv.salaryFromPreference" placeholder="Salary from ($)"/>
       <input type="number" name="salary_till" [(ngModel)]="cv.salaryTillPreference" placeholder="Salary till ($)"/>
     </div>
@@ -211,9 +210,9 @@
     </a>
     <div class="collapse" id="languages">
       <div *ngFor="let language of cv.languages; let i = index; trackBy:trackByFn">
-        <select name="language_{{i}}" [(ngModel)]="cv.languages[i].id">
+        <select name="language_{{i}}" [(ngModel)]="cv.languages[i]">
           <option disabled>Select language</option>
-          <option *ngFor="let lg of languages" [value]="lg.id" [selected]="cv.languages[i].id == lg.id">{{ lg.nameLang }}</option>
+          <option *ngFor="let lg of languages" [ngValue]="lg" [selected]="cv.languages[i].id == lg.id">{{ lg.nameLang }}</option>
         </select>
         <!--<input type="text" name="language_{{i}}" placeholder="language {{i+1}}"-->
                <!--[(ngModel)]="cv.languages[i].nameLang"/>-->
@@ -234,9 +233,9 @@
       <h3><i class="fas fa-chevron-circle-down"></i> Footer links</h3>
     </a>
     <div class="collapse" id="links">
-      <input type="text" name="footer_link_portfolio" placeholder="portfolio" [(ngModel)]="cv.portfolio"/>
+      <input type="text" name="linkedin_link" placeholder="linkedin link" [(ngModel)]="cv.linkedin"/>
       <input type="text" name="footer_link_github" placeholder="github" [(ngModel)]="cv.github"/>
-      <!--<input type="text" name="footer_link_other" placeholder="other" [(ngModel)]="cv.personal_info.other_link"/>-->
+      <input type="text" name="footer_link_portfolio" placeholder="portfolio" [(ngModel)]="cv.portfolio"/>
     </div>
 
     <a

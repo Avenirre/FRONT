@@ -8,7 +8,7 @@
     </div>
     <div class="cv-section-right">
       <h2 class="candidate_name">{{cv.firstName}} {{cv.lastName}}</h2>
-      <h4 class="prefer_position">{{cv.positionPreference.postName}}</h4>
+      <h4 class="prefer_position">{{cv.position_preference}}</h4>
       <div class="cv-summary">
         {{cv.about}}
       </div>
@@ -29,7 +29,7 @@
           {{cv.residence}}
         </span>
         <span class="cv-contact">
-          {{cv.birthday}} y.o.
+          {{calculateAge(cv.birthday)}} y.o.
         </span>
       </div>
     </div>
@@ -46,8 +46,10 @@
     <div class="cv-section-left"><h3>skills</h3></div>
     <div class="cv-section-right">
       <div class="cv-data-container">
-        <span *ngFor="let skill of cv.skills">
-          </span>
+        <span *ngFor="let skill of cv.skills; let i = index;">
+          <strong *ngIf="i > 0">, </strong>
+          <strong>{{ skill.nameSkill }}</strong>
+        </span>
       </div>
     </div>
   </div>
@@ -56,7 +58,7 @@
     <div class="cv-section-right">
       <div class="cv-data-container">
         <p *ngFor="let job of cv.cvJobs">
-          {{job.date_from}}year - {{job.date_till}}year<br>
+          {{job.yearStart}} year - {{job.yearEnd}} year<br>
           <strong>{{job.company}}</strong>
           {{job.position.postName}} <br>
           {{job.backFront}}% frontend <strong>/</strong> {{100 - job.backFront}}% backend <br>
@@ -75,8 +77,20 @@
           <strong>{{education.institution}} | {{education.degree}}</strong>
           <br>
           {{education.location}}
-          <br>
           {{education.note}}
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="cv-section-grid-container">
+    <div class="cv-section-left"><h3>certification</h3></div>
+    <div class="cv-section-right">
+      <div class="cv-data-container">
+        <p *ngFor="let certificate of cv.cvCertification">
+          {{certificate.yearEnd}}<br>
+          <strong>
+            {{certificate.description}}
+          </strong>
         </p>
       </div>
     </div>
@@ -98,11 +112,12 @@
     <div class="cv-section-left"><h3>languages</h3></div>
     <div class="cv-section-right">
       <div class="cv-data-container">
-        <p *ngFor="let lanaguage of cv.languages">
+        <span *ngFor="let lanaguage of cv.languages; let i = index;">
+          <strong *ngIf="i > 0 && lanaguage.id">, </strong>
           <strong>
             {{lanaguage.nameLang}}
           </strong>
-        </p>
+        </span>
       </div>
     </div>
   </div>
@@ -110,10 +125,10 @@
     <div class="cv-section-left"><h3>other</h3></div>
     <div class="cv-section-right">
       <div class="cv-data-container">
-        <strong>
-          <!-- TODO footer info-->
-        </strong>
-        <br><br>
+        {{ cv.linkedin }} <br *ngIf="cv.linkedin!='' && cv.linkedin!=null">
+        {{ cv.github }} <br *ngIf="cv.github!='' && cv.github!=null">
+        {{ cv.portfolio }} <br *ngIf="cv.portfolio!='' && cv.portfolio!=null">
+        {{ cv.recommendations }}
       </div>
     </div>
   </div>
