@@ -48,6 +48,7 @@ import {BtnsUnloggedComponent} from './header/header-controls/btns-unlogged/btns
 import {AuthService} from './auth/auth.service';
 import { ProfileCompanyComponent } from './profiles/profile-company/profile-company.component';
 import { CompanyMenuComponent } from './profiles/profile-company/company-menu/company-menu.component';
+import { CvService } from '../services/cv.service';
 // import { CvPreviewComponent } from './profiles/profile-company/cv-preview/cv-preview.component';
 import { ProfileStatisticComponent } from './profiles/profile-candidate/profile-statistic/profile-statistic.component';
 import { ProfileSettingComponent } from './profiles/profile-candidate/profile-setting/profile-setting.component';
@@ -66,6 +67,7 @@ import { CvFormInputComponent } from './form-controls/cv-form-input/cv-form-inpu
 import { CvFormSliderComponent } from './form-controls/cv-form-slider/cv-form-slider.component';
 import { FoldersListComponent } from './profiles/profile-company/company-menu/folders-list/folders-list.component';
 import {MatProgressSpinnerModule} from '@angular/material';
+
 
 
 @NgModule({
@@ -135,6 +137,7 @@ import {MatProgressSpinnerModule} from '@angular/material';
     ApiCandidatesService,
     ApiCompaniesService,
     AuthService,
+    CvService
   ],
   bootstrap: [AppComponent]
 })

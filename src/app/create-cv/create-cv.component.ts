@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {CvService} from './cv.service';
+import {CvService} from '../../services/cv.service';
 import {ActivatedRoute, Params} from '@angular/router';
+import {CV} from '../../models/cv/cv.model';
+import {DataService} from '../../services/data.service';
 
 @Component({
   selector: 'app-create-cv',
@@ -17,8 +19,10 @@ export class CreateCvComponent implements OnInit {
     this.route.params.subscribe(
         (params: Params) => {
           if (params['id']) {
-            this.cvService.setEditCv(params['id']);
-            console.log('id of editint cv is: ' + params['id']);
+            this.cvService.setCVOfUserCvs(params['id']);
+          } else {
+              DataService.saveCV(new CV());
+              this.cvService.setCV(new CV());
           }
         }
     );

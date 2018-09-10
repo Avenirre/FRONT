@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {environment} from '../../../environments/environment';
-import {CvService} from '../cv.service';
+import {CvService} from '../../../services/cv.service';
 
 
 @Component({
@@ -18,7 +18,7 @@ export class CvChooseViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.cvService.getCV();
+    this.cvService.setCV();
   }
 
   onChangeTemplate(type, color) {

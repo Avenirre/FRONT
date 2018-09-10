@@ -1,12 +1,10 @@
-import {LoginDataInterface} from '../../interfaces/login-data.interface';
-
-export class LoginData implements LoginDataInterface {
-  username: string;
+export class LoginData {
+  usernameOrEmail: string;
   password: string;
 
   constructor(username: string, password: string) {
     if (username && password) {
-      this.username = username;
+      this.usernameOrEmail = username;
       this.password = password;
     } else {
       return null;

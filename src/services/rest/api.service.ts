@@ -36,6 +36,31 @@ export class ApiService {
     }
   }
 
+    /**
+     * makes PUT request to the back-server with given params
+     * @param path: string[]
+     * @param obj: JSON object
+     * @param httpOptions: JSON headers
+     */
+  public put<T>(path: string[], obj: T, httpOptions) {
+      const adr = new RequestAdress(environment.apiUrl, environment.apiPort.toString(), path);
+      const query = this.buildRequest(adr);
+      console.log('Query(put) to: ' + query);
+      console.log('Query(put) header: ', httpOptions);
+      console.log('Query(put) object:');
+      console.log(obj);
+      console.log(JSON.stringify(obj));
+      return this.http.put(query, obj, httpOptions);
+  }
+
+  public delete<T>(path: string[], httpOptions) {
+      const adr = new RequestAdress(environment.apiUrl, environment.apiPort.toString(), path);
+      const query = this.buildRequest(adr);
+      console.log('Query(delete) to: ' + query);
+      console.log('Query(delete) header: ', httpOptions);
+      return this.http.delete(query, httpOptions);
+  }
+
   /**
    * makes post request to the back-end server with given path
    * and send data, stored in the @object
@@ -47,6 +72,9 @@ export class ApiService {
     const query = this.buildRequest(adr);
     console.log('Query(post) to: ' + query);
     console.log('Query(post) header: ', httpOptions);
+    console.log('Query(post) object:');
+    console.log(obj);
+    console.log(JSON.stringify(obj));
     return this.http.post(query, obj, httpOptions);
   }
   /**

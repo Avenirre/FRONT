@@ -29,15 +29,14 @@ export class DataService {
   }
 
   public static getUserName() {
-    const user = JSON.parse(localStorage.getItem(this.names.profile));
+    const user = JSON.parse(localStorage.getItem(this.names.profile)).profile;
+    // console.log(user.username);
     return user.username || null;
   }
 
   public static getUserType() {
-    const user = JSON.parse(localStorage.getItem(this.names.profile));
-    let usertype = user.usertype;
-    usertype = usertype.slice(1, usertype.length - 1);
-    return usertype;
+    const user = JSON.parse(localStorage.getItem(this.names.profile)).profile;
+    return user.usertype;
   }
 
   public static getUserToken() {
