@@ -49,6 +49,7 @@ export class AuthService {
         .subscribe(
           (data) => {
             this.afterSuccessLogin(data);
+            console.log(data);
             resolve('success');
           },
           (error: Error) => {
