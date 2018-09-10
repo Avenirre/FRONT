@@ -30,7 +30,6 @@ export class DataService {
 
   public static getUserName() {
     const user = JSON.parse(localStorage.getItem(this.names.profile)).profile;
-    // console.log(user.username);
     return user.username || null;
   }
 
@@ -47,6 +46,10 @@ export class DataService {
     return null;
   }
 
+  static getUserId() {
+    const userId = JSON.parse(localStorage.getItem(this.names.profile)).profile.id;
+    return userId || null;
+  }
 // SETTINGS METHODS
   public static getSettings(): LocalSettings {
     const settings = localStorage.getItem(this.names.settings);
@@ -104,5 +107,6 @@ export class DataService {
   }
 
 // END CV METHODS
+
 
 }

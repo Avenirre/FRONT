@@ -160,13 +160,21 @@ a {
   font-size: 0.8rem;
   margin: 0.3rem;
   padding: 0;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
 }
 
 .folders-list {
   position: relative;
 }
 
+.pr-icon {
+  font-size: 3rem;
+  color: #fff;
+  text-align: center;
 
+}
 
 
 

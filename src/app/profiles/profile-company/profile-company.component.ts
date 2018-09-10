@@ -4,13 +4,15 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 import {SectionUnit} from '../../../enums/section.enum';
 import {environment} from '../../../environments/environment';
 import {Subscription} from 'rxjs';
+import {CompanySettingsService} from './company-settings.service';
 
 @Component({
   selector: 'app-profile-company',
   templateUrl: './profile-company.component.html',
   styleUrls: ['./profile-company.component.scss'],
   providers: [
-    CompanyFoldersService
+    CompanyFoldersService,
+    CompanySettingsService
   ]
 })
 export class ProfileCompanyComponent implements OnInit, OnDestroy {

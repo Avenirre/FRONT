@@ -2,7 +2,8 @@
 
 :host ::ng-deep label {
   font-size: 0.9rem;
-  font-family: $secondary-font;
+  font-family: $main-font;
+  padding: 0.5rem 1rem;
 }
 
 :host ::ng-deep .cv-form-main {
@@ -44,10 +45,6 @@
 
 :host ::ng-deep a {
   cursor: pointer;
-}
-:host ::ng-deep button {
-  font-family: $secondary-font;
-  font-weight: 700;
 }
 :host ::ng-deep div {
   color: $color-dark-grey;

@@ -1,6 +1,5 @@
 <ng-container *ngIf="folder !== undefined">
   <app-cmp-edit-panel></app-cmp-edit-panel>
-  {{folder.nameFolder}}
   <div *ngIf="!errors.FolderNotFound && !errors.FolderIsEmpty">
     <app-company-cv-prev
       *ngFor="let cv of folder.cvs"
