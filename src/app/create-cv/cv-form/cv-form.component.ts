@@ -9,9 +9,13 @@ import {Certification} from '../../../models/cv/cv.certification.model';
 import {Language} from '../../../models/cv/cv.lang.model';
 import {Skill} from '../../../models/cv/cv.skill.model';
 import {Position} from '../../../models/cv/cv.position.model';
+
 import {ApiService} from '../../../services/rest/api.service';
 import {environment} from '../../../environments/environment';
 import {HttpClient} from '@angular/common/http';
+
+import {AgmCvComponent} from './agm-cv/agm-cv.component';
+
 
 declare var $: any;
 
@@ -57,6 +61,7 @@ export class CvFormComponent implements OnInit {
           );
   }
 
+
   // getLangRef() {
   //     const url = this.apiService.buildRequest(environment.api.lang_ref);
   //     return this.http.get(url);
@@ -65,6 +70,12 @@ export class CvFormComponent implements OnInit {
   // getSkillsRef() {
   //     const url = this.apiService.buildRequest(environment.api.skills_ref);
   //     return this.http.get(url);
+
+
+
+  // addExperience() {
+  //   this.cv['prof_info']['experience'].push(new Experience(''));
+
   // }
 
   addEducation() {
