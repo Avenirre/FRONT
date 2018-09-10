@@ -11,13 +11,12 @@ section:hover {
 .prev-container {
   display: grid;
   grid-template-areas: "prev-check prev-content prev-contacts prev-status";
-  grid-template-columns: 2rem auto 10rem 10rem;
+  grid-template-columns: 2rem auto 15rem 5rem;
   margin-left: 0.6rem;
   border-bottom: 1px solid $color-shadow-blue;
   color: $color-shadow-blue;
   padding: 1rem 0 2rem 0;
 }
-
 
 .prev-check {
   grid-area: prev-check;
@@ -32,6 +31,7 @@ section:hover {
     font-size: 0.8em;
     font-weight: 400;
     text-align: justify;
+    min-height: 3rem;
     margin: 15px 0;
   }
 
@@ -98,6 +98,13 @@ span {
   font-size: 0.8rem;
   font-weight: 200;
   color: $color-shadow-blue;
+}
+
+.activated {
+  position: relative;
+  display: inline;
+  top: calc(50% - 1rem);
+  font-weight: 700;
 }
 
 

@@ -7,3 +7,11 @@
 :host ::ng-deep select {
   border-radius: 3rem;
 }
+
+:host ::ng-deep .pr-icon {
+  position: relative;
+  font-size: 3rem;
+  color: darkgrey;
+  text-align: center;
+
+}

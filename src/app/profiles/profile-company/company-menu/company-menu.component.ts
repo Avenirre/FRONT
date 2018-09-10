@@ -30,7 +30,7 @@ export class CompanyMenuComponent implements OnInit, OnDestroy {
     this._companyFolderService._$section.subscribe((section) => {
       this.section = section;
       // if (section === SectionUnit.FOLDERS) {
-      //   this._companyFolderService.getBackEndFolders();
+      //   this._companyFolderService.apiGetFolders();
       // }
     });
   }

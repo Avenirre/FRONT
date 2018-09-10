@@ -9,6 +9,9 @@ import {SectionUnit} from '../../../enums/section.enum';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {Applicant} from '../../../models/auth/applicant.model';
 
+// TESTING IMPORT
+import {testingFolders} from '../../testing/folders.testing';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -24,12 +27,15 @@ export class CompanyFoldersService {
   section: SectionUnit;
   _$section = new BehaviorSubject<SectionUnit>(this.section);
 
+  checkedCvs: number[] = [];
+  _$checkedFoldersChanged = new BehaviorSubject(this.checkedCvs);
+
   constructor(
     private _api: ApiService,
     private _router: Router,
     private _route: ActivatedRoute
   ) {
-    this.getBackEndFolders();
+    this.apiGetFolders();
   }
 
   public static defineSection(section): SectionUnit {
@@ -44,24 +50,6 @@ export class CompanyFoldersService {
         return SectionUnit.FOLDERS;
       }
     }
-  }
-
-  public async getBackEndFolders() {
-    this.isDownloading = true;
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${DataService.getUserToken()}`
-      })
-    };
-    const response = await this._api
-      .get(environment.api.getFolders, httpOptions)
-      .toPromise();
-    const folders = response['data'];
-    this.folders = folders;
-    this._$folders.next(folders);
-    this.isDownloading = false;
-    this.downloadCompleted.emit();
   }
 
   public getFolder(id: number): ProfileFolder {
@@ -130,6 +118,8 @@ export class CompanyFoldersService {
     ]);
   }
 
+  // CRUD FOLDERS METHODS
+
   createFolder(name: string) {
     console.log(name);
     const folder = new ProfileFolder(1, name, null);
@@ -149,6 +139,81 @@ export class CompanyFoldersService {
     this.folders[index] = editedFolder;
   }
 
+  deleteFolder(id: number) {
+    const index = this.folders.findIndex((c) => {
+      return c.id === id;
+    });
+    if (this.folders.length <= 1) {
+      this.folders[index].cvs = null;
+      this.folders[index].nameFolder = 'Default Folder';
+    } else {
+      if (index !== -1) {
+        this.folders.splice(index, 1);
+      }
+      this._$folders.next(this.folders);
+    }
+  }
+
+  // CVS METHODS
+
+  public addCheckedCv(id: number) {
+    this.checkedCvs.push(id);
+    this._$checkedFoldersChanged.next(this.checkedCvs);
+  }
+
+  public removeCheckedCv(id: number) {
+    const index = this.checkedCvs.findIndex((c) => {
+      return c === id;
+    });
+    this.checkedCvs.splice(index, 1);
+    this._$checkedFoldersChanged.next(this.checkedCvs);
+  }
+
+  public deleteSelectedCvs() {
+    this.checkedCvs.forEach((id: number) => {
+      const cvIndex = this.currentFolder.cvs.findIndex((current) => {
+        return current.id === id;
+      });
+      this.currentFolder.cvs.splice(cvIndex, 1);
+    });
+    this.clearChecks();
+  }
+
+  public clearChecks() {
+    this.checkedCvs = [];
+    this._$checkedFoldersChanged.next(this.checkedCvs);
+  }
+
+  //              //
+  // API METHODS  \\
+  //              //
+  private async apiGetFolders() {
+    this.isDownloading = true;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${DataService.getUserToken()}`
+      })
+    };
+    const response = await this._api
+      .get(environment.api.getFolders, httpOptions)
+      .toPromise();
+
+// TESTING
+    // const folders = response['data'];
+    const folders = <ProfileFolder[]> testingFolders;
+// TESTING
+    this.folders = folders;
+    this._$folders.next(folders);
+    this.isDownloading = false;
+    this.downloadCompleted.emit();
+  }
+
+  /**
+   * makes request to the server and changes name of folder with
+   * given id on given name;
+   * @param folder
+   */
   async apiEditFolder(folder) {
     const httpOptions = {
       headers: new HttpHeaders({
@@ -164,6 +229,8 @@ export class CompanyFoldersService {
       .toPromise();
     console.log(resp);
   }
+
+
 }
 
 

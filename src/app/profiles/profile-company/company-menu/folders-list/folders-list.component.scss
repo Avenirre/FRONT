@@ -8,7 +8,8 @@
 }
 
 .folders-h {
-  width: 100%;
+  display: inline-block;
+  width: 2rem;
 
   .f-link {
     display: block;
@@ -16,12 +17,12 @@
     margin-top: 0;
   }
 
-  .f-create {
-    display: block;
-    float: right;
-    font-size: 1.5rem;
-  }
 }
+  .f-create {
+    display: inline-block;
+    font-size: 1.5rem;
+    padding: 1.1rem 0;
+  }
 
 .folders-h::after {
   content: '';
@@ -48,8 +49,6 @@
   padding: 0.5rem 2rem;
   background-color: $color-main-blue;
   border-radius: 4rem 0 0 4rem;
-  //z-index: 100;
-  //top: 2.5rem;
   right: -1.2rem;
 
   i{
@@ -64,7 +63,9 @@ a {
 }
 
 .create-folder-form {
-  padding: 0 1rem;
+  display: inline-block;
+  padding: 0;
+  width: calc(100% - 2rem);
 
   input {
     font-family: $secondary-font;

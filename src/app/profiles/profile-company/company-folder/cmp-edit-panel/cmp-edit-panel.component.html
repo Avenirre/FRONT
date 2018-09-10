@@ -1,12 +1,12 @@
-<section>
+<section *ngIf="selectedCount > 0">
   <h1>
     Selected: {{selectedCount}}
   </h1>
   <div class="buttons-container">
     <i class="fas fa-share-alt"></i>
-    <i class="fas fa-trash"></i>
+    <i (click)="deleteSelectedCvs()"
+      class="fas fa-trash"></i>
     <i class="fas fa-arrows-alt"></i>
     <i class="fas fa-times"></i>
   </div>
-
 </section>

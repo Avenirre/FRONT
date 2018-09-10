@@ -6,12 +6,12 @@
       [cv]="cv"
     ></app-company-cv-prev>
   </div>
-<div class="alert alert-danger"
+<div class="alert alert-primary"
      *ngIf="!folder.cvs">
-  Your folder is empty!<br>
-  Add some cvs into this folder.
+  This folder is empty!<br>
+  You can add some CVs into this folder.
 </div>
-<div class="alert alert-danger"
+<div class="alert alert-dismissible"
      *ngIf="errors.FolderNotFound">
   This folder does not exist anymore!
 </div>
@@ -21,5 +21,5 @@
 
 </ng-container>
 <ng-container *ngIf="!folder && !errors.FolderNotFound && !errors.FolderNotFound">
-  <i style="color: #2C4CB8" class="fas fa-spinner fa-pulse"></i>
+  <div class="pr-icon"><i style="" class="fas fa-spinner fa-pulse"></i></div>
 </ng-container>

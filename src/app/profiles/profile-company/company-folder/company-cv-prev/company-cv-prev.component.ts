@@ -11,29 +11,27 @@ import {Subscription} from 'rxjs';
 })
 export class CompanyCvPrevComponent implements OnInit, OnDestroy {
   folderSubscription: Subscription;
-  checked: boolean[];
+  checked: boolean;
   checkedCount = 0;
-  // folder: ProfileFolder;
   @Input() cv: CV;
 
   constructor(
-    private companyService: CompanyFoldersService
-  ) { }
+    private _companyService: CompanyFoldersService
+  ) {
+  }
 
   ngOnInit() {
-    // this.folder = this.companyService.getCurentFolder();
-    // this.folderSubscription = this.companyService.folderSelected.subscribe(
-    //   (folder: ProfileFolder) => {
-    //     this.folder = folder;
-    // });
   }
 
   ngOnDestroy(): void {
-    // this.folderSubscription.unsubscribe();
   }
 
-  onCheckboxPressed(event) {
-    // const state = event.target.checked;
-    // this.companyService.cvCheckboxPressed(state);
+  onCheckboxPressed(event: Event) {
+    const state = event.target['checked'];
+    if (state) {
+      this._companyService.addCheckedCv(this.cv.id);
+    } else {
+      this._companyService.removeCheckedCv(this.cv.id);
+    }
   }
 }

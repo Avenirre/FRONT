@@ -54,6 +54,7 @@ export class FoldersListComponent implements OnInit, OnDestroy {
   onSelectFolder(folder: ProfileFolder): void {
     if (folder !== this.currentFolder) {
       this._companyService.navigateToFolder(folder.id);
+      this._companyService.clearChecks();
     }
   }
 
@@ -102,6 +103,10 @@ export class FoldersListComponent implements OnInit, OnDestroy {
   cancelEdit() {
     this.resetErrors();
     this.menuAction = ActionUnit.NONE;
+  }
+
+  deleteFolder(id: number) {
+    this._companyService.deleteFolder(id);
   }
 
   private isError() {
