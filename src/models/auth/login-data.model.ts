@@ -1,10 +1,10 @@
 export class LoginData {
-  username: string;
+  usernameOrEmail: string;
   password: string;
 
   constructor(username: string, password: string) {
     if (username && password) {
-      this.username = username;
+      this.usernameOrEmail = username;
       this.password = password;
     } else {
       return null;
