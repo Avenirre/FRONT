@@ -1,6 +1,8 @@
 import {Component, ElementRef, Input, OnDestroy, OnInit} from '@angular/core';
-import {CompanyService} from '../../company.service';
+import {CompanyFoldersService} from '../../company-folders.service';
 import {CV} from '../../../../../models/cv/cv.model';
+import {ProfileFolder} from '../../../../../models/profileFolder';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-company-cv-prev',
@@ -8,14 +10,14 @@ import {CV} from '../../../../../models/cv/cv.model';
   styleUrls: ['./company-cv-prev.component.scss']
 })
 export class CompanyCvPrevComponent implements OnInit, OnDestroy {
-  // folderSubscription: Subscription;
-  // checked: boolean[];
-  // checkedCount = 0;
+  folderSubscription: Subscription;
+  checked: boolean[];
+  checkedCount = 0;
   // folder: ProfileFolder;
   @Input() cv: CV;
 
   constructor(
-    private companyService: CompanyService
+    private companyService: CompanyFoldersService
   ) { }
 
   ngOnInit() {
@@ -31,7 +33,7 @@ export class CompanyCvPrevComponent implements OnInit, OnDestroy {
   }
 
   onCheckboxPressed(event) {
-    const state = event.target.checked;
-    this.companyService.cvCheckboxPressed(state);
+    // const state = event.target.checked;
+    // this.companyService.cvCheckboxPressed(state);
   }
 }

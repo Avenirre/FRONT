@@ -2,6 +2,9 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {RouterRoutingModule} from '../router/router-routing.module';
+import {MatSelectModule} from '@angular/material/select';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 // LIBRARIES
 
@@ -54,6 +57,15 @@ import { CompanyFolderComponent } from './profiles/profile-company/company-folde
 import { CompanySettingsComponent } from './profiles/profile-company/company-settings/company-settings.component';
 import { CvSearchComponent } from './profiles/profile-company/cv-search/cv-search.component';
 import { SearchFormComponent } from './profiles/profile-company/search-form/search-form.component';
+import {BrowserAnimationsModule, NoopAnimationsModule} from '@angular/platform-browser/animations';
+import { CvFormSelectComponent } from './form-controls/cv-form-select/cv-form-select.component';
+import { CvFormChipsComponent } from './form-controls/cv-form-chips/cv-form-chips.component';
+import { CvChipsItemComponent } from './form-controls/cv-form-chips/cv-chips-item/cv-chips-item.component';
+import { CvFormCheckboxGroupComponent } from './form-controls/cv-form-checkbox-group/cv-form-checkbox-group.component';
+import { CvFormInputComponent } from './form-controls/cv-form-input/cv-form-input.component';
+import { CvFormSliderComponent } from './form-controls/cv-form-slider/cv-form-slider.component';
+import { FoldersListComponent } from './profiles/profile-company/company-menu/folders-list/folders-list.component';
+import {MatProgressSpinnerModule} from '@angular/material';
 
 
 @NgModule({
@@ -88,7 +100,6 @@ import { SearchFormComponent } from './profiles/profile-company/search-form/sear
     BtnsUnloggedComponent,
     ProfileCompanyComponent,
     CompanyMenuComponent,
-    // CvPreviewComponent,
     ProfileStatisticComponent,
     ProfileSettingComponent,
     CompanyCvPrevComponent,
@@ -97,13 +108,26 @@ import { SearchFormComponent } from './profiles/profile-company/search-form/sear
     CompanySettingsComponent,
     CvSearchComponent,
     SearchFormComponent,
+    CvFormSelectComponent,
+    CvFormChipsComponent,
+    CvChipsItemComponent,
+    CvFormCheckboxGroupComponent,
+    CvFormInputComponent,
+    CvFormSliderComponent,
+    FoldersListComponent,
   ],
   imports: [
     BrowserModule,
     RouterRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NoopAnimationsModule,
+    BrowserAnimationsModule,
+    MatSelectModule,
+    MatChipsModule,
+    MatProgressSpinnerModule,
+    MatProgressBarModule
   ],
   providers: [
     ModalService,

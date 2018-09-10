@@ -24,7 +24,7 @@ export const environment = {
     regCompany: 'registration-company',
     profile: 'profile',
     profileCandidate: 'profile/candidate',
-    profileCompany: 'profile/company',
+    profileCompany: 'company',
     profileCompanyFolders: 'folders',
     profileCompanySettings: 'settings',
     profileCompanySearch: 'search',

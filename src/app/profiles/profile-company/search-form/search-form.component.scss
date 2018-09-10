@@ -4,16 +4,73 @@ form {
   margin: 0 0 0 1rem;
 }
 
-h3 {
+.sec-heading {
+  font-family: $secondary-font;
   font-size: 1.2rem;
-  margin: 2rem 0 0 1rem;
+  font-weight: 600;
+  margin: 2rem 0 0.2rem 0;
 }
 
-input {
-  box-shadow: 0 0 5px $color-main-blue;
+input[type=text] {
+  box-shadow: 0 0 10px $color-main-blue;
   border: 0;
-  padding: 0.5rem 1rem;
+  padding: 0.3rem 1rem;
   margin: 0.5rem 1rem 0.5rem 0;
   width: 100%;
   color: $color-light-gray;
+  outline: none;
+}
+
+.form-area {
+  background-color: $color-light;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  box-shadow: 0 0 10px $color-main-blue;
+  color: $color-dark-grey;
+}
+
+.checkbox-group {
+  padding: 1rem;
+}
+
+.create-folder-form {
+  padding: 0 1rem;
+  text-align: right;
+
+  input {
+    font-family: $secondary-font;
+    font-weight: 300;
+    font-size: 1.2rem;
+    margin: 0.8rem 0.5rem;
+    box-sizing: border-box;
+    display: inline-block;
+    width: calc(100% - 3.5rem);
+    color: $color-light;
+    border-radius: 0;
+    border: 0px;
+    border-bottom: 2px solid #fff;
+    background-color: $color-light-blue;
+    box-shadow: none;
+    outline: 0;
+  }
+
+  button {
+    position: relative;
+    box-sizing: border-box;
+    display: inline-block;
+    text-align: center;
+    margin: 1.5rem 0;
+    color: $color-light-blue;
+    padding: 1rem;
+    border-radius: 5rem;
+    background-color: $color-light;
+    border: 0;
+    outline: 0;
+
+    i {
+      position: absolute;
+      top: 0.5rem;
+      left: 0.6rem;
+    }
+  }
 }

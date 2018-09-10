@@ -40,17 +40,16 @@ const routesApi: Routes = [
       {path: 'statistics', component: ProfileStatisticComponent}
     ]
   },
-  {path: routes.profileCompany, component: ProfileCompanyComponent},
   {path: routes.profileCandidate, component: ProfileCandidateComponent},
   {
-    path: routes.profileCompany, component: ProfileCompanyComponent, children: [
+    path: routes.profileCompany, children: [
       {
-        path: routes.profileCompanyFolders, children: [
-          {path: ':folder', component: CompanyFolderComponent},
+        path: ':section', component: ProfileCompanyComponent, children: [
+          {path: ':id', component: CompanyFolderComponent},
         ]
       },
-      {path: routes.profileCompanySearch, component: CvSearchComponent},
-      {path: routes.profileCompanySettings, component: CompanySettingsComponent},
+      // {path: routes.profileCompanySearch, component: CvSearchComponent},
+      // {path: routes.profileCompanySettings, component: CompanySettingsComponent},
     ]
   },
   {

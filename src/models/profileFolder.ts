@@ -2,12 +2,12 @@ import {CV} from './cv/cv.model';
 
 export class ProfileFolder {
   public id: number;
-  public name: string;
+  public nameFolder: string;
   public cvs: CV[];
 
-  constructor(id: number, name: string, cvs: CV[]) {
+  constructor(id: number, nameFolder: string, cvs: CV[]) {
     this.id = id;
-    this.name = name;
+    this.nameFolder = nameFolder;
     this.cvs = cvs;
   }
 

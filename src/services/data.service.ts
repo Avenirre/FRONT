@@ -2,6 +2,8 @@ import {Injectable} from '@angular/core';
 import {CV} from '../models/cv/cv.model';
 import {environment} from '../environments/environment';
 import {LocalSettings} from '../models/local-settings.model';
+import {SectionUnit} from '../enums/section.enum';
+import {ProfileFolder} from '../models/profileFolder';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +30,6 @@ export class DataService {
 
   public static getUserName() {
     const user = JSON.parse(localStorage.getItem(this.names.profile));
-    // console.log(user.username);
     return user.username || null;
   }
 
@@ -46,32 +47,47 @@ export class DataService {
     }
     return null;
   }
+
 // SETTINGS METHODS
   public static getSettings(): LocalSettings {
     const settings = localStorage.getItem(this.names.settings);
     return JSON.parse(settings) || null;
   }
 
-  public static setCurrentFolder(folder: string) {
+  public static setCurrentFolder(folder: ProfileFolder) {
     let settings = this.getSettings();
-    if (settings) {
-      settings.profile.currentFolder = folder;
-      localStorage.setItem(this.names.settings, JSON.stringify(settings));
-    } else {
+    if (!settings) {
       settings = new LocalSettings();
-      settings.profile.currentFolder = folder;
-      localStorage.setItem(this.names.settings, JSON.stringify(settings));
     }
+    settings.profile.currentFolder = JSON.stringify(folder);
+    localStorage.setItem(this.names.settings, JSON.stringify(settings));
   }
 
-  public static getCurrentFolder() {
+  public static setMenuSection(section: SectionUnit) {
+    let settings = this.getSettings();
+    if (!settings) {
+      settings = new LocalSettings();
+    }
+    settings.profile.currentSection = section;
+    localStorage.setItem(this.names.settings, JSON.stringify(settings));
+  }
+
+  public static getCurrentFolder(): { id: number, name: string } {
     const settings = this.getSettings();
     if (settings && settings.profile && settings.profile.currentFolder) {
-      return settings.profile.currentFolder;
+      return JSON.parse(settings.profile.currentFolder);
     }
     return null;
   }
-// END USER METHODS
+
+  public static getCurrentMenuSection(): number {
+    const settings = this.getSettings();
+    if (settings && settings.profile && settings.profile.currentSection !== undefined) {
+      return settings.profile.currentSection;
+    }
+    return null;
+  }
+
 // CV METHODS
   public static saveCV(cv: CV) {
     const cvStr = JSON.stringify(cv);
@@ -89,4 +105,5 @@ export class DataService {
   }
 
 // END CV METHODS
+
 }

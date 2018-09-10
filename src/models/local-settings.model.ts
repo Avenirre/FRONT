@@ -1,5 +1,8 @@
+import {SectionUnit} from '../enums/section.enum';
+
 export class LocalSettings {
   profile = {
-    currentFolder: ''
+    currentFolder: '',
+    currentSection: 0
   };
 }

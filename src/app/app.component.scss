@@ -3,3 +3,7 @@
 :host ::ng-deep input {
   border-radius: 25px;
 }
+
+:host ::ng-deep select {
+  border-radius: 3rem;
+}

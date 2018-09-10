@@ -1,24 +1,60 @@
 <form (ngSubmit)="onSubmitForm(searchForm)" #searchForm="ngForm">
-  <h3>1. Position</h3>
-  <input type="text" name="position" id="position">
+  <div class="sec-heading">1. Position</div>
+  <input type="text"
+         name="position"
+         id="position"
+         placeholder="Type position">
 
-  <h3>2. Prof. area</h3>
-  <select name="prof-area" id="prof-area">
-    <option value="Choose prof. area" default></option>
-    <option value="smth"></option>
-    <option value="smth"></option>
-    <option value="smth"></option>
-  </select>
+  <div class="sec-heading">2. Prof. area</div>
+  <app-cv-form-select [listItems]="profAreas" name="profArea"></app-cv-form-select>
 
-  <h3>3. Region</h3>
+  <div class="sec-heading">3. Region</div>
 
-  <h3>4. Skills</h3>
+  <div class="form-area checkbox-group">
+    <app-cv-form-checkbox-group [items]="regions"
+                                name="regions">
+    </app-cv-form-checkbox-group>
+  </div>
 
-  <h3>5. Salary</h3>
 
-  <h3>6. City</h3>
+  <div class="sec-heading">4. Skills</div>
 
-  <h3>7. Citizenship</h3>
+  <div class="form-area">
+    <app-cv-form-chips [listItems]="skills"
+                       (listChanged)="replaceSkills($event)">
+
+    </app-cv-form-chips>
+  </div>
+  <form class="create-folder-form"
+        (ngSubmit)="onAddSkill(addSkillForm.value.skill)"
+        #addSkillForm="ngForm">
+    <input class="form-control"
+           type="text"
+           name="skill"
+           ngModel>
+    <button type="submit">
+      <i class="fas fa-plus"></i>
+    </button>
+  </form>
+
+  <div class="sec-heading">5. Salary</div>
+  <app-cv-slider></app-cv-slider>
+
+  <label for="position">
+    <div class="sec-heading">6. City</div>
+  </label>
+  <input type="text"
+         name="city"
+         id="city"
+         placeholder="Type city">
+
+  <label for="position">
+    <div class="sec-heading">7. Citizenship</div>
+  </label>
+  <input type="text"
+         name="citizenship"
+         id="citizenship"
+         placeholder="Type citizenship">
 
   <button type="submit" class="btn btn-danger">Find</button>
 </form>

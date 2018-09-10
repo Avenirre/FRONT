@@ -1,0 +1,8 @@
+<div class="select-wrapper">
+  <select name="name">
+  <option *ngFor="let item of listItems"
+          [value]="item.value">
+    {{item.displayValue}}
+  </option>
+</select>
+</div>
