@@ -12,11 +12,12 @@
       </h3>
     </a>
     <div class="collapse" id="title">
-      <input type="text" name="title" placeholder="cv title*" [(ngModel)]="cv.title"/>
-      <input type="text" name="first_name" placeholder="first name*" [(ngModel)]="cv.firstName"/>
-      <input type="text" name="last_name" placeholder="last name*" [(ngModel)]="cv.lastName"/>
-      <textarea name="summary" id="summary" placeholder="summary*" [(ngModel)]="cv.summary"></textarea>
-      <textarea name="about" id="about" placeholder="about*" [(ngModel)]="cv.about"></textarea>
+      <input type="text" name="title" required placeholder="cv title*" [(ngModel)]="cv.title"/>
+      <input type="text" name="first_name" required placeholder="first name*" [(ngModel)]="cv.firstName"/>
+      <input type="text" name="last_name" required placeholder="last name*" [(ngModel)]="cv.lastName"/>
+      <input type="text" name="birthday" type="date" placeholder="birthday" [(ngModel)]="cv.birthday"/>
+      <textarea name="summary" id="summary" required placeholder="summary*" [(ngModel)]="cv.summary"></textarea>
+      <textarea name="about" id="about" required placeholder="about*" [(ngModel)]="cv.about"></textarea>
     </div>
 
     <!--<a-->
@@ -52,10 +53,15 @@
       <h3><i class="fas fa-chevron-circle-down"></i> Contact info</h3>
     </a>
     <div class="collapse" id="contacts">
-      <input type="text" name="residence" placeholder="residence" [(ngModel)]="cv.residence"/>
-      <input type="text" name="birthday" placeholder="birthday" [(ngModel)]="cv.birthday"/>
-      <input type="text" name="phone" placeholder="phone*" [(ngModel)]="cv.phone"/>
+
+      <!--<input type="text" name="residence" placeholder="residence" [(ngModel)]="cv.residence"/>-->
+      <!--<input type="text" name="residence" placeholder="residence" [(ngModel)]="cv.residence"/>-->
+      <agm-cv></agm-cv>
+      <!--<input type="text" name="residence" placeholder="residence" autocorrect="off" autocapitalize="off" spellcheck="off" class="form-control" #search>-->
+        <input type="text" name="phone" required placeholder="phone*" [(ngModel)]="cv.phone"/>
+        <input type="text" name="email" required [email]="true" placeholder="email*" [(ngModel)]="cv.email"/>
       <input type="text" name="email" placeholder="email*" [(ngModel)]="cv.email"/>
+
       <input type="text" name="linkedin_link" placeholder="linkedin link" [(ngModel)]="cv.linkedin"/>
     </div>
 
@@ -69,8 +75,8 @@
     </a>
     <div class="collapse" id="desc">
       <input type="text" name="choose_preferable_area" [(ngModel)]="cv.preferencedArea" placeholder="choose preferable area"/>
-      <select name="preference_position" [(ngModel)]="cv.positionPreference.id">
-        <option disabled selected>Select preference position</option>
+      <select name="preference_position" placeholder="Choose an option" [(ngModel)]="cv.positionPreference.id">
+        <option disabled>Select preference position</option>
         <option *ngFor="let pos of positions" [selected]="cv.positionPreference.id == pos.id" [value]="pos.id">{{ pos.postName }}</option>
       </select>
       <input type="text" name="choose_position" placeholder="choose preferable position"
@@ -116,9 +122,10 @@
       <h3><i class="fas fa-chevron-circle-down"></i> Skills</h3>
     </a>
     <div class="collapse" id="skills">
-      <select name="skills" multiple size="7" [(ngModel)]="cv.cvSkill">
-        <option disabled>Select skills</option>
-        <option *ngFor="let skill of skills" [value]="skill.id">{{skill.name_skill}}</option>
+      <select name="skills" multiple [compareWith]="compareFn" size="7" [(ngModel)]="cv.skills">
+          <option *ngFor="let skill of skills; let i = index" [ngValue]="skill">
+            {{skill.nameSkill}}
+          </option>
       </select>
     </div>
 
@@ -209,13 +216,13 @@
       <h3><i class="fas fa-chevron-circle-down"></i> Languages</h3>
     </a>
     <div class="collapse" id="languages">
-      <div *ngFor="let language of cv.cvLang; let i = index; trackBy:trackByFn">
-        <select name="language_{{i}}" [(ngModel)]="cv.cvLang[i].id">
+      <div *ngFor="let language of cv.languages; let i = index; trackBy:trackByFn">
+        <select name="language_{{i}}" [(ngModel)]="cv.languages[i].id">
           <option disabled>Select language</option>
-          <option *ngFor="let lg of languages" [value]="lg.id" [selected]="cv.cvLang[i].id == lg.id">{{ lg.nameLang }}</option>
+          <option *ngFor="let lg of languages" [value]="lg.id" [selected]="cv.languages[i].id == lg.id">{{ lg.nameLang }}</option>
         </select>
         <!--<input type="text" name="language_{{i}}" placeholder="language {{i+1}}"-->
-               <!--[(ngModel)]="cv.cvLang[i].nameLang"/>-->
+               <!--[(ngModel)]="cv.languages[i].nameLang"/>-->
       </div>
       <div>
         <button class="add-btn" (click)="addLanguage()">

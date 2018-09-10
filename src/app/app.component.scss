@@ -1,1 +1,5 @@
 @import '../style-variables.scss';
+
+:host ::ng-deep input {
+  border-radius: 25px;
+}

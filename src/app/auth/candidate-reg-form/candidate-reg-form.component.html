@@ -102,6 +102,14 @@
              *ngIf="errors.RegError">
           Registration Error
         </div>
+        <div class="alert alert-danger"
+             *ngIf="errors.UserNameExists">
+          User with such username already exists!
+        </div>
+        <div class="alert alert-danger"
+             *ngIf="errors.ServerError">
+          Internal server error
+        </div>
         <!--<a>request secret code</a>-->
         <!--<div class="form-group row">-->
           <!--<input-->

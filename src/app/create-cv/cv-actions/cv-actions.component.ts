@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {CvService} from '../cv.service';
+import {CvService} from '../../../services/cv.service';
 import {CV} from '../../../models/cv/cv.model';
 
 @Component({
@@ -13,19 +13,19 @@ export class CvActionsComponent implements OnInit {
   constructor(private cvService: CvService) { }
 
   ngOnInit() {
-    this.title = this.cvService.getCV().title;
+    this.title = this.cvService.setCV().title;
     this.cvService.cvChanged.subscribe((cv: CV) => {
       this.title = cv.title;
     });
   }
 
     activateCv() {
-        this.cvService.getCV().activated = true;
+        this.cvService.setCV().activated = true;
         this.saveCv();
     }
 
     saveCv() {
-        this.cv = this.cvService.getCV();
-        this.cvService.saveCV(this.cv);
+        this.cv = this.cvService.setCV();
+        this.cvService.saveCV();
     }
 }

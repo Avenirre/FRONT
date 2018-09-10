@@ -2,7 +2,8 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {RouterRoutingModule} from '../router/router-routing.module';
-
+import { AgmCoreModule } from '@agm/core';
+import {AgmCvComponent} from './create-cv/cv-form/agm-cv/agm-cv.component';
 // LIBRARIES
 
 // COMPONENTS
@@ -45,6 +46,7 @@ import {BtnsUnloggedComponent} from './header/header-controls/btns-unlogged/btns
 import {AuthService} from './auth/auth.service';
 import { ProfileCompanyComponent } from './profiles/profile-company/profile-company.component';
 import { CompanyMenuComponent } from './profiles/profile-company/company-menu/company-menu.component';
+import { CvService } from '../services/cv.service';
 // import { CvPreviewComponent } from './profiles/profile-company/cv-preview/cv-preview.component';
 import { ProfileStatisticComponent } from './profiles/profile-candidate/profile-statistic/profile-statistic.component';
 import { ProfileSettingComponent } from './profiles/profile-candidate/profile-setting/profile-setting.component';
@@ -52,6 +54,9 @@ import { CompanyCvPrevComponent } from './profiles/profile-company/company-folde
 import { CmpEditPanelComponent } from './profiles/profile-company/company-folder/cmp-edit-panel/cmp-edit-panel.component';
 import { CompanyFolderComponent } from './profiles/profile-company/company-folder/company-folder.component';
 import { CompanySettingsComponent } from './profiles/profile-company/company-settings/company-settings.component';
+import { CvSearchComponent } from './profiles/profile-company/cv-search/cv-search.component';
+import { SearchFormComponent } from './profiles/profile-company/search-form/search-form.component';
+
 
 
 @NgModule({
@@ -93,8 +98,17 @@ import { CompanySettingsComponent } from './profiles/profile-company/company-set
     CmpEditPanelComponent,
     CompanyFolderComponent,
     CompanySettingsComponent,
+
+    CvSearchComponent,
+    SearchFormComponent,
+
+      AgmCvComponent
   ],
   imports: [
+      AgmCoreModule.forRoot({
+          apiKey: 'AIzaSyA-FppnYJfomJjEu7p3kkhcw2P3RqLZ-9c',
+          libraries: ["places"]
+      }),
     BrowserModule,
     RouterRoutingModule,
     HttpClientModule,
@@ -107,6 +121,7 @@ import { CompanySettingsComponent } from './profiles/profile-company/company-set
     ApiCandidatesService,
     ApiCompaniesService,
     AuthService,
+    CvService
   ],
   bootstrap: [AppComponent]
 })

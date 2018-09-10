@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CvFormComponent } from './cv-form.component';
+import { SearchFormComponent } from './search-form.component';
 
-describe('AgmCvComponent', () => {
-  let component: CvFormComponent;
-  let fixture: ComponentFixture<CvFormComponent>;
+describe('SearchFormComponent', () => {
+  let component: SearchFormComponent;
+  let fixture: ComponentFixture<SearchFormComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CvFormComponent ]
+      declarations: [ SearchFormComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CvFormComponent);
+    fixture = TestBed.createComponent(SearchFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -7,9 +7,13 @@ export const environment = {
    */
   api: {
     login: ['api', 'login'],
+    save_cv: ['api', 'cv'],
+    delete_cv: ['api', 'cv'],
+    lang_ref: ['api', 'languages'],
+    skills_ref: ['api', 'skills'],
+    user_cvs: ['api', 'cv'],
     registration: ['api', 'signup'],
-    save_cv: ['api', 'cv']
-
+    getFolders: ['api', 'folders']
   },
   /**
    * local frontend routes
@@ -24,7 +28,9 @@ export const environment = {
     profileCompany: 'profile/company',
     profileCompanyFolders: 'folders',
     profileCompanySettings: 'settings',
+    profileCompanySearch: 'search',
     cvCreate: 'create-cv',
+    cvEdit: 'profile/candidate/edit-cv/:id',
     unauthorizedUser: 'unauthorized',
   },
   /**

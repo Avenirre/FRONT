@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {CvService} from '../cv.service';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {CvService} from '../../../services/cv.service';
 import {CV} from '../../../models/cv/cv.model';
 import {DataService} from '../../../services/data.service';
 import {Education} from '../../../models/cv/cv.education.model';
@@ -10,6 +10,13 @@ import {Language} from '../../../models/cv/cv.lang.model';
 import {Skill} from '../../../models/cv/cv.skill.model';
 import {Position} from '../../../models/cv/cv.position.model';
 
+import {ApiService} from '../../../services/rest/api.service';
+import {environment} from '../../../environments/environment';
+import {HttpClient} from '@angular/common/http';
+
+import {AgmCvComponent} from './agm-cv/agm-cv.component';
+
+
 declare var $: any;
 
 @Component({
@@ -19,19 +26,9 @@ declare var $: any;
 })
 export class CvFormComponent implements OnInit {
   cv: CV;
-  skills = [
-    new Skill(1, 'Java'),
-    new Skill(2, 'JavaScript'),
-    new Skill(3, 'C#'),
-    new Skill(4, 'PHP'),
-    new Skill(5, 'C++')
-  ];
-  languages = [
-      new Language(1, 'Hebrew'),
-      new Language(2, 'English'),
-      new Language(3, 'Russian'),
-      new Language(4, 'Ukrainian'),
-  ];
+  skills = [];
+  selectedSkills = [];
+  languages = [];
   positions = [
       new Position(1, 'Programmer'),
       new Position(2, 'Tester'),
@@ -40,15 +37,45 @@ export class CvFormComponent implements OnInit {
       new Position(4, 'Front End Developer'),
   ];
 
-  constructor(private cvService: CvService) {
+  constructor(private cvService: CvService,
+              private apiService: ApiService) {
   }
 
   ngOnInit() {
-    this.cv = this.cvService.getCV();
+      this.cv = this.cvService.setCV();
+      this.apiService.get(environment.api.lang_ref)
+        .subscribe(
+            (res) => {
+                for (let i = 0; i < res['data'].length; i++) {
+                    this.languages.push(new Language(+res['data'][i].id, res['data'][i].nameLang));
+                }
+            }
+        );
+      this.apiService.get(environment.api.skills_ref)
+          .subscribe(
+              (res) => {
+                  for (let i = 0; i < res['data'].length; i++) {
+                      this.skills.push(new Skill(+res['data'][i].id, res['data'][i].nameSkill));
+                  }
+              }
+          );
   }
+
+
+  // getLangRef() {
+  //     const url = this.apiService.buildRequest(environment.api.lang_ref);
+  //     return this.http.get(url);
+  // }
+  //
+  // getSkillsRef() {
+  //     const url = this.apiService.buildRequest(environment.api.skills_ref);
+  //     return this.http.get(url);
+
+
 
   // addExperience() {
   //   this.cv['prof_info']['experience'].push(new Experience(''));
+
   // }
 
   addEducation() {
@@ -68,7 +95,7 @@ export class CvFormComponent implements OnInit {
   }
 
   addLanguage() {
-    this.cv.cvLang.push(new Language(null, ''));
+    this.cv.languages.push(new Language(null, ''));
   }
 
   setData() {
@@ -78,6 +105,10 @@ export class CvFormComponent implements OnInit {
 
   trackByFn(index: any, item: any) {
     return index;
+  }
+
+  compareFn(c1, c2): boolean {
+     return c1 && c2 ? c1.id == c2.id : c1 == c2;
   }
 
   openAll() {

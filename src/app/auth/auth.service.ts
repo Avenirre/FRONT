@@ -44,12 +44,12 @@ export class AuthService {
    * login user with given login data
    */
   public login(user: LoginData): Promise<string> {
-    // console.log('user: ', user);
     return new Promise((resolve, reject) => {
       this.apiService.post<LoginData>(this.api.login, user, this.httpOptions)
         .subscribe(
           (data) => {
             this.afterSuccessLogin(data);
+            console.log(data);
             resolve('success');
           },
           (error: Error) => {

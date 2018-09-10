@@ -1,4 +1,4 @@
-@import '../../../style-variables.scss';
+@import '../../../../style-variables.scss';
 
 i {
   font-size: 0.8rem;
@@ -49,12 +49,4 @@ a:hover {
   padding: auto;
   align-content: center;
   margin-left: calc(100% - 28px);
-}
-
-input {
-  border: white 2px solid;
-}
-
-input.ng-touched.ng-invalid {
-  border: red 2px solid;
 }

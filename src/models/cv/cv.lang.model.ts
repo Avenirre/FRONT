@@ -2,8 +2,8 @@ export class Language {
     id: number;
     nameLang: string;
 
-    constructor(id, name_lang) {
+    constructor(id, nameLang) {
         this.id = id;
-        this.nameLang = name_lang;
+        this.nameLang = nameLang;
     }
 }
