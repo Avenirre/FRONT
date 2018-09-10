@@ -193,7 +193,7 @@ export class CvService implements OnInit {
         this.cv.cvActivity = [];
         for (let i = 0; i < this.cv.cvJobs.length; i++) {
             this.cv.cvActivity.push(
-                new Activity(null,
+                new Activity(this.cv.cvJobs[i].id,
                     1,
                     null,
                     this.cv.cvJobs[i].company,
@@ -274,7 +274,7 @@ export class CvService implements OnInit {
                 case 1:
                     this.cv.cvJobs.push(new Job(
                         this.cv.cvActivity[i].id,
-                        '',
+                        this.cv.cvActivity[i].company,
                         this.cv.cvActivity[i].positionId,
                         this.cv.cvActivity[i].postName,
                         this.cv.cvActivity[i].description,
@@ -296,9 +296,9 @@ export class CvService implements OnInit {
                     break;
             }
         }
-      if (!this.cv.positionPreference) {
-          this.cv.positionPreference = new Position(null, null);
-      }
+      // if (!this.cv.positionPreference) {
+      //     this.cv.positionPreference = new Position(null, null);
+      // }
       if (!this.cv.template) {
           this.cv.template = new Template(null, 0, 0);
       }

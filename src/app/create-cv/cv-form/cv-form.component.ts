@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, NgZone, OnInit, ViewChild} from '@angular/core';
 import {CvService} from '../../../services/cv.service';
 import {CV} from '../../../models/cv/cv.model';
 import {DataService} from '../../../services/data.service';
@@ -9,9 +9,14 @@ import {Certification} from '../../../models/cv/cv.certification.model';
 import {Language} from '../../../models/cv/cv.lang.model';
 import {Skill} from '../../../models/cv/cv.skill.model';
 import {Position} from '../../../models/cv/cv.position.model';
+
 import {ApiService} from '../../../services/rest/api.service';
 import {environment} from '../../../environments/environment';
 import {HttpClient} from '@angular/common/http';
+
+import {AgmCvComponent} from './agm-cv/agm-cv.component';
+import {MapsAPILoader} from '@agm/core';
+
 
 declare var $: any;
 
@@ -32,9 +37,12 @@ export class CvFormComponent implements OnInit {
       new Position(4, 'Back End Developer'),
       new Position(4, 'Front End Developer'),
   ];
+  @ViewChild('searchResidence') public searchElement: ElementRef;
 
   constructor(private cvService: CvService,
-              private apiService: ApiService) {
+              private apiService: ApiService,
+              private mapsAPILoader: MapsAPILoader,
+              private ngZone: NgZone) {
   }
 
   ngOnInit() {
@@ -55,7 +63,23 @@ export class CvFormComponent implements OnInit {
                   }
               }
           );
+      this.mapsAPILoader.load().then(
+          () => {
+              let autocomplete = new google.maps.places.Autocomplete(this.searchElement.nativeElement, { types:["(cities)"] });
+
+              autocomplete.addListener("place_changed", () => {
+                  this.ngZone.run(() => {
+                      let place: google.maps.places.PlaceResult = autocomplete.getPlace();
+                      if (place.geometry === undefined || place.geometry === null ) {
+                          return;
+                      }
+                      this.cv.residence = place.formatted_address;
+                  });
+              });
+          }
+      );
   }
+
 
   // getLangRef() {
   //     const url = this.apiService.buildRequest(environment.api.lang_ref);
@@ -65,6 +89,12 @@ export class CvFormComponent implements OnInit {
   // getSkillsRef() {
   //     const url = this.apiService.buildRequest(environment.api.skills_ref);
   //     return this.http.get(url);
+
+
+
+  // addExperience() {
+  //   this.cv['prof_info']['experience'].push(new Experience(''));
+
   // }
 
   addEducation() {

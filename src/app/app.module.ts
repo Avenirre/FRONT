@@ -2,10 +2,8 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {RouterRoutingModule} from '../router/router-routing.module';
-import {MatSelectModule} from '@angular/material/select';
-import {MatChipsModule} from '@angular/material/chips';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
-
+import { AgmCoreModule } from '@agm/core';
+import {AgmCvComponent} from './create-cv/cv-form/agm-cv/agm-cv.component';
 // LIBRARIES
 
 // COMPONENTS
@@ -117,8 +115,13 @@ import {MatProgressSpinnerModule} from '@angular/material';
     CvFormInputComponent,
     CvFormSliderComponent,
     FoldersListComponent,
+    AgmCvComponent
   ],
   imports: [
+      AgmCoreModule.forRoot({
+          apiKey: 'AIzaSyA-FppnYJfomJjEu7p3kkhcw2P3RqLZ-9c',
+          libraries: ["places"]
+      }),
     BrowserModule,
     RouterRoutingModule,
     HttpClientModule,

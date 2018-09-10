@@ -24,6 +24,7 @@ export class CV {
     public title: string;
     public activated: boolean;
     public portfolio: string;
+    public position_preference: string;
     public preferencedArea: string;
     public salaryFromPreference: number;
     public salaryTillPreference: number;
@@ -35,13 +36,13 @@ export class CV {
     public cvCertification = [];
     public education = [];
     public template = new Template(null, null, null);
-    public positionPreference = new Position(null, null);
+    // public positionPreference = new Position(null, null);
     public languages = [];
     public skills = [];
 
     constructor(cv?) {
         if (!cv) {
-            this.positionPreference = new Position(null, '');
+            // this.positionPreference = new Position(null, '');
             this.template = new Template(null, 0, 0);
             this.languages.push(new Language(null, ''));
             this.skills.push(new Skill(null, ''));
