@@ -49,6 +49,7 @@ export class ApiService {
       console.log('Query(put) header: ', httpOptions);
       console.log('Query(put) object:');
       console.log(obj);
+      console.log(JSON.stringify(obj));
       return this.http.put(query, obj, httpOptions);
   }
 
@@ -73,6 +74,7 @@ export class ApiService {
     console.log('Query(post) header: ', httpOptions);
     console.log('Query(post) object:');
     console.log(obj);
+    console.log(JSON.stringify(obj));
     return this.http.post(query, obj, httpOptions);
   }
   /**

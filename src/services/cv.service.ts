@@ -190,12 +190,13 @@ export class CvService implements OnInit {
   }
 
   private prepareActivity() {
-        this.cv.cvActivity.splice(0, this.cv.cvActivity.length - 1);
+        this.cv.cvActivity = [];
         for (let i = 0; i < this.cv.cvJobs.length; i++) {
             this.cv.cvActivity.push(
                 new Activity(null,
                     1,
                     null,
+                    this.cv.cvJobs[i].company,
                     this.cv.cvJobs[i].position.id,
                     this.cv.cvJobs[i].position.postName,
                     this.cv.cvJobs[i].description,
@@ -206,8 +207,9 @@ export class CvService implements OnInit {
         }
         for (let i = 0; i < this.cv.cvAchievements.length; i++) {
             this.cv.cvActivity.push(
-                new Activity(null,
+                new Activity(this.cv.cvAchievements[i].id,
                     2,
+                    null,
                     null,
                     null,
                     null,
@@ -219,8 +221,9 @@ export class CvService implements OnInit {
         }
         for (let i = 0; i < this.cv.cvCertification.length; i++) {
             this.cv.cvActivity.push(
-                new Activity(null,
+                new Activity(this.cv.cvCertification[i].id,
                     3,
+                    null,
                     null,
                     null,
                     null,
@@ -282,12 +285,14 @@ export class CvService implements OnInit {
                 case 2:
                     this.cv.cvAchievements.push(new Achievement(
                         this.cv.cvActivity[i].description,
-                        this.cv.cvActivity[i].yearEnd));
+                        this.cv.cvActivity[i].yearEnd,
+                        this.cv.cvActivity[i].id));
                     break;
                 case 3:
                     this.cv.cvCertification.push(new Certification(
                         this.cv.cvActivity[i].description,
-                        this.cv.cvActivity[i].yearEnd));
+                        this.cv.cvActivity[i].yearEnd,
+                        this.cv.cvActivity[i].id));
                     break;
             }
         }

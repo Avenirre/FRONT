@@ -39,6 +39,12 @@ export class CvPresentationComponent implements OnInit, OnDestroy {
     }
   }
 
+  calculateAge(birthday) {
+    const ageDifMs = Date.now() - birthday.getTime();
+    const ageDate = new Date(ageDifMs);
+    return Math.abs(ageDate.getUTCFullYear() - 1970);
+  }
+
   ngOnDestroy(): void {
 
   }
