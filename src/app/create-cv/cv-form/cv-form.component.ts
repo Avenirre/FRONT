@@ -12,9 +12,7 @@ import {Position} from '../../../models/cv/cv.position.model';
 
 import {ApiService} from '../../../services/rest/api.service';
 import {environment} from '../../../environments/environment';
-import {HttpClient} from '@angular/common/http';
 
-import {AgmCvComponent} from './agm-cv/agm-cv.component';
 import {MapsAPILoader} from '@agm/core';
 
 
@@ -65,9 +63,9 @@ export class CvFormComponent implements OnInit {
           );
       this.mapsAPILoader.load().then(
           () => {
-              let autocomplete = new google.maps.places.Autocomplete(this.searchElement.nativeElement, { types:["(cities)"] });
+              let autocomplete = new google.maps.places.Autocomplete(this.searchElement.nativeElement, { types: ['(cities)'] });
 
-              autocomplete.addListener("place_changed", () => {
+              autocomplete.addListener('place_changed', () => {
                   this.ngZone.run(() => {
                       let place: google.maps.places.PlaceResult = autocomplete.getPlace();
                       if (place.geometry === undefined || place.geometry === null ) {

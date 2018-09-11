@@ -3,7 +3,6 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {RouterRoutingModule} from '../router/router-routing.module';
 import {AgmCoreModule} from '@agm/core';
-import {AgmCvComponent} from './create-cv/cv-form/agm-cv/agm-cv.component';
 // LIBRARIES
 
 // COMPONENTS
@@ -64,7 +63,6 @@ import {CvFormCheckboxGroupComponent} from './form-controls/cv-form-checkbox-gro
 import {CvFormInputComponent} from './form-controls/cv-form-input/cv-form-input.component';
 import {CvFormSliderComponent} from './form-controls/cv-form-slider/cv-form-slider.component';
 import {FoldersListComponent} from './profiles/profile-company/company-menu/folders-list/folders-list.component';
-import {MatProgressSpinnerModule} from '@angular/material';
 
 
 @NgModule({
@@ -113,8 +111,7 @@ import {MatProgressSpinnerModule} from '@angular/material';
     CvFormCheckboxGroupComponent,
     CvFormInputComponent,
     CvFormSliderComponent,
-    FoldersListComponent,
-    AgmCvComponent
+    FoldersListComponent
   ],
   imports: [
     AgmCoreModule.forRoot({
@@ -125,9 +122,7 @@ import {MatProgressSpinnerModule} from '@angular/material';
     RouterRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule,
-    NoopAnimationsModule,
-    BrowserAnimationsModule,
+    ReactiveFormsModule
   ],
   providers: [
     ModalService,
