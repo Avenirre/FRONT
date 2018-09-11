@@ -81,7 +81,7 @@
       <input type="text" name="choose_preferable_area" [(ngModel)]="cv.preferencedArea" placeholder="choose preferable area"/>
       <!--<select name="preference_position" placeholder="Choose an option" [(ngModel)]="cv.positionPreference.id">-->
         <!--<option disabled>Select preference position</option>-->
-        <!--<option *ngFor="let pos of positions" [selected]="cv.positionPreference.id == pos.id" [value]="pos.id">{{ pos.postName }}</option>-->
+        <!--<option *ngFor="let pos of positions" [selected]="cv.positionPreference.id == pos.id" [value]="pos.id">{{ pos.position }}</option>-->
       <!--</select>-->
       <input type="text" name="choose_position" placeholder="choose preferable position"
              [(ngModel)]="cv.position_preference"/>
@@ -105,8 +105,8 @@
                [(ngModel)]="cv.education[i].degree"/>
         <input type="text" name="graduation_year_{{i}}" placeholder="graduation year*"
                [(ngModel)]="cv.education[i].yearEnd"/>
-        <input type="text" name="location_{{i}}" placeholder="location"
-               [(ngModel)]="cv.education[i].location"/>
+        <!--<input type="text" name="location_{{i}}" placeholder="location"-->
+               <!--[(ngModel)]="cv.education[i].location"/>-->
         <textarea name="edu_description_{{i}}" placeholder="description"
                   [(ngModel)]="cv.education[i].note"></textarea>
       </div>
@@ -144,11 +144,8 @@
     <div class="collapse" id="projects">
       <div *ngFor="let job of cv.cvJobs; let i = index">
         <input type="text" name="company_{{i}}" placeholder="company" [(ngModel)]="cv.cvJobs[i].company"/>
-        <!--<input type="text" name="company_{{i}}" placeholder="position" [(ngModel)]="cv.cvJobs[i].position.postName"/>-->
-        <select name="preference_position" [(ngModel)]="cv.cvJobs[i].position.id">
-          <option value="" disabled selected>Select position</option>
-          <option *ngFor="let pos of positions" [selected]="cv.cvJobs[i].position.id == pos.id" [value]="pos.id">{{ pos.postName }}</option>
-        </select>
+        <!--<input type="text" name="company_{{i}}" placeholder="position" [(ngModel)]="cv.cvJobs[i].position.position"/>-->
+        <input name="preference_position" placeholder="position" [(ngModel)]="cv.cvJobs[i].position">
 
         <label for="formControlRange_{{i}}">Frontend / Backend</label>
         <input

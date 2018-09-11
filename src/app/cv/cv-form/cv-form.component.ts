@@ -97,11 +97,11 @@ export class CvFormComponent implements OnInit {
   // }
 
   addEducation() {
-    this.cv.education.push(new Education(null, '', null, '', '', ''));
+    this.cv.education.push(new Education(null, '', null, '', ''));
   }
 
   addJob() {
-    this.cv.cvJobs.push(new Job(null, '', null, '', '', null, null, null));
+    this.cv.cvJobs.push(new Job(null, '', '', '', null, null, null));
   }
 
   addAchivement() {
