@@ -46,8 +46,8 @@ export class CV {
             this.template = new Template(null, 0, 0);
             this.languages.push(new Language(null, ''));
             this.skills.push(new Skill(null, ''));
-            this.education.push(new Education(null, '', null, '', '', ''));
-            this.cvJobs.push(new Job(null, '', null, '', '', null, null, 50));
+            this.education.push(new Education(null, '', null, '', ''));
+            this.cvJobs.push(new Job(null, '', '', '', null, null, 50));
             this.cvAchievements.push(new Achievement('', null));
             this.cvCertification.push(new Certification('', null));
         }

@@ -36,6 +36,7 @@ export const environment = {
     cvCreate: 'create-cv',
     cvEdit: 'profile/candidate/edit-cv/:id',
     unauthorizedUser: 'unauthorized',
+    cvShow: 'cv/:id',
   },
   /**
    * names of variables in local storage;

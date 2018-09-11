@@ -10,12 +10,15 @@ import {CV} from '../../../models/cv/cv.model';
 export class CvActionsComponent implements OnInit {
   title: string;
   cv: CV;
+  onlyShowMode = true;
   constructor(private cvService: CvService) { }
 
   ngOnInit() {
     this.title = this.cvService.setCV().title;
+    this.onlyShowMode = this.cvService.onlyShowMode;
     this.cvService.cvChanged.subscribe((cv: CV) => {
       this.title = cv.title;
+      this.onlyShowMode = this.cvService.onlyShowMode;
     });
   }
 

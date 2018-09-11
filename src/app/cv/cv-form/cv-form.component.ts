@@ -105,11 +105,11 @@ export class CvFormComponent implements OnInit {
   }
 
   addAchivement() {
-    this.cv.cvAchievements.push(new Achievement('', null));
+    this.cv.cvAchievements.push(new Achievement('', null, null));
   }
 
   addCertification() {
-    this.cv.cvCertification.push(new Certification('', null));
+    this.cv.cvCertification.push(new Certification('', null, null));
   }
 
   addLanguage() {

@@ -3,20 +3,18 @@ export class Activity {
     activityTypeId: number;
     activityTypeName: string;
     company: string;
-    positionId: number;
-    postName: string;
+    position: string;
     description: string;
     yearStart: number;
     yearEnd: number;
     backFront: number;
 
-    constructor(id, activityTypeId, activityTypeName, company, positionId, position_postName, description, yearStart, yearEnd, backFront) {
+    constructor(id, activityTypeId, activityTypeName, company, position, description, yearStart, yearEnd, backFront) {
         this.id = id;
         this.activityTypeId = activityTypeId;
         this.activityTypeName = activityTypeName;
         this.company = company;
-        this.positionId = positionId;
-        this.postName = position_postName;
+        this.position = position;
         this.description = description;
         this.yearStart = yearStart;
         this.yearEnd = yearEnd;
