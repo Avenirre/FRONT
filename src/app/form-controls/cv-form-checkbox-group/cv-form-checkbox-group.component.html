@@ -1,0 +1,9 @@
+<div *ngFor="let item of items; let i=index">
+  <label [for]="i">
+    <input [id]="i"
+           [name]="name"
+           type="checkbox"
+           value="{{item.value}}">
+    {{item.displayValue}}
+  </label>
+</div>

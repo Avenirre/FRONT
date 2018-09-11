@@ -13,7 +13,11 @@ export const environment = {
     skills_ref: ['api', 'skills'],
     user_cvs: ['api', 'cv'],
     registration: ['api', 'signup'],
-    getFolders: ['api', 'folders']
+    getFolders: ['api', 'folders'],
+    editFolder: (id: number): string[] => {
+      return ['api', 'folders', id.toString()];
+    },
+    getProfile: ['api', 'profiles'],
   },
   /**
    * local frontend routes
@@ -25,7 +29,7 @@ export const environment = {
     regCompany: 'registration-company',
     profile: 'profile',
     profileCandidate: 'profile/candidate',
-    profileCompany: 'profile/company',
+    profileCompany: 'company',
     profileCompanyFolders: 'folders',
     profileCompanySettings: 'settings',
     profileCompanySearch: 'search',

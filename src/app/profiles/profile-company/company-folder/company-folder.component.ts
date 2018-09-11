@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Params} from '@angular/router';
-import {CompanyService} from '../company.service';
+import {ActivatedRoute, ActivatedRouteSnapshot, Params} from '@angular/router';
+import {CompanyFoldersService} from '../company-folders.service';
 import {ProfileFolder} from '../../../../models/profileFolder';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-company-folder',
@@ -9,27 +10,39 @@ import {ProfileFolder} from '../../../../models/profileFolder';
   styleUrls: ['./company-folder.component.scss']
 })
 export class CompanyFolderComponent implements OnInit {
+  folderId: number;
   folder: ProfileFolder;
+
   errors = {
-    FolderNotFound: false
+    FolderNotFound: false,
+    FolderIsEmpty: false
   };
 
   constructor(
-    private companyService: CompanyService,
-    private activatedRoute: ActivatedRoute
+    private _companyService: CompanyFoldersService,
+    private activatedRoute: ActivatedRoute,
   ) {
   }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe((params: Params) => {
-      const folderName = params['folder'];
-      if (this.companyService.isFolderExists(folderName)) {
-        this.companyService.setCurrentFolder(folderName);
-        this.folder = this.companyService.getFolderByName(folderName);
-        this.errors.FolderNotFound = false;
-      } else {
-        this.errors.FolderNotFound = true;
+      this.folderId = parseInt(params['id'], 10);
+      this.getFolder();
+    });
+    this._companyService._$currentFolder.subscribe((folder) => {
+      if (folder !== undefined) {
+        this.folder = folder;
       }
     });
+  }
+
+  getFolder(): void {
+    if (!this._companyService.isDownloading) {
+      this._companyService.setCurrentFolderById(this.folderId);
+    } else {
+      this._companyService.downloadCompleted.subscribe(() => {
+        this._companyService.setCurrentFolderById(this.folderId);
+      });
+    }
   }
 }

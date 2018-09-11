@@ -8,8 +8,12 @@
       </div>
       <div class="content-main">
         <!--MAIN CONTENT-->
+        <app-company-settings *ngIf="section === SectionUnit.SETTINGS"></app-company-settings>
+        <app-cv-search *ngIf="section === SectionUnit.SEARCH"></app-cv-search>
+        <!--<app-company-folder *ngIf="section === SectionUnit.FOLDERS"></app-company-folder>-->
         <router-outlet></router-outlet>
         <!--/MAIN CONTENT-->
+
       </div>
     </section>
   </div>

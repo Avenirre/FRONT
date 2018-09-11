@@ -1,6 +1,26 @@
 @import '../../../../style-variables.scss';
 
 form {
-  margin: 2rem;
+  margin: 2rem 4rem 2rem 4rem;
   color: $color-light-gray;
+}
+
+h1 {
+  font-size: 2.5rem;
+  color: $color-light-gray;
+}
+
+input.ng-invalid {
+  border: 1px solid $color-orange;
+}
+
+input.ng-valid {
+  border: 1px solid $color-light-blue;
+}
+
+.pr-icon {
+  font-size: 3rem;
+  color: darkgrey;
+  text-align: center;
+
 }
