@@ -77,22 +77,6 @@ export class CvFormComponent implements OnInit {
               });
           }
       );
-
-      this.mapsAPILoader.load().then(
-          () => {
-              const autocompleteEst = new google.maps.places.Autocomplete(this.searchEst.nativeElement, { types: ['establishment'] });
-
-              autocompleteEst.addListener('place_changed', () => {
-                  this.ngZone.run(() => {
-                      const place: google.maps.places.PlaceResult = autocompleteEst.getPlace();
-                      if (place.geometry === undefined || place.geometry === null ) {
-                          return;
-                      }
-                      // this.cv.education[].institution = place.formatted_address;
-                  });
-              });
-          }
-      );
   }
 
 

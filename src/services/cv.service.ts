@@ -329,10 +329,10 @@ export class CvService implements OnInit {
           this.cv.cvJobs.push(new Job(null, '', '', '', null, null, 50));
       }
       if (this.cv.cvCertification.length === 0) {
-          this.cv.cvCertification.push(new Certification('', null));
+          this.cv.cvCertification.push(new Certification('', null, null));
       }
       if (this.cv.cvAchievements.length === 0) {
-          this.cv.cvAchievements.push(new Achievement('', null));
+          this.cv.cvAchievements.push(new Achievement('', null, null));
       }
       if (this.cv.education.length === 0) {
           this.cv.education.push(new Education(null, null, null, null, null));

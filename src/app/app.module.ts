@@ -64,6 +64,7 @@ import {CvFormSliderComponent} from './form-controls/cv-form-slider/cv-form-slid
 import {FoldersListComponent} from './profiles/profile-company/company-menu/folders-list/folders-list.component';
 import { CompanyCvFullComponent } from './profiles/profile-company/company-folder/company-cv-full/company-cv-full.component';
 import { ShowCvComponent } from './cv/show-cv/show-cv.component';
+import {AgmCvComponent} from './cv/cv-form/agm-cv/agm-cv.component';
 
 
 @NgModule({
@@ -114,7 +115,8 @@ import { ShowCvComponent } from './cv/show-cv/show-cv.component';
     CvFormSliderComponent,
     FoldersListComponent,
     CompanyCvFullComponent,
-    ShowCvComponent
+    ShowCvComponent,
+    AgmCvComponent
   ],
   imports: [
     AgmCoreModule.forRoot({
