@@ -1,4 +1,4 @@
-import {Component, ElementRef, NgZone, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, NgZone, OnInit, QueryList, ViewChild} from '@angular/core';
 import {CvService} from '../../../services/cv.service';
 import {CV} from '../../../models/cv/cv.model';
 import {DataService} from '../../../services/data.service';
@@ -36,7 +36,8 @@ export class CvFormComponent implements OnInit {
       new Position(4, 'Back End Developer'),
       new Position(4, 'Front End Developer'),
   ];
-  @ViewChild('searchResidence') public searchElement: ElementRef;
+  @ViewChild('searchResidence') public searchCity: ElementRef;
+  @ViewChild('searchEst') public searchEst: ElementRef;
 
   constructor(private cvService: CvService,
               private apiService: ApiService,
@@ -64,15 +65,30 @@ export class CvFormComponent implements OnInit {
           );
       this.mapsAPILoader.load().then(
           () => {
-              let autocomplete = new google.maps.places.Autocomplete(this.searchElement.nativeElement, { types: ['(cities)'] });
-
-              autocomplete.addListener('place_changed', () => {
+              const autocompleteCity = new google.maps.places.Autocomplete(this.searchCity.nativeElement, { types: ['(cities)'] });
+              autocompleteCity.addListener('place_changed', () => {
                   this.ngZone.run(() => {
-                      let place: google.maps.places.PlaceResult = autocomplete.getPlace();
+                      const place: google.maps.places.PlaceResult = autocompleteCity.getPlace();
                       if (place.geometry === undefined || place.geometry === null ) {
                           return;
                       }
                       this.cv.residence = place.formatted_address;
+                  });
+              });
+          }
+      );
+
+      this.mapsAPILoader.load().then(
+          () => {
+              const autocompleteEst = new google.maps.places.Autocomplete(this.searchEst.nativeElement, { types: ['establishment'] });
+
+              autocompleteEst.addListener('place_changed', () => {
+                  this.ngZone.run(() => {
+                      const place: google.maps.places.PlaceResult = autocompleteEst.getPlace();
+                      if (place.geometry === undefined || place.geometry === null ) {
+                          return;
+                      }
+                      // this.cv.education[].institution = place.formatted_address;
                   });
               });
           }

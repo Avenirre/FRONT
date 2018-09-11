@@ -64,8 +64,7 @@
              class="form-control"
              #searchResidence
              [(ngModel)]="cv.residence"
-             [ngModelOptions]="{standalone: true}"
-             (blur)="setData()">
+             [ngModelOptions]="{standalone: true}">
       <!--<agm-cv></agm-cv>-->
     </div>
 
@@ -99,8 +98,19 @@
     </a>
     <div class="collapse" id="education">
       <div *ngFor="let edu of cv.education; let i = index">
-        <input type="text" name="school_institution_name_{{i}}" placeholder="school/institution name*"
-               [(ngModel)]="cv.education[i].institution"/>
+        <!--<input type="text" name="school_institution_name_{{i}}" placeholder="school/institution name*"-->
+               <!--[(ngModel)]="cv.education[i].institution"/>-->
+
+        <input type="text"
+               name="school_institution_name_{{i}}"
+               placeholder="school/institution name*"
+               autocorrect="off"
+               autocapitalize="off"
+               spellcheck="off"
+               class="form-control"
+               #searchEst
+               [(ngModel)]="cv.education[i].institution"
+               [ngModelOptions]="{standalone: true}">
         <input type="text" name="degree_{{i}}" placeholder="degree*"
                [(ngModel)]="cv.education[i].degree"/>
         <input type="text" name="graduation_year_{{i}}" placeholder="graduation year*"
