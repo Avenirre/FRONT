@@ -52,6 +52,7 @@ export class AuthService {
   public handleSession() {
     if (!AuthService.isUserAlive()) {
       this.logout();
+      // setTimeout(this.modalService.openModal(environment.routes.login), 200);
       throw Error('unauthorized user: session is expired');
     }
   }

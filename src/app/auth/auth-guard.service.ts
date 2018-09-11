@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {ActivatedRoute, ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '@angular/router';
+import {ActivatedRoute, ActivatedRouteSnapshot, CanActivate, CanActivateChild, Router, RouterStateSnapshot} from '@angular/router';
 import {Observable} from 'rxjs';
 import {AuthService} from './auth.service';
 import {ModalService} from '../modal/modal.service';
@@ -10,7 +10,7 @@ import {SectionUnit} from '../../enums/section.enum';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
+export class AuthGuard implements CanActivate, CanActivateChild {
   private routes = environment.routes;
 
   constructor(
@@ -24,27 +24,27 @@ export class AuthGuard implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     const usertype = DataService.getUserType();
     if (usertype === 'COMPANY') {
-      let section;
-      const localSection: SectionUnit = DataService.getCurrentMenuSection();
-        if (localSection !== null) {
-          section = localSection;
-        } else {
-          section = this.routes.profileCompanySearch;
-        }
-        switch (section) {
-          case SectionUnit.SEARCH: {
-            section = this.routes.profileCompanySearch;
-            break;
-          }
-          case SectionUnit.SETTINGS: {
-            section = this.routes.profileCompanySettings;
-            break;
-          }
-          case SectionUnit.FOLDERS: {
-            section = this.routes.profileCompanyFolders;
-            break;
-          }
-        }
+      // let section;
+      // const localSection: SectionUnit = DataService.getCurrentMenuSection();
+      //   if (localSection !== null) {
+      //     section = localSection;
+      //   } else {
+      //     section = this.routes.profileCompanySearch;
+      //   }
+      //   switch (section) {
+      //     case SectionUnit.SEARCH: {
+      //       section = this.routes.profileCompanySearch;
+      //       break;
+      //     }
+      //     case SectionUnit.SETTINGS: {
+      //       section = this.routes.profileCompanySettings;
+      //       break;
+      //     }
+      //     case SectionUnit.FOLDERS: {
+      //       section = this.routes.profileCompanyFolders;
+      //       break;
+      //     }
+      //   }
       this.router.navigate([this.routes.profileCompany, this.routes.profileCompanySearch]);
     } else if (usertype === 'CANDIDATE') {
       this.router.navigate([this.routes.profileCandidate]);
@@ -57,5 +57,16 @@ export class AuthGuard implements CanActivate {
     this.modalService.showUnauthorizedMessage();
     return false;
     // return true;
+  }
+
+  canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+
+    const isAuthorisedUser = AuthService.isLoggedIn();
+    if (isAuthorisedUser) {
+      return true;
+    }
+
+    this.modalService.openModal(environment.routes.login);
+    return false;
   }
 }
