@@ -14,6 +14,7 @@ import {ApiService} from '../../../services/rest/api.service';
 import {environment} from '../../../environments/environment';
 
 import {MapsAPILoader} from '@agm/core';
+import {} from '@types/googlemaps';
 
 
 declare var $: any;
