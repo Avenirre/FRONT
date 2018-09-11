@@ -14,9 +14,9 @@ export const environment = {
     user_cvs: ['api', 'cv'],
     registration: ['api', 'signup'],
     getFolders: ['api', 'folders'],
-    editFolder: (id: number): string[] => {
-      return ['api', 'folders', id.toString()];
-    },
+    // editFolder: (id: number): string[] => {
+    //   return ['api', 'folders', id.toString()];
+    // },
     getProfile: ['api', 'profiles'],
   },
   /**

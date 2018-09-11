@@ -98,17 +98,14 @@
             </label>
           </div>
         </div>
-        <div class="alert alert-danger"
-             *ngIf="errors.RegError">
-          Registration Error
-        </div>
-        <div class="alert alert-danger"
-             *ngIf="errors.UserNameExists">
-          User with such username already exists!
-        </div>
-        <div class="alert alert-danger"
-             *ngIf="errors.ServerError">
-          Internal server error
+        <div class="err-message-container">
+          <span *ngIf="errors.message" class="err-message">
+            {{errors.message}}
+          </span>
+          <div class="err-message"
+               *ngIf="errors.ServerError">
+            Internal server error
+          </div>
         </div>
         <!--<a>request secret code</a>-->
         <!--<div class="form-group row">-->

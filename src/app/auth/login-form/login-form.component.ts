@@ -23,7 +23,8 @@ export class LoginFormComponent implements OnInit {
   loginError = false;
   errors = {
     unauthorised: false,
-    dif: false
+    dif: false,
+    message: null
   };
   private routes = environment.routes;
 
@@ -62,8 +63,8 @@ export class LoginFormComponent implements OnInit {
    * @param {NgForm} form
    */
   onLogin(form: NgForm) {
+    this.resetErrors();
     const loginData = new LoginData(form.value['username'], form.value['password']);
-    // console.log(loginData);
     this.authService.login(loginData)
       .then(
         () => {
@@ -76,6 +77,8 @@ export class LoginFormComponent implements OnInit {
         },
         (error) => {
           console.log(error);
+          this.errors.message = error['error']['message'];
+            console.log('login error', error);
           if (error.status === 401) {
             this.errors.unauthorised = true;
           } else {
@@ -83,6 +86,12 @@ export class LoginFormComponent implements OnInit {
           }
         this.loginError = true;
       });
+  }
+
+  private resetErrors() {
+    this.errors.message = null;
+    this.errors.unauthorised = false;
+    this.errors.dif = false;
   }
 }
 

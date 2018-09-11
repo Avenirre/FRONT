@@ -148,7 +148,7 @@ export class CvService implements OnInit {
     if (this.cv.title === '' || this.cv.title === null) {
         return;
     }
-    if (!this.authService.isLoggedIn()) {
+    if (!AuthService.isLoggedIn()) {
       this.expectingCv = true;
       this.headerService.openModal('login');
     } else {

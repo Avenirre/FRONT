@@ -27,6 +27,10 @@ export class CompanyCvPrevComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
   }
 
+  /**
+   * adds/removes id of checked/unchecked cv in checked cv IDs array;
+   * @param event
+   */
   onCheckboxPressed(event: Event) {
     const state = event.target['checked'];
     if (state) {
@@ -36,6 +40,9 @@ export class CompanyCvPrevComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   * toggles state of visibility of full representation of current CV;
+   */
   openFullCv() {
     this.isDeployed = !this.isDeployed;
   }

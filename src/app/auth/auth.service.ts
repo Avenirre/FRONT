@@ -42,6 +42,10 @@ export class AuthService {
     return user !== null && user.token !== null;
   }
 
+  /**
+   * returns true if current user session is less than setted session time
+   * and returns false otherwise;
+   */
   public static isUserAlive(): boolean {
     const profileTime = DataService.getCurrentUser().timestamp;
     const currentTime = Date.now();
@@ -49,6 +53,10 @@ export class AuthService {
     return currentTime - profileTime < lifeTime;
   }
 
+  /**
+   * checks that user session is not expired; otherwise makes logout of current user;
+   * throws Unauthorised error;
+   */
   public handleSession() {
     if (!AuthService.isUserAlive()) {
       this.logout();
@@ -136,8 +144,6 @@ export class AuthService {
           });
     });
   }
-
-
 }
 
 

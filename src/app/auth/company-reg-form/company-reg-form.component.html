@@ -159,8 +159,8 @@
             <label class="col-md-6 d-none d-md-block"
                    for="username">e.g.Username</label>
             <!--<div class="error-message" *ngIf="regForm.get('username')">-->
-              <!--{{validation_messages.username}}-->
-              <!--sdfsdf-->
+            <!--{{validation_messages.username}}-->
+            <!--sdfsdf-->
             <!--</div>-->
           </div>
 
@@ -190,7 +190,7 @@
           </div>
 
           <div class="alert alert-danger"
-          *ngIf="errors.RegError">
+               *ngIf="errors.RegError">
             Registration Error
           </div>
         </div>
@@ -206,17 +206,22 @@
         <!--secret code, received by SMS-->
         <!--</label>-->
         <!--</div>-->
-        <div class="alert alert-danger"
-             *ngIf="errors.RegError">
-          Registration Error
-        </div>
-        <div class="alert alert-danger"
-             *ngIf="errors.UserNameExists">
-          User with such username already exists!
-        </div>
-        <div class="alert alert-danger"
-             *ngIf="errors.ServerError">
-          Internal server error
+        <div class="err-message-container">
+          <span *ngIf="errors.message" class="err-message">
+            {{errors.message}}
+          </span>
+          <!--<div class="alert alert-danger"-->
+               <!--*ngIf="errors.RegError">-->
+            <!--Registration Error-->
+          <!--</div>-->
+          <!--<div class="alert alert-danger"-->
+               <!--*ngIf="errors.UserNameExists">-->
+            <!--User with such username already exists!-->
+          <!--</div>-->
+          <div class="err-message"
+               *ngIf="errors.ServerError">
+            Internal server error
+          </div>
         </div>
         <div class="form-group row">
           <div class="col-12 message">

@@ -59,6 +59,10 @@ export class CompanyFoldersService {
     }
   }
 
+  /**
+   * returns folder by given folder id
+   * @param id
+   */
   public getFolder(id: number): ProfileFolder {
     for (const folder of this.folders) {
       if (folder.id === id) {
@@ -68,11 +72,20 @@ export class CompanyFoldersService {
     return null;
   }
 
+  /**
+   * set current section[settings, search or folders] and emits Observable
+   * with changed section value;
+   * @param paramSection
+   */
   sectionChanged(paramSection: string) {
     this.section = CompanyFoldersService.defineSection(paramSection);
     this._$section.next(this.section);
   }
 
+  /**
+   * sets value of current folder on folder with given id and emits changes Observable;
+   * @param id
+   */
   setCurrentFolderById(id: number): boolean {
     const folder = this.getFolder(id);
     if (folder) {
@@ -83,6 +96,12 @@ export class CompanyFoldersService {
     return false;
   }
 
+  /**
+   * receives parameter which can be number - id or string - name and checks,
+   * that folder with given id/name exists in folders array;
+   * * returns true if folder exists and false if folder does not exists;
+   * @param par
+   */
   public isFolderExists(par: number | string): boolean {
     if (typeof par === 'number') {
       return this.isFolderIdExists(<number>par);
@@ -91,6 +110,11 @@ export class CompanyFoldersService {
     }
   }
 
+  /**
+   * checks that folders with given id exists in folders array;
+   * returns true if folder exists and false if folder does not exists;
+   * @param id
+   */
   private isFolderIdExists(id: number): boolean {
     for (const folder of this.folders) {
       if (folder.id === id) {
@@ -100,6 +124,11 @@ export class CompanyFoldersService {
     return false;
   }
 
+  /**
+   * checks that folders with given name exists in folders array;
+   * * returns true if folder exists and false if folder does not exists;
+   * @param name
+   */
   private isFolderNameExists(name: string) {
     for (const folder of this.folders) {
       if (folder.nameFolder === name) {
@@ -109,6 +138,10 @@ export class CompanyFoldersService {
     return false;
   }
 
+  /**
+   * redirects to folder page chosen by given id;
+   * @param id
+   */
   public navigateToFolder(id: number): void {
     this._router.navigate([
       environment.routes.profileCompany,
@@ -117,6 +150,9 @@ export class CompanyFoldersService {
     ]);
   }
 
+  /**
+   * redirects to the page of first existing in folders array folder;
+   */
   navigateToDefaultFolder() {
     this._router.navigate([
       environment.routes.profileCompany,
@@ -127,6 +163,11 @@ export class CompanyFoldersService {
 
   // CRUD FOLDERS METHODS
 
+  /**
+   * creates folder with given name and inserts it into local folders array;
+   * TODO api create method: method must make request to create folder to back api and receive created folder, which must include proper folder id and push it into folders array;
+   * @param name
+   */
   createFolder(name: string) {
     console.log(name);
     const folder = new ProfileFolder(1, name, null);
@@ -135,6 +176,12 @@ export class CompanyFoldersService {
     this._$folders.next(this.folders);
   }
 
+  /**
+   * sets given name to the local folder with given id;
+   * makes request to api;
+   * @param id
+   * @param name
+   */
   async editFolder(id: number, name: string) {
     const index = this.folders.findIndex((cur) => {
       return cur.id === id;
@@ -150,6 +197,11 @@ export class CompanyFoldersService {
     }
   }
 
+  /**
+   * deletes folder by given id from local folders array and makes request to
+   * delete folder with given id from backend database;
+   * @param id
+   */
   deleteFolder(id: number) {
     const index = this.folders.findIndex((c) => {
       return c.id === id;
@@ -167,11 +219,19 @@ export class CompanyFoldersService {
 
   // CVS METHODS
 
+  /**
+   * adds given cv id into array of user checked CVs;
+   * @param id
+   */
   public addCheckedCv(id: number) {
     this.checkedCvs.push(id);
     this._$checkedFoldersChanged.next(this.checkedCvs);
   }
 
+  /**
+   * removes given cv id from array of user checked CVs;
+   * @param id
+   */
   public removeCheckedCv(id: number) {
     const index = this.checkedCvs.findIndex((c) => {
       return c === id;
@@ -180,6 +240,11 @@ export class CompanyFoldersService {
     this._$checkedFoldersChanged.next(this.checkedCvs);
   }
 
+  /**
+   * deletes in current folder all CVs whose IDs represented
+   * in arrays of CVs, selected by user;
+   * TODO api request
+   */
   public deleteSelectedCvs() {
     this.checkedCvs.forEach((id: number) => {
       const cvIndex = this.currentFolder.cvs.findIndex((current) => {
@@ -199,11 +264,6 @@ export class CompanyFoldersService {
   // API METHODS  \\
   //              //
   private async apiGetFolders() {
-    // try {
-    //   this._auth.handleSession();
-    // } catch (error) {
-    //   throw error;
-    // }
     this.isDownloading = true;
     const httpOptions = {
       headers: new HttpHeaders({
@@ -245,7 +305,7 @@ export class CompanyFoldersService {
     };
     const resp = await this._api
       .put<ProfileFolder>(
-        environment.api.editFolder(folder.id),
+        ['api', 'folders', folder.id],
         folder,
         httpOptions)
       .toPromise();

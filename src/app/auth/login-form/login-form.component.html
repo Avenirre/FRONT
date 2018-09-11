@@ -56,9 +56,8 @@
           <!--<i class="clear fas fa-times" onclick="var input = this.previousSibling; input.value = ''; input.focus();"></i>-->
         </div>
         <div class="err-message-container">
-          <span class="err-message"
-             *ngIf="errors.unauthorised">
-            Invalid login or password!
+          <span *ngIf="errors.message" class="err-message">
+            {{errors.message}}
           </span>
           <span class="err-message"
                 *ngIf="errors.dif">

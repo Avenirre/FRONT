@@ -65,7 +65,7 @@ export class ModalService implements OnInit {
   }
 
   /**
-   * fire modal with success authorization message
+   * fire modal with success authorization message;
    */
   public showSuccessLogin() {
     const currentLogin = DataService.getUserName();
@@ -73,11 +73,18 @@ export class ModalService implements OnInit {
     this.showMessage(message);
   }
 
+  /**
+   * creates modal with unauthorized user text message;
+   */
   public showUnauthorizedMessage() {
     const message = this.textService.getUnauthorizedMessage();
     this.showMessage(message);
   }
 
+  /**
+   * creates modal with custom given error text message;
+   * @param type
+   */
   public showErrorMessage(type: string) {
     if (type === 'registration') {
       const message = this.textService.getRegistrationErrorMessage();

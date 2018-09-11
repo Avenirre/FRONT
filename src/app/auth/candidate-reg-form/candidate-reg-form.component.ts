@@ -23,7 +23,8 @@ export class CandidateRegFormComponent implements OnInit {
   errors = {
     RegError: false,
     UserNameExists: false,
-    ServerError: false
+    ServerError: false,
+    message: null
   };
   regForm = this.fb.group({
     applicantDetails: this.fb.group({
@@ -117,6 +118,7 @@ export class CandidateRegFormComponent implements OnInit {
           }
         },
         (error) => {
+          this.errors.message = error.error.message;
           console.log(error);
           if (error.status === 400) {
             this.errors.UserNameExists = true;

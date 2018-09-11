@@ -20,7 +20,8 @@ export class CompanyRegFormComponent implements OnInit {
   errors = {
     RegError: false,
     UserNameExists: false,
-    ServerError: false
+    ServerError: false,
+    message: null
   };
   regForm = this.fb.group({
     companyDetails: this.fb.group({
@@ -108,6 +109,7 @@ export class CompanyRegFormComponent implements OnInit {
         },
         (error) => {
           console.log(error);
+          this.errors.message = error.error.message;
           if (error.status === 400) {
             this.errors.UserNameExists = true;
           } else if (error.status === 500) {

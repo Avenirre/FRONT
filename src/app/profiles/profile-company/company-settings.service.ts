@@ -32,6 +32,11 @@ export class CompanySettingsService implements OnInit {
     }
   }
 
+  /**
+   * makes request to backend api to get profile of current logged user;
+   * returns object of current user data;
+   * throws error if user is not logged;
+   */
   async getProfile(): Promise<Applicant> {
     try {
       this._auth.handleSession();
@@ -52,6 +57,12 @@ export class CompanySettingsService implements OnInit {
     return response['data'];
   }
 
+  /**
+   * makes request with given user data object to backend api
+   * and updates data of current logged user;
+   * throws error if user is not logged;
+   * @param profile
+   */
   async updateProfile(profile: Applicant) {
     try {
       this._auth.handleSession();
