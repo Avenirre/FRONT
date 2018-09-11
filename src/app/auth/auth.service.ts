@@ -7,13 +7,13 @@ import {environment} from '../../environments/environment';
 import {ModalService} from '../modal/modal.service';
 import {DataService} from '../../services/data.service';
 import {Router} from '@angular/router';
+import {LocalProfile} from '../../models/local-storage/local-profile.settings';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private api = environment.api;
-
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -29,6 +29,34 @@ export class AuthService {
     private dataService: DataService,
   ) {
   }
+
+  // LIFETIME METHODS
+
+  public static isUserAlive(): boolean {
+    const profileTime = new Date(DataService.getCurrentUser().timestamp);
+    const currentTime = new Date();
+    const lifeTime = DataService.toMilliseconds(environment.settings.profileLifetime);
+    console.log('diff', );
+
+
+
+
+    const difference = new Date(currentTime - profileTime);
+    console.log('difference', difference.getTime());
+    if (difference < lifeTime) {
+      console.log(false);
+    } else {
+      console.log(true);
+    }
+    return false;
+  }
+
+  public static setProfileLifetime(time) {
+    const profile = DataService.getCurrentUser();
+    console.log(profile);
+  }
+
+  // END LIFETIME METHODS
 
   /**
    * check if user logged in
@@ -117,5 +145,10 @@ export class AuthService {
           });
     });
   }
+
+
 }
+
+
+
 

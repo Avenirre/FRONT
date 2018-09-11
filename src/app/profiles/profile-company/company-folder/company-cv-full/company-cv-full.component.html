@@ -1,5 +1,4 @@
-<p>asdfpi</p>
-<!--&lt;!&ndash;TEMPLATE-0&ndash;&gt;-->
+<!--TEMPLATE-0-->
 <div *ngIf="cv.template.type == 0" class="cv-presentation">
   <div class="h-back template-{{cv.template.colorScheme}}">
   </div>
@@ -44,94 +43,94 @@
       </div>
     </div>
   </div>
-  <!--<div class="cv-section-grid-container">-->
-    <!--<div class="cv-section-left"><h3>skills</h3></div>-->
-    <!--<div class="cv-section-right">-->
-      <!--<div class="cv-data-container">-->
-        <!--<span *ngFor="let skill of cv.skills; let i = index;">-->
-          <!--<strong *ngIf="i > 0">, </strong>-->
-          <!--<strong>{{ skill.nameSkill }}</strong>-->
-        <!--</span>-->
-      <!--</div>-->
-    <!--</div>-->
-  <!--</div>-->
-  <!--<div class="cv-section-grid-container">-->
-    <!--<div class="cv-section-left"><h3>projects</h3></div>-->
-    <!--<div class="cv-section-right">-->
-      <!--<div class="cv-data-container">-->
-        <!--<p *ngFor="let job of cv.cvJobs">-->
-          <!--{{job.yearStart}} year - {{job.yearEnd}} year<br>-->
-          <!--<strong>{{job.company}}</strong>-->
-          <!--{{job.position.postName}} <br>-->
-          <!--{{job.backFront}}% frontend <strong>/</strong> {{100 - job.backFront}}% backend <br>-->
-          <!--{{job.description}}-->
-        <!--</p>-->
-      <!--</div>-->
-    <!--</div>-->
-  <!--</div>-->
-  <!--<div class="cv-section-grid-container">-->
-    <!--<div class="cv-section-left"><h3>education</h3></div>-->
-    <!--<div class="cv-section-right">-->
-      <!--<div class="cv-data-container">-->
-        <!--<p *ngFor="let education of cv.education">-->
-          <!--{{education.yearEnd}} year-->
-          <!--<br>-->
-          <!--<strong>{{education.institution}} | {{education.degree}}</strong>-->
-          <!--<br>-->
-          <!--{{education.location}}-->
-          <!--{{education.note}}-->
-        <!--</p>-->
-      <!--</div>-->
-    <!--</div>-->
-  <!--</div>-->
-  <!--<div class="cv-section-grid-container">-->
-    <!--<div class="cv-section-left"><h3>certification</h3></div>-->
-    <!--<div class="cv-section-right">-->
-      <!--<div class="cv-data-container">-->
-        <!--<p *ngFor="let certificate of cv.cvCertification">-->
-          <!--{{certificate.yearEnd}}<br>-->
-          <!--<strong>-->
-            <!--{{certificate.description}}-->
-          <!--</strong>-->
-        <!--</p>-->
-      <!--</div>-->
-    <!--</div>-->
-  <!--</div>-->
-  <!--<div class="cv-section-grid-container">-->
-    <!--<div class="cv-section-left"><h3>achievements</h3></div>-->
-    <!--<div class="cv-section-right">-->
-      <!--<div class="cv-data-container">-->
-        <!--<p *ngFor="let acheivement of cv.cvAchievements">-->
-          <!--{{acheivement.yearEnd}}<br>-->
-          <!--<strong>-->
-            <!--{{acheivement.description}}-->
-          <!--</strong>-->
-        <!--</p>-->
-      <!--</div>-->
-    <!--</div>-->
-  <!--</div>-->
-  <!--<div class="cv-section-grid-container">-->
-    <!--<div class="cv-section-left"><h3>languages</h3></div>-->
-    <!--<div class="cv-section-right">-->
-      <!--<div class="cv-data-container">-->
-        <!--<span *ngFor="let lanaguage of cv.languages; let i = index;">-->
-          <!--<strong *ngIf="i > 0 && lanaguage.id">, </strong>-->
-          <!--<strong>-->
-            <!--{{lanaguage.nameLang}}-->
-          <!--</strong>-->
-        <!--</span>-->
-      <!--</div>-->
-    <!--</div>-->
-  <!--</div>-->
-  <!--<div class="cv-section-grid-container">-->
-    <!--<div class="cv-section-left"><h3>other</h3></div>-->
-    <!--<div class="cv-section-right">-->
-      <!--<div class="cv-data-container">-->
-        <!--{{ cv.linkedin }} <br *ngIf="cv.linkedin!='' && cv.linkedin!=null">-->
-        <!--{{ cv.github }} <br *ngIf="cv.github!='' && cv.github!=null">-->
-        <!--{{ cv.portfolio }} <br *ngIf="cv.portfolio!='' && cv.portfolio!=null">-->
-        <!--{{ cv.recommendations }}-->
-      <!--</div>-->
-    <!--</div>-->
-  <!--</div>-->
+  <div class="cv-section-grid-container">
+    <div class="cv-section-left"><h3>skills</h3></div>
+    <div class="cv-section-right">
+      <div class="cv-data-container">
+        <span *ngFor="let skill of cv.skills; let i = index;">
+          <strong *ngIf="i > 0">, </strong>
+          <strong>{{ skill.nameSkill }}</strong>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="cv-section-grid-container">
+    <div class="cv-section-left"><h3>projects</h3></div>
+    <div class="cv-section-right">
+      <div class="cv-data-container">
+        <p *ngFor="let job of cv.cvJobs">
+          {{job.yearStart}} year - {{job.yearEnd}} year<br>
+          <strong>{{job.company}}</strong>
+          {{job.position.postName}} <br>
+          {{job.backFront}}% frontend <strong>/</strong> {{100 - job.backFront}}% backend <br>
+          {{job.description}}
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="cv-section-grid-container">
+    <div class="cv-section-left"><h3>education</h3></div>
+    <div class="cv-section-right">
+      <div class="cv-data-container">
+        <p *ngFor="let education of cv.education">
+          {{education.yearEnd}} year
+          <br>
+          <strong>{{education.institution}} | {{education.degree}}</strong>
+          <br>
+          {{education.location}}
+          {{education.note}}
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="cv-section-grid-container">
+    <div class="cv-section-left"><h3>certification</h3></div>
+    <div class="cv-section-right">
+      <div class="cv-data-container">
+        <p *ngFor="let certificate of cv.cvCertification">
+          {{certificate.yearEnd}}<br>
+          <strong>
+            {{certificate.description}}
+          </strong>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="cv-section-grid-container">
+    <div class="cv-section-left"><h3>achievements</h3></div>
+    <div class="cv-section-right">
+      <div class="cv-data-container">
+        <p *ngFor="let acheivement of cv.cvAchievements">
+          {{acheivement.yearEnd}}<br>
+          <strong>
+            {{acheivement.description}}
+          </strong>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="cv-section-grid-container">
+    <div class="cv-section-left"><h3>languages</h3></div>
+    <div class="cv-section-right">
+      <div class="cv-data-container">
+        <span *ngFor="let lanaguage of cv.languages; let i = index;">
+          <strong *ngIf="i > 0 && lanaguage.id">, </strong>
+          <strong>
+            {{lanaguage.nameLang}}
+          </strong>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="cv-section-grid-container">
+    <div class="cv-section-left"><h3>other</h3></div>
+    <div class="cv-section-right">
+      <div class="cv-data-container">
+        {{ cv.linkedin }} <br *ngIf="cv.linkedin!='' && cv.linkedin!=null">
+        {{ cv.github }} <br *ngIf="cv.github!='' && cv.github!=null">
+        {{ cv.portfolio }} <br *ngIf="cv.portfolio!='' && cv.portfolio!=null">
+        {{ cv.recommendations }}
+      </div>
+    </div>
+  </div>
 </div>

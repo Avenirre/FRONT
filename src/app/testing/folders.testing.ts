@@ -20,7 +20,7 @@ export const testingFolders = [
         'activated': 'true',
         'template': {
           'type': 0,
-          'coloreScherme': 0
+          'colorScheme': 0
         }
       },
       {
@@ -33,7 +33,11 @@ export const testingFolders = [
         'phone': '+972 73 243 4222',
         'skills': ['piece', 'Latin', 'words'],
         'residence': 'Beer Sheva',
-        'birthday': '25'
+        'birthday': '25',
+        'template': {
+          'type': 0,
+          'colorScheme': 1
+        }
       },
       {
         'id': 3,
@@ -47,7 +51,11 @@ export const testingFolders = [
         'skills': ['Letraset', 'long', 'looking'],
         'residence': 'Beer Sheva',
         'birthday': '25',
-        'activated': 'true'
+        'activated': 'true',
+        'template': {
+          'type': 0,
+          'colorScheme': 0
+        }
       }
     ]
   },
@@ -66,7 +74,11 @@ export const testingFolders = [
         'phone': '+972 73 243 4222',
         'skills': ['skill1', 'skill2', 'skill3'],
         'residence': 'Beer Sheva',
-        'birthday': '25'
+        'birthday': '25',
+        'template': {
+          'type': 0,
+          'colorScheme': 1
+        }
       },
       {
         'id': 5,
@@ -79,7 +91,11 @@ export const testingFolders = [
         'phone': '+972 73 243 4222',
         'skills': ['piece', 'Latin', 'words'],
         'residence': 'Beer Sheva',
-        'birthday': '25'
+        'birthday': '25',
+        'template': {
+          'type': 0,
+          'colorScheme': 1
+        }
       }
     ]
   }

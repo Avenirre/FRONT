@@ -9,20 +9,13 @@ import {RequestAdress} from '../../models/request-adress.model';
   providedIn: 'root'
 })
 export class ApiService {
-  // httpOptions = {
-  //   // TODO token
-  //   headers: new HttpHeaders({
-  //     'Content-Type': 'application/json',
-  //     'Authorization': 'my-auth-token'
-  //   })
-  // };
   constructor(private http: HttpClient) {
   }
 
   /**
    * makes request to the back-end server with given path
-   * @param {string[]} path
-   * @returns {Observable<Object>}
+   * @param path
+   * @param headers
    */
   public get(path: string[], headers?) {
     const adr = new RequestAdress(environment.apiUrl, environment.apiPort.toString(), path);
@@ -64,8 +57,9 @@ export class ApiService {
   /**
    * makes post request to the back-end server with given path
    * and send data, stored in the @object
-   * @param {string[]} path
-   * @returns {Observable<Object>}
+   * @param path
+   * @param obj
+   * @param httpOptions
    */
   public post<T>(path: string[], obj: T, httpOptions) {
     const adr = new RequestAdress(environment.apiUrl, environment.apiPort.toString(), path);
@@ -77,10 +71,10 @@ export class ApiService {
     console.log(JSON.stringify(obj));
     return this.http.post(query, obj, httpOptions);
   }
+
   /**
    *
-   * @param {QueryAdressInterface} adr
-   * @returns {string}
+   * @param adr
    */
   private buildRequest(adr: QueryAdressInterface): string {
     let res = adr.host + ':' + adr.port;

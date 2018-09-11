@@ -49,6 +49,14 @@ export const environment = {
    * other options;
    */
   settings: {
+    profileLifetime: {
+      years: 0,
+      months: 0,
+      days: 0,
+      hours: 0,
+      minutes: 0,
+      seconds: 10
+    },
     templates: {
       types: [0],
       colorSchemes: [0, 1]

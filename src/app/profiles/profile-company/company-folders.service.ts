@@ -199,10 +199,11 @@ export class CompanyFoldersService {
       .get(environment.api.getFolders, httpOptions)
       .toPromise();
 
+    let folders = response['data'];
 // TESTING
-    // const folders = response['data'];
-    const folders = <ProfileFolder[]> testingFolders;
+    folders = <ProfileFolder[]> testingFolders;
 // TESTING
+    console.log(folders);
     this.folders = folders;
     this._$folders.next(folders);
     this.isDownloading = false;
