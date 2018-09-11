@@ -37,7 +37,7 @@ export class CvService implements OnInit {
   routes = environment;
   changedChecked = new Subject<number>();
   changedUserCVs = new Subject<CV[]>();
-  onlyShowMode = false;
+  onlyShowMode = true;
 
   constructor(private http: HttpClient,
               private apiService: ApiService,
@@ -48,20 +48,19 @@ export class CvService implements OnInit {
 
   public setCV(cv?) {
       if (typeof cv === 'number') {
-          let get_route: string[];
+          const get_route = [];
           for (let i = 0; i < this.routes.api.user_cvs.length; i++) {
-              get_route.push(this.routes.api.user_cvs.length[i]);
+              get_route.push(this.routes.api.user_cvs[i]);
           }
           get_route.push(cv.toString());
           let headers: HttpHeaders = new HttpHeaders();
           headers = headers.append('Content-Type', 'application/json');
           headers = headers.append('Authorization', `Bearer ${DataService.getUserToken()}`);
           this.apiService.get(get_route, {headers: headers}).subscribe(
-              (res: CV) => {
-                  this.cv = res;
+              (res) => {
+                  this.cv = res['data'];
                   this.prepareToUsing();
                   this.onlyShowMode = true;
-                  console.log('only show', this.onlyShowMode);
                   this.cvChanged.next(this.cv);
                   return this.cv;
               },
@@ -175,7 +174,7 @@ export class CvService implements OnInit {
     if (this.cv.title === '' || this.cv.title === null) {
         return;
     }
-    if (!this.authService.isLoggedIn()) {
+    if (!AuthService.isLoggedIn()) {
       this.expectingCv = true;
       this.headerService.openModal('login');
     } else {

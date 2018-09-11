@@ -24,12 +24,12 @@ import {NotFoundComponent} from './not-found/not-found.component';
 import {ProfileMenuComponent} from './profiles/profile-candidate/profile-menu/profile-menu.component';
 import {ProfileCvsComponent} from './profiles/profile-candidate/profile-cvs/profile-cvs.component';
 import {CvsEditPanelComponent} from './profiles/profile-candidate/profile-cvs/cvs-edit-panel/cvs-edit-panel.component';
-import {CreateCvComponent} from './cv/create-cv.component';
+import {CreateCvComponent} from './create-cv/create-cv.component';
 import {TestingComponent} from './testing/testing.component';
-import {CvFormComponent} from './cv/cv-form/cv-form.component';
-import {CvPresentationComponent} from './cv/cv-presentation/cv-presentation.component';
-import {CvChooseViewComponent} from './cv/cv-choose-view/cv-choose-view.component';
-import {CvActionsComponent} from './cv/cv-actions/cv-actions.component';
+import {CvFormComponent} from './create-cv/cv-form/cv-form.component';
+import {CvPresentationComponent} from './create-cv/cv-presentation/cv-presentation.component';
+import {CvChooseViewComponent} from './create-cv/cv-choose-view/cv-choose-view.component';
+import {CvActionsComponent} from './create-cv/cv-actions/cv-actions.component';
 
 // SERVICES
 import {ModalService} from './modal/modal.service';
@@ -62,9 +62,9 @@ import {CvFormCheckboxGroupComponent} from './form-controls/cv-form-checkbox-gro
 import {CvFormInputComponent} from './form-controls/cv-form-input/cv-form-input.component';
 import {CvFormSliderComponent} from './form-controls/cv-form-slider/cv-form-slider.component';
 import {FoldersListComponent} from './profiles/profile-company/company-menu/folders-list/folders-list.component';
-import { CompanyCvFullComponent } from './profiles/profile-company/company-folder/company-cv-full/company-cv-full.component';
-import { ShowCvComponent } from './cv/show-cv/show-cv.component';
-import {AgmCvComponent} from './cv/cv-form/agm-cv/agm-cv.component';
+import {CompanyCvFullComponent} from './profiles/profile-company/company-folder/company-cv-full/company-cv-full.component';
+import {ShowCvComponent} from './create-cv/show-cv/show-cv.component';
+import {AgmCvComponent} from './create-cv/cv-form/agm-cv/agm-cv.component';
 
 
 @NgModule({

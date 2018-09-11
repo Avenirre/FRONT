@@ -13,12 +13,11 @@ export class ShowCvComponent implements OnInit {
               private cvService: CvService) { }
 
   ngOnInit() {
-    console.log(this.cvService.setCV(this.route.params['id']));
-    // this.route.params.subscribe(
-    //     (params: Params) => {
-    //       this.cvService.cvChanged.next(this.cvService.setCV(params['id']));
-    //     }
-    // );
+    this.route.params.subscribe(
+        (params: Params) => {
+          this.cvService.setCV(+params['id']);
+        }
+    );
   }
 
 }
