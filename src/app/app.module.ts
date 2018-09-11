@@ -3,7 +3,6 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {RouterRoutingModule} from '../router/router-routing.module';
 import {AgmCoreModule} from '@agm/core';
-import {AgmCvComponent} from './create-cv/cv-form/agm-cv/agm-cv.component';
 // LIBRARIES
 
 // COMPONENTS
@@ -113,7 +112,6 @@ import { CompanyCvFullComponent } from './profiles/profile-company/company-folde
     CvFormInputComponent,
     CvFormSliderComponent,
     FoldersListComponent,
-    AgmCvComponent,
     CompanyCvFullComponent
   ],
   imports: [
@@ -125,7 +123,7 @@ import { CompanyCvFullComponent } from './profiles/profile-company/company-folde
     RouterRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     ModalService,
