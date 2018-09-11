@@ -19,6 +19,7 @@ import {CompanyFolderComponent} from '../app/profiles/profile-company/company-fo
 import {CompanySettingsComponent} from '../app/profiles/profile-company/company-settings/company-settings.component';
 import {CvPresentationComponent} from '../app/create-cv/cv-presentation/cv-presentation.component';
 import {CvSearchComponent} from '../app/profiles/profile-company/cv-search/cv-search.component';
+import {ShowCvComponent} from '../app/create-cv/show-cv/show-cv.component';
 
 const routes = environment.routes;
 const routesApi: Routes = [
@@ -65,6 +66,7 @@ const routesApi: Routes = [
         }
     ]
   },
+  {path: routes.cvShow, component: ShowCvComponent},
   {path: 'message', component: MessageComponent, outlet: 'modal'},
   {path: 'testing', component: TestingComponent},
   {path: '404', component: NotFoundComponent},

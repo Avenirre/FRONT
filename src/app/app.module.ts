@@ -62,7 +62,9 @@ import {CvFormCheckboxGroupComponent} from './form-controls/cv-form-checkbox-gro
 import {CvFormInputComponent} from './form-controls/cv-form-input/cv-form-input.component';
 import {CvFormSliderComponent} from './form-controls/cv-form-slider/cv-form-slider.component';
 import {FoldersListComponent} from './profiles/profile-company/company-menu/folders-list/folders-list.component';
-import { CompanyCvFullComponent } from './profiles/profile-company/company-folder/company-cv-full/company-cv-full.component';
+import {CompanyCvFullComponent} from './profiles/profile-company/company-folder/company-cv-full/company-cv-full.component';
+import {ShowCvComponent} from './create-cv/show-cv/show-cv.component';
+import {AgmCvComponent} from './create-cv/cv-form/agm-cv/agm-cv.component';
 
 
 @NgModule({
@@ -112,7 +114,9 @@ import { CompanyCvFullComponent } from './profiles/profile-company/company-folde
     CvFormInputComponent,
     CvFormSliderComponent,
     FoldersListComponent,
-    CompanyCvFullComponent
+    CompanyCvFullComponent,
+    ShowCvComponent,
+    AgmCvComponent
   ],
   imports: [
     AgmCoreModule.forRoot({

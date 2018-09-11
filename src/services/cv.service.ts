@@ -37,6 +37,7 @@ export class CvService implements OnInit {
   routes = environment;
   changedChecked = new Subject<number>();
   changedUserCVs = new Subject<CV[]>();
+  onlyShowMode = true;
 
   constructor(private http: HttpClient,
               private apiService: ApiService,
@@ -46,17 +47,42 @@ export class CvService implements OnInit {
   }
 
   public setCV(cv?) {
-    if (cv) {
-        this.cv = cv;
-    } else {
-        if (this.cv === null) {
-          this.cv = DataService.getCV();
-          if (this.cv === null) {
-            this.cv = new CV();
+      if (typeof cv === 'number') {
+          const get_route = [];
+          for (let i = 0; i < this.routes.api.user_cvs.length; i++) {
+              get_route.push(this.routes.api.user_cvs[i]);
           }
+          get_route.push(cv.toString());
+          let headers: HttpHeaders = new HttpHeaders();
+          headers = headers.append('Content-Type', 'application/json');
+          headers = headers.append('Authorization', `Bearer ${DataService.getUserToken()}`);
+          this.apiService.get(get_route, {headers: headers}).subscribe(
+              (res) => {
+                  this.cv = res['data'];
+                  this.prepareToUsing();
+                  this.onlyShowMode = true;
+                  this.cvChanged.next(this.cv);
+                  return this.cv;
+              },
+              (error) => {
+                  return error;
+              }
+          );
+      } else {
+        if (cv) {
+            this.cv = cv;
+        } else {
+            if (this.cv === null) {
+              this.cv = DataService.getCV();
+              if (this.cv === null) {
+                this.cv = new CV();
+              }
+            }
         }
-    }
-    return this.cv;
+        this.onlyShowMode = false;
+        this.cvChanged.next(this.cv);
+        return this.cv;
+      }
   }
 
   // public setCV(cv) {
@@ -197,8 +223,7 @@ export class CvService implements OnInit {
                     1,
                     null,
                     this.cv.cvJobs[i].company,
-                    this.cv.cvJobs[i].position.id,
-                    this.cv.cvJobs[i].position.postName,
+                    this.cv.cvJobs[i].position,
                     this.cv.cvJobs[i].description,
                     this.cv.cvJobs[i].yearStart,
                     this.cv.cvJobs[i].yearEnd,
@@ -212,7 +237,6 @@ export class CvService implements OnInit {
                     null,
                     null,
                     null,
-                    null,
                     this.cv.cvAchievements[i].description,
                     null,
                     this.cv.cvAchievements[i].yearEnd,
@@ -223,7 +247,6 @@ export class CvService implements OnInit {
             this.cv.cvActivity.push(
                 new Activity(this.cv.cvCertification[i].id,
                     3,
-                    null,
                     null,
                     null,
                     null,
@@ -275,8 +298,7 @@ export class CvService implements OnInit {
                     this.cv.cvJobs.push(new Job(
                         this.cv.cvActivity[i].id,
                         this.cv.cvActivity[i].company,
-                        this.cv.cvActivity[i].positionId,
-                        this.cv.cvActivity[i].postName,
+                        this.cv.cvActivity[i].position,
                         this.cv.cvActivity[i].description,
                         this.cv.cvActivity[i].yearStart,
                         this.cv.cvActivity[i].yearEnd,
@@ -303,16 +325,16 @@ export class CvService implements OnInit {
           this.cv.template = new Template(null, 0, 0);
       }
       if (this.cv.cvJobs.length === 0) {
-          this.cv.cvJobs.push(new Job(null, '', null, '', '', null, null, 50));
+          this.cv.cvJobs.push(new Job(null, '', '', '', null, null, 50));
       }
       if (this.cv.cvCertification.length === 0) {
-          this.cv.cvCertification.push(new Certification('', null));
+          this.cv.cvCertification.push(new Certification('', null, null));
       }
       if (this.cv.cvAchievements.length === 0) {
-          this.cv.cvAchievements.push(new Achievement('', null));
+          this.cv.cvAchievements.push(new Achievement('', null, null));
       }
       if (this.cv.education.length === 0) {
-          this.cv.education.push(new Education(null, null, null, null, null, null));
+          this.cv.education.push(new Education(null, null, null, null, null));
       }
       if (this.cv.languages.length === 0) {
           this.cv.languages.push(new Language(null, null));
