@@ -95,8 +95,9 @@
     </a>
     <div class="collapse" id="education">
       <div *ngFor="let edu of cv.education; let i = index">
-        <input type="text" name="school_institution_name_{{i}}" placeholder="school/institution name*"
-               [(ngModel)]="cv.education[i].institution"/>
+        <!--<input type="text" name="school_institution_name_{{i}}" placeholder="school/institution name*"-->
+               <!--[(ngModel)]="cv.education[i].institution"/>-->
+        <education-cv></education-cv>
         <input type="text" name="degree_{{i}}" placeholder="degree*"
                [(ngModel)]="cv.education[i].degree"/>
         <input type="text" name="graduation_year_{{i}}" placeholder="graduation year*"

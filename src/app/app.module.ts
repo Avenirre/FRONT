@@ -4,6 +4,7 @@ import {NgModule} from '@angular/core';
 import {RouterRoutingModule} from '../router/router-routing.module';
 import { AgmCoreModule } from '@agm/core';
 import {AgmCvComponent} from './create-cv/cv-form/agm-cv/agm-cv.component';
+
 // LIBRARIES
 
 // COMPONENTS
@@ -56,6 +57,7 @@ import { CompanyFolderComponent } from './profiles/profile-company/company-folde
 import { CompanySettingsComponent } from './profiles/profile-company/company-settings/company-settings.component';
 import { CvSearchComponent } from './profiles/profile-company/cv-search/cv-search.component';
 import { SearchFormComponent } from './profiles/profile-company/search-form/search-form.component';
+import {EducationCvComponent} from './create-cv/cv-form/education-cv/education-cv.component';
 
 
 
@@ -101,7 +103,7 @@ import { SearchFormComponent } from './profiles/profile-company/search-form/sear
 
     CvSearchComponent,
     SearchFormComponent,
-
+    EducationCvComponent,
       AgmCvComponent
   ],
   imports: [
