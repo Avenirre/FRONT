@@ -7,6 +7,8 @@
     </div>
     <div class="prev-content">
       <h2 (click)="openFullCv()">
+        <i *ngIf="!isDeployed" class="fas fa-caret-down"></i>
+        <i *ngIf="isDeployed" class="fas fa-caret-up"></i>
         {{cv.title}}
       </h2>
       <p class="cv-description">

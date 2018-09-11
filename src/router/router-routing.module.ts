@@ -40,9 +40,8 @@ const routesApi: Routes = [
       {path: 'statistics', component: ProfileStatisticComponent}
     ]
   },
-  {path: routes.profileCandidate, component: ProfileCandidateComponent},
   {
-    path: routes.profileCompany, children: [
+    path: routes.profileCompany, canActivateChild: [AuthGuard], children: [
       {
         path: ':section', component: ProfileCompanyComponent, children: [
           {path: ':id', component: CompanyFolderComponent},
@@ -69,7 +68,7 @@ const routesApi: Routes = [
   {path: 'message', component: MessageComponent, outlet: 'modal'},
   {path: 'testing', component: TestingComponent},
   {path: '404', component: NotFoundComponent},
-  // {path: '**', redirectTo: '/404'}
+  {path: '**', redirectTo: '/404'}
 ];
 
 @NgModule({
