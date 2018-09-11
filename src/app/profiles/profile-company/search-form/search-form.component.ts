@@ -1,8 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {MatSelectModule} from '@angular/material/select';
-import {MatChipsModule} from '@angular/material/chips';
-import {ApiService} from '../../../../services/rest/api.service';
-import {DataService} from '../../../../services/data.service';
 
 @Component({
   selector: 'app-search-form',

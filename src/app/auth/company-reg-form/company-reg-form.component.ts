@@ -37,9 +37,11 @@ export class CompanyRegFormComponent implements OnInit {
       firstName: [''],
       lastName: [''],
       position: [''],
-      email: ['', Validators.pattern(
+      email: ['', [
+        Validators.required,
+        Validators.pattern(
         '^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$'
-      )],
+      )]],
       username: ['', [
         Validators.required,
         Validators.pattern('[A-Za-z0-9-_]+'),

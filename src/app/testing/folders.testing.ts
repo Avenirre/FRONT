@@ -17,7 +17,11 @@ export const testingFolders = [
         'skills': ['best', 'bestI', 'the'],
         'residence': 'Beer Sheva',
         'birthday': '25',
-        'activated': 'true'
+        'activated': 'true',
+        'template': {
+          'type': 0,
+          'coloreScherme': 0
+        }
       },
       {
         'id': 9,

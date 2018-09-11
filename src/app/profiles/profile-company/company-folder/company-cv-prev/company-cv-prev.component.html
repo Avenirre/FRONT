@@ -6,7 +6,9 @@
              (click)="onCheckboxPressed($event)">
     </div>
     <div class="prev-content">
-      <h2>{{cv.title}}</h2>
+      <h2 (click)="openFullCv()">
+        {{cv.title}}
+      </h2>
       <p class="cv-description">
         {{cv.about}}
       </p>
@@ -33,3 +35,4 @@
     </div>
   </div>
 </section>
+<app-company-cv-full *ngIf="isDeployed" [cv]="cv"></app-company-cv-full>

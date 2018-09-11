@@ -13,12 +13,13 @@ export class CompanyCvPrevComponent implements OnInit, OnDestroy {
   folderSubscription: Subscription;
   checked: boolean;
   checkedCount = 0;
+  fullCvId: number;
+  isDeployed: boolean;
   @Input() cv: CV;
 
   constructor(
     private _companyService: CompanyFoldersService
-  ) {
-  }
+  ) {}
 
   ngOnInit() {
   }
@@ -33,5 +34,9 @@ export class CompanyCvPrevComponent implements OnInit, OnDestroy {
     } else {
       this._companyService.removeCheckedCv(this.cv.id);
     }
+  }
+
+  openFullCv() {
+    this.isDeployed = !this.isDeployed;
   }
 }

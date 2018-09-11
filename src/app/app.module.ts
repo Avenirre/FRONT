@@ -56,7 +56,6 @@ import {CompanyFolderComponent} from './profiles/profile-company/company-folder/
 import {CompanySettingsComponent} from './profiles/profile-company/company-settings/company-settings.component';
 import {CvSearchComponent} from './profiles/profile-company/cv-search/cv-search.component';
 import {SearchFormComponent} from './profiles/profile-company/search-form/search-form.component';
-import {BrowserAnimationsModule, NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {CvFormSelectComponent} from './form-controls/cv-form-select/cv-form-select.component';
 import {CvFormChipsComponent} from './form-controls/cv-form-chips/cv-form-chips.component';
 import {CvChipsItemComponent} from './form-controls/cv-form-chips/cv-chips-item/cv-chips-item.component';
@@ -64,7 +63,7 @@ import {CvFormCheckboxGroupComponent} from './form-controls/cv-form-checkbox-gro
 import {CvFormInputComponent} from './form-controls/cv-form-input/cv-form-input.component';
 import {CvFormSliderComponent} from './form-controls/cv-form-slider/cv-form-slider.component';
 import {FoldersListComponent} from './profiles/profile-company/company-menu/folders-list/folders-list.component';
-import {MatProgressSpinnerModule} from '@angular/material';
+import { CompanyCvFullComponent } from './profiles/profile-company/company-folder/company-cv-full/company-cv-full.component';
 
 
 @NgModule({
@@ -114,7 +113,8 @@ import {MatProgressSpinnerModule} from '@angular/material';
     CvFormInputComponent,
     CvFormSliderComponent,
     FoldersListComponent,
-    AgmCvComponent
+    AgmCvComponent,
+    CompanyCvFullComponent
   ],
   imports: [
     AgmCoreModule.forRoot({
@@ -126,8 +126,6 @@ import {MatProgressSpinnerModule} from '@angular/material';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    NoopAnimationsModule,
-    BrowserAnimationsModule,
   ],
   providers: [
     ModalService,
