@@ -25,14 +25,15 @@ export class CompanySettingsComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private _settingsService: CompanySettingsService
-  ) {}
+  ) {
+  }
 
   async ngOnInit() {
     this._settingsService.ngOnInit();
     this._settingsService._profileChanged.subscribe((profile) => {
       if (profile) {
-      this.profile = profile;
-      this.fulfillForm();
+        this.profile = profile;
+        this.fulfillForm();
       }
     });
   }
@@ -40,7 +41,11 @@ export class CompanySettingsComponent implements OnInit {
   submitEdits() {
     const editedProfile = this.createApplicant();
     console.log(editedProfile);
-    this._settingsService.updateProfile(editedProfile);
+    try {
+      this._settingsService.updateProfile(editedProfile);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   private fulfillForm() {

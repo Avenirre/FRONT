@@ -7,13 +7,13 @@ import {environment} from '../../environments/environment';
 import {ModalService} from '../modal/modal.service';
 import {DataService} from '../../services/data.service';
 import {Router} from '@angular/router';
+import {LocalProfile} from '../../models/local-storage/local-profile.settings';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private api = environment.api;
-
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -30,15 +30,33 @@ export class AuthService {
   ) {
   }
 
+// LIFETIME METHODS
+
   /**
    * check if user logged in
    * @returns {boolean}
    */
-  public isLoggedIn(): boolean {
+  public static isLoggedIn(): boolean {
     const user = DataService.getCurrentUser();
 
     return user !== null && user.token !== null;
   }
+
+  public static isUserAlive(): boolean {
+    const profileTime = DataService.getCurrentUser().timestamp;
+    const currentTime = Date.now();
+    const lifeTime = DataService.toMilliseconds(environment.settings.profileLifetime);
+    return currentTime - profileTime < lifeTime;
+  }
+
+  public handleSession() {
+    if (!AuthService.isUserAlive()) {
+      this.logout();
+      throw Error('unauthorized user: session is expired');
+    }
+  }
+
+// END LIFETIME METHODS
 
   /**
    * login user with given login data
@@ -80,7 +98,7 @@ export class AuthService {
    *logout current user
    */
   public logout(): boolean {
-    if (this.isLoggedIn()) {
+    if (AuthService.isLoggedIn()) {
       DataService.removeUser();
       this.router.navigate(['/']);
       return true;
@@ -117,5 +135,10 @@ export class AuthService {
           });
     });
   }
+
+
 }
+
+
+
 

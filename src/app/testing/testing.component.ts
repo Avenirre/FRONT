@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ApiCandidatesService} from '../../services/rest/api-candidates.service';
 import {ApiCompaniesService} from '../../services/rest/api-companies.service';
+import {DataService} from '../../services/data.service';
+import {AuthService} from '../auth/auth.service';
 
 @Component({
   selector: 'app-testing',
@@ -25,9 +27,10 @@ export class TestingComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.testChips();
+    AuthService.isUserAlive();
+
   }
 
-  testChips() {
+  testLifetime() {
   }
 }

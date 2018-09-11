@@ -3,8 +3,9 @@ import {Applicant} from '../../../models/auth/applicant.model';
 import {environment} from '../../../environments/environment';
 import {DataService} from '../../../services/data.service';
 import {HttpHeaders} from '@angular/common/http';
-import {BehaviorSubject, Subject} from 'rxjs';
+import {BehaviorSubject, Observable, Subject} from 'rxjs';
 import {ApiService} from '../../../services/rest/api.service';
+import {AuthService} from '../../auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,18 +16,28 @@ export class CompanySettingsService implements OnInit {
   _downloadCompleted = new EventEmitter();
 
   constructor(
-    private _api: ApiService
+    private _api: ApiService,
+    private _auth: AuthService,
   ) {
   }
 
   async ngOnInit() {
     if (!this.profile) {
-      this.profile = await this.getProfile();
-      this._profileChanged.next(this.profile);
+      try {
+        this.profile = await this.getProfile();
+        this._profileChanged.next(this.profile);
+      } catch (error) {
+        console.log(error);
+      }
     }
   }
 
   async getProfile(): Promise<Applicant> {
+    try {
+      this._auth.handleSession();
+    } catch (error) {
+      throw error;
+    }
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -42,6 +53,11 @@ export class CompanySettingsService implements OnInit {
   }
 
   async updateProfile(profile: Applicant) {
+    try {
+      this._auth.handleSession();
+    } catch (error) {
+      throw error;
+    }
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -56,7 +72,11 @@ export class CompanySettingsService implements OnInit {
       )
       .toPromise();
     console.log(response);
-    this.profile = await this.getProfile();
+    try {
+      this.profile = await this.getProfile();
+    } catch (error) {
+      console.log(error);
+    }
     this._profileChanged.next(this.profile);
   }
 }

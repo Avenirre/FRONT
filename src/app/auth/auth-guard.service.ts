@@ -49,7 +49,7 @@ export class AuthGuard implements CanActivate {
     } else if (usertype === 'CANDIDATE') {
       this.router.navigate([this.routes.profileCandidate]);
     }
-    const isAuthorisedUser = this.authService.isLoggedIn();
+    const isAuthorisedUser = AuthService.isLoggedIn();
     if (isAuthorisedUser) {
       return true;
     }

@@ -50,6 +50,12 @@ export const environment = {
    * other options;
    */
   settings: {
+    profileLifetime: {
+      days: 0,
+      hours: 2,
+      minutes: 0,
+      seconds: 0
+    },
     templates: {
       types: [0],
       colorSchemes: [0, 1]

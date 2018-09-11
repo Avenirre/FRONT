@@ -11,6 +11,7 @@ import {Applicant} from '../../../models/auth/applicant.model';
 
 // TESTING IMPORT
 import {testingFolders} from '../../testing/folders.testing';
+import {AuthService} from '../../auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,7 @@ import {testingFolders} from '../../testing/folders.testing';
 export class CompanyFoldersService {
   isDownloading = true;
   downloadCompleted = new EventEmitter();
+
   currentFolder: ProfileFolder;
   _$currentFolder = new BehaviorSubject<ProfileFolder>(this.currentFolder);
 
@@ -33,9 +35,14 @@ export class CompanyFoldersService {
   constructor(
     private _api: ApiService,
     private _router: Router,
-    private _route: ActivatedRoute
+    private _route: ActivatedRoute,
+    private _auth: AuthService
   ) {
-    this.apiGetFolders();
+    // try {
+      this.apiGetFolders();
+    // } catch (error) {
+    //   console.log(error);
+    // }
   }
 
   public static defineSection(section): SectionUnit {
@@ -134,9 +141,13 @@ export class CompanyFoldersService {
     });
     const editedFolder = this.folders[index];
     editedFolder.nameFolder = name;
-    const resp = await this.apiEditFolder(editedFolder);
-    console.log('resp:', resp);
-    this.folders[index] = editedFolder;
+    try {
+      const resp = await this.apiEditFolder(editedFolder);
+      console.log('resp:', resp);
+      this.folders[index] = editedFolder;
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   deleteFolder(id: number) {
@@ -188,6 +199,11 @@ export class CompanyFoldersService {
   // API METHODS  \\
   //              //
   private async apiGetFolders() {
+    // try {
+    //   this._auth.handleSession();
+    // } catch (error) {
+    //   throw error;
+    // }
     this.isDownloading = true;
     const httpOptions = {
       headers: new HttpHeaders({
@@ -199,10 +215,11 @@ export class CompanyFoldersService {
       .get(environment.api.getFolders, httpOptions)
       .toPromise();
 
+    let folders = response['data'];
 // TESTING
-    // const folders = response['data'];
-    const folders = <ProfileFolder[]> testingFolders;
+    folders = <ProfileFolder[]> testingFolders;
 // TESTING
+    console.log(folders);
     this.folders = folders;
     this._$folders.next(folders);
     this.isDownloading = false;
@@ -215,6 +232,11 @@ export class CompanyFoldersService {
    * @param folder
    */
   async apiEditFolder(folder) {
+    try {
+      this._auth.handleSession();
+    } catch (error) {
+      throw error;
+    }
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -229,8 +251,6 @@ export class CompanyFoldersService {
       .toPromise();
     console.log(resp);
   }
-
-
 }
 
 

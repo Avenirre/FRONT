@@ -4,6 +4,8 @@ import {environment} from '../environments/environment';
 import {LocalSettings} from '../models/local-settings.model';
 import {SectionUnit} from '../enums/section.enum';
 import {ProfileFolder} from '../models/profileFolder';
+import {LocalProfile} from '../models/local-storage/local-profile.settings';
+import {AuthService} from '../app/auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,35 +13,37 @@ import {ProfileFolder} from '../models/profileFolder';
 export class DataService {
   private static names = environment.local;
 
+
   constructor() {
   }
 
 // USER METHODS
-  public static saveUser(data) {
-    localStorage.setItem(this.names.profile, JSON.stringify(data));
+  public static saveUser(data): void {
+    const profile = new LocalProfile(data['profile'], data['token']);
+    localStorage.setItem(this.names.profile, JSON.stringify(profile));
   }
 
-  public static removeUser() {
+  public static removeUser(): void {
     localStorage.removeItem(this.names.profile);
   }
 
-  public static getCurrentUser() {
+  public static getCurrentUser(): LocalProfile {
     const user = localStorage.getItem(this.names.profile);
-    return JSON.parse(user) || null;
+    return <LocalProfile>JSON.parse(user) || null;
   }
 
   public static getUserName() {
-    const user = JSON.parse(localStorage.getItem(this.names.profile)).profile;
-    return user.username || null;
+    const user = <LocalProfile>JSON.parse(localStorage.getItem(this.names.profile));
+    return user.profile['username'] || null;
   }
 
   public static getUserType() {
-    const user = JSON.parse(localStorage.getItem(this.names.profile)).profile;
-    return user.usertype;
+    const user = <LocalProfile>JSON.parse(localStorage.getItem(this.names.profile));
+    return user.profile['usertype'];
   }
 
   public static getUserToken() {
-    const user = JSON.parse(localStorage.getItem(this.names.profile));
+    const user = <LocalProfile>JSON.parse(localStorage.getItem(this.names.profile));
     if (user && user.token) {
       return user.token;
     }
@@ -50,6 +54,7 @@ export class DataService {
     const userId = JSON.parse(localStorage.getItem(this.names.profile)).profile.id;
     return userId || null;
   }
+
 // SETTINGS METHODS
   public static getSettings(): LocalSettings {
     const settings = localStorage.getItem(this.names.settings);
@@ -109,4 +114,12 @@ export class DataService {
 // END CV METHODS
 
 
+  static toMilliseconds(time: { days: number; hours: number; minutes: number; seconds: number }) {
+    let res;
+    res = time.seconds * 1000;
+    res += time.minutes * 60 * 1000;
+    res += time.hours * 60 * 60 * 1000;
+    res += time.days * 24 * 60 * 60 * 1000;
+    return res;
+  }
 }
