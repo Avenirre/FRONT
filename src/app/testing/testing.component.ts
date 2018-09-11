@@ -28,6 +28,7 @@ export class TestingComponent implements OnInit {
 
   ngOnInit() {
     AuthService.isUserAlive();
+
   }
 
   testLifetime() {

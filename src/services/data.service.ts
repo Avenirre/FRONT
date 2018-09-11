@@ -5,6 +5,7 @@ import {LocalSettings} from '../models/local-settings.model';
 import {SectionUnit} from '../enums/section.enum';
 import {ProfileFolder} from '../models/profileFolder';
 import {LocalProfile} from '../models/local-storage/local-profile.settings';
+import {AuthService} from '../app/auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,10 +16,6 @@ export class DataService {
 
   constructor() {
   }
-
-
-
-
 
 // USER METHODS
   public static saveUser(data): void {
@@ -57,6 +54,7 @@ export class DataService {
     const userId = JSON.parse(localStorage.getItem(this.names.profile)).profile.id;
     return userId || null;
   }
+
 // SETTINGS METHODS
   public static getSettings(): LocalSettings {
     const settings = localStorage.getItem(this.names.settings);

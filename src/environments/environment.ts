@@ -50,12 +50,10 @@ export const environment = {
    */
   settings: {
     profileLifetime: {
-      years: 0,
-      months: 0,
       days: 0,
-      hours: 0,
+      hours: 2,
       minutes: 0,
-      seconds: 10
+      seconds: 0
     },
     templates: {
       types: [0],

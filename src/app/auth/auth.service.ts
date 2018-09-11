@@ -30,43 +30,33 @@ export class AuthService {
   ) {
   }
 
-  // LIFETIME METHODS
-
-  public static isUserAlive(): boolean {
-    const profileTime = new Date(DataService.getCurrentUser().timestamp);
-    const currentTime = new Date();
-    const lifeTime = DataService.toMilliseconds(environment.settings.profileLifetime);
-    console.log('diff', );
-
-
-
-
-    const difference = new Date(currentTime - profileTime);
-    console.log('difference', difference.getTime());
-    if (difference < lifeTime) {
-      console.log(false);
-    } else {
-      console.log(true);
-    }
-    return false;
-  }
-
-  public static setProfileLifetime(time) {
-    const profile = DataService.getCurrentUser();
-    console.log(profile);
-  }
-
-  // END LIFETIME METHODS
+// LIFETIME METHODS
 
   /**
    * check if user logged in
    * @returns {boolean}
    */
-  public isLoggedIn(): boolean {
+  public static isLoggedIn(): boolean {
     const user = DataService.getCurrentUser();
 
     return user !== null && user.token !== null;
   }
+
+  public static isUserAlive(): boolean {
+    const profileTime = DataService.getCurrentUser().timestamp;
+    const currentTime = Date.now();
+    const lifeTime = DataService.toMilliseconds(environment.settings.profileLifetime);
+    return currentTime - profileTime < lifeTime;
+  }
+
+  public handleSession() {
+    if (!AuthService.isUserAlive()) {
+      this.logout();
+      throw Error('unauthorized user: session is expired');
+    }
+  }
+
+// END LIFETIME METHODS
 
   /**
    * login user with given login data
@@ -108,7 +98,7 @@ export class AuthService {
    *logout current user
    */
   public logout(): boolean {
-    if (this.isLoggedIn()) {
+    if (AuthService.isLoggedIn()) {
       DataService.removeUser();
       this.router.navigate(['/']);
       return true;

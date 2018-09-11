@@ -1,15 +1,20 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
-import {Observable} from 'rxjs';
+import {Observable, Subject} from 'rxjs';
 import {QueryAdressInterface} from '../../interfaces/query-adress.interface';
 import {RequestAdress} from '../../models/request-adress.model';
+import {AuthService} from '../../app/auth/auth.service';
+import {DataService} from '../data.service';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient
+    ) {
   }
 
   /**

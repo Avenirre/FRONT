@@ -1,6 +1,6 @@
 export class LocalProfile {
   profile: Object;
-  timestamp = new Date();
+  timestamp = Date.now();
   token: number;
 
   constructor(profile: Object, token) {
