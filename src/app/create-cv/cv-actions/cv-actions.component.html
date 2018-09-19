@@ -9,5 +9,7 @@
       <button class="btn btn-primary" (click)="saveCv()">Save</button>
     </span>
   </div>
-  <span></span>
 </aside>
+<div *ngIf="alertVisible" [ngClass]="alertClass">
+  <span id="alert" class="small" [innerHTML]="alertText"></span>
+</div>
