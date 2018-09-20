@@ -3,6 +3,7 @@ import {CvService} from '../../../services/cv.service';
 import {CV} from '../../../models/cv/cv.model';
 import {ActivatedRoute} from '@angular/router';
 import {environment} from '../../../environments/environment';
+import { ClipboardService } from 'ngx-clipboard'
 
 @Component({
   selector: 'app-cv-actions',
@@ -14,8 +15,13 @@ export class CvActionsComponent implements OnInit {
   cv: CV;
   onlyShowMode = true;
   url_share: string;
+  alertClass = [];
+  alertText = '';
+  alertVisible = false;
+
   constructor(private cvService: CvService,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private _clipboardService: ClipboardService) { }
 
   ngOnInit() {
     this.title = this.cvService.setCV().title;
@@ -26,7 +32,15 @@ export class CvActionsComponent implements OnInit {
     });
     this.route.params.subscribe(
         (params) => {
-          this.url_share = environment.apiUrl + ':' + environment.apiPort + '/cv/' + params['id'];
+          if (params['id']) {
+             this.alertClass = ['text-success'];
+             this.url_share = environment.apiUrl + ':' + environment.apiPort + '/cv/' + params['id'];
+             this.alertText = `Link on this CV: <a link='${this.url_share}'>${this.url_share}</a>, was copied to the clipboard.`;
+             document.execCommand('copy');
+          } else {
+             this.alertClass = ['text-danger'];
+             this.alertText = 'This CV cant`t be shared. Please save this CV before sharing.';
+          }
         }
     );
   }
@@ -42,6 +56,9 @@ export class CvActionsComponent implements OnInit {
     }
 
     copyLink() {
-      console.log(this.url_share);
+        if (this.url_share) {
+            this._clipboardService.copyFromContent(this.url_share);
+        }
+        this.alertVisible = true;
     }
 }

@@ -65,7 +65,7 @@ import {FoldersListComponent} from './profiles/profile-company/company-menu/fold
 import {CompanyCvFullComponent} from './profiles/profile-company/company-folder/company-cv-full/company-cv-full.component';
 import {ShowCvComponent} from './create-cv/show-cv/show-cv.component';
 import {AgmCvComponent} from './create-cv/cv-form/agm-cv/agm-cv.component';
-
+import {ClipboardModule} from 'ngx-clipboard';
 
 @NgModule({
   declarations: [
@@ -127,7 +127,8 @@ import {AgmCvComponent} from './create-cv/cv-form/agm-cv/agm-cv.component';
     RouterRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ClipboardModule
   ],
   providers: [
     ModalService,

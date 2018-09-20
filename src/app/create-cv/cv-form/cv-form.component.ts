@@ -79,41 +79,44 @@ export class CvFormComponent implements OnInit {
       );
   }
 
-
-  // getLangRef() {
-  //     const url = this.apiService.buildRequest(environment.api.lang_ref);
-  //     return this.http.get(url);
-  // }
-  //
-  // getSkillsRef() {
-  //     const url = this.apiService.buildRequest(environment.api.skills_ref);
-  //     return this.http.get(url);
-
-
-
-  // addExperience() {
-  //   this.cv['prof_info']['experience'].push(new Experience(''));
-
-  // }
-
   addEducation() {
     this.cv.education.push(new Education(null, '', null, '', ''));
+  }
+
+  removeEducation() {
+     this.cv.education.splice(this.cv.education.length - 1, 1);
   }
 
   addJob() {
     this.cv.cvJobs.push(new Job(null, '', '', '', null, null, null));
   }
 
+  removeJob() {
+      this.cv.cvJobs.splice(this.cv.cvJobs.length - 1, 1);
+  }
+
   addAchivement() {
     this.cv.cvAchievements.push(new Achievement('', null, null));
+  }
+
+  removeAchivement() {
+    this.cv.cvAchievements.splice(this.cv.cvAchievements.length - 1, 1);
   }
 
   addCertification() {
     this.cv.cvCertification.push(new Certification('', null, null));
   }
 
+  removeCertification() {
+    this.cv.cvCertification.splice(this.cv.cvCertification.length - 1, 1);
+  }
+
   addLanguage() {
     this.cv.languages.push(new Language(null, ''));
+  }
+
+  removeLanguage() {
+    this.cv.languages.splice(this.cv.languages.length - 1, 1);
   }
 
   setData() {

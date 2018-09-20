@@ -31,6 +31,7 @@
     "express": "^4.16.3",
     "google-libphonenumber": "^3.1.12",
     "jquery": "^3.3.1",
+    "ngx-clipboard": "^11.1.7",
     "npm": "^6.4.0",
     "npm-font-open-sans": "^1.1.0",
     "path": "^0.12.7",

@@ -39,7 +39,12 @@ a:hover {
   text-decoration: none;
 }
 
-.add-btn {
+.btns-box {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-circle-btn {
   height: 35px;
   width: 35px;
   border: none;
@@ -48,7 +53,7 @@ a:hover {
   cursor: pointer;
   padding: auto;
   align-content: center;
-  margin-left: calc(100% - 28px);
+  //margin-left: calc(100% - 28px);
 }
 
 input {

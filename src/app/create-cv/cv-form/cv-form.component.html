@@ -98,30 +98,19 @@
     </a>
     <div class="collapse" id="education">
       <div *ngFor="let edu of cv.education; let i = index">
-        <!--<input type="text" name="school_institution_name_{{i}}" placeholder="school/institution name*"-->
-               <!--[(ngModel)]="cv.education[i].institution"/>-->
         <app-agm-cv [id]="i" ></app-agm-cv>
-        <!--<input type="text"-->
-               <!--name="school_institution_name_{{i}}"-->
-               <!--placeholder="school/institution name*"-->
-               <!--autocorrect="off"-->
-               <!--autocapitalize="off"-->
-               <!--spellcheck="off"-->
-               <!--class="form-control"-->
-               <!--#searchEst-->
-               <!--[(ngModel)]="cv.education[i].institution"-->
-               <!--[ngModelOptions]="{standalone: true}">-->
         <input type="text" name="degree_{{i}}" placeholder="degree*"
                [(ngModel)]="cv.education[i].degree"/>
         <input type="text" name="graduation_year_{{i}}" placeholder="graduation year*"
                [(ngModel)]="cv.education[i].yearEnd"/>
-        <!--<input type="text" name="location_{{i}}" placeholder="location"-->
-               <!--[(ngModel)]="cv.education[i].location"/>-->
         <textarea name="edu_description_{{i}}" placeholder="description"
                   [(ngModel)]="cv.education[i].note"></textarea>
       </div>
-      <div>
-        <button class="add-btn" (click)="addEducation()">
+      <div class="btns-box">
+        <button class="form-circle-btn" (click)="removeEducation()" title="Remove Education">
+          <i class="fas fa-minus fa-2x"></i>
+        </button>
+        <button class="form-circle-btn" (click)="addEducation()" title="Add Education">
           <i class="fas fa-plus fa-2x"></i>
         </button>
       </div>
@@ -154,7 +143,6 @@
     <div class="collapse" id="projects">
       <div *ngFor="let job of cv.cvJobs; let i = index">
         <input type="text" name="company_{{i}}" placeholder="company" [(ngModel)]="cv.cvJobs[i].company"/>
-        <!--<input type="text" name="company_{{i}}" placeholder="position" [(ngModel)]="cv.cvJobs[i].position.position"/>-->
         <input name="preference_position" placeholder="position" [(ngModel)]="cv.cvJobs[i].position">
 
         <label for="formControlRange_{{i}}">Frontend / Backend</label>
@@ -169,8 +157,11 @@
         <textarea name="project_description_{{i}}" placeholder="project description"
                   [(ngModel)]="cv.cvJobs[i].description"></textarea>
       </div>
-      <div>
-        <button class="add-btn" (click)="addJob()">
+      <div class="btns-box">
+        <button class="form-circle-btn" (click)="removeJob()" title="Remove Project/Job">
+          <i class="fas fa-minus fa-2x"></i>
+        </button>
+        <button class="form-circle-btn" class="form-circle-btn" (click)="addJob()" title="Add Project/Job">
           <i class="fas fa-plus fa-2x"></i>
         </button>
       </div>
@@ -190,8 +181,11 @@
                   [(ngModel)]="cv.cvAchievements[i].description"></textarea>
         <input type="number" name="achievement_date_end_{{i}}" placeholder="graduation year" [(ngModel)]="cv.cvAchievements[i].yearEnd"/>
       </div>
-      <div>
-        <button class="add-btn" (click)="addAchivement()">
+      <div class="btns-box">
+        <button class="form-circle-btn" (click)="removeAchivement()" title="Remove Achivement">
+          <i class="fas fa-minus fa-2x"></i>
+        </button>
+        <button class="form-circle-btn" (click)="addAchivement()" title="Add Achivement">
           <i class="fas fa-plus fa-2x"></i>
         </button>
       </div>
@@ -211,8 +205,11 @@
                   [(ngModel)]="cv.cvCertification[i].description"></textarea>
         <input type="number" name="certification_date_end_{{i}}" placeholder="graduation year" [(ngModel)]="cv.cvCertification[i].yearEnd"/>
       </div>
-      <div>
-        <button class="add-btn" (click)="addCertification()">
+      <div class="btns-box">
+        <button class="form-circle-btn" (click)="removeCertification()" title="Remove Certification">
+          <i class="fas fa-minus fa-2x"></i>
+        </button>
+        <button class="form-circle-btn" (click)="addCertification()" title="Add Certification">
           <i class="fas fa-plus fa-2x"></i>
         </button>
       </div>
@@ -232,11 +229,12 @@
           <option disabled>Select language</option>
           <option *ngFor="let lg of languages" [ngValue]="lg" [selected]="cv.languages[i].id == lg.id">{{ lg.nameLang }}</option>
         </select>
-        <!--<input type="text" name="language_{{i}}" placeholder="language {{i+1}}"-->
-               <!--[(ngModel)]="cv.languages[i].nameLang"/>-->
       </div>
-      <div>
-        <button class="add-btn" (click)="addLanguage()">
+      <div class="btns-box">
+        <button class="form-circle-btn" (click)="removeLanguage()" title="Remove Language">
+          <i class="fas fa-minus fa-2x"></i>
+        </button>
+        <button class="form-circle-btn" (click)="addLanguage()" title="Add Language">
           <i class="fas fa-plus fa-2x"></i>
         </button>
       </div>
