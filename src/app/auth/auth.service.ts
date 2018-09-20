@@ -8,6 +8,7 @@ import {ModalService} from '../modal/modal.service';
 import {DataService} from '../../services/data.service';
 import {Router} from '@angular/router';
 import {LocalProfile} from '../../models/local-storage/local-profile.settings';
+import {UnauthorisedError} from '../../errors/unauthorised.error';
 
 @Injectable({
   providedIn: 'root'
@@ -61,7 +62,7 @@ export class AuthService {
     if (!AuthService.isUserAlive()) {
       this.logout();
       // setTimeout(this.modalService.openModal(environment.routes.login), 200);
-      throw Error('unauthorized user: session is expired');
+      throw new UnauthorisedError();
     }
   }
 

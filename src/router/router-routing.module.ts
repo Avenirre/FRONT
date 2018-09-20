@@ -66,7 +66,7 @@ const routesApi: Routes = [
         }
     ]
   },
-  {path: routes.cvShow, component: ShowCvComponent},
+  // {path: routes.cvShow, component: ShowCvComponent},
   {path: 'message', component: MessageComponent, outlet: 'modal'},
   {path: 'testing', component: TestingComponent},
   {path: '404', component: NotFoundComponent},

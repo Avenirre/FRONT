@@ -1,7 +1,9 @@
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost',
-  apiPort: 8080,
+  apiUrl: 'https://cvbanktelran.herokuapp.com',
+  apiPort: '',
+  // apiUrl: 'http://localhost',
+  // apiPort: 8080,
   /**
    * api routes, used to make request to the back-end server;
    */
@@ -36,6 +38,7 @@ export const environment = {
     cvCreate: 'create-cv',
     cvEdit: 'profile/candidate/edit-cv/:id',
     unauthorizedUser: 'unauthorized',
+    cvShow: 'cv/:id',
   },
   /**
    * names of variables in local storage;
