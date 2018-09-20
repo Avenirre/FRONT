@@ -34,9 +34,10 @@ export class ModalComponent implements OnInit, OnDestroy {
   }
 
   public openModal() {
-    // console.log(this.message);
     this.isOpened = true;
   }
 
-
+  onModalKeyPressed(event) {
+    console.log(event);
+  }
 }
