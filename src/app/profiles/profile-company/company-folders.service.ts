@@ -39,7 +39,8 @@ export class CompanyFoldersService {
     private _auth: AuthService
   ) {
     // try {
-      this.apiGetFolders();
+    this.apiGetFolders();
+    // this.apiCreateFolder(new ProfileFolder(100, 'test', []));
     // } catch (error) {
     //   console.log(error);
     // }
@@ -164,14 +165,15 @@ export class CompanyFoldersService {
   // CRUD FOLDERS METHODS
 
   /**
-   * creates folder with given name and inserts it into local folders array;
-   * TODO api create method: method must make request to create folder to back api and receive created folder, which must include proper folder id and push it into folders array;
    * @param name
    */
   createFolder(name: string) {
-    console.log(name);
-    const folder = new ProfileFolder(1, name, null);
-    console.log(folder);
+    let folder = new ProfileFolder(null, name, null);
+    this.apiCreateFolder(folder).then((resp) => {
+      if (resp['status'] === 'success') {
+        folder = resp['data'];
+      }
+    });
     this.folders.push(folder);
     this._$folders.next(this.folders);
   }
@@ -203,12 +205,16 @@ export class CompanyFoldersService {
    * @param id
    */
   deleteFolder(id: number) {
+    this.apiDeleteFolder(id).then((resp) => {
+      console.log('response', resp);
+    });
     const index = this.folders.findIndex((c) => {
       return c.id === id;
     });
     if (this.folders.length <= 1) {
       this.folders[index].cvs = null;
       this.folders[index].nameFolder = 'Default Folder';
+      this.apiEditFolder(this.folders[index]);
     } else {
       if (index !== -1) {
         this.folders.splice(index, 1);
@@ -275,9 +281,9 @@ export class CompanyFoldersService {
       .get(environment.api.getFolders, httpOptions)
       .toPromise();
 
-    let folders = response['data'];
+    const folders = response['data'];
 // TESTING
-    folders = <ProfileFolder[]> testingFolders;
+//     const folders = <ProfileFolder[]> testingFolders;
 // TESTING
     console.log(folders);
     this.folders = folders;
@@ -311,6 +317,44 @@ export class CompanyFoldersService {
       .toPromise();
     console.log(resp);
   }
+
+  /**
+   * makes request to the api to create new folder;
+   * @param folder
+   */
+  async apiCreateFolder(folder: ProfileFolder) {
+    this.checkSession();
+    const httpOptions = ApiService.createHeaderToken();
+    return await this._api
+      .post<ProfileFolder>(
+        ['api', 'folders'],
+        folder,
+        httpOptions)
+      .toPromise();
+  }
+
+  private async apiDeleteFolder(id: number) {
+    this.checkSession();
+    const httpOptions = ApiService.createHeaderToken();
+    return await this._api
+      .get(
+        ['api', 'folders', id.toString()],
+        httpOptions
+      );
+  }
+
+  /**
+   * checks user session status;
+   * if session is not alive throws UnauthorizedError;
+   */
+  private checkSession() {
+    try {
+      this._auth.handleSession();
+    } catch (error) {
+      throw error;
+    }
+  }
+
 }
 
 

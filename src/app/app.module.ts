@@ -66,6 +66,7 @@ import {CompanyCvFullComponent} from './profiles/profile-company/company-folder/
 import {ShowCvComponent} from './create-cv/show-cv/show-cv.component';
 import {AgmCvComponent} from './create-cv/cv-form/agm-cv/agm-cv.component';
 import {ClipboardModule} from 'ngx-clipboard';
+import { DirectivesDirective } from './modal/directives.directive';
 
 @NgModule({
   declarations: [
@@ -116,7 +117,8 @@ import {ClipboardModule} from 'ngx-clipboard';
     FoldersListComponent,
     CompanyCvFullComponent,
     ShowCvComponent,
-    AgmCvComponent
+    AgmCvComponent,
+    DirectivesDirective
   ],
   imports: [
     AgmCoreModule.forRoot({
