@@ -5,8 +5,8 @@
     <a (click)="copyLink()"><i class="fas fa-share"></i>Share</a>
     <a href=""><i class="fas fa-print"></i>Print</a>
     <span *ngIf="onlyShowMode == false">
-      <button class="btn btn-danger" (click)="activateCv()">Activate</button>
-      <button class="btn btn-primary" (click)="saveCv()">Save</button>
+      <button class="btn btn-danger" (click)="activateCv()" [disabled]="!formValid">Activate</button>
+      <button class="btn btn-primary" (click)="saveCv()" [disabled]="!formValid">Save</button>
     </span>
   </div>
 </aside>

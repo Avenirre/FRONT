@@ -15,6 +15,7 @@ import {environment} from '../../../environments/environment';
 
 import {MapsAPILoader} from '@agm/core';
 import {} from '@types/googlemaps';
+import {NgForm} from '@angular/forms';
 
 
 declare var $: any;
@@ -37,7 +38,8 @@ export class CvFormComponent implements OnInit {
       new Position(4, 'Front End Developer'),
   ];
   @ViewChild('searchResidence') public searchCity: ElementRef;
-  @ViewChild('searchEst') public searchEst: ElementRef;
+  // @ViewChild('searchEst') public searchEst: ElementRef;
+  @ViewChild('f') public form: NgForm;
 
   constructor(private cvService: CvService,
               private apiService: ApiService,
@@ -47,6 +49,7 @@ export class CvFormComponent implements OnInit {
 
   ngOnInit() {
       this.cv = this.cvService.setCV();
+      this.cvService.setFormToServ(this.form);
       this.apiService.get(environment.api.lang_ref)
         .subscribe(
             (res) => {
@@ -121,6 +124,7 @@ export class CvFormComponent implements OnInit {
 
   setData() {
     this.cvService.setCV(this.cv);
+    this.cvService.setFormToServ(this.form);
     this.cvService.emitCvChanges();
   }
 

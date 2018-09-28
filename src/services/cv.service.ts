@@ -18,6 +18,7 @@ import {Language} from '../models/cv/cv.lang.model';
 import {Skill} from '../models/cv/cv.skill.model';
 import {Router} from '@angular/router';
 import {Subject} from 'rxjs';
+import {NgForm} from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -37,7 +38,9 @@ export class CvService implements OnInit {
   routes = environment;
   changedChecked = new Subject<number>();
   changedUserCVs = new Subject<CV[]>();
+  changedForm = new Subject<NgForm>();
   onlyShowMode = true;
+  form: NgForm;
 
   constructor(private http: HttpClient,
               private apiService: ApiService,
@@ -171,7 +174,8 @@ export class CvService implements OnInit {
   }
 
   public saveCV() {
-    if (this.cv.title === '' || this.cv.title === null) {
+    if (!this.form.valid) {
+        console.log('invalid form', this.form);
         return;
     }
     if (!AuthService.isLoggedIn()) {
@@ -371,10 +375,15 @@ export class CvService implements OnInit {
 
   getUsersCvs(): CV[] {
       return this.user_cvs;
-    }
+  }
+
+  setFormToServ(form: NgForm) {
+      this.form = form;
+      this.changedForm.next(form);
+  }
 
   ngOnInit(): void {
-    }
+  }
 
 }
 

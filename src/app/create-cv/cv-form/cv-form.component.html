@@ -1,5 +1,5 @@
 <section>
-  <form (change)="setData()">
+  <form (change)="setData()" #f="ngForm">
     <a class="unfold" (click)="openAll()"><i class="fas fa-angle-double-down"></i></a>
     <a
       data-toggle="collapse"
@@ -78,10 +78,6 @@
     </a>
     <div class="collapse" id="desc">
       <input type="text" name="choose_preferable_area" [(ngModel)]="cv.preferencedArea" placeholder="choose preferable area"/>
-      <!--<select name="preference_position" placeholder="Choose an option" [(ngModel)]="cv.positionPreference.id">-->
-        <!--<option disabled>Select preference position</option>-->
-        <!--<option *ngFor="let pos of positions" [selected]="cv.positionPreference.id == pos.id" [value]="pos.id">{{ pos.position }}</option>-->
-      <!--</select>-->
       <input type="text" name="choose_position" placeholder="choose preferable position"
              [(ngModel)]="cv.position_preference"/>
       <input type="number" name="salary_from" [(ngModel)]="cv.salaryFromPreference" placeholder="Salary from ($)"/>
@@ -98,10 +94,10 @@
     </a>
     <div class="collapse" id="education">
       <div *ngFor="let edu of cv.education; let i = index">
-        <app-agm-cv [id]="i" ></app-agm-cv>
-        <input type="text" name="degree_{{i}}" placeholder="degree*"
+        <app-agm-cv [id]="i"></app-agm-cv>
+        <input type="text" required name="degree_{{i}}" placeholder="degree*"
                [(ngModel)]="cv.education[i].degree"/>
-        <input type="text" name="graduation_year_{{i}}" placeholder="graduation year*"
+        <input type="text" required name="graduation_year_{{i}}" placeholder="graduation year*"
                [(ngModel)]="cv.education[i].yearEnd"/>
         <textarea name="edu_description_{{i}}" placeholder="description"
                   [(ngModel)]="cv.education[i].note"></textarea>

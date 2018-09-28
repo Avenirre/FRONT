@@ -4,6 +4,7 @@ import {CV} from '../../../models/cv/cv.model';
 import {ActivatedRoute} from '@angular/router';
 import {environment} from '../../../environments/environment';
 import { ClipboardService } from 'ngx-clipboard'
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-cv-actions',
@@ -18,6 +19,7 @@ export class CvActionsComponent implements OnInit {
   alertClass = [];
   alertText = '';
   alertVisible = false;
+  formValid = false;
 
   constructor(private cvService: CvService,
               private route: ActivatedRoute,
@@ -30,6 +32,11 @@ export class CvActionsComponent implements OnInit {
       this.title = cv.title;
       this.onlyShowMode = this.cvService.onlyShowMode;
     });
+    this.cvService.changedForm.subscribe(
+        (form: NgForm) => {
+            this.formValid = form.valid;
+        }
+    )
     this.route.params.subscribe(
         (params) => {
           if (params['id']) {
