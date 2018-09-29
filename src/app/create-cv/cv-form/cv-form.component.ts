@@ -1,4 +1,4 @@
-import {Component, ElementRef, NgZone, OnInit, QueryList, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, NgZone, OnInit, QueryList, ViewChild} from '@angular/core';
 import {CvService} from '../../../services/cv.service';
 import {CV} from '../../../models/cv/cv.model';
 import {DataService} from '../../../services/data.service';
@@ -15,7 +15,8 @@ import {environment} from '../../../environments/environment';
 
 import {MapsAPILoader} from '@agm/core';
 import {} from '@types/googlemaps';
-import {NgForm} from '@angular/forms';
+import {NgForm, NgModel} from '@angular/forms';
+import {forEach} from '../../../../node_modules/@angular/router/src/utils/collection';
 
 
 declare var $: any;
@@ -40,11 +41,13 @@ export class CvFormComponent implements OnInit {
   @ViewChild('searchResidence') public searchCity: ElementRef;
   // @ViewChild('searchEst') public searchEst: ElementRef;
   @ViewChild('f') public form: NgForm;
+  @ViewChild('lgDiv') public lgDiv: ElementRef;
 
   constructor(private cvService: CvService,
               private apiService: ApiService,
               private mapsAPILoader: MapsAPILoader,
-              private ngZone: NgZone) {
+              private ngZone: NgZone,
+              private elem: ElementRef) {
   }
 
   ngOnInit() {
@@ -55,6 +58,13 @@ export class CvFormComponent implements OnInit {
             (res) => {
                 for (let i = 0; i < res['data'].length; i++) {
                     this.languages.push(new Language(+res['data'][i].id, res['data'][i].nameLang));
+                }
+                for (let i = 0; i < this.cv.languages.length; i++) {
+                    for (let ii = 0; ii < this.languages.length; ii++) {
+                        if (this.languages[ii].id === this.cv.languages[i].id) {
+                            this.languages[ii].available = false;
+                        }
+                    }
                 }
             }
         );
@@ -120,12 +130,14 @@ export class CvFormComponent implements OnInit {
 
   removeLanguage() {
     this.cv.languages.splice(this.cv.languages.length - 1, 1);
+    this.refreshAbleLg();
   }
 
   setData() {
     this.cvService.setCV(this.cv);
     this.cvService.setFormToServ(this.form);
     this.cvService.emitCvChanges();
+    console.log(this.form);
   }
 
   trackByFn(index: any, item: any) {
@@ -138,5 +150,44 @@ export class CvFormComponent implements OnInit {
 
   openAll() {
     $('.collapse').collapse('toggle');
+  }
+
+  setMarkPresentation(event) {
+      const name  = (event.srcElement.name !== '' && event.srcElement.name) ?
+          event.srcElement.name : event.srcElement.getAttribute('ng-reflect-name');
+      this.cvService.setLightFieldPresentation(name);
+  }
+
+  clearMarkPresentation(event) {
+      this.cvService.setLightFieldPresentation(null);
+  }
+
+  refreshAbleLg() {
+      const notAvaiables: number[] = [];
+      for (let i = 0; i < this.lgDiv.nativeElement.children.length; i++) {
+          let lgId = this.lgDiv.nativeElement.children[i].children[0].value;
+          const index = lgId.indexOf(': ');
+          lgId = +lgId.substring(index + 2, lgId.length);
+          notAvaiables.push(lgId);
+      }
+      for (let i = 0; i < this.languages.length; i++) {
+          this.languages[i].available = true;
+          for (let ii = 0; ii < notAvaiables.length; ii++) {
+              if (this.languages[i].id === notAvaiables[ii]) {
+                  this.languages[i].available = false;
+                  break;
+              }
+          }
+      }
+      console.log('CV lg: ', this.cv.languages);
+  }
+
+  isLangHidden(lgId) {
+      for (let i = 0; i < this.languages.length; i++) {
+          if (this.languages[i].id === lgId) {
+              return !this.languages[i].available;
+          }
+      }
+      return false;
   }
 }

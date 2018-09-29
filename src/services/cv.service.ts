@@ -33,6 +33,7 @@ export class CvService implements OnInit {
   cv: CV = null;
   user_cvs: CV[];
   userCvsIdChecked: number[] = [];
+  lightPresentationField = new EventEmitter<string>();
   cvChanged = new EventEmitter<any>();
   expectingCv = false;
   routes = environment;
@@ -380,6 +381,10 @@ export class CvService implements OnInit {
   setFormToServ(form: NgForm) {
       this.form = form;
       this.changedForm.next(form);
+  }
+
+  setLightFieldPresentation(fieldName: string) {
+      this.lightPresentationField.next(fieldName);
   }
 
   ngOnInit(): void {

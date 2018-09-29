@@ -36,9 +36,10 @@ const routesApi: Routes = [
   {
     path: routes.profileCandidate, component: ProfileCandidateComponent,
     children: [
-      {path: 'cvs-manager', component: ProfileCvsComponent},
-      {path: 'settings', component: ProfileSettingComponent},
-      {path: 'statistics', component: ProfileStatisticComponent}
+        {path: '', redirectTo: 'cvs-manager', pathMatch: 'full'},
+        {path: 'cvs-manager', component: ProfileCvsComponent},
+        {path: 'settings', component: ProfileSettingComponent},
+        {path: 'statistics', component: ProfileStatisticComponent}
     ]
   },
   {

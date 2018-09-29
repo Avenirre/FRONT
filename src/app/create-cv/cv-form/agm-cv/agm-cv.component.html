@@ -1,2 +1,13 @@
-<input type="text" required placeholder="school/institution name*" autocorrect="off" autocapitalize="off" spellcheck="off" class="form-control" #search>
-<!--<input type="text" name="residence" placeholder="residence" autocorrect="off" autocapitalize="off" spellcheck="off" class="form-control" #search>-->
+<input type="text"
+       name="institution_name_{{id}}"
+       (focus)="setMarkPresentation($event)"
+       (blur)="clearMarkPresentation($event)"
+       required
+       placeholder="school/institution name*"
+       autocorrect="off"
+       autocapitalize="off"
+       spellcheck="off"
+       class="form-control"
+       ngModel
+       #myControl
+       #search>

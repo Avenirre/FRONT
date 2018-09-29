@@ -1,7 +1,8 @@
 import { MapsAPILoader } from '@agm/core';
 import {} from '@types/googlemaps';
-import {ViewChild, ElementRef, NgZone, OnInit, Component, Input} from '@angular/core';
+import {ViewChild, ElementRef, NgZone, OnInit, Component, Input, AfterViewInit, EventEmitter, Output} from '@angular/core';
 import {CvService} from '../../../../services/cv.service';
+import {NgForm, NgModel} from '@angular/forms';
 
 @Component({
     selector: 'app-agm-cv',
@@ -10,7 +11,10 @@ import {CvService} from '../../../../services/cv.service';
 })
 export class AgmCvComponent implements OnInit {
     @Input('id') id;
+    @ViewChild('myControl') myControl: NgModel;
+    @Input()formParent;
     @ViewChild('search') public searchElement: ElementRef;
+    @Input()parentForm: NgForm;
 
     constructor(private mapsAPILoader: MapsAPILoader,
                 private ngZone: NgZone,
@@ -19,7 +23,7 @@ export class AgmCvComponent implements OnInit {
     ngOnInit() {
         this.mapsAPILoader.load().then(
             () => {
-                const autocomplete = new google.maps.places.Autocomplete(this.searchElement.nativeElement, { types:['establishment'] });
+                const autocomplete = new google.maps.places.Autocomplete(this.searchElement.nativeElement, { types: ['establishment'] });
 
                 autocomplete.addListener('place_changed', () => {
                     this.ngZone.run(() => {
@@ -35,10 +39,20 @@ export class AgmCvComponent implements OnInit {
                             }
                         }
                         this.cvService.cv.education[this.id].institution = formated_res;
+                        console.log(this.cvService.cv.education);
                     });
                 });
             }
         );
     }
 
+    setMarkPresentation(event) {
+        const name  = (event.srcElement.name !== '' && event.srcElement.name) ?
+            event.srcElement.name : event.srcElement.getAttribute('ng-reflect-name');
+        this.cvService.setLightFieldPresentation(name);
+    }
+
+    clearMarkPresentation(event) {
+        this.cvService.setLightFieldPresentation(null);
+    }
 }

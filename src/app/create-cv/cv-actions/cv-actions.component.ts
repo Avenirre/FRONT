@@ -12,7 +12,6 @@ import {NgForm} from '@angular/forms';
   styleUrls: ['./cv-actions.component.scss']
 })
 export class CvActionsComponent implements OnInit {
-  title: string;
   cv: CV;
   onlyShowMode = true;
   url_share: string;
@@ -20,23 +19,28 @@ export class CvActionsComponent implements OnInit {
   alertText = '';
   alertVisible = false;
   formValid = false;
+  activatedField: string;
 
   constructor(private cvService: CvService,
               private route: ActivatedRoute,
               private _clipboardService: ClipboardService) { }
 
   ngOnInit() {
-    this.title = this.cvService.setCV().title;
     this.onlyShowMode = this.cvService.onlyShowMode;
     this.cvService.cvChanged.subscribe((cv: CV) => {
-      this.title = cv.title;
+      this.cv = cv;
       this.onlyShowMode = this.cvService.onlyShowMode;
     });
     this.cvService.changedForm.subscribe(
         (form: NgForm) => {
             this.formValid = form.valid;
         }
-    )
+    );
+    this.cvService.lightPresentationField.subscribe(
+        (field) => {
+            this.activatedField = field;
+        }
+    );
     this.route.params.subscribe(
         (params) => {
           if (params['id']) {

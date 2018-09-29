@@ -14,6 +14,7 @@ export class CvPresentationComponent implements OnInit, OnDestroy {
   cv: CV;
   templateType = 0;
   templateColor = 0;
+  activatedField: string;
 
   constructor(
     private cvService: CvService
@@ -29,6 +30,11 @@ export class CvPresentationComponent implements OnInit, OnDestroy {
         this.cv = cv;
         this.loadTemplate();
       }
+    );
+    this.cvService.lightPresentationField.subscribe(
+        (field) => {
+            this.activatedField = field;
+        }
     );
   }
 
