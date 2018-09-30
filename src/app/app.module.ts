@@ -68,6 +68,7 @@ import {AgmCvComponent} from './create-cv/cv-form/agm-cv/agm-cv.component';
 import {ClipboardModule} from 'ngx-clipboard';
 import { DirectivesDirective } from './modal/directives.directive';
 import {RenderService} from '../services/render.service';
+import {SliderModule} from './share/slider/slider.module';
 
 @NgModule({
   declarations: [
@@ -131,7 +132,8 @@ import {RenderService} from '../services/render.service';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    ClipboardModule
+    ClipboardModule,
+    SliderModule
   ],
   providers: [
     ModalService,
