@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-templates',
@@ -6,16 +6,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./templates.component.scss']
 })
 export class TemplatesComponent implements OnInit {
-  public imagesUrl;
+  _items: { id: number, text: string, imgUrl: string }[] = [];
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
-    this.imagesUrl = [
-      'https://www.openkm.com/resources/images/icon/document-management-big.png',
-      'https://www.openkm.com/resources/images/icon/document-management-big.png',
-      'https://www.openkm.com/resources/images/icon/document-management-big.png',
-    ];
+    this.initItems();
+  }
+
+  private initItems() {
+    for (let i = 0; i < 10; i++) {
+      const item = {
+        id: i,
+        text: `item ${i + 1}`,
+        imgUrl: ''
+      };
+      this._items.push(item);
+    }
   }
 
 }
