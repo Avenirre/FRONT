@@ -67,6 +67,7 @@ import {ShowCvComponent} from './create-cv/show-cv/show-cv.component';
 import {AgmCvComponent} from './create-cv/cv-form/agm-cv/agm-cv.component';
 import {ClipboardModule} from 'ngx-clipboard';
 import { DirectivesDirective } from './modal/directives.directive';
+import {RenderService} from '../services/render.service';
 
 @NgModule({
   declarations: [
@@ -138,7 +139,8 @@ import { DirectivesDirective } from './modal/directives.directive';
     ApiCandidatesService,
     ApiCompaniesService,
     AuthService,
-    CvService
+    CvService,
+    RenderService
   ],
   bootstrap: [AppComponent]
 })

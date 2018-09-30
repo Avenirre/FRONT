@@ -67,3 +67,16 @@ input.ng-touched.ng-invalid {
 hr {
   background-color: white;
 }
+
+#selected-skills {
+  background-color: white;
+  border-radius: 15px;
+}
+
+#skill-list {
+  padding-left: 5px;
+}
+
+#skill-list u {
+  cursor: pointer;
+}

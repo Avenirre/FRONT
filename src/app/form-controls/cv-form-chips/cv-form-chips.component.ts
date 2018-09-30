@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {RenderService} from '../../../services/render.service';
 
 @Component({
   selector: 'app-cv-form-chips',
@@ -18,7 +19,7 @@ export class CvFormChipsComponent implements OnInit {
   @Input() listItems: {id: number, value: string}[];
   @Output() listChanged = new EventEmitter<{id: number, value: string}[]>();
 
-  constructor() {}
+  constructor(private renderService: RenderService) {}
 
   ngOnInit() {
   }
@@ -27,6 +28,7 @@ export class CvFormChipsComponent implements OnInit {
     const index = this.listItems.findIndex((c) => {
       return c.id === id;
     });
+    this.renderService.removedSkill.emit(this.listItems[index]);
     this.listItems.splice(index, 1);
     this.listChanged.emit(this.listItems);
   }

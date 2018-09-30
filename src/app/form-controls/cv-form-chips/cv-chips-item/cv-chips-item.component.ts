@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Skill} from '../../../../models/cv/cv.skill.model';
 
 @Component({
   selector: 'app-cv-chips-item',
@@ -6,7 +7,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
   styleUrls: ['./cv-chips-item.component.scss']
 })
 export class CvChipsItemComponent implements OnInit {
-  @Input() item: {id: number, value: string};
+  @Input() item: {id: number, value: string, nameSkill: string};
   @Output() itemDeleted = new EventEmitter<number>();
 
   constructor() { }

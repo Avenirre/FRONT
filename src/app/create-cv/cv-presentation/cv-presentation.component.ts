@@ -4,6 +4,7 @@ import {CV} from '../../../models/cv/cv.model';
 import {ActivatedRoute, Params} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
 import {DataService} from '../../../services/data.service';
+import {RenderService} from '../../../services/render.service';
 
 @Component({
   selector: 'app-cv-presentation',
@@ -15,16 +16,22 @@ export class CvPresentationComponent implements OnInit, OnDestroy {
   templateType = 0;
   templateColor = 0;
   activatedField: string;
+  jobsFrontEnd: boolean[] = [];
 
   constructor(
-    private cvService: CvService
-  ) {
+    private cvService: CvService,
+    private renderService: RenderService) {
   }
 
   ngOnInit() {
     this.cv = this.cvService.setCV();
     this.loadTemplate();
 
+    this.renderService.jobsFrontEndChange.subscribe(
+        (obj) => {
+          this.jobsFrontEnd[obj.id] = obj.value;
+        }
+    );
     this.cvService.cvChanged.subscribe(
       (cv: CV) => {
         this.cv = cv;

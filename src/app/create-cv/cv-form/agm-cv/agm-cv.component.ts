@@ -39,7 +39,6 @@ export class AgmCvComponent implements OnInit {
                             }
                         }
                         this.cvService.cv.education[this.id].institution = formated_res;
-                        console.log(this.cvService.cv.education);
                     });
                 });
             }
@@ -54,5 +53,9 @@ export class AgmCvComponent implements OnInit {
 
     clearMarkPresentation(event) {
         this.cvService.setLightFieldPresentation(null);
+    }
+
+    bindToCv(event) {
+        this.cvService.cv.education[this.id].institution = event.srcElement.value
     }
 }

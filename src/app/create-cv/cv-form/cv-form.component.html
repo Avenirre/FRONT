@@ -166,11 +166,22 @@
       <h3><i class="fas fa-chevron-circle-down"></i> Skills</h3>
     </a>
     <div class="collapse" id="skills">
-      <select name="skills" multiple [compareWith]="compareFn" size="7" [(ngModel)]="cv.skills">
-          <option *ngFor="let skill of skills; let i = index" [ngValue]="skill">
-            {{skill.nameSkill}}
-          </option>
-      </select>
+      <h6>Selected skills:</h6>
+      <div id="selected-skills">
+        <app-cv-form-chips [listItems]="cv.skills"></app-cv-form-chips>
+      </div>
+      <hr>
+      <h6>List of skills:</h6>
+      <div id="skill-list">
+        <span *ngFor="let skill of skills; let i = index">
+          <u (click)="addSkill(skill)">{{skill.nameSkill}}</u>&#160;
+        </span>
+      </div>
+      <!--<select name="skills" multiple [compareWith]="compareFn" size="7" [(ngModel)]="cv.skills">-->
+          <!--<option *ngFor="let skill of skills; let i = index" [ngValue]="skill">-->
+            <!--{{skill.nameSkill}}-->
+          <!--</option>-->
+      <!--</select>-->
     </div>
 
     <a
@@ -190,20 +201,22 @@
                placeholder="company"
                [(ngModel)]="cv.cvJobs[i].company"/>
         <input name="position_{{i}}"
+               (keyup)="isRenderedRange(i)"
                (focus)="setMarkPresentation($event)"
                (blur)="clearMarkPresentation($event)"
                placeholder="position"
                [(ngModel)]="cv.cvJobs[i].position">
-
-        <label for="formControlRange_{{i}}">Frontend / Backend</label>
-        <input
-          type="range"
-          name="range_{{i}}"
-          (focus)="setMarkPresentation($event)"
-          (blur)="clearMarkPresentation($event)"
-          class="form-control-range"
-          id="formControlRange_{{i}}"
-          [(ngModel)]="cv.cvJobs[i].backFront">
+        <div *ngIf="jobsFrontEnd[i]">
+          <label for="formControlRange_{{i}}">Frontend / Backend</label>
+          <input
+                 type="range"
+                 name="range_{{i}}"
+                 (focus)="setMarkPresentation($event)"
+                 (blur)="clearMarkPresentation($event)"
+                 class="form-control-range"
+                 id="formControlRange_{{i}}"
+                 [(ngModel)]="cv.cvJobs[i].backFront">
+        </div>
         <input type="number"
                name="date_from_{{i}}"
                (focus)="setMarkPresentation($event)"
@@ -310,15 +323,16 @@
     <div class="collapse" id="languages">
       <div #lgDiv>
         <div *ngFor="let language of cv.languages; let i = index; trackBy:trackByFn">
-          <select name="language_{{i}}" (change)="refreshAbleLg(lgDiv)"
+          <select name="language_{{i}}"
+                  (change)="refreshAbleLg()"
                   (focus)="setMarkPresentation($event)"
                   (blur)="clearMarkPresentation($event)"
                   [(ngModel)]="cv.languages[i].id">
             <option *ngFor="let lg of languages"
-                    [ngValue]="lg.id"
-                    [selected]="cv.languages[i].id == lg.id"
-                    [hidden]="isLangHidden(lg.id)">
-                {{ lg.nameLang }}
+                      [ngValue]="lg.id"
+                      [selected]="lg.id==cv.languages[i].id"
+                      [hidden]="isLangHidden(lg.id)">
+                  {{lg.nameLang}}
             </option>
           </select>
         </div>

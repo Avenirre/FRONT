@@ -17,6 +17,7 @@ import {MapsAPILoader} from '@agm/core';
 import {} from '@types/googlemaps';
 import {NgForm, NgModel} from '@angular/forms';
 import {forEach} from '../../../../node_modules/@angular/router/src/utils/collection';
+import {RenderService} from '../../../services/render.service';
 
 
 declare var $: any;
@@ -29,6 +30,7 @@ declare var $: any;
 export class CvFormComponent implements OnInit {
   cv: CV;
   skills = [];
+  jobsFrontEnd: boolean[] = [];
   selectedSkills = [];
   languages = [];
   positions = [
@@ -47,12 +49,18 @@ export class CvFormComponent implements OnInit {
               private apiService: ApiService,
               private mapsAPILoader: MapsAPILoader,
               private ngZone: NgZone,
-              private elem: ElementRef) {
+              private elem: ElementRef,
+              private renderService: RenderService) {
   }
 
   ngOnInit() {
       this.cv = this.cvService.setCV();
       this.cvService.setFormToServ(this.form);
+      this.renderService.removedSkill.subscribe(
+          (skill) => {
+              this.skills.push(skill);
+          }
+      )
       this.apiService.get(environment.api.lang_ref)
         .subscribe(
             (res) => {
@@ -66,6 +74,7 @@ export class CvFormComponent implements OnInit {
                         }
                     }
                 }
+                console.log(this.languages);
             }
         );
       this.apiService.get(environment.api.skills_ref)
@@ -74,6 +83,7 @@ export class CvFormComponent implements OnInit {
                   for (let i = 0; i < res['data'].length; i++) {
                       this.skills.push(new Skill(+res['data'][i].id, res['data'][i].nameSkill));
                   }
+                  this.removeSelectedSkills();
               }
           );
       this.mapsAPILoader.load().then(
@@ -163,11 +173,16 @@ export class CvFormComponent implements OnInit {
   }
 
   refreshAbleLg() {
+      for (let i = 0; i < this.cv.languages.length; i++) {
+          for (let ii = 0; ii < this.languages.length; ii++) {
+              if (this.cv.languages[i].id === this.languages[ii].id) {
+                  this.cv.languages[i].nameLang = this.languages[ii].nameLang;
+              }
+          }
+      }
       const notAvaiables: number[] = [];
       for (let i = 0; i < this.lgDiv.nativeElement.children.length; i++) {
-          let lgId = this.lgDiv.nativeElement.children[i].children[0].value;
-          const index = lgId.indexOf(': ');
-          lgId = +lgId.substring(index + 2, lgId.length);
+          const lgId = this.form.controls['language_' + i].value;
           notAvaiables.push(lgId);
       }
       for (let i = 0; i < this.languages.length; i++) {
@@ -189,5 +204,33 @@ export class CvFormComponent implements OnInit {
           }
       }
       return false;
+  }
+
+  addSkill(skill: Skill) {
+    this.cv.skills.push(skill);
+    for (let i = 0; i < this.skills.length; i++) {
+        if (this.skills[i].id === skill.id) {
+            this.skills.splice(i, 1);
+        }
+    }
+  }
+
+  removeSelectedSkills() {
+      for (let i = 0; i < this.cv.skills.length; i++) {
+          for (let ii = 0; ii < this.skills.length; ii++) {
+              if (this.skills[ii].id === this.cv.skills[i].id) {
+                  console.log('match');
+                  this.skills.splice(ii, 1);
+              }
+          }
+      }
+  }
+
+  isRenderedRange(i) {
+      const position = this.cv.cvJobs[i].position;
+      const reg = position.match(/n*(full stack)|(fullstack)n*/i);
+      const res = reg ? true : false;
+      this.jobsFrontEnd[i] = res;
+      this.renderService.jobsFrontEndChange.next({id: i, value: res});
   }
 }

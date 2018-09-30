@@ -89,10 +89,6 @@ export class CvService implements OnInit {
       }
   }
 
-  // public setCV(cv) {
-  //   this.cv = cv;
-  // }
-
   public deleteCv(id) {
       for (let i = 0; i < this.user_cvs.length; i++) {
           if (this.user_cvs[i].id === id ) {
@@ -323,6 +319,9 @@ export class CvService implements OnInit {
                     break;
             }
         }
+      for (let i = 0; i < this.cv.languages.length; i++) {
+          this.cv.languages[i] = new Language(this.cv.languages[i].id, this.cv.languages[i].nameLang);
+      }
       // if (!this.cv.positionPreference) {
       //     this.cv.positionPreference = new Position(null, null);
       // }
@@ -344,9 +343,9 @@ export class CvService implements OnInit {
       if (this.cv.languages.length === 0) {
           this.cv.languages.push(new Language(null, null));
       }
-      if (this.cv.skills.length === 0) {
-          this.cv.skills.push(new Skill(null, null));
-      }
+      // if (this.cv.skills.length === 0) {
+      //     this.cv.skills.push(new Skill(null, null));
+      // }
     }
 
   setUsersCvs() {

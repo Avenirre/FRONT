@@ -1,5 +1,6 @@
 <input type="text"
        name="institution_name_{{id}}"
+       (keyup)="bindToCv($event)"
        (focus)="setMarkPresentation($event)"
        (blur)="clearMarkPresentation($event)"
        required
