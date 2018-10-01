@@ -213,13 +213,13 @@ export class CvFormComponent implements OnInit {
             this.skills.splice(i, 1);
         }
     }
+    this.setData();
   }
 
   removeSelectedSkills() {
       for (let i = 0; i < this.cv.skills.length; i++) {
           for (let ii = 0; ii < this.skills.length; ii++) {
               if (this.skills[ii].id === this.cv.skills[i].id) {
-                  console.log('match');
                   this.skills.splice(ii, 1);
               }
           }

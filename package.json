@@ -36,6 +36,7 @@
     "npm-font-open-sans": "^1.1.0",
     "path": "^0.12.7",
     "popper.js": "^1.14.4",
+    "print-html-element": "^0.5.1",
     "roboto-fontface": "^0.10.0",
     "rxjs": "^6.0.0",
     "typescript": "~2.7.2",

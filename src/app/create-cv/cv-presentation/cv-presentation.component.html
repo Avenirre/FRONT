@@ -1,5 +1,5 @@
 <!--TEMPLATE-0-->
-<div *ngIf="templateType == 0" class="cv-presentation">
+<div *ngIf="templateType == 0" class="cv-presentation" id="printPdf" #printPdf>
   <div class="h-back template-{{templateColor}}">
   </div>
   <div class="cv-section-grid-container">
@@ -40,7 +40,7 @@
           <span *ngIf="activatedField=='residence'" class="pulse"></span>
         </span>
         <span class="cv-contact">
-          {{calculateAge(cv.birthday)}}<span *ngIf="activatedField=='birthday'" class="pulse"></span> y.o.
+          {{calculateAge(cv.birthday)}}<span *ngIf="activatedField=='birthday'" class="pulse"></span> years old
         </span>
       </div>
     </div>

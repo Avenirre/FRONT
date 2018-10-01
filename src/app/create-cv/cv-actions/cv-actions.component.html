@@ -1,9 +1,9 @@
 <aside>
   <h3>{{cv.title}}<span *ngIf="activatedField=='title'" class="pulse"></span></h3>
   <div class="buttons">
-    <a href=""><i class="fas fa-download"></i>Download</a>
+    <a href="" disabled><i class="fas fa-download"></i>Download</a>
     <a (click)="copyLink()"><i class="fas fa-share"></i>Share</a>
-    <a href=""><i class="fas fa-print"></i>Print</a>
+    <a (click)="printCv('printPdf')"><i class="fas fa-print"></i>Print</a>
     <span *ngIf="onlyShowMode == false">
       <button class="btn btn-danger" (click)="activateCv()" [disabled]="!formValid">Activate</button>
       <button class="btn btn-primary" (click)="saveCv()" [disabled]="!formValid">Save</button>

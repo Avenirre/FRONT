@@ -1,10 +1,8 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {CvService} from '../../../services/cv.service';
 import {CV} from '../../../models/cv/cv.model';
-import {ActivatedRoute, Params} from '@angular/router';
-import {HttpClient} from '@angular/common/http';
-import {DataService} from '../../../services/data.service';
 import {RenderService} from '../../../services/render.service';
+
 
 @Component({
   selector: 'app-cv-presentation',
@@ -17,6 +15,7 @@ export class CvPresentationComponent implements OnInit, OnDestroy {
   templateColor = 0;
   activatedField: string;
   jobsFrontEnd: boolean[] = [];
+  @ViewChild('printPdf') printPdf: ElementRef;
 
   constructor(
     private cvService: CvService,
@@ -56,6 +55,9 @@ export class CvPresentationComponent implements OnInit, OnDestroy {
     const ageDifMs = Date.now() - new Date(birthday).getTime();
     const ageDate = new Date(ageDifMs);
     return Math.abs(ageDate.getUTCFullYear() - 1970) || null;
+  }
+
+  downloadPDF() {
   }
 
   ngOnDestroy(): void {

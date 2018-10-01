@@ -1,5 +1,5 @@
 <section>
-  <form (change)="setData()" #f="ngForm">
+  <form (keyup)="setData()" (change)="setData()" (click)="setData()" #f="ngForm">
     <a class="unfold" (click)="openAll()"><i class="fas fa-angle-double-down"></i></a>
     <a
       data-toggle="collapse"
@@ -166,7 +166,7 @@
       <h3><i class="fas fa-chevron-circle-down"></i> Skills</h3>
     </a>
     <div class="collapse" id="skills">
-      <h6>Selected skills:</h6>
+      <h6>Selected skills*:</h6>
       <div id="selected-skills">
         <app-cv-form-chips [listItems]="cv.skills"></app-cv-form-chips>
       </div>
@@ -177,11 +177,6 @@
           <u (click)="addSkill(skill)">{{skill.nameSkill}}</u>&#160;
         </span>
       </div>
-      <!--<select name="skills" multiple [compareWith]="compareFn" size="7" [(ngModel)]="cv.skills">-->
-          <!--<option *ngFor="let skill of skills; let i = index" [ngValue]="skill">-->
-            <!--{{skill.nameSkill}}-->
-          <!--</option>-->
-      <!--</select>-->
     </div>
 
     <a
@@ -196,15 +191,17 @@
       <div *ngFor="let job of cv.cvJobs; let i = index">
         <input type="text"
                name="company_{{i}}"
+               required
                (focus)="setMarkPresentation($event)"
                (blur)="clearMarkPresentation($event)"
-               placeholder="company"
+               placeholder="company*"
                [(ngModel)]="cv.cvJobs[i].company"/>
         <input name="position_{{i}}"
+               required
                (keyup)="isRenderedRange(i)"
                (focus)="setMarkPresentation($event)"
                (blur)="clearMarkPresentation($event)"
-               placeholder="position"
+               placeholder="position*"
                [(ngModel)]="cv.cvJobs[i].position">
         <div *ngIf="jobsFrontEnd[i]">
           <label for="formControlRange_{{i}}">Frontend / Backend</label>
@@ -257,7 +254,8 @@
     <div class="collapse" id="achievements">
       <div *ngFor="let a of cv.cvAchievements; let i = index; trackBy:trackByFn">
         <textarea name="achievement_{{i}}"
-                  placeholder="description"
+                  placeholder="description*"
+                  required
                   (focus)="setMarkPresentation($event)"
                   (blur)="clearMarkPresentation($event)"
                   [(ngModel)]="cv.cvAchievements[i].description"></textarea>
@@ -265,7 +263,8 @@
                name="achievement_date_end_{{i}}"
                (focus)="setMarkPresentation($event)"
                (blur)="clearMarkPresentation($event)"
-               placeholder="graduation year"
+               placeholder="graduation year*"
+               required
                [(ngModel)]="cv.cvAchievements[i].yearEnd"/>
         <hr *ngIf="i != cv.cvAchievements.length - 1">
       </div>
@@ -292,13 +291,15 @@
         <textarea name="certification_{{i}}"
                   (focus)="setMarkPresentation($event)"
                   (blur)="clearMarkPresentation($event)"
-                  placeholder="description"
+                  placeholder="description*"
+                  required
                   [(ngModel)]="cv.cvCertification[i].description"></textarea>
         <input type="number"
                name="certification_date_end_{{i}}"
                (focus)="setMarkPresentation($event)"
                (blur)="clearMarkPresentation($event)"
-               placeholder="graduation year"
+               placeholder="graduation year*"
+               required
                [(ngModel)]="cv.cvCertification[i].yearEnd"/>
         <hr *ngIf="i != cv.cvCertification.length - 1">
       </div>

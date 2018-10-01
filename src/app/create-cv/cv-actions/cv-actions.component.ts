@@ -33,7 +33,9 @@ export class CvActionsComponent implements OnInit {
     });
     this.cvService.changedForm.subscribe(
         (form: NgForm) => {
-            this.formValid = form.valid;
+            const fValid = this.formValid = form.valid;
+            const sValid = this.cv.skills.length > 0 ? true : false;
+            this.formValid = fValid && sValid;
         }
     );
     this.cvService.lightPresentationField.subscribe(
@@ -71,5 +73,25 @@ export class CvActionsComponent implements OnInit {
             this._clipboardService.copyFromContent(this.url_share);
         }
         this.alertVisible = true;
+    }
+    printCv(elem) {
+        // window.document.getElementById()
+        let mywindow = window.open('', '');
+        mywindow.document.head.innerHTML = document.head.innerHTML;
+        mywindow.document.head.innerHTML += `<style>@page { size: auto;  margin: 0px;}</style>`;
+        let printElem = '<div id="printElem">' + document.getElementById(elem).innerHTML + '<div>';
+        mywindow.document.body.innerHTML = printElem;
+        mywindow.document.getElementById('printElem').setAttribute('style', 'margin: 120px;');
+        console.log(mywindow.document);
+
+        mywindow.document.close(); // necessary for IE >= 10
+        mywindow.focus(); // necessary for IE >= 10*/
+
+        setTimeout(() => {
+            mywindow.print();
+            mywindow.close();
+        }, 100)
+
+        return true;
     }
 }

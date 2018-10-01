@@ -75,6 +75,7 @@ export class CvService implements OnInit {
       } else {
         if (cv) {
             this.cv = cv;
+            this.changedForm.next(this.form);
         } else {
             if (this.cv === null) {
               this.cv = DataService.getCV();
