@@ -11,6 +11,7 @@ import {NgForm, NgModel} from '@angular/forms';
 })
 export class AgmCvComponent implements OnInit {
     @Input('id') id;
+    @Input('cvValue') cvValue;
     @ViewChild('myControl') myControl: NgModel;
     @Input()formParent;
     @ViewChild('search') public searchElement: ElementRef;
@@ -21,6 +22,7 @@ export class AgmCvComponent implements OnInit {
                 private cvService: CvService) {}
 
     ngOnInit() {
+        console.log(this.cvValue);
         this.mapsAPILoader.load().then(
             () => {
                 const autocomplete = new google.maps.places.Autocomplete(this.searchElement.nativeElement, { types: ['establishment'] });

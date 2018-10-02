@@ -26,6 +26,7 @@ export class CvsEditPanelComponent implements OnInit {
           this.cvService.deleteCv(this.cvService.userCvsIdChecked[i]);
       }
       this.cvService.userCvsIdChecked = [];
+      this.cvService.changedChecked.next(0);
       this.cvService.changedChecked.next(this.cvService.userCvsIdChecked.length);
   }
 
@@ -33,5 +34,7 @@ export class CvsEditPanelComponent implements OnInit {
       for (let i = 0; i < this.cvService.userCvsIdChecked.length; i++) {
           this.cvService.toggleActiveCV(this.cvService.userCvsIdChecked[i], active);
       }
+      this.cvService.changedChecked.next(0);
+      this.cvService.changedUserCvsLocal.emit(this.cvService.getUsersCvs());
   }
 }

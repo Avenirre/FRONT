@@ -1,6 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {CV} from '../../../../../models/cv/cv.model';
 import {CvService} from '../../../../../services/cv.service';
+import {forEach} from '../../../../../../node_modules/@angular/router/src/utils/collection';
 
 @Component({
   selector: 'app-cv-item',
@@ -9,20 +10,36 @@ import {CvService} from '../../../../../services/cv.service';
 })
 export class CvItemComponent implements OnInit {
   @Input() cv: CV;
-  badgeClasses = ['badge', 'badge-secondary'];;
+  @ViewChild('ch') ch: ElementRef;
+  badgeClasses = {
+      'badge': true,
+      'badge-secondary': false,
+      'badge-primary': false
+  };
   badgeText = 'Not activated';
   constructor(private cvService: CvService) { }
 
   ngOnInit() {
+      this.cvService.changedUserCvsLocal.subscribe(
+          (CVs) => {
+              for (let i = 0; i < CVs.length; i++) {
+                  if (CVs[i].id === this.cv.id) {
+                     this.cv = CVs[i];
+                     this.ch.nativeElement.checked = false;
+                     this.fillBadge();
+                  }
+              }
+          }
+      );
       this.fillBadge();
   }
 
   fillBadge() {
+    this.badgeClasses['badge-secondary'] = !this.cv.activated;
+    this.badgeClasses['badge-primary'] = this.cv.activated;
     if (this.cv.activated) {
-        this.badgeClasses = ['badge', 'badge-primary'];
         this.badgeText = 'Activated';
     } else {
-        this.badgeClasses = ['badge', 'badge-secondary'];
         this.badgeText = 'Not activated';
     }
   }

@@ -1,5 +1,5 @@
 export class Education {
-    id: string;
+    id: number;
     institution: string;
     yearEnd: number;
     degree: string;

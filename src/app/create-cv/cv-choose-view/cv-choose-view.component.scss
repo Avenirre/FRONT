@@ -2,7 +2,7 @@
 
 ul {
   list-style: none;
-  margin: 5rem 0 0 0rem;
+  //margin: 5rem 0 0 0rem;
 }
 
 li {
@@ -11,8 +11,11 @@ li {
 img.preview {
   display: block;
   width: inherit;
+  max-width: 130px;
   transform: translate(-0.3rem, -0.3rem);
   opacity: 0.8;
+  cursor: pointer;
+  box-shadow: 2px 2px 5px black;
 }
 
 img.active, img.preview:hover {
@@ -20,8 +23,8 @@ img.active, img.preview:hover {
 }
 
 .template {
-  width: 100%;
-  background-color: $color-shadow-blue;
+  //width: 100%;
+  //background-color: $color-shadow-blue;
   margin: 1.5rem 0;
 
 }

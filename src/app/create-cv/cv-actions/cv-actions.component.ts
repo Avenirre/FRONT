@@ -20,6 +20,7 @@ export class CvActionsComponent implements OnInit {
   alertVisible = false;
   formValid = false;
   activatedField: string;
+  alertShow = false;
 
   constructor(private cvService: CvService,
               private route: ActivatedRoute,
@@ -46,10 +47,11 @@ export class CvActionsComponent implements OnInit {
     this.route.params.subscribe(
         (params) => {
           if (params['id']) {
-             this.alertClass = ['text-success'];
-             this.url_share = environment.apiUrl + ':' + environment.apiPort + '/cv/' + params['id'];
+             // this.alertClass = ['text-success'];
+             this.url_share = window.location.host + '/cv/' + params['id'];
              this.alertText = `Link on this CV: <a link='${this.url_share}'>${this.url_share}</a>, was copied to the clipboard.`;
              document.execCommand('copy');
+             this.alertShow = false;
           } else {
              this.alertClass = ['text-danger'];
              this.alertText = 'This CV cant`t be shared. Please save this CV before sharing.';

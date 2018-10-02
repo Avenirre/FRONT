@@ -13,6 +13,7 @@ import {CvService} from '../../../../services/cv.service';
 })
 export class ProfileCvsComponent implements OnInit {
   cvs: CV[];
+  downloading = false;
   constructor(private cvService: CvService) { }
 
   ngOnInit() {
@@ -25,10 +26,11 @@ export class ProfileCvsComponent implements OnInit {
           }
       );
       if (!this.cvs) {
-          document.body.style.cursor = 'progress';
+          this.downloading = true;
           this.cvService.setUsersCvs().then(
               (res) => {
                 this.cvs = this.cvService.getUsersCvs();
+                this.downloading = false;
               }
           );
       }
