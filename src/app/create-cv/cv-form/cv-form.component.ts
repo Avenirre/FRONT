@@ -159,7 +159,7 @@ export class CvFormComponent implements OnInit {
   }
 
   openAll() {
-    $('.collapse').collapse('toggle');
+    $('form .collapse').collapse('toggle');
   }
 
   setMarkPresentation(event) {

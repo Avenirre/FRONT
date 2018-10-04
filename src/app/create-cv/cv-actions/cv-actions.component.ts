@@ -3,8 +3,10 @@ import {CvService} from '../../../services/cv.service';
 import {CV} from '../../../models/cv/cv.model';
 import {ActivatedRoute} from '@angular/router';
 import {environment} from '../../../environments/environment';
-import { ClipboardService } from 'ngx-clipboard'
+import { ClipboardService } from 'ngx-clipboard';
 import {NgForm} from '@angular/forms';
+import * as jspdf from 'jspdf';
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-cv-actions',
@@ -78,10 +80,10 @@ export class CvActionsComponent implements OnInit {
     }
     printCv(elem) {
         // window.document.getElementById()
-        let mywindow = window.open('', '');
+        const mywindow = window.open('', '');
         mywindow.document.head.innerHTML = document.head.innerHTML;
         mywindow.document.head.innerHTML += `<style>@page { size: auto;  margin: 0px;}</style>`;
-        let printElem = '<div id="printElem">' + document.getElementById(elem).innerHTML + '<div>';
+        const printElem = '<div id="printElem">' + document.getElementById(elem).innerHTML + '<div>';
         mywindow.document.body.innerHTML = printElem;
         mywindow.document.getElementById('printElem').setAttribute('style', 'margin: 120px;');
         console.log(mywindow.document);
@@ -92,8 +94,31 @@ export class CvActionsComponent implements OnInit {
         setTimeout(() => {
             mywindow.print();
             mywindow.close();
-        }, 100)
+        }, 100);
 
         return true;
+    }
+
+    downloadPdf() {
+        // const doc = new jsPDF();
+        //
+        // doc.addHTML(document.getElementById('printPdf'), function() {
+        //     doc.save('test.pdf');
+        // });
+
+        var data = document.getElementById('printPdf');
+        html2canvas(data).then(canvas => {
+            // Few necessary setting options
+            var imgWidth = 208;
+            var pageHeight = 295;
+            var imgHeight = canvas.height * imgWidth / canvas.width;
+            var heightLeft = imgHeight;
+
+            const contentDataURL = canvas.toDataURL('image/png')
+            let pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF
+            var position = 0;
+            pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
+            pdf.save('MYPdf.pdf'); // Generated PDF
+        });
     }
 }

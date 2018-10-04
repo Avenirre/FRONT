@@ -204,6 +204,7 @@ export class CvService implements OnInit {
                });
         }
         this.expectingCv = false;
+        this.router.navigate(['/profile/candidate']);
     }
   }
 

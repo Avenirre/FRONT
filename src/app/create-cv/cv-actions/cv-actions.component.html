@@ -1,7 +1,7 @@
 <aside>
   <h3>{{cv.title}}<span *ngIf="activatedField=='title'" class="pulse"></span></h3>
   <div class="buttons">
-    <a><i class="fas fa-download"></i>Download</a>
+    <a (click)="downloadPdf()"><i class="fas fa-download"></i>Download</a>
     <a (click)="copyLink()"><i class="fas fa-share"></i>Share</a>
     <a (click)="printCv('printPdf')"><i class="fas fa-print"></i>Print</a>
     <span *ngIf="onlyShowMode == false">
