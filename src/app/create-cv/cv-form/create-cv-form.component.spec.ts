@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CvFormComponent } from './cv-form.component';
 
-describe('CvFormComponent', () => {
+describe('AgmCvComponent', () => {
   let component: CvFormComponent;
   let fixture: ComponentFixture<CvFormComponent>;
 

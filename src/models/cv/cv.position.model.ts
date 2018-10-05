@@ -1,5 +1,5 @@
 export class Position {
-    id: number;
+    id: string;
     postName: string;
 
     constructor(id, postName) {

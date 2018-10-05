@@ -18,7 +18,10 @@ import {CV} from '../../../models/cv/cv.model';
 })
 export class CompanyRegFormComponent implements OnInit {
   errors = {
-    RegError: false
+    RegError: false,
+    UserNameExists: false,
+    ServerError: false,
+    message: null
   };
   regForm = this.fb.group({
     companyDetails: this.fb.group({
@@ -35,9 +38,11 @@ export class CompanyRegFormComponent implements OnInit {
       firstName: [''],
       lastName: [''],
       position: [''],
-      email: ['', Validators.pattern(
+      email: ['', [
+        Validators.required,
+        Validators.pattern(
         '^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$'
-      )],
+      )]],
       username: ['', [
         Validators.required,
         Validators.pattern('[A-Za-z0-9-_]+'),
@@ -90,6 +95,7 @@ export class CompanyRegFormComponent implements OnInit {
   }
 
   submitRegistration() {
+    this.resetErrors();
     const applicant = this.createApplicant();
     this.authService.createApplicant(applicant)
       .then(
@@ -102,8 +108,15 @@ export class CompanyRegFormComponent implements OnInit {
           this.authService.login(loginData);
         },
         (error) => {
-          this.errors.RegError = true;
           console.log(error);
+          this.errors.message = error.error.message;
+          if (error.status === 400) {
+            this.errors.UserNameExists = true;
+          } else if (error.status === 500) {
+            this.errors.ServerError = true;
+          } else {
+            this.errors.RegError = true;
+          }
         });
   }
 
@@ -124,6 +137,12 @@ export class CompanyRegFormComponent implements OnInit {
     applicant.phone = this.regForm.value['companyDetails']['phone'];
     applicant.companyName = this.regForm.value['companyDetails']['companyName'];
     return applicant;
+  }
+
+  private resetErrors() {
+    this.errors.UserNameExists = false;
+    this.errors.RegError = false;
+    this.errors.ServerError = false;
   }
 }
 

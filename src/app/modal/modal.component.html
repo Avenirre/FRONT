@@ -1,7 +1,8 @@
 <div
         #cvModalMain
         class="cv-modal"
-        [class.disabled]="!isOpened">
+        [class.disabled]="!isOpened"
+        >
     <!--<div class="cv-modal-content">-->
             <router-outlet name="modal" (activate)="openModal()"></router-outlet>
     <!--</div>-->

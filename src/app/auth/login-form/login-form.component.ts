@@ -6,7 +6,7 @@ import {NgForm} from '@angular/forms';
 import {AuthService} from '../auth.service';
 import {TextService} from '../../../services/text.service';
 import {LoginData} from '../../../models/auth/login-data.model';
-import {CvService} from '../../create-cv/cv.service';
+import {CvService} from '../../../services/cv.service';
 import {CV} from '../../../models/cv/cv.model';
 
 // declare var $: any;
@@ -21,6 +21,11 @@ import {CV} from '../../../models/cv/cv.model';
 })
 export class LoginFormComponent implements OnInit {
   loginError = false;
+  errors = {
+    unauthorised: false,
+    dif: false,
+    message: null
+  };
   private routes = environment.routes;
 
   constructor(
@@ -58,21 +63,35 @@ export class LoginFormComponent implements OnInit {
    * @param {NgForm} form
    */
   onLogin(form: NgForm) {
+    this.resetErrors();
     const loginData = new LoginData(form.value['username'], form.value['password']);
-    // console.log(loginData);
     this.authService.login(loginData)
       .then(
         () => {
           if (this.cvService.expectingCv) {
-            const cv: CV = this.cvService.getCV();
+            this.cvService.setCV();
             console.log(`Expecting CV:`);
-            console.log(cv);
-            this.cvService.saveCV(cv);
+            console.log(this.cvService.cv);
+            this.cvService.saveCV();
           }
         },
         (error) => {
+          console.log(error);
+          this.errors.message = error['error']['message'];
+            console.log('login error', error);
+          if (error.status === 401) {
+            this.errors.unauthorised = true;
+          } else {
+            this.errors.dif = true;
+          }
         this.loginError = true;
       });
+  }
+
+  private resetErrors() {
+    this.errors.message = null;
+    this.errors.unauthorised = false;
+    this.errors.dif = false;
   }
 }
 

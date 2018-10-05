@@ -1,0 +1,7 @@
+@import '../../../style-variables.scss';
+
+input[type=checkbox] {
+  display: inline-block;
+  margin-right: 0.5rem;
+  font-family: $secondary-font;
+}

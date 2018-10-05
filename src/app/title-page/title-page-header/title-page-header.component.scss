@@ -115,6 +115,7 @@
     margin-right: 15px;
 }
 #footer-block-2{
+    background-image: url('../../../assets/imgs/background.png');
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
@@ -122,6 +123,12 @@
 #footer-block-2 .container .row{
     min-height: 70vh;
     margin-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+#footer-block-2 .container {
+    max-width: none;
 }
 
 .title-header-logo i {
@@ -138,6 +145,7 @@
 
 ul {
     list-style: none;
+    text-align: left;
 }
 
 .red-line {

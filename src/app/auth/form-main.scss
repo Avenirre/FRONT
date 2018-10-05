@@ -2,7 +2,8 @@
 
 :host ::ng-deep label {
   font-size: 0.9rem;
-  font-family: $secondary-font;
+  font-family: $main-font;
+  padding: 0.5rem 1rem;
 }
 
 :host ::ng-deep .cv-form-main {
@@ -44,10 +45,6 @@
 
 :host ::ng-deep a {
   cursor: pointer;
-}
-:host ::ng-deep button {
-  font-family: $secondary-font;
-  font-weight: 700;
 }
 :host ::ng-deep div {
   color: $color-dark-grey;
@@ -119,7 +116,18 @@ input.ng-valid.ng-touched {
   }
 }
 
+.err-message-container {
+  min-height: 2.5rem;
+  padding: 0rem 2rem 1rem 2rem;
+  text-align: center;
 
+  .err-message {
+    color: $color-orange;
+    font-size: 0.8rem;
+    margin: 0;
+    vertical-align: middle;
+  }
+}
 
 
 

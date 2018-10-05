@@ -1,8 +1,13 @@
 <app-cvs-edit-panel></app-cvs-edit-panel>
+<ng-container *ngIf="downloading">
+  <div class="pr-icon"><i style="color: blue;" class="fas fa-spinner fa-pulse"></i></div>
+</ng-container>
 <div *ngFor="let cv of cvs">
-  <app-cv-item></app-cv-item>
+  <app-cv-item [cv]="cv"></app-cv-item>
 </div>
+
 <hr>
+
 <div class="box box-light">
   <h1>
     Let us check your skills <br>

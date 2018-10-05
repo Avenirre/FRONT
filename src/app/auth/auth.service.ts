@@ -7,13 +7,14 @@ import {environment} from '../../environments/environment';
 import {ModalService} from '../modal/modal.service';
 import {DataService} from '../../services/data.service';
 import {Router} from '@angular/router';
+import {LocalProfile} from '../../models/local-storage/local-profile.settings';
+import {UnauthorisedError} from '../../errors/unauthorised.error';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private api = environment.api;
-
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -30,26 +31,53 @@ export class AuthService {
   ) {
   }
 
+// LIFETIME METHODS
+
   /**
    * check if user logged in
    * @returns {boolean}
    */
-  public isLoggedIn(): boolean {
+  public static isLoggedIn(): boolean {
     const user = DataService.getCurrentUser();
 
     return user !== null && user.token !== null;
   }
 
   /**
+   * returns true if current user session is less than setted session time
+   * and returns false otherwise;
+   */
+  public static isUserAlive(): boolean {
+    const profileTime = DataService.getCurrentUser().timestamp;
+    const currentTime = Date.now();
+    const lifeTime = DataService.toMilliseconds(environment.settings.profileLifetime);
+    return currentTime - profileTime < lifeTime;
+  }
+
+  /**
+   * checks that user session is not expired; otherwise makes logout of current user;
+   * throws Unauthorised error;
+   */
+  public handleSession() {
+    if (!AuthService.isUserAlive()) {
+      this.logout();
+      // setTimeout(this.modalService.openModal(environment.routes.login), 200);
+      throw new UnauthorisedError();
+    }
+  }
+
+// END LIFETIME METHODS
+
+  /**
    * login user with given login data
    */
   public login(user: LoginData): Promise<string> {
-    // console.log('user: ', user);
     return new Promise((resolve, reject) => {
       this.apiService.post<LoginData>(this.api.login, user, this.httpOptions)
         .subscribe(
           (data) => {
             this.afterSuccessLogin(data);
+            console.log(data);
             resolve('success');
           },
           (error: Error) => {
@@ -80,7 +108,7 @@ export class AuthService {
    *logout current user
    */
   public logout(): boolean {
-    if (this.isLoggedIn()) {
+    if (AuthService.isLoggedIn()) {
       DataService.removeUser();
       this.router.navigate(['/']);
       return true;
@@ -118,4 +146,7 @@ export class AuthService {
     });
   }
 }
+
+
+
 

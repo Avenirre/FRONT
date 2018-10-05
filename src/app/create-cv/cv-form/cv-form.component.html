@@ -1,255 +1,396 @@
-<section>
-  <form (change)="setData()">
+<form (keyup)="setData()" (change)="setData()" (click)="setData()" #f="ngForm">
     <a class="unfold" (click)="openAll()"><i class="fas fa-angle-double-down"></i></a>
     <a
-      data-toggle="collapse"
-      href="#title"
-      role="button"
-      aria-expanded="false"
-      aria-controls="title">
-      <h3>
-        <i class="fas fa-chevron-circle-down"></i> Title
-      </h3>
+            data-toggle="collapse"
+            href="#title"
+            role="button"
+            aria-expanded="false"
+            aria-controls="title">
+        <h3>
+            <i class="fas fa-chevron-circle-down"></i> Title
+        </h3>
     </a>
     <div class="collapse" id="title">
-      <input type="text" name="title" placeholder="cv title*" [(ngModel)]="cv.title"/>
-      <input type="text" name="first_name" placeholder="first name*" [(ngModel)]="cv.firstName"/>
-      <input type="text" name="last_name" placeholder="last name*" [(ngModel)]="cv.lastName"/>
-      <textarea name="summary" id="summary" placeholder="summary*" [(ngModel)]="cv.summary"></textarea>
-      <textarea name="about" id="about" placeholder="about*" [(ngModel)]="cv.about"></textarea>
+        <input type="text"
+               (focus)="setMarkPresentation($event)"
+               (blur)="clearMarkPresentation($event)"
+               name="title"
+               required
+               placeholder="cv title*"
+               [(ngModel)]="cv.title"/>
+        <input type="text"
+               name="first_name"
+               (focus)="setMarkPresentation($event)"
+               (blur)="clearMarkPresentation($event)"
+               required
+               placeholder="first name*"
+               [(ngModel)]="cv.firstName"/>
+        <input type="text"
+               name="last_name"
+               (focus)="setMarkPresentation($event)"
+               (blur)="clearMarkPresentation($event)"
+               required
+               placeholder="last name*"
+               [(ngModel)]="cv.lastName"/>
+        <input type="text"
+               name="birthday"
+               (focus)="setMarkPresentation($event)"
+               (blur)="clearMarkPresentation($event)"
+               type="date"
+               placeholder="birthday"
+               [(ngModel)]="cv.birthday"/>
+        <textarea name="summary"
+                  (focus)="setMarkPresentation($event)"
+                  (blur)="clearMarkPresentation($event)"
+                  id="summary"
+                  required
+                  placeholder="summary*"
+                  [(ngModel)]="cv.summary"></textarea>
+        <textarea name="about"
+                  (focus)="setMarkPresentation($event)"
+                  (blur)="clearMarkPresentation($event)"
+                  id="about"
+                  required
+                  placeholder="about*"
+                  [(ngModel)]="cv.about"></textarea>
     </div>
-
-    <!--<a-->
-      <!--data-toggle="collapse"-->
-      <!--href="#experience"-->
-      <!--role="button"-->
-      <!--aria-expanded="false"-->
-      <!--aria-controls="experience">-->
-      <!--<h3>-->
-        <!--<i class="fas fa-chevron-circle-down"></i> Experience-->
-      <!--</h3>-->
-    <!--</a>-->
-    <!--<div class="collapse" id="experience">-->
-      <!--<div *ngFor="let experience of cv['prof_info']['experience']; let i = index">-->
-        <!--<input type="text" name="position_{{i}}" placeholder="position"-->
-               <!--[(ngModel)]="cv['prof_info']['experience'][i]['position']"/>-->
-        <!--<input type="text" name="exp_years_{{i}}" placeholder="experience years"-->
-               <!--[(ngModel)]="cv['prof_info']['experience'][i]['years']"/>-->
-      <!--</div>-->
-      <!--<div>-->
-        <!--<button class="add-btn" (click)="addExperience()">-->
-          <!--<i class="fas fa-plus fa-2x"></i>-->
-        <!--</button>-->
-      <!--</div>-->
-    <!--</div>-->
-
     <a
-      data-toggle="collapse"
-      href="#contacts"
-      role="button"
-      aria-expanded="false"
-      aria-controls="contacts">
-      <h3><i class="fas fa-chevron-circle-down"></i> Contact info</h3>
+            data-toggle="collapse"
+            href="#contacts"
+            role="button"
+            aria-expanded="false"
+            aria-controls="contacts">
+        <h3><i class="fas fa-chevron-circle-down"></i> Contact info</h3>
     </a>
     <div class="collapse" id="contacts">
-      <input type="text" name="residence" placeholder="residence" [(ngModel)]="cv.residence"/>
-      <input type="text" name="birthday" placeholder="birthday" [(ngModel)]="cv.birthday"/>
-      <input type="text" name="phone" placeholder="phone*" [(ngModel)]="cv.phone"/>
-      <input type="text" name="email" placeholder="email*" [(ngModel)]="cv.email"/>
-      <input type="text" name="linkedin_link" placeholder="linkedin link" [(ngModel)]="cv.linkedin"/>
+        <!--<input type="text" name="residence" placeholder="residence"/>-->
+        <input type="text"
+               name="phone"
+               (focus)="setMarkPresentation($event)"
+               (blur)="clearMarkPresentation($event)"
+               required
+               placeholder="phone*"
+               [(ngModel)]="cv.phone"/>
+        <input type="email"
+               name="email"
+               (focus)="setMarkPresentation($event)"
+               (blur)="clearMarkPresentation($event)"
+               required
+               [email]="true"
+               placeholder="email*"
+               [(ngModel)]="cv.email"/>
+        <input type="text"
+               placeholder="residence"
+               name="residence"
+               (focus)="setMarkPresentation($event)"
+               (blur)="clearMarkPresentation($event)"
+               autocorrect="off"
+               autocapitalize="off"
+               spellcheck="off"
+               class="form-control"
+               #searchResidence
+               [(ngModel)]="cv.residence"
+               [ngModelOptions]="{standalone: true}">
+        <!--<agm-cv></agm-cv>-->
     </div>
 
     <a
-      data-toggle="collapse"
-      href="#desc"
-      role="button"
-      aria-expanded="false"
-      aria-controls="desc">
-      <h3><i class="fas fa-chevron-circle-down"></i> Decsription</h3>
+            data-toggle="collapse"
+            href="#desc"
+            role="button"
+            aria-expanded="false"
+            aria-controls="desc">
+        <h3><i class="fas fa-chevron-circle-down"></i> Decsription</h3>
     </a>
     <div class="collapse" id="desc">
-      <input type="text" name="choose_preferable_area" [(ngModel)]="cv.preferencedArea" placeholder="choose preferable area"/>
-      <select name="preference_position" [(ngModel)]="cv.positionPreference.id">
-        <option disabled selected>Select preference position</option>
-        <option *ngFor="let pos of positions" [selected]="cv.positionPreference.id == pos.id" [value]="pos.id">{{ pos.postName }}</option>
-      </select>
-      <input type="text" name="choose_position" placeholder="choose preferable position"
-             [(ngModel)]="cv.positionPreference.postName"/>
-      <input type="number" name="salary_from" [(ngModel)]="cv.salaryFromPreference" placeholder="Salary from ($)"/>
-      <input type="number" name="salary_till" [(ngModel)]="cv.salaryTillPreference" placeholder="Salary till ($)"/>
+        <input type="text" name="choose_preferable_area" [(ngModel)]="cv.preferencedArea"
+               placeholder="choose preferable area"/>
+        <input type="text"
+               name="choose_position"
+               (focus)="setMarkPresentation($event)"
+               (blur)="clearMarkPresentation($event)"
+               placeholder="choose preferable position"
+               [(ngModel)]="cv.position_preference"/>
+        <input type="number" name="salary_from" [(ngModel)]="cv.salaryFromPreference" placeholder="Salary from ($)"/>
+        <input type="number" name="salary_till" [(ngModel)]="cv.salaryTillPreference" placeholder="Salary till ($)"/>
     </div>
 
     <a
-      data-toggle="collapse"
-      href="#education"
-      role="button"
-      aria-expanded="false"
-      aria-controls="education">
-      <h3><i class="fas fa-chevron-circle-down"></i> Education</h3>
+            data-toggle="collapse"
+            href="#education"
+            role="button"
+            aria-expanded="false"
+            aria-controls="education">
+        <h3><i class="fas fa-chevron-circle-down"></i> Education</h3>
     </a>
     <div class="collapse" id="education">
-      <div *ngFor="let edu of cv.education; let i = index">
-        <input type="text" name="school_institution_name_{{i}}" placeholder="school/institution name*"
-               [(ngModel)]="cv.education[i].institution"/>
-        <input type="text" name="degree_{{i}}" placeholder="degree*"
-               [(ngModel)]="cv.education[i].degree"/>
-        <input type="text" name="graduation_year_{{i}}" placeholder="graduation year*"
-               [(ngModel)]="cv.education[i].yearEnd"/>
-        <input type="text" name="location_{{i}}" placeholder="location"
-               [(ngModel)]="cv.education[i].location"/>
-        <textarea name="edu_description_{{i}}" placeholder="description"
-                  [(ngModel)]="cv.education[i].note"></textarea>
-      </div>
-      <div>
-        <button class="add-btn" (click)="addEducation()">
-          <i class="fas fa-plus fa-2x"></i>
-        </button>
-      </div>
+        <div *ngFor="let edu of cv.education; let i = index">
+            <app-agm-cv [id]="i" [parentForm]="f" [cvValue]="cv.education[i].institution"></app-agm-cv>
+            <input type="text"
+                   required
+                   name="degree_{{i}}"
+                   (focus)="setMarkPresentation($event)"
+                   (blur)="clearMarkPresentation($event)"
+                   placeholder="degree*"
+                   [(ngModel)]="cv.education[i].degree"/>
+            <input type="number"
+                   required
+                   name="graduation_year_{{i}}"
+                   (focus)="setMarkPresentation($event)"
+                   (blur)="clearMarkPresentation($event)"
+                   placeholder="graduation year*"
+                   [(ngModel)]="cv.education[i].yearEnd"/>
+            <textarea name="edu_description_{{i}}"
+                      (focus)="setMarkPresentation($event)"
+                      (blur)="clearMarkPresentation($event)"
+                      placeholder="description"
+                      [(ngModel)]="cv.education[i].note"></textarea>
+            <hr *ngIf="i != cv.education.length - 1">
+        </div>
+        <div class="btns-box">
+            <button class="form-circle-btn" (click)="removeEducation()" title="Remove Education">
+                <i class="fas fa-minus fa-2x"></i>
+            </button>
+            <button class="form-circle-btn" (click)="addEducation()" title="Add Education">
+                <i class="fas fa-plus fa-2x"></i>
+            </button>
+        </div>
     </div>
 
     <a
-      data-toggle="collapse"
-      href="#skills"
-      role="button"
-      aria-expanded="false"
-      aria-controls="skills">
-      <h3><i class="fas fa-chevron-circle-down"></i> Skills</h3>
+            data-toggle="collapse"
+            href="#skills"
+            role="button"
+            aria-expanded="false"
+            aria-controls="skills">
+        <h3><i class="fas fa-chevron-circle-down"></i> Skills</h3>
     </a>
     <div class="collapse" id="skills">
-      <select name="skills" multiple size="7" [(ngModel)]="cv.cvSkill">
-        <option disabled>Select skills</option>
-        <option *ngFor="let skill of skills" [value]="skill.id">{{skill.name_skill}}</option>
-      </select>
+        <h6>Selected skills*:</h6>
+        <div id="selected-skills">
+            <app-cv-form-chips [listItems]="cv.skills"></app-cv-form-chips>
+        </div>
+        <hr>
+        <h6>List of skills:</h6>
+        <div id="skill-list">
+        <span *ngFor="let skill of skills; let i = index">
+          <u (click)="addSkill(skill)">{{skill.nameSkill}}</u>&#160;
+        </span>
+        </div>
     </div>
 
     <a
-      data-toggle="collapse"
-      href="#projects"
-      role="button"
-      aria-expanded="false"
-      aria-controls="projects">
-      <h3><i class="fas fa-chevron-circle-down"></i> Projects / Jobs</h3>
+            data-toggle="collapse"
+            href="#projects"
+            role="button"
+            aria-expanded="false"
+            aria-controls="projects">
+        <h3><i class="fas fa-chevron-circle-down"></i> Projects / Jobs</h3>
     </a>
     <div class="collapse" id="projects">
-      <div *ngFor="let job of cv.cvJobs; let i = index">
-        <input type="text" name="company_{{i}}" placeholder="company" [(ngModel)]="cv.cvJobs[i].company"/>
-        <!--<input type="text" name="company_{{i}}" placeholder="position" [(ngModel)]="cv.cvJobs[i].position.postName"/>-->
-        <select name="preference_position" [(ngModel)]="cv.cvJobs[i].position.id">
-          <option value="" disabled selected>Select position</option>
-          <option *ngFor="let pos of positions" [selected]="cv.cvJobs[i].position.id == pos.id" [value]="pos.id">{{ pos.postName }}</option>
-        </select>
-
-        <label for="formControlRange_{{i}}">Frontend / Backend</label>
-        <input
-          type="range"
-          name="range_{{i}}"
-          class="form-control-range"
-          id="formControlRange_{{i}}"
-          [(ngModel)]="cv.cvJobs[i].backFront">
-        <input type="number" name="date_from_{{i}}" [(ngModel)]="cv.cvJobs[i].yearStart" placeholder="year from"/>
-        <input type="number" name="date_till_{{i}}" [(ngModel)]="cv.cvJobs[i].yearEnd" placeholder="year till"/>
-        <textarea name="project_description_{{i}}" placeholder="project description"
-                  [(ngModel)]="cv.cvJobs[i].description"></textarea>
-      </div>
-      <div>
-        <button class="add-btn" (click)="addJob()">
-          <i class="fas fa-plus fa-2x"></i>
-        </button>
-      </div>
+        <div *ngFor="let job of cv.cvJobs; let i = index">
+            <input type="text"
+                   name="company_{{i}}"
+                   required
+                   (focus)="setMarkPresentation($event)"
+                   (blur)="clearMarkPresentation($event)"
+                   placeholder="company*"
+                   [(ngModel)]="cv.cvJobs[i].company"/>
+            <input name="position_{{i}}"
+                   required
+                   (keyup)="isRenderedRange(i)"
+                   (focus)="setMarkPresentation($event)"
+                   (blur)="clearMarkPresentation($event)"
+                   placeholder="position*"
+                   [(ngModel)]="cv.cvJobs[i].position">
+            <div *ngIf="jobsFrontEnd[i]">
+                <label for="formControlRange_{{i}}">Frontend / Backend</label>
+                <input
+                        type="range"
+                        name="range_{{i}}"
+                        (focus)="setMarkPresentation($event)"
+                        (blur)="clearMarkPresentation($event)"
+                        class="form-control-range"
+                        id="formControlRange_{{i}}"
+                        [(ngModel)]="cv.cvJobs[i].backFront">
+            </div>
+            <input type="number"
+                   name="date_from_{{i}}"
+                   (focus)="setMarkPresentation($event)"
+                   (blur)="clearMarkPresentation($event)"
+                   [(ngModel)]="cv.cvJobs[i].yearStart"
+                   placeholder="year from"/>
+            <input type="number"
+                   name="date_till_{{i}}"
+                   (focus)="setMarkPresentation($event)"
+                   (blur)="clearMarkPresentation($event)"
+                   [(ngModel)]="cv.cvJobs[i].yearEnd"
+                   placeholder="year till"/>
+            <textarea name="project_description_{{i}}"
+                      (focus)="setMarkPresentation($event)"
+                      (blur)="clearMarkPresentation($event)"
+                      placeholder="project description"
+                      [(ngModel)]="cv.cvJobs[i].description"></textarea>
+            <hr *ngIf="i != cv.cvJobs.length - 1">
+        </div>
+        <div class="btns-box">
+            <button class="form-circle-btn" (click)="removeJob()" title="Remove Project/Job">
+                <i class="fas fa-minus fa-2x"></i>
+            </button>
+            <button class="form-circle-btn" class="form-circle-btn" (click)="addJob()" title="Add Project/Job">
+                <i class="fas fa-plus fa-2x"></i>
+            </button>
+        </div>
     </div>
 
     <a
-      data-toggle="collapse"
-      href="#achievements"
-      role="button"
-      aria-expanded="false"
-      aria-controls="achievements">
-      <h3><i class="fas fa-chevron-circle-down"></i> Achievements</h3>
+            data-toggle="collapse"
+            href="#achievements"
+            role="button"
+            aria-expanded="false"
+            aria-controls="achievements">
+        <h3><i class="fas fa-chevron-circle-down"></i> Achievements</h3>
     </a>
     <div class="collapse" id="achievements">
-      <div *ngFor="let a of cv.cvAchievements; let i = index; trackBy:trackByFn">
-        <textarea name="achievement_{{i}}" placeholder="description"
+        <div *ngFor="let a of cv.cvAchievements; let i = index; trackBy:trackByFn">
+        <textarea name="achievement_{{i}}"
+                  placeholder="description*"
+                  required
+                  (focus)="setMarkPresentation($event)"
+                  (blur)="clearMarkPresentation($event)"
                   [(ngModel)]="cv.cvAchievements[i].description"></textarea>
-        <input type="number" name="achievement_date_end_{{i}}" placeholder="graduation year" [(ngModel)]="cv.cvAchievements[i].yearEnd"/>
-      </div>
-      <div>
-        <button class="add-btn" (click)="addAchivement()">
-          <i class="fas fa-plus fa-2x"></i>
-        </button>
-      </div>
+            <input type="number"
+                   name="achievement_date_end_{{i}}"
+                   (focus)="setMarkPresentation($event)"
+                   (blur)="clearMarkPresentation($event)"
+                   placeholder="graduation year*"
+                   required
+                   [(ngModel)]="cv.cvAchievements[i].yearEnd"/>
+            <hr *ngIf="i != cv.cvAchievements.length - 1">
+        </div>
+        <div class="btns-box">
+            <button class="form-circle-btn" (click)="removeAchivement()" title="Remove Achivement">
+                <i class="fas fa-minus fa-2x"></i>
+            </button>
+            <button class="form-circle-btn" (click)="addAchivement()" title="Add Achivement">
+                <i class="fas fa-plus fa-2x"></i>
+            </button>
+        </div>
     </div>
 
     <a
-      data-toggle="collapse"
-      href="#certifications"
-      role="button"
-      aria-expanded="false"
-      aria-controls="certifications">
-      <h3><i class="fas fa-chevron-circle-down"></i> Certifications</h3>
+            data-toggle="collapse"
+            href="#certifications"
+            role="button"
+            aria-expanded="false"
+            aria-controls="certifications">
+        <h3><i class="fas fa-chevron-circle-down"></i> Certifications</h3>
     </a>
     <div class="collapse" id="certifications">
-      <div *ngFor="let certificate of cv.cvCertification; let i = index; trackBy:trackByFn">
-        <textarea name="certification_{{i}}" placeholder="description"
+        <div *ngFor="let certificate of cv.cvCertification; let i = index; trackBy:trackByFn">
+        <textarea name="certification_{{i}}"
+                  (focus)="setMarkPresentation($event)"
+                  (blur)="clearMarkPresentation($event)"
+                  placeholder="description*"
+                  required
                   [(ngModel)]="cv.cvCertification[i].description"></textarea>
-        <input type="number" name="certification_date_end_{{i}}" placeholder="graduation year" [(ngModel)]="cv.cvCertification[i].yearEnd"/>
-      </div>
-      <div>
-        <button class="add-btn" (click)="addCertification()">
-          <i class="fas fa-plus fa-2x"></i>
-        </button>
-      </div>
+            <input type="number"
+                   name="certification_date_end_{{i}}"
+                   (focus)="setMarkPresentation($event)"
+                   (blur)="clearMarkPresentation($event)"
+                   placeholder="graduation year*"
+                   required
+                   [(ngModel)]="cv.cvCertification[i].yearEnd"/>
+            <hr *ngIf="i != cv.cvCertification.length - 1">
+        </div>
+        <div class="btns-box">
+            <button class="form-circle-btn" (click)="removeCertification()" title="Remove Certification">
+                <i class="fas fa-minus fa-2x"></i>
+            </button>
+            <button class="form-circle-btn" (click)="addCertification()" title="Add Certification">
+                <i class="fas fa-plus fa-2x"></i>
+            </button>
+        </div>
     </div>
 
     <a
-      data-toggle="collapse"
-      href="#languages"
-      role="button"
-      aria-expanded="false"
-      aria-controls="languages">
-      <h3><i class="fas fa-chevron-circle-down"></i> Languages</h3>
+            data-toggle="collapse"
+            href="#languages"
+            role="button"
+            aria-expanded="false"
+            aria-controls="languages">
+        <h3><i class="fas fa-chevron-circle-down"></i> Languages</h3>
     </a>
     <div class="collapse" id="languages">
-      <div *ngFor="let language of cv.cvLang; let i = index; trackBy:trackByFn">
-        <select name="language_{{i}}" [(ngModel)]="cv.cvLang[i].id">
-          <option disabled>Select language</option>
-          <option *ngFor="let lg of languages" [value]="lg.id" [selected]="cv.cvLang[i].id == lg.id">{{ lg.nameLang }}</option>
-        </select>
-        <!--<input type="text" name="language_{{i}}" placeholder="language {{i+1}}"-->
-               <!--[(ngModel)]="cv.cvLang[i].nameLang"/>-->
-      </div>
-      <div>
-        <button class="add-btn" (click)="addLanguage()">
-          <i class="fas fa-plus fa-2x"></i>
-        </button>
-      </div>
+        <div #lgDiv>
+            <div *ngFor="let language of cv.languages; let i = index; trackBy:trackByFn">
+                <select name="language_{{i}}"
+                        (change)="refreshAbleLg()"
+                        (focus)="setMarkPresentation($event)"
+                        (blur)="clearMarkPresentation($event)"
+                        [(ngModel)]="cv.languages[i].id">
+                    <option *ngFor="let lg of languages"
+                            [ngValue]="lg.id"
+                            [selected]="lg.id==cv.languages[i].id"
+                            [hidden]="isLangHidden(lg.id)">
+                        {{lg.nameLang}}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="btns-box">
+            <button class="form-circle-btn" (click)="removeLanguage()" title="Remove Language">
+                <i class="fas fa-minus fa-2x"></i>
+            </button>
+            <button class="form-circle-btn" (click)="addLanguage()" title="Add Language">
+                <i class="fas fa-plus fa-2x"></i>
+            </button>
+        </div>
     </div>
 
     <a
-      data-toggle="collapse"
-      href="#links"
-      role="button"
-      aria-expanded="false"
-      aria-controls="links">
-      <h3><i class="fas fa-chevron-circle-down"></i> Footer links</h3>
+            data-toggle="collapse"
+            href="#links"
+            role="button"
+            aria-expanded="false"
+            aria-controls="links">
+        <h3><i class="fas fa-chevron-circle-down"></i> Footer links</h3>
     </a>
     <div class="collapse" id="links">
-      <input type="text" name="footer_link_portfolio" placeholder="portfolio" [(ngModel)]="cv.portfolio"/>
-      <input type="text" name="footer_link_github" placeholder="github" [(ngModel)]="cv.github"/>
-      <!--<input type="text" name="footer_link_other" placeholder="other" [(ngModel)]="cv.personal_info.other_link"/>-->
+        <input type="text"
+               name="linkedin_link"
+               (focus)="setMarkPresentation($event)"
+               (blur)="clearMarkPresentation($event)"
+               placeholder="linkedin link"
+               [(ngModel)]="cv.linkedin"/>
+        <input type="text"
+               name="footer_link_github"
+               (focus)="setMarkPresentation($event)"
+               (blur)="clearMarkPresentation($event)"
+               placeholder="github"
+               [(ngModel)]="cv.github"/>
+        <input type="text"
+               name="footer_link_portfolio"
+               (focus)="setMarkPresentation($event)"
+               (blur)="clearMarkPresentation($event)"
+               placeholder="portfolio"
+               [(ngModel)]="cv.portfolio"/>
     </div>
 
     <a
-      data-toggle="collapse"
-      href="#info"
-      role="button"
-      aria-expanded="false"
-      aria-controls="info">
-      <h3><i class="fas fa-chevron-circle-down"></i> Footer info</h3>
+            data-toggle="collapse"
+            href="#info"
+            role="button"
+            aria-expanded="false"
+            aria-controls="info">
+        <h3><i class="fas fa-chevron-circle-down"></i> Footer info</h3>
     </a>
     <div class="collapse" id="info">
-      <textarea name="recommendation" placeholder="recommendation"
+      <textarea name="recommendation"
+                (focus)="setMarkPresentation($event)"
+                (blur)="clearMarkPresentation($event)"
+                placeholder="recommendation"
                 [(ngModel)]="cv.recommendations"></textarea>
     </div>
 
-  </form>
-</section>
+</form>

@@ -1,0 +1,85 @@
+<ng-container *ngIf="folders; else loading">
+  <div class="f-create">
+    <i *ngIf="menuAction !== ActionUnit.CREATE_FOLDER"
+       (click)="openCreateFolderDialog()"
+       class="far fa-plus-square">
+    </i>
+    <i *ngIf="menuAction === ActionUnit.CREATE_FOLDER"
+       (click)="openCreateFolderDialog()"
+       class="far fa-minus-square">
+    </i>
+  </div>
+
+  <form *ngIf="menuAction === ActionUnit.CREATE_FOLDER"
+        class="create-folder-form"
+        (ngSubmit)="onCreateFolder(createFolderForm.value.folderName)"
+        #createFolderForm="ngForm">
+    <input class="form-control"
+           type="text"
+           name="folderName"
+           #createFolderInput
+           ngModel>
+    <button type="submit">
+      <i class="fas fa-plus"></i>
+    </button>
+    <div *ngIf="errors.ExistFolder" class="alert">
+      Folder with such name already exists!
+    </div>
+    <div *ngIf="errors.EmptyNewFolderName" class="alert">
+      Folder name has to contain at least one character!
+    </div>
+  </form>
+
+  <div>
+    <div class="folders-list" *ngFor="let folder of folders; let i=index">
+      <div class="folder"
+           (click)="onSelectFolder(folder)"
+      >
+      <span [class.active]="folder.id === currentFolder.id"
+            *ngIf="menuAction !== ActionUnit.EDIT_FOLDER || folder.id !== currentFolder.id">
+      {{i + 1}}. {{folder.nameFolder}}
+      </span>
+      </div>
+      <!--EDIT FOLDER DIALOG-->
+      <div *ngIf="menuAction === ActionUnit.EDIT_FOLDER && folder.nameFolder === currentFolder.nameFolder">
+        <form
+          class="edit-folder-form"
+          (ngSubmit)="editFolder(folder, editFolderForm.value['folderName'])"
+          #editFolderForm="ngForm">
+          <input class="form-control"
+                 type="text"
+                 name="folderName"
+                 [ngModel]="folder.nameFolder">
+          <button class="submit"
+                  type="submit">
+            <i class="far fa-edit"></i>
+          </button>
+
+          <div *ngIf="errors.ExistFolder" class="alert">
+            Folder with such name already exists!
+          </div>
+          <div *ngIf="errors.EmptyFolderName" class="alert">
+            Folder name can not be empty!
+          </div>
+
+        </form>
+      </div>
+      <!--END EDIT FOLDER DIALOG-->
+      <div *ngIf="folder.id === currentFolder.id"
+           class="folder-controls">
+        <i (click)="openEditFolderDialog()"
+           class="fas fa-edit"></i>
+        <i class="fas fa-share-alt"></i>
+        <i (click)="deleteFolder(folder.id)"
+           class="fas fa-trash"></i>
+        <i class="fas fa-arrows-alt"></i>
+        <i (click)="cancelEdit()"
+           *ngIf="menuAction === ActionUnit.EDIT_FOLDER"
+           class="fas fa-ban"></i>
+      </div>
+    </div>
+  </div>
+</ng-container>
+<ng-template #loading>
+  <div class="pr-icon"><i style="" class="fas fa-spinner fa-pulse"></i></div>
+</ng-template>

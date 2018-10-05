@@ -1,9 +1,5 @@
 @import '../../style-variables.scss';
 
-
-
-
-
 :host hr {
   margin: 0;
 }
@@ -44,15 +40,15 @@
 
 }
 
-.content-container {
-  display: grid;
-  margin: 0;
-  padding: 0;
-  grid-template-areas: "content-left content-main content-right";
-  grid-template-columns: 25% 60% 15%;
-  grid-template-rows: auto;
-
-}
+//.content-container {
+//  display: grid;
+//  margin: 0;
+//  padding: 0;
+//  grid-template-areas: "content-left content-main content-right";
+//  grid-template-columns: 25% 60% 15%;
+//  grid-template-rows: auto;
+//
+//}
 
 //@media (max-width: $display-mobile) {
 //  .content-container {
@@ -76,9 +72,14 @@
 //}
 
 .content-left {
-  grid-area: content-left;
-  padding: 20px 20px 20px 0;
+  //grid-area: content-left;
+  padding-top: 20px;
+  padding-left: 30px;
 }
+
+//.container {
+//  margin-left: 20px;
+//}
 
 .content-main {
   grid-area: content-main;
@@ -133,6 +134,51 @@
   background-color: $color-light-blue;
 }
 
+:host ::ng-deep app-cv-actions, ::ng-deep app-cv-presentation {
+  .pulse {
+    position: static;
+    margin-bottom: 3px;
+    display: inline-block;
+    height: 2px;
+    width: 2px;
+    background-color: rgba(25,117,229, 0);
+    border-radius: 50%;
+    box-shadow: 0 0 0 rgba(25,117,229, 1);
+    animation: pulse 4s infinite;
+  }
+
+  @-webkit-keyframes pulse {
+    0% {
+      background-color: rgba(25,117,229, 1);
+      -webkit-box-shadow: 0 0 0 0 rgba(25,117,229, 1);
+    }
+    25% {
+      background-color: rgba(25,117,229, 0);
+      -webkit-box-shadow: 0 0 0 25px rgba(25,117,229, 0);
+    }
+    100% {
+      background-color: rgba(25,117,229, 0);
+      -webkit-box-shadow: 0 0 0 40px rgba(25,117,229, 0);
+    }
+  }
+  @keyframes pulse {
+    0% {
+      background-color: rgba(25,117,229, 1);
+      -moz-box-shadow: 0 0 0 0 rgba(25,117,229, 1);
+      box-shadow: 0 0 0 0 rgba(25,117,229, 1);
+    }
+    25% {
+      background-color: rgba(25,117,229, 0);
+      -moz-box-shadow: 0 0 0 25px rgba(25,117,229, 0);
+      box-shadow: 0 0 0 25px rgba(25,117,229, 0);
+    }
+    100% {
+      background-color: rgba(25,117,229, 0);
+      -moz-box-shadow: 0 0 0 40px rgba(25,117,229, 0);
+      box-shadow: 0 0 0 40px rgba(25,117,229, 0);
+    }
+  }
+}
 
 
 

@@ -1,0 +1,17 @@
+<div class="clearfix">
+  <div class="arrow"
+       [class.inactive]="isLeftEnd"
+       (click)="prev()">
+    <i class="fas fa-arrow-circle-left"></i>
+  </div>
+  <ul class="slider">
+    <li *ngFor="let item of _currentItems">
+      {{ item.text }}
+    </li>
+  </ul>
+  <div class="arrow"
+       [class.inactive]="isRightEnd"
+       (click)="next()">
+    <i class="fas fa-arrow-circle-right"></i>
+  </div>
+</div>

@@ -1,10 +1,17 @@
 <aside>
-  <h3>{{title}}</h3>
+  <h3>{{cv.title}}<span *ngIf="activatedField=='title'" class="pulse"></span></h3>
   <div class="buttons">
-    <a href=""><i class="fas fa-download"></i>Download</a>
-    <a href=""><i class="fas fa-share"></i>Share</a>
-    <a href=""><i class="fas fa-print"></i>Print</a>
-    <button class="btn btn-danger" (click)="activateCv()">Activate</button>
-    <button class="btn btn-primary" (click)="saveCv()">Save</button>
+    <a (click)="downloadPdf()"><i class="fas fa-download"></i>Download</a>
+    <a (click)="copyLink()"><i class="fas fa-share"></i>Share</a>
+    <a (click)="printCv('printPdf')"><i class="fas fa-print"></i>Print</a>
+    <span *ngIf="onlyShowMode == false">
+      <button class="btn btn-danger" (click)="activateCv()" [disabled]="!formValid">Activate</button>
+      <button class="btn btn-primary" (click)="saveCv()" [disabled]="!formValid">Save</button>
+    </span>
   </div>
 </aside>
+<div *ngIf="alertVisible" [ngClass]="alertClass">
+  <div [hidden]="alertShow"  class="alert alert-primary" role="alert">
+    <span id="alert" [innerHTML]="alertText"></span>
+  </div>
+</div>

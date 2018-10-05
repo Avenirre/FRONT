@@ -1,22 +1,23 @@
-<a routerLinkActive="active"
-   routerLink="settings"
-   (click)="onSelectSettings()">
-  <h1>Settings</h1>
+<a (click)="openSearchSection()">
+  <h1 [class.active]="section === SectionUnit.SEARCH">
+    Search
+  </h1>
 </a>
-<a (click)="onSelectFolder()"><h1>My foders</h1></a>
-<div *ngIf="isFolders">
-  <div *ngFor="let folder of foldersNames; let i=index">
-    <h3
-      (click)="onSelectFolder(folder)"
-      [class.active]="folder === currentFolderName">
-      {{i + 1}}. {{folder}}
-    </h3>
-    <div *ngIf="folder === currentFolderName"
-         class="folder-controls">
-      <i class="fas fa-edit"></i>
-      <i class="fas fa-share-alt"></i>
-      <i class="fas fa-trash"></i>
-      <i class="fas fa-arrows-alt"></i>
-    </div>
-  </div>
-</div>
+
+<a (click)="openSettingsSection()">
+  <h1 [class.active]="section === SectionUnit.SETTINGS">
+    Settings
+  </h1>
+</a>
+
+<a (click)="openFoldersSection()">
+  <h1 [class.active]="section === SectionUnit.FOLDERS"
+      class="f-link">
+    My folders
+  </h1>
+</a>
+
+<!--CONTENT-->
+<app-search-form *ngIf="section === SectionUnit.SEARCH"></app-search-form>
+<app-folders-list *ngIf="section === SectionUnit.FOLDERS"></app-folders-list>
+

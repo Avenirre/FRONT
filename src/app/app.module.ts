@@ -2,7 +2,7 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {RouterRoutingModule} from '../router/router-routing.module';
-
+import {AgmCoreModule} from '@agm/core';
 // LIBRARIES
 
 // COMPONENTS
@@ -43,16 +43,32 @@ import {MessageComponent} from './modal/message/message.component';
 import {BtnsLoggedComponent} from './header/header-controls/btns-logged/btns-logged.component';
 import {BtnsUnloggedComponent} from './header/header-controls/btns-unlogged/btns-unlogged.component';
 import {AuthService} from './auth/auth.service';
-import { ProfileCompanyComponent } from './profiles/profile-company/profile-company.component';
-import { CompanyMenuComponent } from './profiles/profile-company/company-menu/company-menu.component';
+import {ProfileCompanyComponent} from './profiles/profile-company/profile-company.component';
+import {CompanyMenuComponent} from './profiles/profile-company/company-menu/company-menu.component';
+import {CvService} from '../services/cv.service';
 // import { CvPreviewComponent } from './profiles/profile-company/cv-preview/cv-preview.component';
-import { ProfileStatisticComponent } from './profiles/profile-candidate/profile-statistic/profile-statistic.component';
-import { ProfileSettingComponent } from './profiles/profile-candidate/profile-setting/profile-setting.component';
-import { CompanyCvPrevComponent } from './profiles/profile-company/company-folder/company-cv-prev/company-cv-prev.component';
-import { CmpEditPanelComponent } from './profiles/profile-company/company-folder/cmp-edit-panel/cmp-edit-panel.component';
-import { CompanyFolderComponent } from './profiles/profile-company/company-folder/company-folder.component';
-import { CompanySettingsComponent } from './profiles/profile-company/company-settings/company-settings.component';
-
+import {ProfileStatisticComponent} from './profiles/profile-candidate/profile-statistic/profile-statistic.component';
+import {ProfileSettingComponent} from './profiles/profile-candidate/profile-setting/profile-setting.component';
+import {CompanyCvPrevComponent} from './profiles/profile-company/company-folder/company-cv-prev/company-cv-prev.component';
+import {CmpEditPanelComponent} from './profiles/profile-company/company-folder/cmp-edit-panel/cmp-edit-panel.component';
+import {CompanyFolderComponent} from './profiles/profile-company/company-folder/company-folder.component';
+import {CompanySettingsComponent} from './profiles/profile-company/company-settings/company-settings.component';
+import {CvSearchComponent} from './profiles/profile-company/cv-search/cv-search.component';
+import {SearchFormComponent} from './profiles/profile-company/search-form/search-form.component';
+import {CvFormSelectComponent} from './form-controls/cv-form-select/cv-form-select.component';
+import {CvFormChipsComponent} from './form-controls/cv-form-chips/cv-form-chips.component';
+import {CvChipsItemComponent} from './form-controls/cv-form-chips/cv-chips-item/cv-chips-item.component';
+import {CvFormCheckboxGroupComponent} from './form-controls/cv-form-checkbox-group/cv-form-checkbox-group.component';
+import {CvFormInputComponent} from './form-controls/cv-form-input/cv-form-input.component';
+import {CvFormSliderComponent} from './form-controls/cv-form-slider/cv-form-slider.component';
+import {FoldersListComponent} from './profiles/profile-company/company-menu/folders-list/folders-list.component';
+import {CompanyCvFullComponent} from './profiles/profile-company/company-folder/company-cv-full/company-cv-full.component';
+import {ShowCvComponent} from './create-cv/show-cv/show-cv.component';
+import {AgmCvComponent} from './create-cv/cv-form/agm-cv/agm-cv.component';
+import {ClipboardModule} from 'ngx-clipboard';
+import { DirectivesDirective } from './modal/directives.directive';
+import {RenderService} from '../services/render.service';
+import {SliderModule} from './share/slider/slider.module';
 
 @NgModule({
   declarations: [
@@ -86,20 +102,38 @@ import { CompanySettingsComponent } from './profiles/profile-company/company-set
     BtnsUnloggedComponent,
     ProfileCompanyComponent,
     CompanyMenuComponent,
-    // CvPreviewComponent,
     ProfileStatisticComponent,
     ProfileSettingComponent,
     CompanyCvPrevComponent,
     CmpEditPanelComponent,
     CompanyFolderComponent,
     CompanySettingsComponent,
+    CvSearchComponent,
+    SearchFormComponent,
+    CvFormSelectComponent,
+    CvFormChipsComponent,
+    CvChipsItemComponent,
+    CvFormCheckboxGroupComponent,
+    CvFormInputComponent,
+    CvFormSliderComponent,
+    FoldersListComponent,
+    CompanyCvFullComponent,
+    ShowCvComponent,
+    AgmCvComponent,
+    DirectivesDirective
   ],
   imports: [
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyA-FppnYJfomJjEu7p3kkhcw2P3RqLZ-9c',
+      libraries: ['places']
+    }),
     BrowserModule,
     RouterRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ClipboardModule,
+    SliderModule
   ],
   providers: [
     ModalService,
@@ -107,6 +141,8 @@ import { CompanySettingsComponent } from './profiles/profile-company/company-set
     ApiCandidatesService,
     ApiCompaniesService,
     AuthService,
+    CvService,
+    RenderService
   ],
   bootstrap: [AppComponent]
 })

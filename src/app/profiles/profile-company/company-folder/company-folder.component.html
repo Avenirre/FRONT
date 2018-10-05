@@ -1,5 +1,25 @@
-<app-cmp-edit-panel></app-cmp-edit-panel>
-<app-company-cv-prev
-  *ngFor="let cv of folder.cvs"
-  [cv]="cv"
-></app-company-cv-prev>
+<ng-container *ngIf="folder !== undefined">
+  <app-cmp-edit-panel></app-cmp-edit-panel>
+  <div *ngIf="!errors.FolderNotFound && !errors.FolderIsEmpty">
+    <app-company-cv-prev
+      *ngFor="let cv of folder.cvs"
+      [cv]="cv"
+    ></app-company-cv-prev>
+  </div>
+<div class="alert alert-primary"
+     *ngIf="!folder.cvs">
+  This folder is empty!<br>
+  You can add some CVs into this folder.
+</div>
+<div class="alert alert-dismissible"
+     *ngIf="errors.FolderNotFound">
+  This folder does not exist anymore!
+</div>
+<div *ngIf="errors.FolderNotFound" class="alert">
+  Folder not found!
+</div>
+
+</ng-container>
+<ng-container *ngIf="!folder && !errors.FolderNotFound && !errors.FolderNotFound">
+  <div class="pr-icon"><i style="" class="fas fa-spinner fa-pulse"></i></div>
+</ng-container>

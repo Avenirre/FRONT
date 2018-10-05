@@ -1,15 +1,24 @@
 <!--TEMPLATE-0-->
-<div *ngIf="templateType == 0" class="cv-presentation">
-  <div class="h-back template-{{templateColor}}">
+<div *ngIf="templateType == 0" class="cv-presentation" id="printPdf" #printPdf>
+  <div id="h-bg" class="h-back template-{{templateColor}}">
   </div>
   <div class="cv-section-grid-container">
     <div class="cv-section-left">
       <h1 class="cv-logo template-{{templateColor}}">CV</h1>
     </div>
     <div class="cv-section-right">
-      <h1>{{cv.firstName}} {{cv.lastName}}</h1>
+      <h2 class="candidate_name">
+        {{cv.firstName}}<span *ngIf="activatedField=='first_name'" class="pulse"></span>
+        {{cv.lastName}}<span *ngIf="activatedField=='last_name'" class="pulse"></span>
+      </h2>
+      <h4 class="choose_position">
+        {{cv.position_preference}}
+        <span *ngIf="activatedField=='choose_position'" class="pulse"></span>
+      </h4>
+      <p *ngIf="cv.residence!='' && cv.residence!=null">{{cv.residence}}</p>
       <div class="cv-summary">
         {{cv.about}}
+        <span *ngIf="activatedField=='about'" class="pulse"></span>
       </div>
     </div>
   </div>
@@ -20,24 +29,28 @@
         <span class="cv-contact">
           <i class="fas fa-phone-square"></i>
           {{cv.phone}}
+          <span *ngIf="activatedField=='phone'" class="pulse"></span>
         </span>
         <span class="cv-contact"><i class="fas fa-envelope"></i>
           {{cv.email}}
+          <span *ngIf="activatedField=='email'" class="pulse"></span>
         </span>
         <span class="cv-contact"><i class="fas fa-home"></i>
           {{cv.residence}}
+          <span *ngIf="activatedField=='residence'" class="pulse"></span>
         </span>
         <span class="cv-contact">
-          {{cv.birthday}} y.o.
+          {{calculateAge(cv.birthday)}}<span *ngIf="activatedField=='birthday'" class="pulse"></span> years old
         </span>
       </div>
     </div>
   </div>
-  <div class="cv-section-grid-container">
+  <div class="cv-section-grid-container" *ngIf="cv.summary != '' && cv.summary != null">
     <div class="cv-section-left"><h3>summary</h3></div>
     <div class="cv-section-right">
       <div class="cv-data-container">
         {{cv.summary}}
+        <span *ngIf="activatedField=='summary'" class="pulse"></span>
       </div>
     </div>
   </div>
@@ -45,63 +58,97 @@
     <div class="cv-section-left"><h3>skills</h3></div>
     <div class="cv-section-right">
       <div class="cv-data-container">
-        <span *ngFor="let skill of cv.cvSkill">
-          </span>
+        <span *ngFor="let skill of cv.skills; let i = index;">
+          <strong *ngIf="i > 0">, </strong>
+          <strong>{{ skill.nameSkill }}</strong>
+        </span>
       </div>
     </div>
   </div>
-  <div class="cv-section-grid-container">
+  <div class="cv-section-grid-container" *ngIf="cv.cvJobs.length > 0">
     <div class="cv-section-left"><h3>projects</h3></div>
     <div class="cv-section-right">
       <div class="cv-data-container">
-        <p *ngFor="let job of cv.cvJobs">
-          {{job.date_from}}year - {{job.date_till}}year<br>
-          <strong>{{job.company}}</strong>
-          {{job.position.postName}} <br>
-          {{job.backFront}}% frontend <br>
-          {{job.description}}
-        </p>
+        <div *ngFor="let job of cv.cvJobs; let i = index;">
+          {{job.yearStart}}
+          <span *ngIf="activatedField=='date_from_'+i" class="pulse"></span>year -
+          {{job.yearEnd}}
+          <span *ngIf="activatedField=='date_till_'+i" class="pulse"></span>year<br>
+          <strong>{{job.company}}<span *ngIf="activatedField=='company_'+i" class="pulse"></span></strong>
+            {{job.position}}<span *ngIf="activatedField=='position_'+i" class="pulse"></span>
+          <div *ngIf="jobsFrontEnd[i]">
+            {{job.backFront}}% frontend <strong>/</strong> {{100 - job.backFront}}% backend
+          </div>
+          {{job.description}}<span *ngIf="activatedField=='project_description_'+i" class="pulse"></span>
+        </div>
       </div>
     </div>
   </div>
-  <div class="cv-section-grid-container">
+  <div class="cv-section-grid-container" *ngIf="cv.education.length > 0">
     <div class="cv-section-left"><h3>education</h3></div>
     <div class="cv-section-right">
       <div class="cv-data-container">
-        <p *ngFor="let education of cv.education">
-          {{education.yearEnd}} year
+        <p *ngFor="let education of cv.education; let i = index">
+          {{education.yearEnd}}
+          <span *ngIf="activatedField=='graduation_year_'+i" class="pulse"></span> year
           <br>
-          <strong>{{education.institution}} | {{education.degree}}</strong>
+          <strong>
+            {{education.institution}}
+            <span *ngIf="activatedField=='institution_name_'+i" class="pulse"></span>
+            |
+            {{education.degree}}
+            <span *ngIf="activatedField=='degree_'+i" class="pulse"></span>
+          </strong>
           <br>
           {{education.location}}
-          <br>
           {{education.note}}
+          <span *ngIf="activatedField=='edu_description_'+i" class="pulse"></span>
         </p>
       </div>
     </div>
   </div>
-  <div class="cv-section-grid-container">
+  <div class="cv-section-grid-container" *ngIf="cv.cvCertification.length > 0">
+    <div class="cv-section-left"><h3>certification</h3></div>
+    <div class="cv-section-right">
+      <div class="cv-data-container">
+        <p *ngFor="let certificate of cv.cvCertification; let i = index;">
+          {{certificate.yearEnd}}
+          <span *ngIf="activatedField=='certification_date_end_'+i" class="pulse"></span>
+          <br>
+          <strong>
+            {{certificate.description}}
+            <span *ngIf="activatedField=='certification_'+i" class="pulse"></span>
+          </strong>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="cv-section-grid-container" *ngIf="cv.cvAchievements.length > 0">
     <div class="cv-section-left"><h3>achievements</h3></div>
     <div class="cv-section-right">
       <div class="cv-data-container">
-        <p *ngFor="let acheivement of cv.cvAchievements">
-          {{acheivement.yearEnd}}<br>
+        <p *ngFor="let acheivement of cv.cvAchievements; let i = index;">
+          {{acheivement.yearEnd}}
+          <span *ngIf="activatedField=='achievement_date_end_'+i" class="pulse"></span><br>
           <strong>
             {{acheivement.description}}
+            <span *ngIf="activatedField=='achievement_'+i" class="pulse"></span>
           </strong>
         </p>
       </div>
     </div>
   </div>
-  <div class="cv-section-grid-container">
+  <div class="cv-section-grid-container" *ngIf="cv.languages.length > 0">
     <div class="cv-section-left"><h3>languages</h3></div>
     <div class="cv-section-right">
       <div class="cv-data-container">
-        <p *ngFor="let lanaguage of cv.cvLang">
+        <span *ngFor="let lanaguage of cv.languages; let i = index;">
+          <strong *ngIf="i > 0 && lanaguage.id">, </strong>
           <strong>
             {{lanaguage.nameLang}}
+            <span *ngIf="activatedField=='language_'+i" class="pulse"></span>
           </strong>
-        </p>
+        </span>
       </div>
     </div>
   </div>
@@ -109,10 +156,17 @@
     <div class="cv-section-left"><h3>other</h3></div>
     <div class="cv-section-right">
       <div class="cv-data-container">
-        <strong>
-          <!-- TODO footer info-->
-        </strong>
-        <br><br>
+        {{ cv.linkedin }}
+        <span *ngIf="activatedField=='linkedin_link'" class="pulse"></span>
+        <br *ngIf="cv.linkedin!='' && cv.linkedin!=null">
+        {{ cv.github }}
+        <span *ngIf="activatedField=='footer_link_github'" class="pulse"></span>
+        <br *ngIf="cv.github!='' && cv.github!=null">
+        {{ cv.portfolio }}
+        <span *ngIf="activatedField=='footer_link_portfolio'" class="pulse"></span>
+        <br *ngIf="cv.portfolio!='' && cv.portfolio!=null">
+        {{ cv.recommendations }}
+        <span *ngIf="activatedField=='recommendation'" class="pulse"></span>
       </div>
     </div>
   </div>

@@ -6,40 +6,35 @@
              (click)="onCheckboxPressed($event)">
     </div>
     <div class="prev-content">
-      <h2>MyFirstCVName</h2>
-      <p class="cv-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum harum cupiditate, nihil
-        ipsum
-        velit accusamus culpa cumque est ad ipsa nesciunt quo. Sit, id libero odio enim laboriosam
-        sapiente necessitatibus.
+      <h2 (click)="openFullCv()">
+        <i *ngIf="!isDeployed" class="fas fa-caret-down"></i>
+        <i *ngIf="isDeployed" class="fas fa-caret-up"></i>
+        {{cv.title}}
+      </h2>
+      <p class="cv-description">
+        {{cv.about}}
       </p>
       <ul class="cv-skills">
-        <li>
-          <a class="active" href="">skill1</a>
-        </li>
-        <li>
-          <a class="active" href="">skill2</a>
-        </li>
-        <li>
-          <a class="active" href="">skill3</a>
-        </li>
-        <li>
-          <a class="inactive" href="">skill4</a>
-        </li>
-        <li>
-          <a class="inactive" href="">skill5</a>
+        <li *ngFor="let skill of cv.skills">
+          <a class="active">{{skill}}</a>
         </li>
       </ul>
     </div>
     <div class="prev-contacts">
       <p>
-        <i class="fas fa-phone"></i>058-6688-88</p>
+        <i class="fas fa-phone"></i>{{cv.phone}}</p>
       <p>
-        <i class="far fa-envelope"></i>deadfish@gmail.com</p>
+        <i class="far fa-envelope"></i>{{cv.email}}</p>
       <p>
-        <i class="far fa-building"></i>Ashdod</p>
+        <i class="far fa-building"></i>{{cv.residence}}</p>
       <p>
-        <i class="far fa-user"></i>29 e.o.</p>
+        <i class="far fa-user"></i>{{cv.birthday}}</p>
     </div>
-    <div class="prev-status"></div>
+    <div class="prev-status">
+      <div class="activated" *ngIf="cv.activated">
+        approved
+      </div>
+    </div>
   </div>
 </section>
+<app-company-cv-full *ngIf="isDeployed" [cv]="cv"></app-company-cv-full>

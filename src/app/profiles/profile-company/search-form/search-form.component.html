@@ -1,0 +1,60 @@
+<form (ngSubmit)="onSubmitForm(searchForm)" #searchForm="ngForm">
+  <div class="sec-heading">1. Position</div>
+  <input type="text"
+         name="position"
+         id="position"
+         placeholder="Type position">
+
+  <div class="sec-heading">2. Prof. area</div>
+  <app-cv-form-select [listItems]="profAreas" name="profArea"></app-cv-form-select>
+
+  <div class="sec-heading">3. Region</div>
+
+  <div class="form-area checkbox-group">
+    <app-cv-form-checkbox-group [items]="regions"
+                                name="regions">
+    </app-cv-form-checkbox-group>
+  </div>
+
+
+  <div class="sec-heading">4. Skills</div>
+
+  <div class="form-area">
+    <app-cv-form-chips [listItems]="skills"
+                       (listChanged)="replaceSkills($event)">
+
+    </app-cv-form-chips>
+  </div>
+  <form class="create-folder-form"
+        (ngSubmit)="onAddSkill(addSkillForm.value.skill)"
+        #addSkillForm="ngForm">
+    <input class="form-control"
+           type="text"
+           name="skill"
+           ngModel>
+    <button type="submit">
+      <i class="fas fa-plus"></i>
+    </button>
+  </form>
+
+  <div class="sec-heading">5. Salary</div>
+  <app-cv-slider></app-cv-slider>
+
+  <label for="position">
+    <div class="sec-heading">6. City</div>
+  </label>
+  <input type="text"
+         name="city"
+         id="city"
+         placeholder="Type city">
+
+  <label for="position">
+    <div class="sec-heading">7. Citizenship</div>
+  </label>
+  <input type="text"
+         name="citizenship"
+         id="citizenship"
+         placeholder="Type citizenship">
+
+  <button type="submit" class="btn btn-danger">Find</button>
+</form>

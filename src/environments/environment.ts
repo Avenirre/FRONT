@@ -7,9 +7,17 @@ export const environment = {
    */
   api: {
     login: ['api', 'login'],
+    save_cv: ['api', 'cv'],
+    delete_cv: ['api', 'cv'],
+    lang_ref: ['api', 'languages'],
+    skills_ref: ['api', 'skills'],
+    user_cvs: ['api', 'cv'],
     registration: ['api', 'signup'],
-    save_cv: ['api', 'cv']
-
+    getFolders: ['api', 'folders'],
+    // editFolder: (id: number): string[] => {
+    //   return ['api', 'folders', id.toString()];
+    // },
+    getProfile: ['api', 'profiles'],
   },
   /**
    * local frontend routes
@@ -21,11 +29,14 @@ export const environment = {
     regCompany: 'registration-company',
     profile: 'profile',
     profileCandidate: 'profile/candidate',
-    profileCompany: 'profile/company',
+    profileCompany: 'company',
     profileCompanyFolders: 'folders',
     profileCompanySettings: 'settings',
+    profileCompanySearch: 'search',
     cvCreate: 'create-cv',
+    cvEdit: 'profile/candidate/edit-cv/:id',
     unauthorizedUser: 'unauthorized',
+    cvShow: 'cv/:id',
   },
   /**
    * names of variables in local storage;
@@ -39,6 +50,12 @@ export const environment = {
    * other options;
    */
   settings: {
+    profileLifetime: {
+      days: 0,
+      hours: 2,
+      minutes: 0,
+      seconds: 0
+    },
     templates: {
       types: [0],
       colorSchemes: [0, 1]

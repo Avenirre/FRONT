@@ -15,11 +15,6 @@ export class HeaderControlsService {
   ) {
   }
 
-  // static isUserLogged(): boolean {
-  //   // return AuthService.isLoggedIn();
-  //   // return false;
-  // }
-
   public openModal(link: string) {
     console.log(this.routes);
     console.log(link);

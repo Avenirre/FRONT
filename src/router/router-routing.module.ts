@@ -18,6 +18,8 @@ import {ProfileStatisticComponent} from '../app/profiles/profile-candidate/profi
 import {CompanyFolderComponent} from '../app/profiles/profile-company/company-folder/company-folder.component';
 import {CompanySettingsComponent} from '../app/profiles/profile-company/company-settings/company-settings.component';
 import {CvPresentationComponent} from '../app/create-cv/cv-presentation/cv-presentation.component';
+import {CvSearchComponent} from '../app/profiles/profile-company/cv-search/cv-search.component';
+import {ShowCvComponent} from '../app/create-cv/show-cv/show-cv.component';
 
 const routes = environment.routes;
 const routesApi: Routes = [
@@ -29,27 +31,26 @@ const routesApi: Routes = [
     path: routes.profile,
     // component: ProfileCandidateComponent,
     canActivate: [AuthGuard],
+    children: []
+  },
+  {
+    path: routes.profileCandidate, component: ProfileCandidateComponent,
     children: [
-
+        {path: '', redirectTo: 'cvs-manager', pathMatch: 'full'},
+        {path: 'cvs-manager', component: ProfileCvsComponent},
+        {path: 'settings', component: ProfileSettingComponent},
+        {path: 'statistics', component: ProfileStatisticComponent}
     ]
   },
-  {path: routes.profileCandidate, component: ProfileCandidateComponent,
-      children: [
-          {path: 'cvs-manager', component: ProfileCvsComponent},
-          {path: 'settings', component: ProfileSettingComponent},
-          {path: 'statistics', component: ProfileStatisticComponent}
-      ]
-  },
-  {path: routes.profileCompany, component: ProfileCompanyComponent},
-  {path: routes.profileCandidate, component: ProfileCandidateComponent},
   {
-    path: routes.profileCompany, component: ProfileCompanyComponent, children: [
+    path: routes.profileCompany, canActivateChild: [AuthGuard], children: [
       {
-        path: routes.profileCompanyFolders, children: [
-          {path: ':folder', component: CompanyFolderComponent},
+        path: ':section', component: ProfileCompanyComponent, children: [
+          {path: ':id', component: CompanyFolderComponent},
         ]
       },
-      {path: routes.profileCompanySettings, component: CompanySettingsComponent},
+      // {path: routes.profileCompanySearch, component: CvSearchComponent},
+      // {path: routes.profileCompanySettings, component: CompanySettingsComponent},
     ]
   },
   {
@@ -57,10 +58,20 @@ const routesApi: Routes = [
       {path: ':type', component: CvPresentationComponent}
     ]
   },
+  {
+    path: routes.cvEdit, component: CreateCvComponent, children: [
+        {
+          path: ':type',
+          canActivate: [AuthGuard],
+          component: CvPresentationComponent
+        }
+    ]
+  },
+  {path: routes.cvShow, component: ShowCvComponent},
   {path: 'message', component: MessageComponent, outlet: 'modal'},
   {path: 'testing', component: TestingComponent},
   {path: '404', component: NotFoundComponent},
-  // {path: '**', redirectTo: '/404'}
+  {path: '**', redirectTo: '/404'}
 ];
 
 @NgModule({

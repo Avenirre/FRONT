@@ -1,0 +1,14 @@
+<input type="text"
+       name="institution_name_{{id}}"
+       (keyup)="bindToCv($event)"
+       (focus)="setMarkPresentation($event)"
+       (blur)="clearMarkPresentation($event)"
+       required
+       placeholder="school/institution name*"
+       autocorrect="off"
+       autocapitalize="off"
+       spellcheck="off"
+       class="form-control"
+       [ngModel] = "cvValue"
+       #myControl
+       #search>
