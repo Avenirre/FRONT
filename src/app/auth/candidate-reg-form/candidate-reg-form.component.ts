@@ -37,13 +37,13 @@ export class CandidateRegFormComponent implements OnInit {
         Validators.pattern(
         '^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$'
       )]],
-      username: ['', [
-        Validators.required,
-        Validators.pattern('[A-Za-z0-9-_]+'),
-        Validators.minLength(3),
-        Validators.maxLength(15)
-      ]
-      ],
+      // username: ['', [
+      //   Validators.required,
+      //   Validators.pattern('[A-Za-z0-9-_]+'),
+      //   Validators.minLength(3),
+      //   Validators.maxLength(15)
+      // ]
+      // ],
     }),
     passwordGroup: this.fb.group({
         password: ['',
