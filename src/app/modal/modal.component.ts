@@ -37,7 +37,7 @@ export class ModalComponent implements OnInit, OnDestroy {
     this.isOpened = true;
   }
 
-  onModalKeyPressed(event) {
-    console.log(event);
-  }
+  // onModalKeyPressed(event) {
+    // console.log(event);
+  // }
 }

@@ -12,7 +12,7 @@ export class DirectivesDirective {
 
   @HostListener('document:keydown', ['$event'])
   onKeyPressed(event: KeyboardEvent): void {
-    console.log('event', event.key);
+    // console.log('event', event.key);
     if (event['key'] === 'Escape') {
       this._modal.closeModal();
     }

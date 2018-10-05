@@ -70,13 +70,13 @@ export class CompanySettingsComponent implements OnInit {
           ),
           Validators.required
         ]],
-        username: [this.profile.username, [
-          Validators.required,
-          Validators.pattern('[A-Za-z0-9-_]+'),
-          Validators.minLength(3),
-          Validators.maxLength(15)
-        ]
-        ],
+        // username: [this.profile.username, [
+        //   Validators.required,
+        //   Validators.pattern('[A-Za-z0-9-_]+'),
+        //   Validators.minLength(3),
+        //   Validators.maxLength(15)
+        // ]
+        // ],
       }),
       passwordGroup: this.fb.group({
           password: ['',
@@ -94,7 +94,7 @@ export class CompanySettingsComponent implements OnInit {
   private createApplicant(): Applicant {
     const applicant = new Applicant();
     applicant.usertype = 'COMPANY';
-    applicant.username = this.regForm.value['applicantDetails']['username'];
+    // applicant.username = this.regForm.value['applicantDetails']['username'];
     applicant.firstName = this.regForm.value['applicantDetails']['firstName'];
     applicant.lastName = this.regForm.value['applicantDetails']['lastName'];
     applicant.email = this.regForm.value['applicantDetails']['email'];

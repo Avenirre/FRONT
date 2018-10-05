@@ -1,7 +1,7 @@
 import {ApplicantInterface} from '../../interfaces/applicant.interface';
 
 export class Applicant {
-  public username = '';
+  // public username = '';
   public password = '';
   public usertype = '';
   public firstName = '';

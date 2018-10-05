@@ -32,7 +32,7 @@ export class CompanyRegFormComponent implements OnInit {
       street: [''],
       houseBuilding: [''],
       postcode: [''],
-      phone: ['']
+      phone: ['', Validators.pattern('^\\+{0,1}(972[\\- ]?5|05)[2-8][\\- ]?[0-9]{7}')]
     }),
     applicantDetails: this.fb.group({
       firstName: [''],
@@ -43,13 +43,13 @@ export class CompanyRegFormComponent implements OnInit {
         Validators.pattern(
         '^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$'
       )]],
-      username: ['', [
-        Validators.required,
-        Validators.pattern('[A-Za-z0-9-_]+'),
-        Validators.minLength(3),
-        Validators.maxLength(15)
-      ]
-      ],
+      // username: ['', [
+      //   Validators.required,
+      //   Validators.pattern('[A-Za-z0-9-_]+'),
+      //   Validators.minLength(3),
+      //   Validators.maxLength(15)
+      // ]
+      // ],
     }),
     passwordGroup: this.fb.group({
         password: ['',
@@ -101,7 +101,7 @@ export class CompanyRegFormComponent implements OnInit {
       .then(
         (response) => {
           const loginData = new LoginData(
-            applicant.username,
+            applicant.email,
             applicant.password
           );
           console.log('login data: ', loginData);
@@ -123,7 +123,7 @@ export class CompanyRegFormComponent implements OnInit {
   private createApplicant(): Applicant {
     const applicant = new Applicant();
     applicant.usertype = 'COMPANY';
-    applicant.username = this.regForm.value['applicantDetails']['username'];
+    // applicant.username = this.regForm.value['applicantDetails']['username'];
     applicant.firstName = this.regForm.value['applicantDetails']['firstName'];
     applicant.lastName = this.regForm.value['applicantDetails']['lastName'];
     applicant.email = this.regForm.value['applicantDetails']['email'];

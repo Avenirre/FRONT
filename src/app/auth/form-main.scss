@@ -98,7 +98,14 @@
 }
 
 input.ng-invalid.ng-touched {
+  box-sizing: border-box;
   border: 1px solid $color-orange;
+  outline: $color-orange;
+}
+
+input.ng-invalid.ng-touched:focus {
+  border: 1px solid orange;
+  box-shadow: 0 0 0 #000;
 }
 
 input.ng-valid.ng-touched {

@@ -20,11 +20,13 @@ import {CV} from '../../../models/cv/cv.model';
   ]
 })
 export class LoginFormComponent implements OnInit {
+  isWaiting = false;
+  isServerSleeping = true;
   loginError = false;
   errors = {
     unauthorised: false,
     dif: false,
-    message: null
+    message: null,
   };
   private routes = environment.routes;
 
@@ -62,30 +64,63 @@ export class LoginFormComponent implements OnInit {
    * shows error message;
    * @param {NgForm} form
    */
-  onLogin(form: NgForm) {
+  async onLogin(form: NgForm) {
+    let requestsCount = 1;
     this.resetErrors();
+    this.isWaiting = true;
     const loginData = new LoginData(form.value['username'], form.value['password']);
-    this.authService.login(loginData)
+    await this.authService.login(loginData)
       .then(
         () => {
-          if (this.cvService.expectingCv) {
-            this.cvService.setCV();
-            console.log(`Expecting CV:`);
-            console.log(this.cvService.cv);
-            this.cvService.saveCV();
-          }
+          this.loginSuccess();
         },
         (error) => {
-          console.log(error);
-          this.errors.message = error['error']['message'];
-            console.log('login error', error);
-          if (error.status === 401) {
-            this.errors.unauthorised = true;
-          } else {
-            this.errors.dif = true;
+          this.loginFailed(error);
+        });
+    if (this.isServerSleeping) {
+      const requestRepeater = setInterval(
+        () => {
+          requestsCount++;
+          console.log(`request ${requestsCount}`);
+          this.authService.login(loginData)
+            .then(
+              () => {
+                this.loginSuccess();
+              },
+              (error) => {
+                this.loginFailed(error);
+              });
+          if (!this.isServerSleeping || requestsCount >= 3) {
+            clearInterval(requestRepeater);
           }
-        this.loginError = true;
-      });
+        },
+        5000
+      );
+    }
+  }
+
+  private loginFailed(error) {
+    this.isServerSleeping = false;
+    console.log(error);
+    this.isWaiting = false;
+    this.errors.message = error['error']['message'];
+    console.log('login error', error);
+    if (error.status === 401) {
+      this.errors.unauthorised = true;
+    } else {
+      this.errors.dif = true;
+    }
+    this.loginError = true;
+  }
+
+  private loginSuccess() {
+    this.isServerSleeping = false;
+    if (this.cvService.expectingCv) {
+      this.cvService.setCV();
+      console.log(`Expecting CV:`);
+      console.log(this.cvService.cv);
+      this.cvService.saveCV();
+    }
   }
 
   private resetErrors() {

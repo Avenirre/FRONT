@@ -30,7 +30,7 @@ export class CandidateRegFormComponent implements OnInit {
     applicantDetails: this.fb.group({
       firstName: [''],
       lastName: [''],
-      phone: ['',
+      phone: ['', Validators.pattern('^\\+{0,1}(972[\\- ]?5|05)[2-8][\\- ]?[0-9]{7}')
       ],
       email: ['', [
         Validators.required,
@@ -62,10 +62,10 @@ export class CandidateRegFormComponent implements OnInit {
     'email': [
       {type: 'pattern', message: 'Email is not valid'}
     ],
-    'username': [
-      {type: 'validUsername', message: 'Your username has already been taken'},
-      {type: 'pattern', message: 'Your username must contain only numbers, letters and "-" or "_" symbols'}
-    ],
+    // 'username': [
+    //   {type: 'validUsername', message: 'Your username has already been taken'},
+    //   {type: 'pattern', message: 'Your username must contain only numbers, letters and "-" or "_" symbols'}
+    // ],
     'password': [
       {type: 'required', message: 'Password is required'},
       {type: 'minlength', message: 'Password must be at least 8 characters long'},
@@ -85,7 +85,7 @@ export class CandidateRegFormComponent implements OnInit {
   private createApplicant(): Applicant {
     const applicant = new Applicant();
     applicant.usertype = 'CANDIDATE';
-    applicant.username = this.regForm.value['applicantDetails']['username'];
+    // applicant.username = this.regForm.value['applicantDetails']['username'];
     applicant.firstName = this.regForm.value['applicantDetails']['firstName'];
     applicant.lastName = this.regForm.value['applicantDetails']['lastName'];
     applicant.email = this.regForm.value['applicantDetails']['email'];
@@ -108,7 +108,7 @@ export class CandidateRegFormComponent implements OnInit {
       .then(
         (response) => {
           const loginData = new LoginData(
-            applicant.username,
+            applicant.email,
             applicant.password
           );
           this.authService.login(loginData);
