@@ -17,6 +17,7 @@ import {CV} from '../../../models/cv/cv.model';
   ]
 })
 export class CompanyRegFormComponent implements OnInit {
+  isWaiting = false;
   errors = {
     RegError: false,
     UserNameExists: false,
@@ -95,11 +96,13 @@ export class CompanyRegFormComponent implements OnInit {
   }
 
   submitRegistration() {
+    this.isWaiting = true;
     this.resetErrors();
     const applicant = this.createApplicant();
     this.authService.createApplicant(applicant)
       .then(
         (response) => {
+          this.isWaiting = false;
           const loginData = new LoginData(
             applicant.email,
             applicant.password
@@ -108,6 +111,7 @@ export class CompanyRegFormComponent implements OnInit {
           this.authService.login(loginData);
         },
         (error) => {
+          this.isWaiting = false;
           console.log(error);
           this.errors.message = error.error.message;
           if (error.status === 400) {

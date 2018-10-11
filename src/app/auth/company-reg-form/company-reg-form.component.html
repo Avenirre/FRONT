@@ -151,17 +151,17 @@
             </label>
           </div>
           <!--<div class="form-group row">-->
-            <!--<input formControlName="username"-->
-                   <!--type="text"-->
-                   <!--class="form-control col-md-6 col-sm-12"-->
-                   <!--id="username"-->
-                   <!--placeholder="username*">-->
-            <!--<label class="col-md-6 d-none d-md-block"-->
-                   <!--for="username">e.g.Username</label>-->
-            <!--&lt;!&ndash;<div class="error-message" *ngIf="regForm.get('username')">&ndash;&gt;-->
-            <!--&lt;!&ndash;{{validation_messages.username}}&ndash;&gt;-->
-            <!--&lt;!&ndash;sdfsdf&ndash;&gt;-->
-            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+          <!--<input formControlName="username"-->
+          <!--type="text"-->
+          <!--class="form-control col-md-6 col-sm-12"-->
+          <!--id="username"-->
+          <!--placeholder="username*">-->
+          <!--<label class="col-md-6 d-none d-md-block"-->
+          <!--for="username">e.g.Username</label>-->
+          <!--&lt;!&ndash;<div class="error-message" *ngIf="regForm.get('username')">&ndash;&gt;-->
+          <!--&lt;!&ndash;{{validation_messages.username}}&ndash;&gt;-->
+          <!--&lt;!&ndash;sdfsdf&ndash;&gt;-->
+          <!--&lt;!&ndash;</div>&ndash;&gt;-->
           <!--</div>-->
 
         </div>
@@ -211,12 +211,12 @@
             {{errors.message}}
           </span>
           <!--<div class="alert alert-danger"-->
-               <!--*ngIf="errors.RegError">-->
-            <!--Registration Error-->
+          <!--*ngIf="errors.RegError">-->
+          <!--Registration Error-->
           <!--</div>-->
           <!--<div class="alert alert-danger"-->
-               <!--*ngIf="errors.UserNameExists">-->
-            <!--User with such username already exists!-->
+          <!--*ngIf="errors.UserNameExists">-->
+          <!--User with such username already exists!-->
           <!--</div>-->
           <div class="err-message"
                *ngIf="errors.ServerError">
@@ -224,16 +224,24 @@
           </div>
         </div>
         <div class="form-group row">
-          <div class="col-12 message">
-            By clicking "Proceed" you confirm that you accept the
-            Terms of Service & Privacy Policy
-          </div>
-          <div class="col-12 buttons-container">
-            <button [disabled]="regForm.invalid"
-                    type="submit"
-                    class="btn btn-secondary">Proceed
-            </button>
-          </div>
+          <ng-container *ngIf="isWaiting; else buttons">
+            <div class="pr-icon"><i class="fas fa-spinner fa-pulse"></i></div>
+          </ng-container>
+
+          <ng-template #buttons>
+            <div class="col-12 message">
+              By clicking "Proceed" you confirm that you accept the
+              Terms of Service & Privacy Policy
+            </div>
+
+            <div class="col-12 buttons-container">
+              <button [disabled]="regForm.invalid"
+                      type="submit"
+                      class="btn btn-secondary">Proceed
+              </button>
+            </div>
+          </ng-template>
+
         </div>
       </form>
     </div>

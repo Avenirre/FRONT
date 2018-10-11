@@ -206,7 +206,7 @@ export class CompanyFoldersService {
    */
   deleteFolder(id: number) {
     this.apiDeleteFolder(id).then((resp) => {
-      console.log('response', resp);
+      resp.toPromise().then(res => console.log('delete resp: ' + res));
     });
     const index = this.folders.findIndex((c) => {
       return c.id === id;
@@ -256,6 +256,7 @@ export class CompanyFoldersService {
       const cvIndex = this.currentFolder.cvs.findIndex((current) => {
         return current.id === id;
       });
+      this.apiDeleteFolderCv(id);
       this.currentFolder.cvs.splice(cvIndex, 1);
     });
     this.clearChecks();
@@ -281,9 +282,9 @@ export class CompanyFoldersService {
       .get(environment.api.getFolders, httpOptions)
       .toPromise();
 
-    const folders = response['data'];
+    let folders = response['data'];
 // TESTING
-//     const folders = <ProfileFolder[]> testingFolders;
+    folders = <ProfileFolder[]> testingFolders;
 // TESTING
     console.log(folders);
     this.folders = folders;
@@ -333,12 +334,46 @@ export class CompanyFoldersService {
       .toPromise();
   }
 
+  /**
+   * api request to delete folder with given id
+   * @param id
+   */
   private async apiDeleteFolder(id: number) {
     this.checkSession();
     const httpOptions = ApiService.createHeaderToken();
     return await this._api
-      .get(
+      .delete(
         ['api', 'folders', id.toString()],
+        httpOptions
+      );
+  }
+
+  /**
+   * api request to delete current folder cv with given id
+   * @param id
+   */
+  private async apiDeleteFolderCv(id: number) {
+    this.checkSession();
+    const httpOptions = ApiService.createHeaderToken();
+    return await this._api
+      .delete(
+        ['api', 'folders', this.currentFolder.id.toString(), 'cv', id.toString()],
+        httpOptions
+      );
+  }
+
+  /**
+   * api request to add cv with given id to folder with given
+   * Post api/folders/{id}/cv/{cvId}
+   * @param id
+   */
+  private async apiAddFolderCv(idFolder: number, idCv: number) {
+    this.checkSession();
+    const httpOptions = ApiService.createHeaderToken();
+    return await this._api
+      .post(
+        ['api', 'folders', idFolder.toString(), 'cv', idCv.toString()],
+        {},
         httpOptions
       );
   }

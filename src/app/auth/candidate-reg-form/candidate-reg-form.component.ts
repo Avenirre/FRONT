@@ -19,6 +19,7 @@ import {LoginData} from '../../../models/auth/login-data.model';
   ]
 })
 export class CandidateRegFormComponent implements OnInit {
+  isWaiting = false;
   private routes = environment.routes;
   errors = {
     RegError: false,
@@ -102,11 +103,13 @@ export class CandidateRegFormComponent implements OnInit {
   }
 
   submitRegistration() {
+    this.isWaiting = true;
     this.resetErrors();
     const applicant = this.createApplicant();
     this.authService.createApplicant(applicant)
       .then(
         (response) => {
+          this.isWaiting = false;
           const loginData = new LoginData(
             applicant.email,
             applicant.password
@@ -118,6 +121,7 @@ export class CandidateRegFormComponent implements OnInit {
           }
         },
         (error) => {
+          this.isWaiting = false;
           this.errors.message = error.error.message;
           console.log(error);
           if (error.status === 400) {
