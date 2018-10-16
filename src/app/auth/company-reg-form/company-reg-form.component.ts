@@ -99,6 +99,7 @@ export class CompanyRegFormComponent implements OnInit {
     this.isWaiting = true;
     this.resetErrors();
     const applicant = this.createApplicant();
+    console.log('request');
     this.authService.createApplicant(applicant)
       .then(
         (response) => {

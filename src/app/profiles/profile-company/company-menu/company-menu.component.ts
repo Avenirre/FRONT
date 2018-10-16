@@ -59,7 +59,13 @@ export class CompanyMenuComponent implements OnInit, OnDestroy {
    */
   openFoldersSection() {
     this.section = SectionUnit.FOLDERS;
-    this._companyFolderService.navigateToDefaultFolder();
+    if (this._companyFolderService.folders) {
+      this._companyFolderService.navigateToDefaultFolder();
+    } else {
+      this._companyFolderService.downloadCompleted.subscribe(() => {
+        this._companyFolderService.navigateToDefaultFolder();
+      });
+    }
     // this.router.navigate(['../', environment.routes.profileCompanyFolders],
     //   {relativeTo: this.activatedRoute});
   }

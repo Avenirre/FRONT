@@ -278,9 +278,15 @@ export class CompanyFoldersService {
         'Authorization': `Bearer ${DataService.getUserToken()}`
       })
     };
-    const response = await this._api
-      .get(environment.api.getFolders, httpOptions)
-      .toPromise();
+    let response;
+    try {
+      response = await this._api
+        .get(environment.api.getFolders, httpOptions)
+        .toPromise();
+    } catch (err) {
+      console.log(err);
+      return;
+    }
 
     let folders = response['data'];
 // TESTING

@@ -42,6 +42,11 @@ export class DataService {
     return user.profile['usertype'];
   }
 
+  public static getUserEmail() {
+    const user = <LocalProfile> JSON.parse(localStorage.getItem(this.names.profile));
+    return user.profile['email'];
+  }
+
   public static getUserToken() {
     const user = <LocalProfile>JSON.parse(localStorage.getItem(this.names.profile));
     if (user && user.token) {

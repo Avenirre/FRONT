@@ -13,7 +13,7 @@ import {environment} from '../../../../environments/environment';
   ]
 })
 export class BtnsLoggedComponent implements OnInit {
-  currentUsername = DataService.getUserName();
+  currentUsername = DataService.getUserEmail();
   routes = environment.routes;
   constructor(
     private authService: AuthService
