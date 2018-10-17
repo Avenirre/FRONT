@@ -61,6 +61,11 @@ export class CvFormComponent implements OnInit {
               this.skills.push(skill);
           }
       )
+      this.cvService.savedNewCv.subscribe(
+          (cv) => {
+              this.cv = cv;
+          }
+      )
       this.apiService.get(environment.api.lang_ref)
         .subscribe(
             (res) => {

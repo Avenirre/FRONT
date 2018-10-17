@@ -8,14 +8,12 @@ import {HeaderControlsService} from '../app/header/header-controls.service';
 import {AuthService} from '../app/auth/auth.service';
 import {Activity} from '../models/cv/cv.activity.model';
 import {environment} from '../environments/environment';
-import {Position} from '../models/cv/cv.position.model';
 import {Template} from '../models/cv/cv.template.model';
 import {Education} from '../models/cv/cv.education.model';
 import {Job} from '../models/cv/cv.job.model';
 import {Achievement} from '../models/cv/cv.achievement.model';
 import {Certification} from '../models/cv/cv.certification.model';
 import {Language} from '../models/cv/cv.lang.model';
-import {Skill} from '../models/cv/cv.skill.model';
 import {Router} from '@angular/router';
 import {Subject} from 'rxjs';
 import {NgForm} from '@angular/forms';
@@ -36,6 +34,7 @@ export class CvService implements OnInit {
   lightPresentationField = new EventEmitter<string>();
   cvChanged = new EventEmitter<any>();
   expectingCv = false;
+  savedNewCv = new EventEmitter<any>();
   routes = environment;
   changedChecked = new Subject<number>();
   changedUserCVs = new Subject<CV[]>();
@@ -170,42 +169,55 @@ export class CvService implements OnInit {
   }
 
   public saveCV() {
-    if (!this.form.valid) {
-        console.log('invalid form', this.form);
-        return;
-    }
-    if (!AuthService.isLoggedIn()) {
-      this.expectingCv = true;
-      this.headerService.openModal('login');
-    } else {
-        this.prepareCvToSave();
-        this.httpOptions.headers.set('Authorization', 'my-new-auth-token');
-        let headers: HttpHeaders = new HttpHeaders();
-        headers = headers.append('Content-Type', 'application/json');
-        headers = headers.append('Authorization', `Bearer ${DataService.getUserToken()}`);
-        if (this.cv.id) {
-            const update_path = [];
-            for (let ii = 0; ii < environment.api.delete_cv.length; ii++) {
-                update_path.push(environment.api.delete_cv[ii]);
-            }
-            update_path.push(this.cv.id);
-            this.apiService.put<CV>(update_path, this.cv, {headers: headers})
-                .subscribe(
-                    (data) => {
-                        console.log(data);
-                        this.setUsersCvs();
-                    });
-        } else {
-            this.apiService.post<CV>(this.routes.api.save_cv, this.cv, {headers: headers})
-             .subscribe(
-               (data) => {
-                 console.log(data);
-                 this.setUsersCvs();
-               });
-        }
-        this.expectingCv = false;
-        this.router.navigate(['/profile/candidate']);
-    }
+      return new Promise((resolve, reject) => {
+          if (!this.form.valid) {
+              console.log('invalid form', this.form);
+              reject();
+          }
+          if (!AuthService.isLoggedIn()) {
+              this.expectingCv = true;
+              this.headerService.openModal('login');
+              reject();
+          } else {
+              this.prepareCvToSave();
+              this.httpOptions.headers.set('Authorization', 'my-new-auth-token');
+              let headers: HttpHeaders = new HttpHeaders();
+              headers = headers.append('Content-Type', 'application/json');
+              headers = headers.append('Authorization', `Bearer ${DataService.getUserToken()}`);
+              if (this.cv.id) {
+                  const update_path = [];
+                  for (let ii = 0; ii < environment.api.delete_cv.length; ii++) {
+                      update_path.push(environment.api.delete_cv[ii]);
+                  }
+                  update_path.push(this.cv.id);
+                  this.apiService.put<CV>(update_path, this.cv, {headers: headers})
+                      .subscribe(
+                          (data) => {
+                              console.log(data);
+                              this.setUsersCvs();
+                              resolve();
+                          });
+              } else {
+                  this.apiService.post<CV>(this.routes.api.save_cv, this.cv, {
+                      headers: headers,
+                      responseType: 'arraybuffer'
+                  })
+                      .subscribe(
+                          (data) => {
+                              this.setUsersCvs();
+                              const decodedString = String.fromCharCode.apply(null, new Uint8Array(data));
+                              const obj = JSON.parse(decodedString);
+                              const newCv = obj['data'];
+                              this.cv = newCv;
+                              this.prepareToUsing();
+                              this.savedNewCv.next(this.cv);
+                              // this.cvChanged.next(this.cv);
+                              resolve();
+                          });
+              }
+              this.expectingCv = false;
+          }
+      });
   }
 
   public prepareCvToSave() {

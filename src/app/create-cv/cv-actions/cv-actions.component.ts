@@ -49,7 +49,7 @@ export class CvActionsComponent implements OnInit {
     this.route.params.subscribe(
         (params) => {
           if (params['id']) {
-             // this.alertClass = ['text-success'];
+             this.alertClass = ['text-success'];
              this.url_share = window.location.host + '/cv/' + params['id'];
              this.alertText = `Link on this CV: <a link='${this.url_share}'>${this.url_share}</a>, was copied to the clipboard.`;
              document.execCommand('copy');
@@ -69,7 +69,18 @@ export class CvActionsComponent implements OnInit {
 
     saveCv() {
         this.cv = this.cvService.setCV();
-        this.cvService.saveCV();
+        this.cvService.saveCV().then(
+            () => {
+                this.alertText = 'CV was saved!';
+                this.alertClass = ['text-danger'];
+                this.alertVisible = true;
+            },
+        () => {
+                this.alertText = 'CV wasn\'t saved!';
+                this.alertClass = ['text-danger'];
+                this.alertVisible = true;
+            }
+        );
     }
 
     copyLink() {
