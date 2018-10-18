@@ -69,16 +69,20 @@ export class CvActionsComponent implements OnInit {
 
     saveCv() {
         this.cv = this.cvService.setCV();
+        this.formValid = false;
+        document.body.style.cursor = 'progress';
         this.cvService.saveCV().then(
             () => {
                 this.alertText = 'CV was saved!';
                 this.alertClass = ['text-danger'];
                 this.alertVisible = true;
+                document.body.style.cursor = 'none';
             },
         () => {
                 this.alertText = 'CV wasn\'t saved!';
                 this.alertClass = ['text-danger'];
                 this.alertVisible = true;
+                document.body.style.cursor = 'none';
             }
         );
     }
